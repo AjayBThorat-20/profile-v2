@@ -20,18 +20,32 @@ export default function Home() {
       <div className="animate-slide-up">
         <div className="w-full h-full text-center items-center justify-center space-y-6 pb-10">
           <div className="flex flex-col md:flex-row items-center md:justify-between w-full h-full space-y-8 md:space-y-0 md:px-0 px-0">
-            <div className="relative w-full h-[100vh] md:w-1/2 md:h-[90vh] max-h-[85vh]">
-              <Image
+            <div className="relative w-full h-[100vh] md:w-1/2 md:h-[90vh] max-h-[85vh] ">
+              {/* <Image
                 src="/Images/Profile/Ajay.png"
                 alt="Ajay Thorat - Professional Profile"
                 fill
                 priority
                 placeholder="blur"
                 blurDataURL="data:image/jpeg;base64,..."
-                className={`object-cover md:scale-120 brightness-70 transition-opacity duration-500 ${isImageLoaded ? 'opacity-100' : 'opacity-0'}`}
+                className={`md:object-cover object-contain md:scale-120 brightness-70 transition-opacity duration-500 ${isImageLoaded ? 'opacity-100' : 'opacity-0'}`}
                 onLoad={() => setIsImageLoaded(true)}
-                sizes="(max-width: 768px) 100vw, 50vw"
-              />
+                sizes="(max-width: 768px)  100vw, 50vw"
+              /> */}
+
+
+<Image
+  src="/Images/Profile/Ajay.png"
+  alt="Ajay Thorat - Professional Profile"
+  fill
+  priority
+  placeholder="blur"
+  blurDataURL="data:image/jpeg;base64,..."
+  className={`md:object-contain object-contain scale-100 border-gray-400 md:scale-120 brightness-70 transition-opacity duration-500 ${isImageLoaded ? 'opacity-100' : 'opacity-0'}`}
+  onLoad={() => setIsImageLoaded(true)}
+  sizes="(max-width: 768px) 100vw, 50vw"
+/>
+
             </div>
 
             {showRest && (

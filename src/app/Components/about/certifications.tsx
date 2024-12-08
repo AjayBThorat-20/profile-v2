@@ -29,10 +29,10 @@ const Certifications: React.FC = () => {
 
       <div className="w-full h-full overflow-hidden pb-8">
         {/* <div className='flex flex-wrap space-x-12 text-center justify-center' > */}
-        <div className='grid md:grid-cols-2  lg:grid-cols-3 grid-cols-1 gap-4 '>
+        <div className='grid md:grid-cols-2  lg:grid-cols-3 grid-cols-1 gap-x-4 gap-y-4 lg:gap-y-0  '>
           {ActivityData.map((activity) => (
             <div key={activity.id} className="max-w-sm">
-              <div className="bg-gray-100 lg:h-[400px] lg:min-h-[350px]  md:min-h-[300px] md:h-[400px] h-full w-auto shadow-lg rounded-lg  border-2 border-solid mx-auto border-slate-200 hover:shadow-xl hover:shadow-slate-400 relative">
+              <div className="bg-gray-100 lg:h-[400px] lg:min-h-[350px]  md:min-h-[300px] md:h-[400px] h-full w- md:shadow-md lg:shadow-lg rounded-lg  border-2 border-solid mx-auto border-slate-200 hover:shadow-xl hover:shadow-slate-400 relative">
                 {/* Card Body */}
                 <div className="p-4">
                   <Image
