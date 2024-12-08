@@ -5,7 +5,6 @@ import Skills from '../Components/about/skills'
 import Certifications from '../Components/about/certifications'
 import CoCurricularActivities from '../Components/about/coCurricularActivities'
 import Education from '../Components/about/education'
-import CurrentlyWorkingOn from '../Components/experience/currentlyWorkingOn'
 
 export default function page() {
   return (
