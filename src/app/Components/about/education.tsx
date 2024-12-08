@@ -30,7 +30,7 @@ const elements = [
 
 const Education: React.FC = () => {
   return (
-    <div className="py-5  h-full px-4">
+    <div className="h-full px-4">
       <div className="text-left mb-8">
         <h1 className="text-[2rem] md:text-[2.5rem] font-bold">Education</h1>
       </div>

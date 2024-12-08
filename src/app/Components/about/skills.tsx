@@ -49,11 +49,11 @@ const Skills: React.FC = () => {
 
   return (
     <div className="md:pt-10 h-full pb-18">
-      <div className="text-left">
+      <div className="text-left md:mb-8">
         <h1 className="text-[2.5rem] font-bold">Skills</h1>
       </div>
 
-      <div className="md:relative w-full h-[500px] flex items-center justify-center md:overflow-hidden md:scale-100 lg:scale-125 scale-75 pb-10">
+      <div className="md:relative w-auto h-[300px] md:h-[450px] lg:h-[450px] flex items-center justify-center md:overflow-hidden md:scale-100 lg:scale-125 scale-75  ">
         {/* Central Sun */}
         <div className="absolute z-10 bg-yellow-500 rounded-full w-12 h-12 flex items-center justify-center text-black font-bold text-xs hover:scale-150 hover:z-50">
           Tech Stack

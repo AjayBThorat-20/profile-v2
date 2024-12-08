@@ -34,9 +34,14 @@ export default function CurrentlyWorkingOn() {
   };
 
   return (
-    <div className='h-full'>
-      <h1 className='text-[2.5rem] font-bold text-left'>Currently Working On</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 py-4 md:px-4">
+    <div className="min-h-full ">
+      {/* <h1 className='text-[2.5rem] font-bold text-left mb-8'>Currently Working On</h1> */}
+
+
+      <div className='text-left mb-8'>
+        <h1 className='text-[2.5rem] font-bold'>Currently Working On</h1>
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4 md:px-4">
         {ActivityData.map((item) => (
           <div key={item.id} className="flex flex-col">
             <div

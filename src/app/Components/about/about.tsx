@@ -6,10 +6,9 @@ export default function About() {
   return (
     <>
 
-    
+<div className='mb-8 md:mb-0'>
 <h1 className="text-6xl md:text-7xl font-bold " >AJAY BHIMRAO THORAT</h1>
-
-
+</div>
 
 <div className="md:flex text-center   md:justify-between w-full md:gap-4 ">
   <div className='h-full min-h-full  w-full max-w-[100vh]'>
@@ -57,7 +56,7 @@ export default function About() {
 
   </div>
   <div className='relative items-center h-ful md:w-[70vh]  w-auto pt-10 '>
-  <div className=" min-h-[70vh] md:min-h-[10vh]  max-w-[20vh] w-full h-full ">
+  <div className=" min-h-[70vh] md:min-h-[10vh]  max-w-[20vh] w-auto h-full ">
     <Image
     
       src="/Images/Dummy/icon.png"
