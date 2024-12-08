@@ -1,8 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
-import CurrentlyWorkingOn from "./Components/experience/currentlyWorkingOn";
-import WelcomeToExperience from "./Components/experience/welcomeToExperience";
-import Internship from "./Components/experience/internship";
+import WelcomeToProject from "./Components/projects/welcomeToProject";
+import AcademicProjects from "./Components/projects/academicProjects";
 
 export default function Home() {
   const [showRest, setShowRest] = useState(false);
@@ -61,26 +60,19 @@ export default function Home() {
 
 
 
-
-
-
   <section className="mb-10">    
-<WelcomeToExperience/>
+  <WelcomeToProject/>
 </section>
 
 
 
 <section className="mb-10">
-<Internship/>
+<AcademicProjects/>
 </section>
 
 
 
-{/* Certifications Section */}
-<section className="mb-10">
-        
-<CurrentlyWorkingOn/>
-      </section>
+
 
 
     </div>
