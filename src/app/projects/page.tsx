@@ -12,10 +12,21 @@ export default function page() {
 
       <div className="w-full h-fit text-center items-center justify-center space-y-6 ">
 
-<WelcomeToProject/>
+{/* <WelcomeToProject/>
 
+<AcademicProjects/> */}
+
+
+
+<section className="mb-10">    
+  <WelcomeToProject/>
+</section>
+
+
+
+<section className="mb-10">
 <AcademicProjects/>
-
+</section>
 </div>
 
 

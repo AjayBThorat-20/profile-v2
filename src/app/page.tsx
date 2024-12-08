@@ -2,6 +2,8 @@
 import { useEffect, useState } from "react";
 import WelcomeToProject from "./Components/projects/welcomeToProject";
 import AcademicProjects from "./Components/projects/academicProjects";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   const [showRest, setShowRest] = useState(false);
@@ -15,7 +17,7 @@ export default function Home() {
 
   return (
     <div className="text-center justify-center text-dark w-full h-screen lg:px-32 overflow-y-auto px-4 overflow-x-hidden hide-scrollbar py-10 md:pb-0">
-      {/* <div className="animate-slide-up">
+      <div className="animate-slide-up">
         <div className="w-full h-full text-center items-center justify-center space-y-6 pb-10">
           <div className="flex flex-col md:flex-row items-center md:justify-between w-full h-full space-y-8 md:space-y-0 md:px-0 px-0">
             <div className="relative w-full h-[100vh] md:w-1/2 md:h-[90vh] max-h-[85vh]">
@@ -55,20 +57,12 @@ export default function Home() {
             )}
           </div>
         </div>
-      </div> */}
+      </div>
 
 
 
 
-  <section className="mb-10">    
-  <WelcomeToProject/>
-</section>
 
-
-
-<section className="mb-10">
-<AcademicProjects/>
-</section>
 
 
 
