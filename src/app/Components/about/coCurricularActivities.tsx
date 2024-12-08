@@ -27,7 +27,7 @@ const ActivityData = [
 
 const CoCurricularActivities: React.FC = () => {
   return (
-    <div className="h-full px-4 ">
+    <div className="pt-10 h-full px-4 ">
       {/* Header */}
       <div className="text-left mb-8">
         <h1 className="text-[2rem] md:text-[2.5rem] font-bold">
