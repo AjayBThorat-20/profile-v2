@@ -27,7 +27,7 @@ const Certifications: React.FC = () => {
         <h1 className='text-[2.5rem] font-bold'>Certifications</h1>
       </div>
 
-      <div className="w-full h-full overflow-hidden py-10">
+      <div className="w-full h-full overflow-hidden">
         {/* <div className='flex flex-wrap space-x-12 text-center justify-center' > */}
         <div className='grid md:grid-cols-2  lg:grid-cols-3 grid-cols-1 gap-4 '>
           {ActivityData.map((activity) => (
