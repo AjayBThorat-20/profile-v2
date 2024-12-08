@@ -29,47 +29,41 @@ const Certifications: React.FC = () => {
 
       <div className="w-full h-full overflow-hidden pb-8">
         {/* <div className='flex flex-wrap space-x-12 text-center justify-center' > */}
-        <div className='grid md:grid-cols-2  lg:grid-cols-3 grid-cols-1 gap-x-4 gap-y-4 lg:gap-y-0  '>
-          {ActivityData.map((activity) => (
-            <div key={activity.id} className="max-w-sm">
-              <div className="bg-gray-100 lg:h-[400px] lg:min-h-[350px]  md:min-h-[300px] md:h-[400px] h-full w- md:shadow-md lg:shadow-lg rounded-lg  border-2 border-solid mx-auto border-slate-200 hover:shadow-xl hover:shadow-slate-400 relative">
-                {/* Card Body */}
-                <div className="p-4">
-                  <Image
-                    alt="Card background"
-                    className="object-cover rounded-xl"
-                    src={activity.image}
-                    width={400}
-                    height={200}
-                  />
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 grid-cols-1 text-center items-center justify-center mx-auto gap-x-4 gap-y-4 lg:gap-y-0">
+  {ActivityData.map((activity) => (
+    <div key={activity.id} className="flex justify-center">
+      <div className="bg-gray-100 lg:h-[400px] lg:min-h-[350px] md:min-h-[300px] md:h-[400px] h-[400px] w-full max-w-sm md:shadow-md lg:shadow-lg rounded-lg border-2 border-solid border-slate-200 hover:shadow-xl hover:shadow-slate-400 relative flex flex-col items-center">
+        {/* Card Body */}
+        <div className="p-4 flex justify-center items-center">
+          <Image
+            alt="Card background"
+            className="object-cover rounded-xl"
+            src={activity.image}
+            width={400}
+            height={200}
+          />
 
-                       {/* Icon at Bottom-Right */}
-                <button
-                  className="absolute top-4 right-4 cursor-pointer text-white hover:bg-gray-600 bg-gray-400"
-                  onClick={() => openImagePopup(activity.image)}
-                >
-                  <MdOpenWith size={24}/>
-                  {/* <AiOutlineZoomIn size={24} /> */}
-                </button>
-                
-
-
-                </div>
-
-
-
-                {/* Card Header */}
-                <div className="p-4">
-                  <p className="text-xs uppercase font-bold text-gray-800">{activity.organizationName}</p>
-                  <small className="text-gray-600">{activity.year}</small>
-                  <h4 className="font-bold text-lg mt-1">{activity.title}</h4>
-                </div>
-
-           
-              </div>
-            </div>
-          ))}
+          {/* Icon at Bottom-Right */}
+          <button
+            className="absolute top-4 right-4 cursor-pointer text-white hover:bg-gray-600 bg-gray-400"
+            onClick={() => openImagePopup(activity.image)}
+          >
+            <MdOpenWith size={24} />
+            {/* <AiOutlineZoomIn size={24} /> */}
+          </button>
         </div>
+
+        {/* Card Header */}
+        <div className="p-4 text-center">
+          <p className="text-xs uppercase font-bold text-gray-800">{activity.organizationName}</p>
+          <small className="text-gray-600">{activity.year}</small>
+          <h4 className="font-bold text-lg mt-1">{activity.title}</h4>
+        </div>
+      </div>
+    </div>
+  ))}
+</div>
+
       </div>
 
       {/* Popup Modal */}

@@ -10,7 +10,7 @@ export default function About() {
 <h1 className="text-6xl md:text-7xl font-bold " >AJAY BHIMRAO THORAT</h1>
 </div>
 
-<div className="md:flex text-center   md:justify-between w-full md:gap-4 ">
+<div className="md:flex text-center   md:justify-between w-full space-x-2 ">
   <div className='h-full min-h-full  w-full max-w-[100vh]'>
 
     <p className="text-[1rem] md:text-3xl  text-justify md:pt-10 indent-6">
@@ -55,7 +55,7 @@ export default function About() {
     </p>
 
   </div>
-  <div className='relative items-center h-ful md:w-[70vh]  w-auto pt-10 '>
+  <div className='relative items-center h-ful md:w-[50vh]  w-[70vh] pt-10 '>
   <div className=" min-h-[70vh] md:min-h-[10vh]  max-w-[20vh] w-auto h-full ">
     <Image
     
