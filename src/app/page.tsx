@@ -1,13 +1,8 @@
 "use client";
-import Image from "next/image";
-import Link from "next/link";
 import { useEffect, useState } from "react";
-import About from "./Components/about/about";
-import Skills from "./Components/about/skills";
-import Certifications from "./Components/about/certifications";
-import CoCurricularActivities from "./Components/about/coCurricularActivities";
-import Education from "./Components/about/education";
 import CurrentlyWorkingOn from "./Components/experience/currentlyWorkingOn";
+import WelcomeToExperience from "./Components/experience/welcomeToExperience";
+import Internship from "./Components/experience/internship";
 
 export default function Home() {
   const [showRest, setShowRest] = useState(false);
@@ -64,33 +59,30 @@ export default function Home() {
       </div> */}
 
 
+
+
+
+
+
   <section className="mb-10">    
-<About/>
+<WelcomeToExperience/>
 </section>
 
 
 
 <section className="mb-10">
-<Skills/>
+<Internship/>
 </section>
 
 
 
 {/* Certifications Section */}
 <section className="mb-10">
-        <Certifications />
-      </section>
-
-      {/* Currently Working On Section */}
-      <section className="mb-10">
-        <CurrentlyWorkingOn />
+        
+<CurrentlyWorkingOn/>
       </section>
 
 
-
-      <section className="mb-10">
-<Education/>
-</section>
     </div>
   );
 }

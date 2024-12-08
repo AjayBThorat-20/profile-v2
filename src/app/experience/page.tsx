@@ -13,11 +13,29 @@ export default function page() {
 
       <div className="w-full h-fit text-center items-center justify-center space-y-6 ">
 
-
+{/* 
 <WelcomeToExperience/>
 <Internship/>
-<CurrentlyWorkingOn/>
+<CurrentlyWorkingOn/> */}
 
+
+<section className="mb-10">    
+<WelcomeToExperience/>
+</section>
+
+
+
+<section className="mb-10">
+<Internship/>
+</section>
+
+
+
+{/* Certifications Section */}
+<section className="mb-10">
+        
+<CurrentlyWorkingOn/>
+      </section>
 
 </div>
 
