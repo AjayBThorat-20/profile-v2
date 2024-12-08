@@ -88,31 +88,31 @@ export default function page() {
         <div className="w-full h-fit text-center items-center justify-center space-y-6">
           <section className="mb-10">
             {/* Use Suspense to lazy load About section */}
-            <Suspense fallback={<div>Loading About...</div>}>
+            <Suspense fallback={<div></div>}>
               <About />
             </Suspense>
           </section>
 
           <section className="mb-10">
-            <Suspense fallback={<div>Loading Skills...</div>}>
+            <Suspense fallback={<div></div>}>
               <Skills />
             </Suspense>
           </section>
 
           <section className="mb-10">
-            <Suspense fallback={<div>Loading Certifications...</div>}>
+            <Suspense fallback={<div></div>}>
               <Certifications />
             </Suspense>
           </section>
 
           <section className="mb-10">
-            <Suspense fallback={<div>Loading Co-Curricular Activities...</div>}>
+            <Suspense fallback={<div></div>}>
               <CoCurricularActivities />
             </Suspense>
           </section>
 
           <section className="mb-10">
-            <Suspense fallback={<div>Loading Education...</div>}>
+            <Suspense fallback={<div></div>}>
               <Education />
             </Suspense>
           </section>
