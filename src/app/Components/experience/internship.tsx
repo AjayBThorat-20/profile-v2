@@ -214,7 +214,7 @@ export default function Internship() {
                             </div >
                             
                             <div className="flex flex-col py-1">
-                              <p className="text-[1rem] text-gray-800 font-bold ">Link : </p>
+                              <p className="text-[1rem] text-gray-800 font-bold ">View My Work : </p>
                               <a href={experience.companyUrl} target="_blank" className="text-blue-600">{experience.companyUrl}</a>
                             </div>
                           </div>
@@ -248,7 +248,7 @@ export default function Internship() {
                             <p className="text-gray-600">{experience.teckStack}</p>
                           </div>
                           <div>
-                            <p className="font-bold text-gray-800">Link : </p>
+                            <p className="font-bold text-gray-800">View My Work : </p>
                             <a href={experience.companyUrl} target="_blank" className="text-blue-600">{experience.companyUrl}</a>
                           </div>
                         </div>
