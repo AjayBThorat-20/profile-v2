@@ -125,7 +125,7 @@ export default function Navbar() {
               key={link.href}
               href={link.href}
               onClick={() => setIsMenuOpen(false)}
-              className="text-2xl hover:text-gray-600 transition-colors"
+              className="text-lg hover:text-gray-600 transition-colors"
             >
               {link.label}
             </Link>
