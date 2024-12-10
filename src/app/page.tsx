@@ -124,7 +124,7 @@ export default function Home() {
       <div className="animate-slide-up">
         <div className="w-full h-full text-center items-center justify-center space-y-6 pb-10">
           <div className="flex flex-col md:flex-row items-center md:justify-between w-full h-full space-y-8 md:space-y-0 md:px-0 px-0">
-          <div className="relative w-full h-[40vh] md:w-1/2 md:h-[85vh] max-h-[90vh] ">
+          <div className="relative w-[40vh] h-[40vh] md:w-1/2 md:h-[85vh] max-h-[90vh] ">
   <Image
     src="/Images/Profile/Ajay.png"
     alt="Ajay Thorat - Professional Profile"

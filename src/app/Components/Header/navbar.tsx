@@ -373,7 +373,7 @@ export default function Navbar() {
 
       {/* Mobile Menu Overlay */}
       {isMenuOpen && (
-        <div className='fixed inset-0 bg-white z-40 flex flex-col items-center justify-center space-y-8'>
+        <div className='fixed inset-0 bg-white z-40 flex flex-col items-center justify-center space-y-8 '>
           <nav className='flex flex-col items-center space-y-6'>
             {[{ href: '/', label: 'Home' }, { href: '/about', label: 'About' }, { href: '/projects', label: 'Projects' }, { href: '/experience', label: 'Experience' }].map((link) => (
               <Link
