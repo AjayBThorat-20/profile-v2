@@ -143,7 +143,7 @@ export default function Home() {
             {showRest && (
               <div className="w-full md:w-1/2 h-full text-center md:text-left space-y-6 animate-slide-up order-2 md:order-last px-4 md:px-0 pb-20 md:pb-0">
                 <div >
-                  <h1 className="text-2xl md:text-[2.6rem] font-bold mb-4 ">
+                  <h1 className="md:text-4xl lg:text-6xl text-2xl font-bold mb-4 ">
                     Aspiring to learn and apply.
                   </h1>
                   <p className="text-base md:text-[1.2rem] mb-6 text-justify indent-6">

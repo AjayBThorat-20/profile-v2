@@ -257,7 +257,7 @@ export default function About() {
   return (
     <>
       <div className="mb-8 md:mb-0">
-        <h1 className="text-6xl md:text-7xl font-bold">AJAY BHIMRAO THORAT</h1>
+        <h1 className="md:text-4xl lg:text-6xl text-2xl font-bold">AJAY BHIMRAO THORAT</h1>
       </div>
 
       <div className="md:flex text-center md:justify-between w-full md:gap-2 items-stretch">

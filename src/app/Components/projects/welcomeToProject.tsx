@@ -4,7 +4,7 @@ import React from 'react'
 export default function WelcomeToProject() {
   return (
     <div className='w-full text-center space-y-5 mx-auto'>
-        <h1 className='text-6xl font-bold py-2'>
+        <h1 className='md:text-4xl lg:text-6xl text-2xl font-bold py-2'>
         Welcome to My Projects! 
         </h1>
         <p className='text-xl text-justify indent-14 md:w-10/12 mx-auto'>

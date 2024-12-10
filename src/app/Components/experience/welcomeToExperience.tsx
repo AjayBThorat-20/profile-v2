@@ -4,7 +4,7 @@ import React from 'react'
 export default function WelcomeToExperience() {
   return (
     <div className='w-full text-center space-y-6 mx-auto'>
-        <h1 className='text-6xl font-bold'>
+        <h1 className='md:text-4xl lg:text-6xl text-2xl font-bold'>
          Welcome to My Journey 
         </h1>
         {/* <div className="bg-gray-100 p-5 rounded-lg shadow-md"> */}
