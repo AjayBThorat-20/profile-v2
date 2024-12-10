@@ -50,7 +50,7 @@ const Skills: React.FC = () => {
   return (
     <div className=" mb-10 h-full pb-18">
       <div className="text-left md:mb-8">
-        <h1 className="text-[2.5rem] font-bold">Skills</h1>
+        <h1 className="md:text-3xl text-2xl font-bold">Skills</h1>
       </div>
 
       <div className="md:relative w-auto h-[300px] md:h-[450px] lg:h-[450px] flex items-center justify-center md:overflow-hidden md:scale-100 lg:scale-125 scale-75  ">

@@ -71,7 +71,7 @@ const AcademicProjects: React.FC = () => {
   return (
     <div className="py-5 h-full">
       <div className="text-left">
-        <h1 className="text-[2.5rem] font-bold">Academic Projects</h1>
+        <h1 className="md:text-3xl text-2xl  font-bold">Academic Projects</h1>
       </div>
 
       <div className="w-full h-full overflow-hidden pt-5 space-y-10">

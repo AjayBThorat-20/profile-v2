@@ -24,7 +24,7 @@ const Certifications: React.FC = () => {
   return (
 <div className="min-h-full ">
       <div className='text-left mb-8'>
-        <h1 className='text-[2.5rem] font-bold'>Certifications</h1>
+        <h1 className='md:text-3xl text-2xl  font-bold'>Certifications</h1>
       </div>
 
       <div className="w-full h-full overflow-hidden pb-8">

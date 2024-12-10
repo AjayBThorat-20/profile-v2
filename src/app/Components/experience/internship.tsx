@@ -131,7 +131,7 @@ export default function Internship() {
   return (
     <div className=' h-full'>
       <div className='text-left'>
-        <h1 className='text-[2.5rem] font-bold'>Internship</h1>
+        <h1 className='md:text-3xl text-2xl  font-bold'>Internship</h1>
       </div>
       <div className="py-4 md:py-8 ">
           <div className={getContainerClasses()}>

@@ -94,7 +94,7 @@ const CoCurricularActivities: React.FC = () => {
     <div className="mt-10 h-full px-4 ">
       {/* Header */}
       <div className="text-left mb-8">
-        <h1 className="text-[2rem] md:text-[2.5rem] font-bold">
+        <h1 className="md:text-3xl text-2xl  font-bold">
           Co-Curricular Activities
         </h1>
       </div>

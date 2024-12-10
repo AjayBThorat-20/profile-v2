@@ -39,7 +39,7 @@ export default function CurrentlyWorkingOn() {
 
 
       <div className='text-left mb-8'>
-        <h1 className='text-[2.5rem] font-bold'>Currently Working On</h1>
+        <h1 className='md:text-3xl text-2xl  font-bold'>Currently Working On</h1>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4 md:px-4">
         {ActivityData.map((item) => (
