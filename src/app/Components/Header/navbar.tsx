@@ -363,8 +363,17 @@ export default function Navbar() {
           className='z-50 relative'
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
         >
-          {isMenuOpen ? (
+          {/* {isMenuOpen ? (
             <FaTimes className='w-6 h-6 text-gray-800' />
+          ) : (
+            <FaBars className='w-6 h-6 text-gray-800' />
+          )} */}
+
+
+
+{isMenuOpen ? (
+            // <FaTimes className='w-6 h-6 text-gray-800' />
+            null
           ) : (
             <FaBars className='w-6 h-6 text-gray-800' />
           )}
@@ -373,23 +382,36 @@ export default function Navbar() {
 
       {/* Mobile Menu Overlay */}
       {isMenuOpen && (
-        <div className='fixed inset-0 bg-white z-40 flex flex-col items-center justify-center space-y-8 '>
-          <nav className='flex flex-col items-center space-y-6'>
-            {[{ href: '/', label: 'Home' }, { href: '/about', label: 'About' }, { href: '/projects', label: 'Projects' }, { href: '/experience', label: 'Experience' }].map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setIsMenuOpen(false)}
-                className="text-2xl hover:text-gray-600 transition-colors"
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
-          
-          <SocialLinks className='mt-8' />
-        </div>
-      )}
+  <div className='fixed inset-0 bg-white/90 bg-opacity-55 z-40 flex items-center justify-center shadow-md shadow-gray-400'>
+    <div className='relative w-8/12 h-8/12 bg-white shadow-lg rounded-lg p-6'>
+      {/* Close Button */}
+      <button 
+        onClick={toggleMenu} 
+        className='absolute top-4 right-4 z-50'
+        aria-label="Close menu"
+      >
+        <FaTimes className='w-6 h-6 text-gray-800' />
+      </button>
+
+      <div className='flex flex-col items-center justify-center space-y-6 h-full'>
+        <nav className='flex flex-col items-center space-y-6'>
+          {[{ href: '/', label: 'Home' }, { href: '/about', label: 'About' }, { href: '/projects', label: 'Projects' }, { href: '/experience', label: 'Experience' }].map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              onClick={() => setIsMenuOpen(false)}
+              className="text-2xl hover:text-gray-600 transition-colors"
+            >
+              {link.label}
+            </Link>
+          ))}
+        </nav>
+        
+        <SocialLinks className='mt-8' />
+      </div>
+    </div>
+  </div>
+)}
     </header>
   );
 }
