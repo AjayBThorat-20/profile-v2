@@ -24,7 +24,7 @@ export default function DefaultLayout({ children }: { children: React.ReactNode 
   return (
     <div className={`min-h-screen overflow-x-hidden ${theme === "dark" ? "dark" : "light"}`}>
       <div className="fixed top-0 z-50 w-full">
-        <Navbar />
+        {/* <Navbar /> */}
       </div>
       <main>
         <div className={`text-center justify-center w-full min-h-screen lg:px-32 px-4 overflow-hidden hide-scrollbar ${theme === "dark" ? "bg-gray-900 text-white" : "bg-white text-black"}`}>
@@ -35,7 +35,7 @@ export default function DefaultLayout({ children }: { children: React.ReactNode 
           </div>
         </div>
       </main>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }
