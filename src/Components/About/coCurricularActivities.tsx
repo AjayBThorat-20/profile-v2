@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import WrapperLayout from "../layout/WrapperLayout";
-import CoCurricularActivitiesSkeleton from "../Skeletons/about/CoCurricularActivitiesSkeleton";
-import { coCurricularActivitiesData } from "@/Constants/about";
+import WrapperLayout from "../Layout/wrapperLayout";
+import CoCurricularActivitiesSkeleton from "../Skeletons/About/coCurricularActivitiesSkeleton";
+import { coCurricularActivitiesData } from "@/constants/about";
 
 export default function CoCurricularActivities() {
   const [isLoading, setIsLoading] = useState(true);

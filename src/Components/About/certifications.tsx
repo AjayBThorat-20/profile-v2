@@ -3,9 +3,9 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { IoIosCloseCircle } from "react-icons/io";
-import { certificationsData } from "@/Constants/about";
-import CertificationsSkeleton from "../Skeletons/about/CertificationsSkeleton";
-import WrapperLayout from "../layout/WrapperLayout";
+import WrapperLayout from "../Layout/wrapperLayout";
+import CertificationsSkeleton from "../Skeletons/About/certificationsSkeleton";
+import { certificationsData } from "@/constants/about";
 
 export default function Certifications() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
