@@ -1,10 +1,10 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Navbar from "../Header/navbar";
+// import Navbar from "../Header/navbar";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { hydrateTheme } from "@/store/slices/themeSlice";
-import Footer from "../Footer/footer";
+// import Footer from "../Footer/footer";
 
 
 export default function DefaultLayout({ children }: { children: React.ReactNode }) {
