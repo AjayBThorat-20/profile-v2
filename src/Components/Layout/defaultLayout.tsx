@@ -28,7 +28,7 @@ export default function DefaultLayout({ children }: { children: React.ReactNode 
       </div>
       <main>
         <div className={`text-center justify-center w-full min-h-screen lg:px-32 px-4 overflow-hidden hide-scrollbar ${theme === "dark" ? "bg-gray-900 text-white" : "bg-white text-black"}`}>
-          <div className="animate-slide-up">
+          <div className="animate-slide-up" >
             <div className="w-full h-full text-center items-center justify-center space-y-6 py-8 mt-10">
               {children}
             </div>

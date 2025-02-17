@@ -47,7 +47,7 @@ export default function Footer() {
 
       {/* Footer */}
       <footer
-        className={`w-full text-center py-4 z-50 transition-colors duration-300 ${
+        className={`w-full text-center py-4 z-50 ${
           theme === "dark" ? "bg-gray-900 text-white" : "bg-gray-100 text-gray-800"
         }`}
       >
