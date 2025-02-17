@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { MdMore } from "react-icons/md";
 import WrapperLayout from "../Layout/wrapperLayout";
 import CurrentlyWorkingOnSkeleton from "../Skeletons/Expeience/currentlyWorkingOnSkeleton";
-import { currentlyWorkingOnData } from "@/Constants/experience";
+import { currentlyWorkingOnData } from "@/constants/experience";
 
 export default function CurrentlyWorkingOn() {
   const [clickedId, setClickedId] = useState<number | null>(null);

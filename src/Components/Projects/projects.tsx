@@ -3,7 +3,7 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import WrapperLayout from "../Layout/wrapperLayout";
-import { projectsData } from "@/Constants/project";
+import { projectsData } from "@/constants/project";
 
 export default function Projects() {
   const [currentImageIndexes, setCurrentImageIndexes] = useState<number[]>(

@@ -2,9 +2,9 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { experienceData } from "@/Constants/experience";
 import WrapperLayout from "../Layout/wrapperLayout";
 import ExperienceSkeleton from "../Skeletons/Expeience/experienceSkeleton";
+import { experienceData } from "@/constants/experience";
 
 export default function Experience() {
   const [currentImageIndexes, setCurrentImageIndexes] = useState<number[]>(experienceData.map(() => 0));

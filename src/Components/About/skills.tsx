@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import WrapperLayout from "../layout/WrapperLayout";
-import { skillsData } from "@/Constants/about";
+import WrapperLayout from "../Layout/wrapperLayout";
+import { skillsData } from "@/constants/about";
 
 export default function Skills() {
   return (

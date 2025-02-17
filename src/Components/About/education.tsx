@@ -1,10 +1,9 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import WrapperLayout from "../layout/WrapperLayout";
-import EducationSkeleton from "../Skeletons/about/EducationSkeleton";
-import { educationData } from "@/Constants/about";
-
+import WrapperLayout from "../Layout/wrapperLayout";
+import EducationSkeleton from "../Skeletons/About/educationSkeleton";
+import { educationData } from "@/constants/about";
 export default function Education() {
   const [isLoading, setIsLoading] = useState(true);
 
