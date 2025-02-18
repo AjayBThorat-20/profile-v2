@@ -7,18 +7,8 @@ interface SkeletonLoaderProps {
 export default function SkeletonLoader({ theme }: SkeletonLoaderProps) {
   return (
     <div
-      style={{
-        position: "absolute",
-        top: "50%",
-        left: "50%",
-        transform: "translate(-50%, -50%)",
-        width: "80%",
-        height: "80%",
-        borderRadius: "50%",
-        overflow: "hidden",
-        animation: "pulse 1.5s infinite",
-        backgroundColor: theme === "dark" ? "#374151" : "#e0e0e0",
-      }}
-    />
+    className={`w-[300px] h-[300px] md:w-[300px] md:h-[300px] lg:w-[350px] lg:h-[350px] rounded-full animate-pulse 
+    ${theme === "dark" ? "bg-gray-700" : "bg-gray-300"}`}
+  ></div>
   );
 }
