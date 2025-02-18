@@ -1,4 +1,4 @@
-import { About, Certifications, CoCurricularActivities, Education, Skills } from "@/components/About/page";
+import { About, Certifications, CoCurricularActivities, Education, Skills } from "@/Components/About/page";
 export default function page() {
   return (
     <>

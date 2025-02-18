@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import DefaultLayout from "../components/Layout/defaultLayout";
+import DefaultLayout from "../Components/Layout/defaultLayout";
 import ReduxProvider from "@/providers/ReduxProvider";
 
 const geistSans = localFont({
