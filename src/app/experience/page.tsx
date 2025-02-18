@@ -1,5 +1,5 @@
 import React from 'react'
-import { CurrentlyWorkingOn, Experience, WelcomeToExperience } from "@/Components/Experience/page";
+import { CurrentlyWorkingOn, Experience, WelcomeToExperience } from "@/components/Experience/page";
 export default function page() {
   return (
     <>

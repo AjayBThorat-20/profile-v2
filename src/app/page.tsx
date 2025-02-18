@@ -2,7 +2,7 @@
 
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
-import { BasicInfo, OrbImage } from "@/Components/Home/page";
+import { BasicInfo, OrbImage } from "@/components/Home/page";
 
 export default function Home() {
   const theme = useSelector((state: RootState) => state.theme.mode); // Access `mode` instead of `value`
