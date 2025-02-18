@@ -18,7 +18,7 @@ export default function BasicInfo({ theme }: BasicInfoProps) {
   }, []);
 
   return (
-    <div className="md:w-1/2 w-full h-full text-center md:text-left space-y-8 animate-slide-up order-2 md:order-last px-6 md:px-0">
+    <div className="md:w-1/2 w-full h-full text-center md:text-left space-y-8 order-2 md:order-last px-6 md:px-0">
       {isLoading ? (
       <BasicInfoSkeleton/>
       ) : (
