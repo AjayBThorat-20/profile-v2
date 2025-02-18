@@ -23,17 +23,16 @@ export default function DefaultLayout({ children }: { children: React.ReactNode 
 
   return (
     <div className={`min-h-screen overflow-x-hidden ${theme === "dark" ? "dark" : "light"}`}>
-      <div className="fixed top-0 z-50 w-full">
+      <div className="fixed top-0 z-50 w-full bg-red-500">
         <Navbar />
       </div>
       <main>
-        <div className={`text-center justify-center w-full min-h-screen lg:px-32 px-4 overflow-hidden hide-scrollbar ${theme === "dark" ? "bg-gray-900 text-white" : "bg-white text-black"}`}>
-          <div className="animate-slide-up" >
-            <div className="w-full h-full text-center items-center justify-center space-y-6 py-8 mt-10">
+        <div className={`text-center justify-center w-full min-h-full lg:px-32 px-4 overflow-hidden hide-scrollbar mt-16 ${theme === "dark" ? "bg-gray-900 text-white" : "bg-white text-black"}`}>
+    
+            <div className="w-full h-full text-center items-center justify-center space-y-6">
               {children}
             </div>
           </div>
-        </div>
       </main>
       <Footer />
     </div>

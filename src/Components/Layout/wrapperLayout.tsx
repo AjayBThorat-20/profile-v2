@@ -10,18 +10,21 @@ export default function WrapperLayout({ firstPosition, secondPosition, children 
   return (
     <div className="px-6 sm:px-10 lg:px-16">
       {/* Header */}
+      <div className="animate-slide-up" >
       <div className="py-8">
 
-        {firstPosition || secondPosition ? (
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-center mb-8 sm:mb-12 text-gray-800 dark:text-gray-200">
-            <span>{firstPosition}</span>{" "}
-            <span className="text-blue-500 dark:text-blue-400">{secondPosition}</span>
-          </h1>
-        ) : null}
+{firstPosition || secondPosition ? (
+  <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-center mb-8 sm:mb-12 text-gray-800 dark:text-gray-200">
+    <span>{firstPosition}</span>{" "}
+    <span className="text-blue-500 dark:text-blue-400">{secondPosition}</span>
+  </h1>
+) : null}
 
-        {/* Children */}
-        {children}
+{/* Children */}
+{children}
+</div>
       </div>
+     
     </div>
   );
 }
