@@ -41,7 +41,7 @@ export default function OrbImage({
         <SkeletonLoader theme={theme} />
       ) : (
         <div
-          className={`relative w-[200px] h-[200px] md:w-[300px] md:h-[300px] lg:w-[350px] lg:h-[350px] rounded-full overflow-hidden transition-transform duration-500 ease-out ${
+          className={`relative w-[300px] h-[300px] md:w-[300px] md:h-[300px] lg:w-[350px] lg:h-[350px] rounded-full overflow-hidden transition-transform duration-500 ease-out ${
             forceHoverState ? "scale-[1.1] rotate-6" : "hover:scale-105 hover:rotate-3"
           } ${theme === "dark" ? "darkOrbBackgroundAnimation" : "lightOrbBackgroundAnimation"}`}
         >

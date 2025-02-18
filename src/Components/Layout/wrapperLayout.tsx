@@ -8,7 +8,7 @@ interface WrapperLayoutProps {
 
 export default function WrapperLayout({ firstPosition, secondPosition, children }: WrapperLayoutProps) {
   return (
-    <div className="px-6 sm:px-10 lg:px-16">
+    <div className="px-6 sm:px-10 lg:px-16  ">
       {/* Header */}
       <div className="animate-slide-up" >
       <div className="py-8">

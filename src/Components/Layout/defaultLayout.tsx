@@ -29,7 +29,7 @@ export default function DefaultLayout({ children }: { children: React.ReactNode 
       <main>
         <div className={`text-center justify-center w-full min-h-full lg:px-32 px-4 overflow-hidden hide-scrollbar mt-16 ${theme === "dark" ? "bg-gray-900 text-white" : "bg-white text-black"}`}>
     
-            <div className="w-full h-full text-center items-center justify-center space-y-6">
+            <div className="w-full min-h-screen h text-center items-center justify-center space-y-6">
               {children}
             </div>
           </div>

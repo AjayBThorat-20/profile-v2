@@ -75,7 +75,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 };
   return (
     <WrapperLayout firstPosition="Get in" secondPosition="Touch">
-      <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto text-center pb-6">
+      <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto text-center pb-6 ">
         Please fill out the form below to get in touch.
       </p>
 
