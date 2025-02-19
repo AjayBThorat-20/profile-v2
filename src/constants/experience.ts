@@ -49,21 +49,21 @@ export interface ActivityItem {
   
   // 🔹 Currently Working On Data
   export const currentlyWorkingOnData: ActivityItem[] = [
+    // {
+    //   id: 1,
+    //   description: "Analyzed and documented data behavior patterns in Instagram's user recommendation system, reporting findings to Meta's security team (Case #122106229448589400)",
+    //   hiddenDisc: "I submitted a report to Meta, highlighting an anonymous behavior pattern I discovered in Instagram's system. Additionally, I recommended leveraging this behavior as a potential feature to enhance user engagement on the platform.",
+    // },
     {
       id: 1,
-      description: "Analyzed and documented data behavior patterns in Instagram's user recommendation system, reporting findings to Meta's security team (Case #122106229448589400)",
-      hiddenDisc: "I submitted a report to Meta, highlighting an anonymous behavior pattern I discovered in Instagram's system. Additionally, I recommended leveraging this behavior as a potential feature to enhance user engagement on the platform.",
-    },
-    {
-      id: 2,
       description: "Working on personal web application",
-      hiddenDisc: "Working on theme, Description page of work history",
+      hiddenDisc: "Working on Navigation Bar components and responsiveness of all components",
     },
-    {
-      id: 3,
-      description: "MongoDB database connector map Int to long for Prisma",
-      hiddenDisc: "This is a mapping issue in Prisma's object-relational model. The developer passes age and specifies its data type as int in the Prisma schema, but it is stored as BigInt (long) in MongoDB.",
-    },
+    // {
+    //   id: 3,
+    //   description: "MongoDB database connector map Int to long for Prisma",
+    //   hiddenDisc: "This is a mapping issue in Prisma's object-relational model. The developer passes age and specifies its data type as int in the Prisma schema, but it is stored as BigInt (long) in MongoDB.",
+    // },
   ];
   
  
