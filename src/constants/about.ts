@@ -26,8 +26,8 @@ export interface SkillElement {
   
   // 🔹 Skills Data
   export const skillsData: SkillElement[] = [
-    { id: 1, text: "Python" },
-    { id: 2, text: "Node.js" },
+    { id: 1, text: "Node.js" },
+    { id: 2, text: "Python" },
     { id: 3, text: "Next.js" },
     { id: 4, text: "React.js" },
     { id: 5, text: "Tailwind CSS" },
@@ -42,7 +42,8 @@ export interface SkillElement {
     { id: 14, text: "SQL Server" },
     { id: 15, text: "Postman" },
     { id: 16, text: "Pentaho" },
-    { id: 17, text: "Supabase" }
+    { id: 17, text: "Supabase" },
+    { id: 18, text: "Express.js" }
   ];
   
   // 🔹 Education Data

@@ -75,9 +75,9 @@ export default function Education() {
       {isLoading ? (
         <EducationSkeleton />
       ) : (
-        <div className="flex flex-col items-center w-full max-w-6xl px-4">
+        <div className="relative flex flex-col items-center w-full max-w-6xl px-4">
           {/* Timeline Vertical Line */}
-          <div className="absolute left-4 md:left-1/2 w-1 bg-gray-300 dark:bg-gray-600 h-full z-0"></div>
+          <div className="absolute  md:left-1/2 w-1 bg-gray-300 dark:bg-gray-600 h-full z-0"></div>
 
           {/* Education Cards */}
           <div className="w-full flex flex-col gap-8">
