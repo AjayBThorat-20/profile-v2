@@ -24,11 +24,14 @@ export default function BasicInfo({ theme }: BasicInfoProps) {
       ) : (
         // Actual Content
         <div className="space-y-8">
-          <h1 className="text-2xl md:text-[2.6rem] font-bold mb-4 leading-tight">
+          {/* <h1 className="text-2xl md:text-[2.6rem] font-bold mb-4 leading-tight">
             Aspiring to learn and apply.
+          </h1> */}
+           <h1 className="text-2xl md:text-[2.6rem] mb-4 leading-tight font-extrabold text-left text-gray-800 dark:text-gray-200">
+            Aspiring to <span className="text-blue-500 dark:text-blue-400">learn and apply.</span> 
           </h1>
           <p className="text-base md:text-[1.2rem] mb-6 text-justify indent-6 leading-relaxed">
-            A dedicated and self-motivated full-stack developer driven by a
+            A dedicated and self-motivated Next.js And MERN Stack Developer driven by a
             passion for solving real-world problems. Committed to contributing to
             national, organizational, and personal growth through innovative
             solutions, adaptability, and a relentless pursuit of excellence.
