@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { FaArrowLeft, FaExternalLinkAlt, FaCalendar } from "react-icons/fa";
 
 interface Experience {
   id: number;
@@ -14,7 +15,7 @@ interface Experience {
     id: number;
     title: string;
     picture: string;
-    data: string | { [key: string]: string[] }; // `data` can be a string or a nested object
+    data: string | { [key: string]: string[] };
   }[];
 }
 
@@ -33,105 +34,148 @@ export default function ExperienceDetails() {
     }
   }, []);
 
-  // Scroll to top when the component mounts
   useEffect(() => {
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
   const handleBack = () => {
-    localStorage.removeItem("selectedExperience"); // Clear stored experience
-    router.back(); // Go back to the previous page
+    localStorage.removeItem("selectedExperience");
+    router.back();
   };
 
   if (!experience)
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <p className="text-lg font-semibold text-gray-500">Loading...</p>
+        <div className="animate-pulse space-y-4">
+          <div className="h-8 w-48 bg-gray-300 dark:bg-gray-700 rounded"></div>
+          <p className="text-lg font-semibold text-gray-500">Loading...</p>
+        </div>
       </div>
     );
 
   return (
-    <>
-      <div className="p-6 max-w-3xl mx-auto relative">
-        {/* Experience Details */}
-        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
-          <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-200">{experience.title}</h1>
-          <p className="text-lg text-gray-600 dark:text-gray-400 mt-2">
-            <a
-              href={experience.companyUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-500 hover:underline"
-            >
-              {experience.name}
-            </a>{" "}
-            - {experience.duration}
-          </p>
-          <p className="mt-2 text-gray-600 dark:text-gray-400 font-medium">{experience.techStack}</p>
+    <div className="min-h-screen pb-20">
+      <div className="p-6 max-w-5xl mx-auto">
+        {/* Header Card */}
+        <div className="bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-gray-800 dark:to-gray-900 p-8 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 mb-8">
+          <div className="space-y-4">
+            <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 dark:from-blue-400 dark:to-cyan-400 bg-clip-text text-transparent">
+              {experience.title}
+            </h1>
+            
+            <div className="flex flex-wrap items-center gap-4 text-gray-700 dark:text-gray-300">
+              <a
+                href={experience.companyUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-lg font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors"
+              >
+                {experience.name}
+                <FaExternalLinkAlt className="w-4 h-4" />
+              </a>
+              
+              <span className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
+                <FaCalendar className="w-4 h-4" />
+                {experience.duration}
+              </span>
+            </div>
+
+            {/* Tech Stack Pills */}
+            <div className="flex flex-wrap gap-2 pt-2">
+              {experience.techStack.split(",").map((tech, idx) => (
+                <span
+                  key={idx}
+                  className="px-4 py-2 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium border border-gray-300 dark:border-gray-600 shadow-sm"
+                >
+                  {tech.trim()}
+                </span>
+              ))}
+            </div>
+          </div>
         </div>
 
         {/* Details Section */}
-        <div className="mt-8 space-y-8">
-          {experience.details.map((detail) => (
+        <div className="space-y-6">
+          {experience.details.map((detail, index) => (
             <div
               key={detail.id}
-              className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-200"
+              className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200 dark:border-gray-700"
             >
-              <div className="flex flex-col items-center text-center">
-                <Image
-                  src={detail.picture}
-                  alt={detail.title}
-                  className="w-64 h-64 rounded-xl shadow-md object-cover"
-                  width={256}
-                  height={256}
-                />
-                <h2 className="mt-4 text-xl font-bold text-gray-800 dark:text-gray-200">{detail.title}</h2>
-                {typeof detail.data === "string" ? (
-                  <p className="mt-2 text-gray-700 dark:text-gray-300 text-justify indent-6  text-lg">{detail.data}</p>
-                ) : (
-                  <div className="mt-4 text-left w-full">
-                    {Object.entries(detail.data).map(([key, value]) => (
-                      <div key={key} className="mb-4">
-                        <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
-  {key.replace(/([A-Z])/g, " $1").trim().replace(/^./, str => str.toUpperCase())}
-</h3>
-                        {/* <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">{key}</h3> */}
-                        <ul className="list-disc list-inside text-gray-700 dark:text-gray-300">
-                          {value.map((item, index) => (
-                            <li key={index}>{item}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    ))}
+              <div className="p-6 md:p-8">
+                {/* Image and Title Section */}
+                <div className="flex flex-col md:flex-row gap-6 items-start">
+                  <div className="relative w-full md:w-80 h-64 rounded-xl overflow-hidden shadow-md border-2 border-gray-200 dark:border-gray-700 flex-shrink-0">
+                    <Image
+                      src={detail.picture}
+                      alt={detail.title}
+                      fill
+                      className="object-cover hover:scale-105 transition-transform duration-500"
+                      sizes="(max-width: 768px) 100vw, 320px"
+                    />
                   </div>
-                )}
+
+                  <div className="flex-1 space-y-4">
+                    {/* Badge */}
+                    <div className="inline-flex items-center gap-2 px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full text-sm font-medium">
+                      <span className="w-2 h-2 bg-blue-600 dark:bg-blue-400 rounded-full animate-pulse"></span>
+                      Detail {index + 1} of {experience.details.length}
+                    </div>
+
+                    <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white">
+                      {detail.title}
+                    </h2>
+
+                    {/* Content */}
+                    {typeof detail.data === "string" ? (
+                      <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-lg">
+                        {detail.data}
+                      </p>
+                    ) : (
+                      <div className="space-y-6">
+                        {Object.entries(detail.data).map(([key, value]) => (
+                          <div key={key} className="space-y-3">
+                            <h3 className="text-lg font-bold text-gray-800 dark:text-gray-200 flex items-center gap-2">
+                              <span className="w-1.5 h-6 bg-blue-600 dark:bg-blue-400 rounded-full"></span>
+                              {key
+                                .replace(/([A-Z])/g, " $1")
+                                .trim()
+                                .replace(/^./, (str) => str.toUpperCase())}
+                            </h3>
+                            <ul className="space-y-2 ml-4">
+                              {value.map((item, index) => (
+                                <li
+                                  key={index}
+                                  className="flex items-start gap-3 text-gray-700 dark:text-gray-300"
+                                >
+                                  <span className="mt-2 w-1.5 h-1.5 bg-blue-600 dark:bg-blue-400 rounded-full flex-shrink-0"></span>
+                                  <span>{item}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
               </div>
             </div>
           ))}
         </div>
       </div>
 
-      {/* Back Button */}
-      <div>
-        <button
-          onClick={handleBack}
-          className="fixed bottom-4 right-4 md:bottom-10 md:right-10 flex items-center gap-2 px-5 py-3 text-sm font-medium 
-                     bg-blue-500 text-white rounded-full shadow-lg transition-all duration-300 
-                     hover:bg-blue-600 hover:scale-105 active:scale-95 focus:outline-none z-50"
-        >
-          <svg
-            className="w-5 h-5"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7"></path>
-          </svg>
-          <p className="hidden sm:block">Back</p>
-        </button>
-      </div>
-    </>
+      {/* Floating Back Button */}
+      <button
+        onClick={handleBack}
+        className="fixed bottom-6 right-6 md:bottom-10 md:right-10 flex items-center gap-2 px-6 py-3 
+                   bg-gradient-to-r from-blue-600 to-cyan-600 text-white rounded-full shadow-2xl 
+                   transition-all duration-300 hover:shadow-blue-500/50 hover:scale-110 
+                   active:scale-95 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800 z-50 group"
+        aria-label="Go back"
+      >
+        <FaArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform duration-300" />
+        <span className="font-semibold hidden sm:block">Back</span>
+      </button>
+    </div>
   );
 }

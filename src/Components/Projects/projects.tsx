@@ -4,6 +4,7 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import WrapperLayout from "../Layout/wrapperLayout";
 import { projectsData } from "@/constants/project";
+import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 
 export default function Projects() {
   const [currentImageIndexes, setCurrentImageIndexes] = useState<number[]>(
@@ -14,76 +15,90 @@ export default function Projects() {
     const interval = setInterval(() => {
       setCurrentImageIndexes((prevIndexes) =>
         prevIndexes.map((index, activityIdx) =>
-          index === projectsData[activityIdx].pictures.length - 1 ? 0 : index + 1
+          index === projectsData[activityIdx].pictures.length - 1
+            ? 0
+            : index + 1
         )
       );
-    }, 3000); // Change image every 3 seconds
+    }, 3000);
 
-    return () => clearInterval(interval); // Cleanup on unmount
+    return () => clearInterval(interval);
   }, []);
 
   return (
     <WrapperLayout firstPosition="Personal" secondPosition="Projects">
-      <p className="mt-4 text-lg text-gray-600 dark:text-gray-300 text-center">
-        Explore my academic projects that showcase my technical skills and creativity.
+      <p className="mt-4 text-lg text-gray-600 dark:text-gray-300 text-center max-w-3xl mx-auto mb-12">
+        Explore my portfolio of projects showcasing technical skills, creativity,
+        and problem-solving abilities across various technologies.
       </p>
 
       {/* Projects Grid */}
-      <div className="space-y-8">
+      <div className="space-y-8 max-w-7xl mx-auto">
         {projectsData.map((activity, activityIdx) => (
           <div
             key={activity.id}
-            className="w-full bg-gray-50 dark:bg-gray-800 rounded-xl shadow-xl overflow-hidden transition-transform duration-300 hover:scale-105"
+            className="group w-full bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1 border border-gray-200 dark:border-gray-700"
           >
-            <div className="flex flex-col md:grid md:grid-cols-10 gap-6 p-6">
+            <div className="flex flex-col lg:grid lg:grid-cols-12 gap-6 p-6">
               {/* Image Section */}
-              <div className="flex justify-center md:col-span-3">
-                <Image
-                  alt={`Image from project ${activity.title}`}
-                  className="rounded-lg object-cover border-2 border-gray-200 dark:border-gray-700 shadow-md w-full max-w-[300px] h-auto"
-                  src={activity.pictures[currentImageIndexes[activityIdx]].picture}
-                  width={300}
-                  height={200}
-                />
+              <div className="lg:col-span-4 flex justify-center items-center">
+                <div className="relative w-full max-w-sm aspect-video rounded-xl overflow-hidden shadow-md border-2 border-gray-200 dark:border-gray-700 group-hover:border-blue-500 dark:group-hover:border-blue-400 transition-colors duration-300">
+                  <Image
+                    alt={`${activity.title} preview`}
+                    className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500"
+                    src={
+                      activity.pictures[currentImageIndexes[activityIdx]]
+                        .picture
+                    }
+                    fill
+                    sizes="(max-width: 768px) 100vw, 400px"
+                  />
+                  {/* Image Counter */}
+                  <div className="absolute bottom-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded-full">
+                    {currentImageIndexes[activityIdx] + 1} /{" "}
+                    {activity.pictures.length}
+                  </div>
+                </div>
               </div>
 
               {/* Details Section */}
-              <div className="md:col-span-7 space-y-4">
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
+              <div className="lg:col-span-8 space-y-4">
+                {/* Title */}
+                <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
                   {activity.title}
                 </h3>
-                <p className="text-gray-600 dark:text-gray-300 text-justify">
+
+                {/* Description */}
+                <p className="text-gray-600 dark:text-gray-300 text-base leading-relaxed">
                   {activity.discription}
                 </p>
-                <div className="flex flex-wrap gap-2 mt-4">
-                  {activity.techStack.split(", ").map((tech, idx) => (
-                    <span
-                      key={idx}
-                      className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm"
-                    >
-                      {tech}
-                    </span>
-                  ))}
+
+                {/* Tech Stack */}
+                <div>
+                  <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                    Technologies Used:
+                  </h4>
+                  <div className="flex flex-wrap gap-2">
+                    {activity.techStack.split(", ").map((tech, idx) => (
+                      <span
+                        key={idx}
+                        className="px-3 py-1.5 bg-gradient-to-r from-blue-100 to-cyan-100 dark:from-blue-900/50 dark:to-cyan-900/50 text-blue-800 dark:text-blue-200 rounded-lg text-sm font-medium border border-blue-200 dark:border-blue-700 hover:scale-105 transition-transform duration-200"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
                 </div>
+
+                {/* Action Button */}
                 <a
                   href={activity.url}
-                  className="inline-flex items-center mt-4 text-blue-600 dark:text-blue-400 hover:underline"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white font-semibold rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
+                  <FaExternalLinkAlt className="w-4 h-4" />
                   <span>View Project</span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5 ml-2"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v3.586L7.707 9.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 10.586V7z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
                 </a>
               </div>
             </div>
@@ -91,30 +106,27 @@ export default function Projects() {
         ))}
 
         {/* Additional Projects Card */}
-        <div className="w-full bg-gray-50 dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">
-          <div className="p-6">
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
-              Battle King, Companion-Ai, Marathi Matrimony, and more...
+        <div className="w-full bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl shadow-lg overflow-hidden border-2 border-dashed border-blue-300 dark:border-blue-700 hover:border-solid transition-all duration-300 hover:shadow-xl">
+          <div className="p-8 text-center space-y-4">
+            <div className="inline-block p-4 bg-blue-600 rounded-full mb-4">
+              <FaGithub className="w-8 h-8 text-white" />
+            </div>
+            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white">
+              More Projects Available
             </h3>
+            <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+              Including Battle King, Companion-AI, Marathi Matrimony, and many more
+              exciting projects. Check out my complete portfolio on GitHub!
+            </p>
             <a
               href="https://github.com/AjayBThorat-20?tab=repositories"
-              className="inline-flex items-center mt-4 text-blue-600 dark:text-blue-400 hover:underline"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 mt-4"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <span>View All Projects</span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5 ml-2"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v3.586L7.707 9.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 10.586V7z"
-                  clipRule="evenodd"
-                />
-              </svg>
+              <FaGithub className="w-5 h-5" />
+              <span>View All on GitHub</span>
+              <FaExternalLinkAlt className="w-4 h-4" />
             </a>
           </div>
         </div>
