@@ -1,52 +1,66 @@
 export interface ActivityItem {
-    id: number;
-    description: string;
-    hiddenDisc: string;
-  }
-  
-  // export interface ExperienceItem {
-  //   id: number;
-  //   role: string;
-  //   duration: string;
-  //   company: string;
-  //   companyUrl: string;
-  //   teckStack: string;
-  //   sideCardDescription: string;
-  //   description: {
-  //     id: number;
-  //     desc: string;
-  //     picture: string;
-  //   }[];
-  //   detailPageUrl: string;
-  // }
-  
+  id: number;
+  description: string;
+  hiddenDisc: string;
+}
 
-  
-  export type ExperienceItem = {
-    id: number;
-    name: string;
-    title: string;
-    duration: string;
-    companyUrl: string;
-    techStack: string;
-    details: ExperienceDetail[];
-    detailPageUrl: string;
-  };
-  
-  type ExperienceDetail = {
-    id: number;
-    title: string;
-    picture: string;
-    data: string | ExperienceResponsibilities;
-  };
-  
-  type ExperienceResponsibilities = {
-    coreDevelopment: string[];
-    ecommerceIntegration: string[];
-    featureDevelopment: string[];
-    projectLeadership: string[];
-  };
-  
+export type ExperienceItem = {
+  id: number;
+  name: string;
+  title: string;
+  duration: string;
+  companyUrl: string;
+  techStack: string;
+  details: ExperienceDetail[];
+  detailPageUrl: string;
+};
+
+type ExperienceDetail = {
+  id: number;
+  title: string;
+  picture: string;
+  data: string | ExperienceDataStructure;
+};
+
+type ExperienceDataStructure = {
+  [key: string]: string[];
+};
+
+// Optional: You can still define specific types for better intellisense
+export type ShypBuddyResponsibilities = {
+  coreDevelopment: string[];
+  ecommerceIntegration: string[];
+  featureDevelopment: string[];
+  projectLeadership: string[];
+};
+
+export type RenewalyticResponsibilities = {
+  clientEngagement: string[];
+  fullStackDevelopment: string[];
+  infrastructureManagement: string[];
+  integrations: string[];
+};
+
+export type FNSProjectData = {
+  overview: string[];
+  keyAchievements: string[];
+  features: string[];
+  technicalHighlights: string[];
+};
+
+export type ExcelFlowProjectData = {
+  overview: string[];
+  technicalChallenges: string[];
+  performanceOptimizations: string[];
+  features: string[];
+  roleContribution: string[];
+};
+
+export type RealSyncProjectData = {
+  overview: string[];
+  features: string[];
+};
+
   // 🔹 Currently Working On Data
   export const currentlyWorkingOnData: ActivityItem[] = [
     // {
@@ -119,7 +133,155 @@ export interface ActivityItem {
         }
       ],
       detailPageUrl: "/details"
+    },
+{
+  id: 2,
+  name: "Renewalytics Services Pvt. Ltd.",
+  title: "Junior Full Stack Developer",
+  duration: "18 March 2025 - Present",
+  companyUrl: "https://www.renewalytics.in/",
+  techStack: "Next.js, Prisma, Tailwind CSS, PostgreSQL, MySQL, MongoDB, Redis, BullMQ, Highcharts, shadcn/ui, Zoho Email, Digital Ocean, PM2, Nginx",
+  details: [
+    {
+      id: 1,
+      title: "overview",
+      picture: "/Images/Experience/Renewalytics/logo.png",
+      data: "Renewalytics Services Pvt. Ltd. is a New Delhi-based company specializing in AI-powered renewable energy forecasting and grid management solutions. The company leverages advanced ML/DL models, weather intelligence, and digital twin technology to help integrate solar, wind, and hybrid renewable energy projects seamlessly into the grid while ensuring DSM compliance and optimal performance."
+    },
+    {
+      id: 2,
+      title: "responsibilities",
+      picture: "/Images/Experience/Renewalytics/dashboard.png",
+      data: {
+        clientEngagement: [
+          "Connect with clients to understand their requirements and translate them into technical solutions.",
+          "Act as a bridge between technical teams and clients, ensuring clear communication and requirement alignment."
+        ],
+        fullStackDevelopment: [
+          "Developed and maintained 3 major full-stack applications using Next.js, Prisma, Tailwind CSS, PostgreSQL, MySQL, and MongoDB.",
+          "Took complete ownership of application development lifecycle from requirement gathering to deployment.",
+          "Designed and implemented responsive UI/UX components using shadcn/ui and Tailwind CSS ensuring cross-device compatibility.",
+          "Implemented role-based access control (RBAC) systems across all applications for secure user management."
+        ],
+        infrastructureManagement: [
+          "Managed server infrastructure using Digital Ocean, PM2, and Nginx.",
+          "Monitored system logs and ensured optimal server performance and uptime.",
+          "Set up and managed cron jobs for automated data fetching and processing tasks.",
+          "Implemented automated database backup strategies for PostgreSQL, MySQL, and MongoDB to ensure data integrity and disaster recovery.",
+          "Regularly cleared MongoDB logs and optimized storage to manage limited server resources efficiently.",
+          "Optimized APIs and database queries for improved application performance."
+        ],
+        integrations: [
+          "Integrated Zoho Email API for automated email notifications and alerts.",
+          "Developed scripts to fetch data from multiple sources including SFTP, FTP, and various client APIs.",
+          "Implemented satellite data fetching from FTP servers for DGR (Distributed Generation Resources) integration."
+        ]
+      }
+    },
+    {
+      id: 3,
+      title: "project 1: FNS (Forecasting & Scheduling Platform)",
+      picture: "/Images/Experience/Renewalytics/fns.png",
+      data: {
+        overview: [
+          "Company's flagship subscription-based product managing 3.22+ GW of renewable energy capacity.",
+          "Handles solar, wind, and hybrid plants with STU (State Transmission Utility) and CTU (Central Transmission Utility) classifications.",
+          "Led the complete revamp of the FNS platform using Context API for state management, shadcn/ui for modern UI components, and Highcharts for data visualization."
+        ],
+        keyAchievements: [
+          "Improved application performance by 80% through implementation of caching, memoization, and Context API optimization.",
+          "Managed 30+ plants with automated data fetching at 1-minute, 5-minute, and 15-minute intervals based on client data formats.",
+          "Developed robust backend scripts for data collection from multiple SFTP, FTP, and API sources.",
+          "Implemented dual database architecture using MySQL and MongoDB for efficient data management.",
+          "Set up automated database backup systems and log management to optimize server resources and ensure data safety.",
+          "Regularly upgraded APIs to incorporate new requirements, enhance performance, and adapt to evolving business needs."
+        ],
+        features: [
+          "Replaced old table-based data displays with interactive Highcharts visualizations to show differences between manual and model forecast data.",
+          "Built modern, accessible UI components using shadcn/ui component library for consistent design system.",
+          "Implemented role-based access control for operations and ML teams.",
+          "Created automated report generation system for plant performance calculations.",
+          "Developed features to support smooth operations for both operations teams and ML teams.",
+          "Built comprehensive dashboards with Highcharts for real-time data visualization and trend analysis.",
+          "Designed intuitive interfaces for managing DGR data and plant-specific calculations.",
+          "Enhanced and upgraded existing APIs to accommodate new client requirements and improve system functionality."
+        ],
+        technicalHighlights: [
+          "Utilized Highcharts for advanced data visualization including time-series analysis, comparative charts, and performance metrics.",
+          "Leveraged shadcn/ui components for building responsive, accessible, and visually consistent user interfaces.",
+          "Implemented Context API for efficient state management across the application.",
+          "Established database maintenance routines including regular backups and MongoDB log rotation to manage storage constraints.",
+          "Iteratively upgraded APIs to support new features, improve performance, and meet changing client specifications."
+        ]
+      }
+    },
+    {
+      id: 4,
+      title: "project 2: ExcelFlow",
+      picture: "/Images/Experience/Renewalytics/excelflow.png",
+      data: {
+        overview: [
+          "Client-based project managing data from 33 renewable energy plants (solar and wind).",
+          "Most challenging project requiring rapid development to meet tight client deadlines.",
+          "Tech stack: Next.js, PostgreSQL, Redis, BullMQ, Zoho Email integration."
+        ],
+        technicalChallenges: [
+          "Processed large XLSB files (minimum 15MB) uploaded by plant zonal heads, with each file containing 16+ sheets.",
+          "Handled inconsistent data formats across sheets with different attribute names for similar data.",
+          "Dealt with varying date formats across different sheets requiring intelligent date parsing.",
+          "Implemented binary search algorithm combined with date indexing (checking every 100th index) to efficiently locate target date data in large files.",
+          "Managed storage limitations through efficient database design and regular maintenance including backups and log cleanup."
+        ],
+        performanceOptimizations: [
+          "Implemented parallel sheet processing using BullMQ for fast data scraping and processing.",
+          "Created plant-specific configuration files for XLSX sheet formats, making error handling and debugging easier.",
+          "Utilized PostgreSQL for efficient storage and retrieval of processed data.",
+          "Leveraged Redis for caching and improving response times.",
+          "Optimized database storage through automated backup schedules and log rotation strategies."
+        ],
+        features: [
+          "Generated 32+ notifications per plant based on processed data.",
+          "Developed separate calculation logic and reports for solar and wind plants.",
+          "Created multiple report types for solar plants with plant-specific calculation logic.",
+          "Implemented automated email alerts and reports via Zoho Email integration.",
+          "Built Highcharts dashboards for site analysis, plant analysis, plant-level and inverter-level comparative analysis.",
+          "Integrated satellite data fetching from FTP during DGR upload process.",
+          "Matched Excel calculations with code output to ensure accuracy against client-provided references.",
+          "Implemented authentication, verification, and password reset functionality.",
+          "Designed responsive UI for optimal user experience across devices."
+        ],
+        roleContribution: [
+          "Played a key role in both UI/UX design and backend calculation implementation.",
+          "Managed end-to-end development from data scraping to report generation and notification delivery.",
+          "Established database maintenance practices to ensure system reliability within resource constraints."
+        ]
+      }
+    },
+    {
+      id: 5,
+      title: "project 3: RealSync",
+      picture: "/Images/Experience/Renewalytics/realsync.png",
+      data: {
+        overview: [
+          "Client-side project focused on user management and interface improvements."
+        ],
+        features: [
+          "Implemented role-based access control (RBAC) system for secure user management.",
+          "Created complete authentication system including user verification and forget password functionality.",
+          "Designed and implemented UI/UX improvements for better user experience.",
+          "Developed responsive interface ensuring compatibility across different devices and screen sizes."
+        ]
+      }
+    },
+    {
+      id: 6,
+      title: "conclusion",
+      picture: "/Images/Experience/Renewalytics/team.png",
+      data: "At Renewalytics, I've gained invaluable experience in the renewable energy sector, working on mission-critical applications that manage gigawatts of clean energy capacity. The role has strengthened my skills in full-stack development, performance optimization, complex data processing, and client communication. Working on challenging projects like ExcelFlow taught me how to solve complex technical problems under tight deadlines, while managing FNS—the company's flagship product—gave me end-to-end ownership experience. The exposure to renewable energy domain, combined with hands-on experience in infrastructure management, database administration, and multi-database architecture, has significantly enhanced my technical expertise and problem-solving abilities in real-world production environments."
     }
+  ],
+  detailPageUrl: "/details"
+}
   ] as const;
   
 
@@ -134,21 +296,3 @@ export interface ActivityItem {
 
 
 
-  // export const experienceData: readonly ExperienceItem[] = [
-  //   {
-  //     id: 1,
-  //     role: "Full Stack Developer Intern",
-  //     duration: "18 March - 18 September 2024 (6 Months)",
-  //     company: "ShypBUDDY PVT. LTD",
-  //     companyUrl: "https://shypbuddy.net/",
-  //     teckStack: "Next.js, Supabase, Prisma, Clerk, Tailwind CSS, Node.js",
-  //     sideCardDescription: "Detailed side card description here.",
-  //     description: [
-  //       { id: 1, desc: "Data 1 description", picture: "/Images/Experience/ShypBUDDY/logo.jpeg" },
-  //       { id: 2, desc: "BuddyShield data", picture: "/Images/Experience/ShypBUDDY/buddyshield.png" },
-  //       { id: 3, desc: "BuddyShield data", picture: "/Images/Experience/ShypBUDDY/AjayShupBUDDY.jpeg" },
-  //     ],
-  //     detailPageUrl: "/details",
-  //   },
-  // ] as const;
-  
