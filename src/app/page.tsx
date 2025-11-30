@@ -37,7 +37,7 @@ export default function Home() {
               
               <OrbImage
                 theme={theme}
-                src="/Images/Profile/Ajay.png"
+                src="/Images/Profile/Ajay3.png"
                 alt="Ajay Thorat - Full Stack Developer"
                 className="brightness-100"
               />

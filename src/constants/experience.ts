@@ -99,7 +99,7 @@ export type RealSyncProjectData = {
         {
           id: 2,
           title: "responsibilities",
-          picture: "/Images/Experience/ShypBUDDY/buddyshield.png",
+          picture: "/Images/Experience/ShypBUDDY/responsibilities.png",
           data: {
             coreDevelopment: [
               "Led the development of Next.js/React-based user and admin panels.",
@@ -128,7 +128,7 @@ export type RealSyncProjectData = {
         {
           id: 3,
           title: "conclusion",
-          picture: "/Images/Experience/ShypBUDDY/AjayShupBUDDY.jpeg",
+          picture: "/Images/Experience/ShypBUDDY/conclusion.png",
           data: "During my internship at ShypBUDDY PVT. LTD, I gained extensive hands-on experience in full-stack development, API integration, database management, and agile methodologies. The fast-paced startup environment provided an opportunity to work on real-world challenges, collaborate with cross-functional teams, and contribute to scalable, high-impact solutions in logistics and e-commerce. This experience has significantly strengthened my skills in building robust and efficient web applications while adapting to industry best practices."
         }
       ],
@@ -145,7 +145,7 @@ export type RealSyncProjectData = {
     {
       id: 1,
       title: "overview",
-      picture: "/Images/Experience/Renewalytics/logo.png",
+      picture: "/Images/Experience/Renewalytics/renewalyticslogo.png",
       data: "Renewalytics Services Pvt. Ltd. is a New Delhi-based company specializing in AI-powered renewable energy forecasting and grid management solutions. The company leverages advanced ML/DL models, weather intelligence, and digital twin technology to help integrate solar, wind, and hybrid renewable energy projects seamlessly into the grid while ensuring DSM compliance and optimal performance."
     },
     {
