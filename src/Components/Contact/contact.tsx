@@ -1,3 +1,4 @@
+//src/Components/Contact/contact.tsx
 "use client";
 
 import { useState } from "react";
@@ -14,6 +15,7 @@ import {
   FaPhone,
 } from "react-icons/fa";
 import { IoMdMail } from "react-icons/io";
+import { sendContactEmail } from "@/app/actions/contact.action";
 
 interface ApiError {
   message: string;
@@ -43,15 +45,11 @@ export default function Contact() {
     return re.test(email);
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (
-      !formData.name ||
-      !formData.email ||
-      !formData.subject ||
-      !formData.message
-    ) {
+    // Validation
+    if (!formData.name || !formData.email || !formData.subject || !formData.message) {
       setError("All fields are required");
       return;
     }
@@ -65,40 +63,21 @@ export default function Contact() {
     setError("");
     setSuccessMessage("");
 
-    const timeout = new Promise((_, reject) =>
-      setTimeout(() => reject(new Error("Request timed out")), 5000)
-    );
-    const request = fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/contact`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
-    });
-
     try {
-      const response = (await Promise.race([request, timeout])) as any;
-      const data = await response.json();
+      // Call the Server Action directly (no fetch needed!)
+      const result = await sendContactEmail(formData);
 
-      if (!response.ok) {
-        throw new Error(
-          data.error || "Something went wrong, please try again later."
-        );
+      if (!result.success) {
+        throw new Error(result.error || "Failed to send message");
       }
 
       setSubmitted(true);
       setFormData({ name: "", email: "", subject: "", message: "" });
-      setSuccessMessage("Thank you! Your message has been sent successfully.");
+      setSuccessMessage(result.message || "Message sent successfully!");
+      
     } catch (error) {
-      const err = error as ApiError;
-
-      if (err.message === "Request timed out") {
-        setError("The request timed out. Please try again.");
-      } else if (err.message.includes("network")) {
-        setError(
-          "Network error occurred. Please check your connection and try again."
-        );
-      } else {
-        setError(err.message || "Failed to send message. Please try again.");
-      }
+      const err = error as Error;
+      setError(err.message || "Failed to send message. Please try again.");
     } finally {
       setLoading(false);
       setTimeout(() => {
