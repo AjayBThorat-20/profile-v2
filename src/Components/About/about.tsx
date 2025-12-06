@@ -105,7 +105,7 @@ export default function About() {
               {/* Main image container */}
               <div className="relative w-[280px] h-[280px] sm:w-[350px] sm:h-[350px] lg:w-[420px] lg:h-[420px] rounded-3xl shadow-2xl overflow-hidden group border-4 border-white dark:border-gray-800">
                 <Image
-                  src="/Images/Profile/Ajay.png"
+                  src="/Images/Profile/Ajay4.png"
                   // src="/Images/Dummy/icon.png"
                   alt="Ajay Thorat"
                   fill
