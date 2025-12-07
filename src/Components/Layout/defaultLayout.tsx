@@ -1,3 +1,4 @@
+// src/Components/Layout/defaultLayout.tsx
 "use client";
 
 import React, { useEffect, useState } from "react";
@@ -18,8 +19,21 @@ const DefaultLayout = ({ children }: { children: React.ReactNode }) => {
     dispatch(hydrateTheme());
   }, [dispatch]);
 
+  // Apply theme class to document root
+  useEffect(() => {
+    if (isMounted) {
+      document.documentElement.classList.toggle("dark", theme === "dark");
+    }
+  }, [theme, isMounted]);
+
   if (!isMounted) {
-    return <div className="min-h-screen bg-white dark:bg-gray-900" />;
+    return (
+      <div className="min-h-screen bg-white dark:bg-gray-900">
+        <div className="animate-pulse">
+          <div className="h-20 bg-gray-200 dark:bg-gray-800"></div>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -29,13 +43,11 @@ const DefaultLayout = ({ children }: { children: React.ReactNode }) => {
       }`}
     >
       {/* Fixed Navbar */}
-      <div className="fixed top-0 z-50 w-full">
-        <Navbar />
-        
-      </div>
+      <Navbar />
 
       {/* Main Content with proper spacing for fixed navbar */}
-      <main className="pt-20">
+      <main>
+      {/* <main className="pt-20"> */}
         <div
           className={`w-full min-h-[calc(100vh-4rem)] transition-colors duration-300 ${
             theme === "dark" ? "bg-gray-900 text-white" : "bg-white text-black"

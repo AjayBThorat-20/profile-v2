@@ -90,23 +90,7 @@ export default function BasicInfo({ theme }: BasicInfoProps) {
             </Link>
           </div>
 
-          {/* Tech Stack Pills */}
-          <div className="flex flex-wrap gap-2 justify-center md:justify-start pt-4">
-            {["Next.js", "React", "Node.js", "MongoDB", "TypeScript"].map(
-              (tech) => (
-                <span
-                  key={tech}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 hover:scale-110 ${
-                    theme === "dark"
-                      ? "bg-gray-800 text-gray-300 hover:bg-gray-700"
-                      : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-                  }`}
-                >
-                  {tech}
-                </span>
-              )
-            )}
-          </div>
+        
         </div>
       )}
     </div>

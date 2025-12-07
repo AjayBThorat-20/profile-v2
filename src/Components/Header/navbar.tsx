@@ -1,46 +1,52 @@
+// src/Components/Header/navbar.tsx
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { IoMdMail } from "react-icons/io";
-import { useAppSelector } from "@/store/hooks";
+import { useAppSelector, useAppDispatch } from "@/store/hooks";
+import { toggleMenu, closeMenu, setScrolled } from "@/store/slices/themeSlice";
 import ThemeToggleButton from "../Buttons/ThemeToggleButton";
 
 export default function Navbar() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const dispatch = useAppDispatch();
   const router = useRouter();
   const pathname = usePathname();
-  const theme = useAppSelector((state) => state.theme.mode);
+  
+  const { mode: theme, isMenuOpen, scrolled } = useAppSelector((state) => state.theme);
 
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const handleToggleMenu = () => {
+    dispatch(toggleMenu());
+  };
 
   const handleLinkClick = (href: string) => {
-    setIsMenuOpen(false);
+    dispatch(closeMenu());
     router.push(href);
   };
 
   // Handle scroll effect
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      dispatch(setScrolled(window.scrollY > 20));
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [dispatch]);
 
   // Handle responsive resize
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth >= 768) setIsMenuOpen(false);
+      if (window.innerWidth >= 768) {
+        dispatch(closeMenu());
+      }
     };
 
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [dispatch]);
 
   // Prevent body scroll when menu is open
   useEffect(() => {
@@ -53,6 +59,11 @@ export default function Navbar() {
       document.body.style.overflow = "unset";
     };
   }, [isMenuOpen]);
+
+  // Close menu on route change
+  useEffect(() => {
+    dispatch(closeMenu());
+  }, [pathname, dispatch]);
 
   const navLinks = [
     { href: "/", label: "Home" },
@@ -94,17 +105,24 @@ export default function Navbar() {
       >
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center justify-between px-8 lg:px-16 xl:px-24 py-4">
-          {/* Logo/Brand */}
-          <Link
-            href="/"
-            className="text-3xl font-black tracking-tight bg-gradient-to-r from-blue-600 via-blue-700 to-cyan-600 dark:from-blue-400 dark:via-blue-500 dark:to-cyan-400 bg-clip-text text-transparent hover:scale-105 transition-transform duration-300"
-            style={{ 
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-            }}
-          >
-            AT
-          </Link>
+          {/* Logo/Brand with Flag */}
+          <div className="flex items-center gap-3">
+            <Link
+              href="/"
+              className="text-3xl font-black tracking-tight bg-gradient-to-r from-blue-600 via-blue-700 to-cyan-600 dark:from-blue-400 dark:via-blue-500 dark:to-cyan-400 bg-clip-text text-transparent hover:scale-105 transition-transform duration-300"
+              style={{ 
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+              }}
+            >
+              AT
+            </Link>
+            <img 
+              src="/Flag/flag.gif" 
+              alt="Flag" 
+              className="w-7 h-7 object-contain"
+            />
+          </div>
 
           {/* Navigation Links */}
           <nav className="flex items-center gap-2">
@@ -152,58 +170,39 @@ export default function Navbar() {
 
         {/* Mobile Navigation Header */}
         <div className="md:hidden flex justify-between items-center px-6 py-4">
-          {/* Logo */}
-          <Link
-            href="/"
-            className="text-2xl font-black bg-gradient-to-r from-blue-600 to-cyan-600 dark:from-blue-400 dark:to-cyan-400 bg-clip-text text-transparent"
-            style={{ 
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-            }}
-          >
-            AT
-          </Link>
+          {/* Logo with Flag */}
+          <div className="flex items-center gap-2">
+            <Link
+              href="/"
+              className="text-2xl font-black bg-gradient-to-r from-blue-600 to-cyan-600 dark:from-blue-400 dark:to-cyan-400 bg-clip-text text-transparent"
+              style={{ 
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+              }}
+            >
+              AT
+            </Link>
+            <img 
+              src="/Flag/flag.gif" 
+              alt="Flag" 
+              className="w-6 h-6 object-contain"
+            />
+          </div>
 
           {/* Right Section */}
           <div className="flex items-center gap-2">
-            {/* Social Links */}
-            <Link
-              href="https://www.linkedin.com/in/ajay-thorat-24b4b6215"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all duration-300"
-              aria-label="LinkedIn"
-            >
-              <FaLinkedin className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-            </Link>
-            <Link
-              href="https://github.com/AjayBThorat-20"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-300"
-              aria-label="GitHub"
-            >
-              <FaGithub className="w-5 h-5 text-gray-800 dark:text-gray-200" />
-            </Link>
-            <Link
-              href="mailto:ajaythorat988@gmail.com"
-              className="p-2 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 transition-all duration-300"
-              aria-label="Email"
-            >
-              <IoMdMail className="w-5 h-5 text-red-600 dark:text-red-400" />
-            </Link>
+            {/* Theme Toggle */}
+            <ThemeToggleButton />
 
             {/* Divider */}
             <div className="w-px h-6 bg-gray-300 dark:bg-gray-600 mx-1"></div>
 
-            {/* Theme Toggle */}
-            <ThemeToggleButton />
-
             {/* Hamburger Menu */}
             <button
-              onClick={toggleMenu}
+              onClick={handleToggleMenu}
               className="p-2 ml-1 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-300"
               aria-label="Toggle menu"
+              aria-expanded={isMenuOpen}
             >
               <div className="w-6 h-5 flex flex-col justify-between">
                 <span
@@ -225,18 +224,16 @@ export default function Navbar() {
             </button>
           </div>
         </div>
-        
       </header>
 
       {/* Spacer */}
       <div className="h-16 md:h-20"></div>
-      
 
       {/* Mobile Menu Overlay */}
       {isMenuOpen && (
         <div
           className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 md:hidden"
-          onClick={toggleMenu}
+          onClick={handleToggleMenu}
         ></div>
       )}
 
@@ -252,7 +249,7 @@ export default function Navbar() {
             Navigation
           </h2>
           <button
-            onClick={toggleMenu}
+            onClick={handleToggleMenu}
             className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-300"
             aria-label="Close menu"
           >
@@ -285,11 +282,43 @@ export default function Navbar() {
           })}
         </nav>
 
-        {/* Mobile Menu Footer */}
-        <div className="absolute bottom-0 left-0 right-0 p-6 border-t border-gray-200 dark:border-gray-700">
-          <p className="text-sm text-gray-600 dark:text-gray-400 text-center">
-            © 2024 Ajay Thorat
-          </p>
+        {/* Mobile Menu Footer with Social Links */}
+        <div className="absolute bottom-0 left-0 right-0 border-t border-gray-200 dark:border-gray-700">
+          {/* Social Links */}
+          <div className="flex items-center justify-center gap-3 p-4 bg-gray-50 dark:bg-gray-800">
+            <Link
+              href="https://www.linkedin.com/in/ajay-thorat-24b4b6215"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-3 rounded-lg bg-white dark:bg-gray-700 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all duration-300 group shadow-sm"
+              aria-label="LinkedIn"
+            >
+              <FaLinkedin className="w-6 h-6 text-blue-600 dark:text-blue-400 group-hover:scale-110 transition-transform duration-300" />
+            </Link>
+            <Link
+              href="https://github.com/AjayBThorat-20"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-3 rounded-lg bg-white dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 transition-all duration-300 group shadow-sm"
+              aria-label="GitHub"
+            >
+              <FaGithub className="w-6 h-6 text-gray-800 dark:text-gray-200 group-hover:scale-110 transition-transform duration-300" />
+            </Link>
+            <Link
+              href="mailto:ajaythorat988@gmail.com"
+              className="p-3 rounded-lg bg-white dark:bg-gray-700 hover:bg-red-50 dark:hover:bg-red-900/20 transition-all duration-300 group shadow-sm"
+              aria-label="Email"
+            >
+              <IoMdMail className="w-6 h-6 text-red-600 dark:text-red-400 group-hover:scale-110 transition-transform duration-300" />
+            </Link>
+          </div>
+          
+          {/* Copyright */}
+          <div className="px-6 py-4 bg-white dark:bg-gray-900">
+            <p className="text-sm text-gray-600 dark:text-gray-400 text-center">
+              © 2024 Ajay Thorat
+            </p>
+          </div>
         </div>
       </div>
     </>

@@ -116,7 +116,7 @@ export default function About() {
                 <div className="absolute inset-0 bg-gradient-to-t from-blue-900/60 via-transparent to-transparent"></div>
                 
                 {/* Floating badge */}
-                <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm px-6 py-3 rounded-full shadow-xl border border-gray-200 dark:border-gray-700">
+                <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm px-6 py-3 rounded-full shadow-xl border border-gray-200 dark:border-gray-700 whitespace-nowrap">
                   <p className="text-sm font-bold text-gray-900 dark:text-white">
                     Full-Stack Developer
                   </p>
