@@ -50,33 +50,35 @@ export default function BasicInfo({ theme }: BasicInfoProps) {
 
           {/* Enhanced CTA Section */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start pt-4">
-            <Link
-              href="/Resume/Ajay_Thorat.pdf"
-              target="_blank"
-              className={`group relative inline-flex items-center justify-center px-8 py-4 rounded-xl text-base md:text-lg font-semibold transition-all duration-300 overflow-hidden ${
-                theme === "dark"
-                  ? "bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50"
-                  : "bg-gradient-to-r from-gray-900 to-gray-800 hover:from-gray-800 hover:to-gray-700 text-white shadow-lg shadow-gray-900/30 hover:shadow-gray-900/50"
-              } hover:scale-105 hover:-translate-y-1`}
-            >
-              <span className="relative z-10 flex items-center gap-2">
-                View Resume
-                <svg
-                  className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M13 7l5 5m0 0l-5 5m5-5H6"
-                  />
-                </svg>
-              </span>
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-            </Link>
+<a
+  href="/Resume/Ajay_Thorat.pdf"
+  target="_blank"
+  rel="noopener noreferrer"
+  className={`group relative inline-flex items-center justify-center px-8 py-4 rounded-xl text-base md:text-lg font-semibold transition-all duration-300 overflow-hidden ${
+    theme === "dark"
+      ? "bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50"
+      : "bg-gradient-to-r from-gray-900 to-gray-800 hover:from-gray-800 hover:to-gray-700 text-white shadow-lg shadow-gray-900/30 hover:shadow-gray-900/50"
+  } hover:scale-105 hover:-translate-y-1`}
+>
+  <span className="relative z-10 flex items-center gap-2">
+    View Resume
+    <svg
+      className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M13 7l5 5m0 0l-5 5m5-5H6"
+      />
+    </svg>
+  </span>
+  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+</a>
+
 
             <Link
               href="/contact"
