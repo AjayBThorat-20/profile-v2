@@ -1,4 +1,3 @@
-//src/Components/Layout/wrapperLayout.tsx
 "use client";
 
 import { usePathname } from "next/navigation";
@@ -30,14 +29,12 @@ export default function WrapperLayout({
 
   if (!isClient) {
     return (
-      <div className="px-6 sm:px-10 lg:px-16">
-        <div className="py-8">
+      <div className="container-custom">
+        <div className="section">
           {firstPosition || secondPosition ? (
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-center mb-8 sm:mb-12 text-gray-800 dark:text-gray-200">
-              <span>{firstPosition}</span>{" "}
-              <span className="text-blue-500 dark:text-blue-400">
-                {secondPosition}
-              </span>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-center mb-8 sm:mb-12">
+              <span className="text-foreground">{firstPosition}</span>{" "}
+              <span className="gradient-text">{secondPosition}</span>
             </h1>
           ) : null}
           <div id="content-wrapper" style={{ visibility: "hidden" }}>
@@ -49,23 +46,32 @@ export default function WrapperLayout({
   }
 
   return (
-    <div className="px-6 sm:px-10 lg:px-16">
-      <div className="animate-fadeIn">
-        <div className="py-8">
-          {firstPosition || secondPosition ? (
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-center mb-8 sm:mb-12 text-gray-800 dark:text-gray-200 animate-fadeIn">
-              <span className="inline-block animate-slideInLeft">
-                {firstPosition}
-              </span>{" "}
-              <span className="inline-block text-blue-500 dark:text-blue-400 animate-slideInRight">
-                {secondPosition}
-              </span>
+    <div className="container-custom">
+      <div className="section animate-fadeIn">
+        {firstPosition || secondPosition ? (
+          <div className="mb-12 md:mb-16">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-center leading-tight">
+              <div className="overflow-hidden mb-2">
+                <span className="inline-block animate-slideInLeft text-foreground">
+                  {firstPosition}
+                </span>
+              </div>
+              <div className="overflow-hidden">
+                <span className="inline-block gradient-text-animated animate-slideInRight">
+                  {secondPosition}
+                </span>
+              </div>
             </h1>
-          ) : null}
+            
+            {/* Decorative underline */}
+            <div className="flex justify-center mt-6">
+              <div className="h-1 w-24 bg-gradient-to-r from-primary via-secondary to-accent rounded-full animate-fadeIn" style={{ animationDelay: '400ms' }}></div>
+            </div>
+          </div>
+        ) : null}
 
-          {/* Children */}
-          <div id="content-wrapper">{children}</div>
-        </div>
+        {/* Children */}
+        <div id="content-wrapper">{children}</div>
       </div>
     </div>
   );

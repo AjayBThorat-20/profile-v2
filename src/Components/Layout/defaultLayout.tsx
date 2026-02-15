@@ -1,4 +1,3 @@
-// src/Components/Layout/defaultLayout.tsx
 "use client";
 
 import React, { useEffect, useState } from "react";
@@ -28,34 +27,23 @@ const DefaultLayout = ({ children }: { children: React.ReactNode }) => {
 
   if (!isMounted) {
     return (
-      <div className="min-h-screen bg-white dark:bg-gray-900">
+      <div className="min-h-screen bg-background">
         <div className="animate-pulse">
-          <div className="h-20 bg-gray-200 dark:bg-gray-800"></div>
+          <div className="h-20 bg-muted"></div>
         </div>
       </div>
     );
   }
 
   return (
-    <div
-      className={`min-h-screen overflow-x-hidden transition-colors duration-300 ${
-        theme === "dark" ? "dark bg-gray-900" : "light bg-white"
-      }`}
-    >
+    <div className="min-h-screen overflow-x-hidden bg-background text-foreground transition-colors duration-300">
       {/* Fixed Navbar */}
       <Navbar />
 
       {/* Main Content with proper spacing for fixed navbar */}
-      <main>
-      {/* <main className="pt-20"> */}
-        <div
-          className={`w-full min-h-[calc(100vh-4rem)] transition-colors duration-300 ${
-            theme === "dark" ? "bg-gray-900 text-white" : "bg-white text-black"
-          }`}
-        >
-          <div className="w-full min-h-full">
-            <React.Fragment key={pathname}>{children}</React.Fragment>
-          </div>
+      <main className="w-full min-h-[calc(100vh-4rem)]">
+        <div className="w-full min-h-full">
+          <React.Fragment key={pathname}>{children}</React.Fragment>
         </div>
       </main>
 

@@ -41,22 +41,8 @@ export default function RootLayout({
     <html lang="en" className="scroll-smooth">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased transition-colors duration-300`}
-        data-new-gr-c-s-check-loaded="14.1223.0"
-        data-gr-ext-installed=""
-        cz-shortcut-listen="true"
       >
         <ReduxProvider>
-          {/* Background gradient effects */}
-          <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
-            {/* Light theme gradients */}
-            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-400/20 rounded-full blur-3xl dark:opacity-0 transition-opacity duration-500" />
-            <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-cyan-400/15 rounded-full blur-3xl dark:opacity-0 transition-opacity duration-500" />
-            
-            {/* Dark theme gradients */}
-            <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-3xl opacity-0 dark:opacity-100 transition-opacity duration-500" />
-            <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-3xl opacity-0 dark:opacity-100 transition-opacity duration-500" />
-          </div>
-
           <DefaultLayout>{children}</DefaultLayout>
         </ReduxProvider>
       </body>
