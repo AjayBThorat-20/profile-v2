@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { FaArrowLeft, FaExternalLinkAlt, FaCalendar, FaCheckCircle, FaBuilding } from "react-icons/fa";
 import { experienceData } from "@/constants/experience";
+import CompanyReviews from "./CompanyReviews";
 
 interface Experience {
   id: number;
@@ -239,6 +240,9 @@ export default function ExperienceDetails() {
             })}
           </div>
 
+
+ <CompanyReviews />
+ 
           {/* Navigation Footer */}
           <div className="flex justify-center pt-8 animate-fadeIn" style={{ animationDelay: '600ms' }}>
             <button

@@ -288,7 +288,7 @@ export type RealSyncProjectData = {
 
 
 
-
+export const REVIEW_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSeVzKnrECCWJsOFQDXfsKpV34-zO5s16ZvopHoTXbQDQuubrw/viewform?usp=header";
 
 
 

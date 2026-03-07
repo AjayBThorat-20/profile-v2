@@ -244,7 +244,7 @@ export default function Contact() {
                     <input
                       type="email"
                       id="email"
-                      name="name"
+                      name="email"
                       value={formData.email}
                       onChange={handleChange}
                       required
