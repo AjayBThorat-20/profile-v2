@@ -3,7 +3,6 @@ export interface ActivityItem {
   description: string;
   hiddenDisc: string;
 }
-
 export type ExperienceItem = {
   id: number;
   name: string;
@@ -14,18 +13,15 @@ export type ExperienceItem = {
   details: ExperienceDetail[];
   detailPageUrl: string;
 };
-
 type ExperienceDetail = {
   id: number;
   title: string;
   picture: string;
   data: string | ExperienceDataStructure;
 };
-
 type ExperienceDataStructure = {
   [key: string]: string[];
 };
-
 // Optional: You can still define specific types for better intellisense
 export type ShypBuddyResponsibilities = {
   coreDevelopment: string[];
@@ -33,21 +29,18 @@ export type ShypBuddyResponsibilities = {
   featureDevelopment: string[];
   projectLeadership: string[];
 };
-
 export type RenewalyticResponsibilities = {
   clientEngagement: string[];
   fullStackDevelopment: string[];
   infrastructureManagement: string[];
   integrations: string[];
 };
-
 export type FNSProjectData = {
   overview: string[];
   keyAchievements: string[];
   features: string[];
   technicalHighlights: string[];
 };
-
 export type ExcelFlowProjectData = {
   overview: string[];
   technicalChallenges: string[];
@@ -55,12 +48,10 @@ export type ExcelFlowProjectData = {
   features: string[];
   roleContribution: string[];
 };
-
 export type RealSyncProjectData = {
   overview: string[];
   features: string[];
 };
-
   // 🔹 Currently Working On Data
   export const currentlyWorkingOnData: ActivityItem[] = [
     // {
@@ -146,7 +137,7 @@ export type RealSyncProjectData = {
       id: 1,
       title: "overview",
       picture: "/Images/Experience/Renewalytics/renewalyticslogo.png",
-      data: "Renewalytics Services Pvt. Ltd. is a New Delhi-based company specializing in AI-powered renewable energy forecasting and grid management solutions. The company leverages advanced ML/DL models, weather intelligence, and digital twin technology to help integrate solar, wind, and hybrid renewable energy projects seamlessly into the grid while ensuring DSM compliance and optimal performance."
+      data: "Renewalytics Services Pvt. Ltd. is a New Delhi-based company specializing in AI-powered renewable energy forecasting and grid management solutions. The company leverages advanced ML/DL models, weather intelligence, and digital twin technology to help integrate solar, wind, and hybrid renewable energy projects seamlessly into the grid while ensuring DSM compliance and optimal performance. Renewalytics manages 3.22+ GW of capacity with >92% forecast accuracy, providing 24*7 RTC support across 13+ state networks covering 34+ total sites with 45+ compliance automation processes. Key clients include TrueRe, Dalmia, ReNew, Refex, UPC Renewables, SEIT, Sembcorp, Avaada, SPRNG, ACME, Amplus, LR Energy, Ampin, and Gentari."
     },
     {
       id: 2,
@@ -155,7 +146,8 @@ export type RealSyncProjectData = {
       data: {
         clientEngagement: [
           "Connect with clients to understand their requirements and translate them into technical solutions.",
-          "Act as a bridge between technical teams and clients, ensuring clear communication and requirement alignment."
+          "Act as a bridge between technical teams and clients, ensuring clear communication and requirement alignment.",
+          "Work with major renewable energy clients including TrueRe, Dalmia, ReNew, Refex, UPC Renewables, SEIT, Sembcorp, Avaada, SPRNG, ACME, Amplus, LR Energy, Ampin, and Gentari to deliver customized forecasting and grid management solutions."
         ],
         fullStackDevelopment: [
           "Developed and maintained 3 major full-stack applications using Next.js, Prisma, Tailwind CSS, PostgreSQL, MySQL, and MongoDB.",
@@ -190,11 +182,12 @@ export type RealSyncProjectData = {
         ],
         keyAchievements: [
           "Improved application performance by 80% through implementation of caching, memoization, and Context API optimization.",
-          "Managed 30+ plants with automated data fetching at 1-minute, 5-minute, and 15-minute intervals based on client data formats.",
+          "Managed 34+ plants across 13+ state networks with automated data fetching at 1-minute, 5-minute, and 15-minute intervals based on client data formats.",
           "Developed robust backend scripts for data collection from multiple SFTP, FTP, and API sources.",
           "Implemented dual database architecture using MySQL and MongoDB for efficient data management.",
           "Set up automated database backup systems and log management to optimize server resources and ensure data safety.",
-          "Regularly upgraded APIs to incorporate new requirements, enhance performance, and adapt to evolving business needs."
+          "Regularly upgraded APIs to incorporate new requirements, enhance performance, and adapt to evolving business needs.",
+          "Achieved >92% forecast accuracy across all managed sites with 24*7 RTC support and 45+ compliance automation processes."
         ],
         features: [
           "Replaced old table-based data displays with interactive Highcharts visualizations to show differences between manual and model forecast data.",
@@ -277,22 +270,11 @@ export type RealSyncProjectData = {
       id: 6,
       title: "conclusion",
       picture: "/Images/Experience/Renewalytics/team.png",
-      data: "At Renewalytics, I've gained invaluable experience in the renewable energy sector, working on mission-critical applications that manage gigawatts of clean energy capacity. The role has strengthened my skills in full-stack development, performance optimization, complex data processing, and client communication. Working on challenging projects like ExcelFlow taught me how to solve complex technical problems under tight deadlines, while managing FNS—the company's flagship product—gave me end-to-end ownership experience. The exposure to renewable energy domain, combined with hands-on experience in infrastructure management, database administration, and multi-database architecture, has significantly enhanced my technical expertise and problem-solving abilities in real-world production environments."
+      data: "At Renewalytics, I've gained invaluable experience in the renewable energy sector, working on mission-critical applications that manage 3.22+ gigawatts of clean energy capacity across 34+ sites in 13+ state networks with >92% forecast accuracy and 24*7 RTC support. The role has strengthened my skills in full-stack development, performance optimization, complex data processing, and client communication. Working on challenging projects like ExcelFlow taught me how to solve complex technical problems under tight deadlines, while managing FNS—the company's flagship product with 45+ compliance automation processes—gave me end-to-end ownership experience. The exposure to renewable energy domain, combined with hands-on experience in infrastructure management, database administration, and multi-database architecture, has significantly enhanced my technical expertise and problem-solving abilities in real-world production environments."
     }
   ],
   detailPageUrl: "/details"
 }
   ] as const;
   
-
-
-
-
 export const REVIEW_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSeVzKnrECCWJsOFQDXfsKpV34-zO5s16ZvopHoTXbQDQuubrw/viewform?usp=header";
-
-
-
-
-
-
-
