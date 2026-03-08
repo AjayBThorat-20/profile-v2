@@ -241,7 +241,7 @@ export default function ExperienceDetails() {
           </div>
 
 
-{experience.id === 2 && <CompanyReviews />}
+ <CompanyReviews />
  
           {/* Navigation Footer */}
           <div className="flex justify-center pt-8 animate-fadeIn" style={{ animationDelay: '600ms' }}>

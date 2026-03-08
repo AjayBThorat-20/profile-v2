@@ -34,9 +34,17 @@ export default function CompanyReviews() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedReview, setSelectedReview] = useState<number | null>(null);
+  const [shouldDisplay, setShouldDisplay] = useState(false);
 
   useEffect(() => {
-    fetchReviews();
+    // Check if the current company is Renewalytics (id: 2)
+    const companyId = localStorage.getItem("selectedCompanyId");
+    if (companyId === "2") {
+      setShouldDisplay(true);
+      fetchReviews();
+    } else {
+      setLoading(false);
+    }
   }, []);
 
   const fetchReviews = async () => {
@@ -153,6 +161,11 @@ export default function CompanyReviews() {
       setLoading(false);
     }
   };
+
+  // Don't render anything if not Renewalytics
+  if (!shouldDisplay) {
+    return null;
+  }
 
   const calculateAverageRating = (): string => {
     if (reviews.length === 0) return "0.0";
