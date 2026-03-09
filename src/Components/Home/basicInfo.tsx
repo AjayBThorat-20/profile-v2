@@ -180,7 +180,7 @@ export default function BasicInfo({ theme }: BasicInfoProps) {
       {/* CTA Buttons */}
       <div className="flex flex-col sm:flex-row gap-3 md:gap-4 animate-fadeIn" style={{ animationDelay: '600ms' }}>
         <a
-          href="/Resume/Ajay_Thorat.pdf"
+          href="/Resume/AJAY_THORAT.pdf"
           target="_blank"
           rel="noopener noreferrer"
           className="magnetic group relative flex-1 inline-flex items-center justify-center gap-2 md:gap-3 px-5 py-3 md:px-6 md:py-4 rounded-xl font-semibold text-sm md:text-base overflow-hidden bg-gradient-to-r from-primary to-secondary text-primary-foreground shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-[1.02] active:scale-95"
