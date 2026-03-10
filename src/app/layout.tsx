@@ -1,4 +1,3 @@
-// layout.tsx - Root layout component with global styles, fonts, and metadata
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
@@ -20,13 +19,16 @@ const geistMono = localFont({
 export const metadata: Metadata = {
   title: "Ajay Thorat | Full Stack Developer",
   description: "Next.js and MERN Stack Developer passionate about solving real-world problems through innovative solutions.",
-  keywords: ["Next.js", "React", "MERN Stack", "Full Stack Developer", "Web Development", "Ajay Thorat", "Software Engineer", "JavaScript", "TypeScript"],
+  keywords: ["Next.js", "React", "MERN Stack", "Full Stack Developer", "Web Development", "Ajay Thorat", "Software Engineer", "JavaScript", "TypeScript", "Node.js", "MongoDB"],
   authors: [{ name: "Ajay Thorat" }],
   creator: "Ajay Thorat",
   publisher: "Ajay Thorat",
   metadataBase: new URL('https://portfolio.ajaythorat.com'),
   alternates: {
     canonical: '/',
+  },
+  verification: {
+    google: 'D4BCW0QrUAQ6n52Z4FQeeQPV9LyD-uSFgEmXW5RS5R4', // Replace with actual code from Google
   },
   openGraph: {
     title: "Ajay Thorat | Full Stack Developer",
@@ -44,12 +46,12 @@ export const metadata: Metadata = {
       },
     ],
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "Ajay Thorat | Full Stack Developer",
-    description: "Next.js and MERN Stack Developer passionate about solving real-world problems",
-    images: ["/Images/Profile/Ajay3.png"],
-  },
+  // twitter: {
+  //   card: "summary_large_image",
+  //   title: "Ajay Thorat | Full Stack Developer",
+  //   description: "Next.js and MERN Stack Developer passionate about solving real-world problems",
+  //   images: ["/Images/Profile/Ajay3.png"],
+  // },
   robots: {
     index: true,
     follow: true,
@@ -61,10 +63,6 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  // Add the verification tag that Google will give you (you'll get this in the next step)
-  verification: {
-    google: 'D4BCW0QrUAQ6n52Z4FQeeQPV9LyD-uSFgEmXW5RS5R4', // Replace with actual code from Google
-  },
 };
 
 export default function RootLayout({
@@ -72,13 +70,33 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Structured Data for Person/Developer
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Ajay Thorat",
+    "url": "https://portfolio.ajaythorat.com",
+    "image": "https://portfolio.ajaythorat.com/Images/Profile/Ajay3.png",
+    "jobTitle": "Full Stack Developer",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Freelance"
+    },
+    "sameAs": [
+      "https://www.linkedin.com/in/ajay-thorat-24b4b6215",
+      "https://github.com/AjayBThorat-20"
+    ],
+    "knowsAbout": ["Next.js", "React", "MERN Stack", "Full Stack Development", "JavaScript", "TypeScript"],
+    "email": "ajaythorat988@gmail.com"
+  };
+
   return (
     <html lang="en" className="scroll-smooth">
       <head>
         {/* Google Analytics */}
         <Script
           strategy="afterInteractive"
-          src="https://www.googletagmanager.com/gtag/js?id=G-7XGVSSDX53"
+          src="https://www.googletagmanager.com/gtag/js?id=G-7XGVSSDX57"
         />
         <Script
           id="google-analytics"
@@ -92,6 +110,15 @@ export default function RootLayout({
                 page_path: window.location.pathname,
               });
             `,
+          }}
+        />
+        
+        {/* Structured Data */}
+        <Script
+          id="structured-data"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(structuredData),
           }}
         />
       </head>
