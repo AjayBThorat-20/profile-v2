@@ -95,11 +95,12 @@ export default function About() {
                 <div className="relative group">
                   <div className="relative aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl border-2 border-primary/20 group-hover:border-primary/40 transition-all duration-500">
                     <Image
-                      src="/Images/Profile/Ajay4.png"
-                      alt="Ajay Thorat"
+                      src="/Images/Profile/Ajay4.webp"
+                      alt="Ajay Thorat - Full Stack Developer"
                       fill
-                      className="object-cover transition-transform duration-700 group-hover:scale-110 brightness-110 contrast-105 saturate-110"
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
                       priority
+                      quality={85}
                       sizes="(max-width: 1024px) 90vw, 45vw"
                     />
                     
