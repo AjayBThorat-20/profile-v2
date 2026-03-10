@@ -16,6 +16,10 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://portfolio.ajaythorat.com';
+const googleVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
+const bingVerification = process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION;
+
 export const metadata: Metadata = {
   title: "Ajay Thorat | Full Stack Developer",
   description: "Next.js and MERN Stack Developer passionate about solving real-world problems through innovative solutions.",
@@ -23,19 +27,22 @@ export const metadata: Metadata = {
   authors: [{ name: "Ajay Thorat" }],
   creator: "Ajay Thorat",
   publisher: "Ajay Thorat",
-  metadataBase: new URL('https://portfolio.ajaythorat.com'),
+  metadataBase: new URL(siteUrl),
   alternates: {
     canonical: '/',
   },
   verification: {
-    google: 'D4BCW0QrUAQ6n52Z4FQeeQPV9LyD-uSFgEmXW5RS5R4', // Replace with actual code from Google
+    google: googleVerification,
+    other: bingVerification ? {
+      'msvalidate.01': bingVerification,
+    } : {},
   },
   openGraph: {
     title: "Ajay Thorat | Full Stack Developer",
     description: "Next.js and MERN Stack Developer passionate about solving real-world problems through innovative solutions.",
     type: "website",
     locale: "en_US",
-    url: "https://portfolio.ajaythorat.com",
+    url: siteUrl,
     siteName: "Ajay Thorat Portfolio",
     images: [
       {
@@ -70,13 +77,15 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const gaId = process.env.NEXT_PUBLIC_GA_ID;
+
   // Structured Data for Person/Developer
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Ajay Thorat",
-    "url": "https://portfolio.ajaythorat.com",
-    "image": "https://portfolio.ajaythorat.com/Images/Profile/Ajay3.png",
+    "url": siteUrl,
+    "image": `${siteUrl}/Images/Profile/Ajay3.png`,
     "jobTitle": "Full Stack Developer",
     "worksFor": {
       "@type": "Organization",
@@ -94,24 +103,28 @@ export default function RootLayout({
     <html lang="en" className="scroll-smooth">
       <head>
         {/* Google Analytics */}
-        <Script
-          strategy="afterInteractive"
-          src="https://www.googletagmanager.com/gtag/js?id=G-7XGVSSDX57"
-        />
-        <Script
-          id="google-analytics"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-7XGVSSDX57', {
-                page_path: window.location.pathname,
-              });
-            `,
-          }}
-        />
+        {gaId && (
+          <>
+            <Script
+              strategy="afterInteractive"
+              src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
+            />
+            <Script
+              id="google-analytics"
+              strategy="afterInteractive"
+              dangerouslySetInnerHTML={{
+                __html: `
+                  window.dataLayer = window.dataLayer || [];
+                  function gtag(){dataLayer.push(arguments);}
+                  gtag('js', new Date());
+                  gtag('config', '${gaId}', {
+                    page_path: window.location.pathname,
+                  });
+                `,
+              }}
+            />
+          </>
+        )}
         
         {/* Structured Data */}
         <Script
