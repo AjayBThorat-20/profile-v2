@@ -1,3 +1,4 @@
+// page.tsx - Main landing page with animated background, profile image, and basic info section
 "use client";
 
 import { useEffect, useState } from "react";

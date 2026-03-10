@@ -1,3 +1,4 @@
+// navbar.tsx - Responsive navigation bar with scroll effects, theme toggle, and animated links
 "use client";
 
 import React, { useEffect, useState } from "react";
