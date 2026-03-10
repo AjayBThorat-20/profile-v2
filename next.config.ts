@@ -1,10 +1,23 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
   images: {
-    domains: ['portfolio.ajaythorat.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'portfolio.ajaythorat.com',
+        port: '',
+        pathname: '/**',
+      },
+    ],
+    formats: ['image/webp', 'image/avif'],
   },
+  // Enable strict mode for better SEO
   reactStrictMode: true,
-};
+  // Compiler optimizations
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production',
+  },
+}
 
-export default nextConfig;
+export default nextConfig

@@ -1,4 +1,3 @@
-// page.tsx - Main landing page with animated background, profile image, and basic info section
 "use client";
 
 import { useEffect, useState } from "react";
@@ -58,14 +57,16 @@ export default function Home() {
               {/* Main Image */}
               <div className="relative group">
                 <div className="relative aspect-[3/4] rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl border-2 border-primary/10">
-                  <Image
-                    src="/Images/Profile/Ajay3.png"
-                    alt="Ajay Thorat - Full Stack Developer"
-                    fill
-                    className="object-cover object-center brightness-110 contrast-105 saturate-110 transition-all duration-700 group-hover:scale-105 group-hover:brightness-115"
-                    priority
-                    sizes="(max-width: 640px) 280px, (max-width: 768px) 320px, (max-width: 1024px) 380px, 420px"
-                  />
+<Image
+  src="/Images/Profile/Ajay3.webp" // Use .webp if you converted it
+  alt="Ajay Thorat - Full Stack Developer"
+  fill
+  className="object-cover object-center transition-all duration-700 group-hover:scale-105"
+  priority
+  quality={85}
+  sizes="(max-width: 640px) 280px, (max-width: 768px) 320px, (max-width: 1024px) 380px, 420px"
+  loading="eager"
+/>
                   
                   {/* Subtle gradient overlay for depth */}
                   <div className="absolute inset-0 bg-gradient-to-t from-blue-900/5 via-transparent to-transparent pointer-events-none"></div>

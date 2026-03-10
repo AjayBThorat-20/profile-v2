@@ -131,11 +131,13 @@ export default function Navbar() {
             >
               AT
             </Link>
-            <img 
-              src="/Flag/flag.gif" 
-              alt="Flag" 
-              className="w-7 h-7 object-contain"
-            />
+<img 
+  src="/Flag/flag.gif" 
+  alt="Flag" 
+  width={28}
+  height={28}
+  className="w-7 h-7 object-contain"
+/>
           </div>
 
           {/* Navigation Links */}
@@ -200,11 +202,13 @@ export default function Navbar() {
             >
               AT
             </Link>
-            <img 
-              src="/Flag/flag.gif" 
-              alt="Flag" 
-              className="w-6 h-6 object-contain"
-            />
+<img 
+  src="/Flag/flag.gif" 
+  alt="Flag"
+  width={24}
+  height={24}
+  className="w-6 h-6 object-contain"
+/>
           </div>
 
           {/* Right Section */}

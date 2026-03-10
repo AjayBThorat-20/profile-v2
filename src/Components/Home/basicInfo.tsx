@@ -79,7 +79,7 @@ export default function BasicInfo({ theme }: BasicInfoProps) {
 
       {/* Role Tags */}
       <div className="flex flex-wrap gap-2 md:gap-3 animate-fadeIn" style={{ animationDelay: '300ms' }}>
-        {["Full-Stack Developer", "MERN Specialist", "System Architect"].map((role, index) => (
+        {["Full-Stack Developer", "MERN Stack", "System Architect"].map((role, index) => (
           <div 
             key={index}
             className="px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-gradient-to-r from-primary/10 to-secondary/10 border border-primary/20 hover:border-primary/50 transition-all duration-300 hover:scale-105 cursor-default"
