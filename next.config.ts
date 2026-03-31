@@ -11,6 +11,7 @@ const nextConfig: NextConfig = {
       },
     ],
     formats: ['image/webp', 'image/avif'],
+    qualities: [75, 85], // Add this line to fix the warning
   },
   // Enable strict mode for better SEO
   reactStrictMode: true,
