@@ -129,7 +129,7 @@ export type RealSyncProjectData = {
   id: 2,
   name: "Renewalytics Services Pvt. Ltd.",
   title: "Junior Full Stack Developer",
-  duration: "18 March 2025 - Present",
+  duration: "18 March 2025 - 09 March 2026",
   companyUrl: "https://www.renewalytics.in/",
   techStack: "Next.js, Prisma, Tailwind CSS, PostgreSQL, MySQL, MongoDB, Redis, BullMQ, Highcharts, shadcn/ui, Zoho Email, Digital Ocean, PM2, Nginx",
   details: [
