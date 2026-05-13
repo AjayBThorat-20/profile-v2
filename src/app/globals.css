@@ -1,6 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* globals.css */
+@import "tailwindcss";
 
 /* ==========================================
    ROOT VARIABLES
