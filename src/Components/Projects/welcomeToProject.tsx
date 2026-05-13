@@ -110,7 +110,7 @@ export default function WelcomeToProject() {
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-gradient"></div>
           
           <div className="relative p-8 md:p-10 text-center">
-            <p className="text-xl md:text-2xl font-black text-white leading-relaxed drop-shadow-lg">
+            <p className="text-xl md:text-2xl font-black leading-relaxed drop-shadow-lg">
               Dive in, and feel free to connect if any of my work inspires or resonates with you! 🚀
             </p>
           </div>

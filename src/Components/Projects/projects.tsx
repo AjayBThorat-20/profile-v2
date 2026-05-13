@@ -176,7 +176,7 @@ export default function Projects() {
             <div className="relative p-8 md:p-12 text-center space-y-6">
               {/* Icon */}
               <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-primary to-secondary rounded-2xl shadow-lg group-hover:scale-110 transition-transform duration-300">
-                <FaGithub className="w-10 h-10 text-white" />
+                <FaGithub className="w-10 h-10 " />
               </div>
 
               {/* Title */}

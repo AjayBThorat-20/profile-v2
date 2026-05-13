@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 
 export default function About() {
   const [mounted, setMounted] = useState(false);
+  const [imageError, setImageError] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -28,8 +29,50 @@ export default function About() {
           {/* Main Content */}
           <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
             
+            {/* Image Section - Now first on mobile, second on desktop */}
+            <div className="w-full lg:w-[45%] flex justify-center animate-fadeIn" style={{ animationDelay: '200ms' }}>
+              <div className="relative w-full max-w-md">
+                {/* Glow effect */}
+                <div className="absolute -inset-6 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-3xl blur-3xl opacity-60 animate-pulse-slow"></div>
+                
+                {/* Main image container */}
+                <div className="relative group">
+                  <div className="relative aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl border-2 border-primary/20 group-hover:border-primary/40 transition-all duration-500 bg-muted/20">
+                    {!imageError ? (
+                      <Image
+                        src="/Images/Profile/Ajay4.webp"
+                        alt="Ajay Thorat - Full Stack Developer"
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-110"
+                        priority
+                        quality={85}
+                        sizes="(max-width: 768px) 90vw, (max-width: 1024px) 50vw, 45vw"
+                        onError={() => setImageError(true)}
+                      />
+                    ) : (
+                      <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-primary/10 to-secondary/10">
+                        <div className="text-center p-6">
+                          <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-primary/20 flex items-center justify-center">
+                            <span className="text-4xl font-bold text-primary">AT</span>
+                          </div>
+                          <p className="text-muted-foreground text-sm">Ajay Thorat</p>
+                        </div>
+                      </div>
+                    )}
+                    
+                    {/* Gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent"></div>
+                  </div>
+
+                  {/* Floating accent borders */}
+                  <div className="absolute -top-4 -right-4 w-20 h-20 border-3 border-primary/40 rounded-3xl animate-float"></div>
+                  <div className="absolute -bottom-4 -left-4 w-24 h-24 border-3 border-secondary/40 rounded-3xl animate-float" style={{ animationDelay: '1s' }}></div>
+                </div>
+              </div>
+            </div>
+
             {/* Text Section */}
-            <div className="lg:w-[55%] space-y-8 order-2 lg:order-1 animate-fadeIn">
+            <div className="w-full lg:w-[55%] space-y-8 animate-fadeIn">
               {/* Name & Title Card */}
               <div className="glass-card p-8 rounded-2xl border-2 border-primary/20 relative overflow-hidden group hover:border-primary/40 transition-all duration-500">
                 {/* Background gradient */}
@@ -82,36 +125,6 @@ export default function About() {
                     </p>
                   </div>
                 ))}
-              </div>
-            </div>
-
-            {/* Image Section */}
-            <div className="lg:w-[45%] flex justify-center order-1 lg:order-2 animate-fadeIn" style={{ animationDelay: '200ms' }}>
-              <div className="relative w-full max-w-md">
-                {/* Glow effect */}
-                <div className="absolute -inset-6 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-3xl blur-3xl opacity-60 animate-pulse-slow"></div>
-                
-                {/* Main image container */}
-                <div className="relative group">
-                  <div className="relative aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl border-2 border-primary/20 group-hover:border-primary/40 transition-all duration-500">
-                    <Image
-                      src="/Images/Profile/Ajay4.webp"
-                      alt="Ajay Thorat - Full Stack Developer"
-                      fill
-                      className="object-cover transition-transform duration-700 group-hover:scale-110"
-                      priority
-                      quality={85}
-                      sizes="(max-width: 1024px) 90vw, 45vw"
-                    />
-                    
-                    {/* Gradient overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent"></div>
-                  </div>
-
-                  {/* Floating accent borders */}
-                  <div className="absolute -top-4 -right-4 w-20 h-20 border-3 border-primary/40 rounded-3xl animate-float"></div>
-                  <div className="absolute -bottom-4 -left-4 w-24 h-24 border-3 border-secondary/40 rounded-3xl animate-float" style={{ animationDelay: '1s' }}></div>
-                </div>
               </div>
             </div>
           </div>

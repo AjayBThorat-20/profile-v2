@@ -12,10 +12,10 @@ export default function ThemeToggleButton() {
   return (
     <button
       onClick={() => dispatch(toggleTheme())}
-      className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
+      className="p-2 rounded-full hover:bg-gray-600 dark:hover:bg-gray-400 transition-colors duration-200"
     >
       {theme === "light" ? (
-        <FaMoon className="w-6 h-6 text-gray-800 dark:text-gray-200" />
+        <FaMoon className="w-6 h-6 text-gray-800 dark:text-gray-800" />
       ) : (
         <FaSun className="w-6 h-6 text-yellow-400" />
       )}

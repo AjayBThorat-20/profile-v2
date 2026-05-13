@@ -3,6 +3,7 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { IoMdMail } from "react-icons/io";
@@ -16,6 +17,7 @@ export default function Navbar() {
   const pathname = usePathname();
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [flagError, setFlagError] = useState(false);
   
   const { mode: theme, isMenuOpen, scrolled } = useAppSelector((state) => state.theme);
 
@@ -109,6 +111,38 @@ export default function Navbar() {
     );
   };
 
+const FlagIcon = ({ size = 28 }: { size?: number }) => {
+  if (flagError) {
+    return (
+      <div 
+        className="rounded-sm overflow-hidden flex-shrink-0"
+        style={{ 
+          width: `${size}px`, 
+          height: `${size}px`,
+          background: 'linear-gradient(to bottom, #FF9933 33.33%, #FFFFFF 33.33%, #FFFFFF 66.66%, #138808 66.66%)'
+        }}
+      />
+    );
+  }
+
+  return (
+    <div 
+      className="relative flex-shrink-0" 
+      style={{ width: `${size}px`, height: `${size}px` }}
+    >
+      <Image 
+        src="/Flag/flag.gif" 
+        alt="Indian Flag" 
+        fill
+        className="object-contain"
+        onError={() => setFlagError(true)}
+        priority
+        unoptimized
+      />
+    </div>
+  );
+};
+
   return (
     <>
       {/* Desktop & Tablet Navbar */}
@@ -131,13 +165,7 @@ export default function Navbar() {
             >
               AT
             </Link>
-<img 
-  src="/Flag/flag.gif" 
-  alt="Flag" 
-  width={28}
-  height={28}
-  className="w-7 h-7 object-contain"
-/>
+            <FlagIcon size={28} />
           </div>
 
           {/* Navigation Links */}
@@ -202,13 +230,7 @@ export default function Navbar() {
             >
               AT
             </Link>
-<img 
-  src="/Flag/flag.gif" 
-  alt="Flag"
-  width={24}
-  height={24}
-  className="w-6 h-6 object-contain"
-/>
+            <FlagIcon size={24} />
           </div>
 
           {/* Right Section */}
@@ -228,17 +250,23 @@ export default function Navbar() {
             >
               <div className="w-6 h-5 flex flex-col justify-between">
                 <span
-                  className={`w-full h-0.5 bg-foreground rounded-full transition-all duration-300 ${
+                  className={`w-full h-0.5 rounded-full transition-all duration-300 ${
+                    theme === 'dark' ? 'bg-white' : 'bg-black'
+                  } ${
                     isMenuOpen ? "rotate-45 translate-y-2" : ""
                   }`}
                 ></span>
                 <span
-                  className={`w-full h-0.5 bg-foreground rounded-full transition-all duration-300 ${
+                  className={`w-full h-0.5 rounded-full transition-all duration-300 ${
+                    theme === 'dark' ? 'bg-white' : 'bg-black'
+                  } ${
                     isMenuOpen ? "opacity-0" : ""
                   }`}
                 ></span>
                 <span
-                  className={`w-full h-0.5 bg-foreground rounded-full transition-all duration-300 ${
+                  className={`w-full h-0.5 rounded-full transition-all duration-300 ${
+                    theme === 'dark' ? 'bg-white' : 'bg-black'
+                  } ${
                     isMenuOpen ? "-rotate-45 -translate-y-2" : ""
                   }`}
                 ></span>
