@@ -52,7 +52,7 @@ export default function Home() {
           <div className="relative w-full md:w-[42%] flex items-center justify-center md:justify-end order-1 animate-fadeIn">
             <div className="relative w-full max-w-[280px] sm:max-w-[320px] md:max-w-[380px] lg:max-w-[420px]">
               {/* Glow effect behind image */}
-              <div className="absolute -inset-4 md:-inset-6 bg-gradient-to-r from-blue-500/20 via-cyan-500/20 to-purple-500/20 rounded-3xl blur-3xl opacity-60 animate-pulse-slow"></div>
+              <div className="absolute -inset-4 md:-inset-6 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-3xl blur-3xl opacity-60 animate-pulse-slow"></div>
               
               {/* Main Image */}
               <div className="relative group">
@@ -79,7 +79,7 @@ export default function Home() {
 
               {/* Floating Stats Badges - Compact */}
               <div className="absolute -left-3 md:-left-4 top-[20%] animate-float">
-                <div className="px-3 py-2 md:px-4 md:py-2.5 rounded-xl md:rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-500 shadow-xl border-2 border-white/20">
+                <div className="px-3 py-2 md:px-4 md:py-2.5 rounded-xl md:rounded-2xl bg-gradient-to-br from-primary to-secondary shadow-xl border-2 border-white/20">
                   <div className="text-center">
                     <div className="text-lg md:text-xl font-black text-white">1.5+</div>
                     <div className="text-[10px] md:text-xs text-white/90 font-semibold whitespace-nowrap">Years Exp</div>
@@ -88,7 +88,7 @@ export default function Home() {
               </div>
 
               <div className="absolute -right-3 md:-right-4 bottom-[35%] animate-float" style={{ animationDelay: '0.5s' }}>
-                <div className="px-3 py-2 md:px-4 md:py-2.5 rounded-xl md:rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 shadow-xl border-2 border-white/20">
+                <div className="px-3 py-2 md:px-4 md:py-2.5 rounded-xl md:rounded-2xl bg-gradient-to-br from-secondary to-accent shadow-xl border-2 border-white/20">
                   <div className="text-center">
                     <div className="text-lg md:text-xl font-black text-white">4+</div>
                     <div className="text-[10px] md:text-xs text-white/90 font-semibold whitespace-nowrap">Live Projects</div>

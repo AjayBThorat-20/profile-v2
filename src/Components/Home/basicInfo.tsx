@@ -24,21 +24,21 @@ export default function BasicInfo({ theme }: BasicInfoProps) {
       icon: FaCode, 
       value: "1.5+", 
       label: "Years Experience",
-      color: "from-blue-500 to-cyan-500",
+      color: "from-primary to-secondary",
       description: "Building production-ready solutions"
     },
     { 
       icon: FaRocket, 
       value: "4+", 
       label: "Real-Time Projects",
-      color: "from-purple-500 to-pink-500",
+      color: "from-secondary to-accent",
       description: "Live systems serving users"
     },
     { 
       icon: FaCog, 
       value: "100%", 
       label: "Build & Scale",
-      color: "from-orange-500 to-red-500",
+      color: "from-primary to-accent",
       description: "From scratch to optimization"
     },
   ];

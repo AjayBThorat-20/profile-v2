@@ -1,6 +1,121 @@
 /* globals.css */
 @import "tailwindcss";
 
+/* Tailwind v4 no longer reads tailwind.config.ts's darkMode/theme.extend
+   automatically (that requires an explicit @config directive, which this
+   project never added) - so every dark: utility below was compiling to
+   `@media (prefers-color-scheme: dark)` instead of following the .dark
+   class the theme toggle sets, and every custom color/animation utility
+   (bg-primary, text-foreground, bg-card, animate-fadeIn, ...) never
+   existed in the compiled CSS at all. This restores class-based dark
+   mode and wires the CSS custom properties below into real Tailwind
+   utilities via the v4 CSS-first @theme API. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  --animate-fadeIn: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  --animate-fadeInScale: fadeInScale 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  --animate-slideInLeft: slideInLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  --animate-slideInRight: slideInRight 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  --animate-slideInUp: slideInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  --animate-gradient: gradient 3s ease-in-out infinite;
+  --animate-shimmer: shimmer 2s infinite;
+  --animate-pulse-slow: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-float: float 3s ease-in-out infinite;
+  --animate-rotate: rotate 20s linear infinite;
+  --animate-bounce-slow: bounce-slow 2s infinite;
+  --animate-glow: glow 2s ease-in-out infinite;
+  --animate-reveal: reveal 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  --animate-ping-slow: ping-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-ping-slower: ping-slower 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInScale {
+  0% { opacity: 0; transform: scale(0.95); }
+  100% { opacity: 1; transform: scale(1); }
+}
+@keyframes slideInLeft {
+  0% { opacity: 0; transform: translateX(-30px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+@keyframes slideInRight {
+  0% { opacity: 0; transform: translateX(30px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+@keyframes slideInUp {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes gradient {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+@keyframes shimmer {
+  100% { transform: translateX(100%); }
+}
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+@keyframes bounce-slow {
+  0%, 100% { transform: translateY(0); animation-timing-function: cubic-bezier(0.8, 0, 1, 1); }
+  50% { transform: translateY(-10px); animation-timing-function: cubic-bezier(0, 0, 0.2, 1); }
+}
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 20px hsl(var(--primary) / 0.2); }
+  50% { box-shadow: 0 0 40px hsl(var(--primary) / 0.4); }
+}
+@keyframes reveal {
+  0% { clip-path: inset(0 100% 0 0); }
+  100% { clip-path: inset(0 0 0 0); }
+}
+@keyframes ping-slow {
+  0% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.05); opacity: 0.4; }
+  100% { transform: scale(1); opacity: 0.8; }
+}
+@keyframes ping-slower {
+  0% { transform: scale(1); opacity: 0.6; }
+  50% { transform: scale(1.08); opacity: 0.2; }
+  100% { transform: scale(1); opacity: 0.6; }
+}
+
 /* ==========================================
    ROOT VARIABLES
    ========================================== */
@@ -14,19 +129,24 @@
   --card-foreground: 222 47% 11%;
   --popover: 210 40% 99%;
   --popover-foreground: 222 47% 11%;
-  --primary: 217 91% 60%;
+  /* One muted blue-to-teal hue family instead of a multi-hue rainbow
+     gradient — reads as a deliberate brand color rather than a
+     stock AI-template gradient, and every existing gradient in the
+     codebase (from-primary via-secondary to-accent) now moves
+     smoothly through a single tonal range instead of clashing hues. */
+  --primary: 215 70% 45%;      /* steel blue */
   --primary-foreground: 0 0% 100%;
-  --secondary: 189 94% 43%;
+  --secondary: 200 65% 40%;    /* deep teal-blue */
   --secondary-foreground: 0 0% 100%;
   --muted: 214 32% 95%;
   --muted-foreground: 215 16% 42%;
-  --accent: 189 94% 43%;
-  --accent-foreground: 222 47% 11%;
+  --accent: 185 55% 36%;       /* muted teal */
+  --accent-foreground: 0 0% 100%;
   --destructive: 0 84% 60%;
   --destructive-foreground: 0 0% 100%;
   --border: 214 20% 89%;
   --input: 214 20% 89%;
-  --ring: 217 91% 60%;
+  --ring: 215 70% 45%;
   --radius: 0.5rem;
 }
 
@@ -37,19 +157,19 @@
   --card-foreground: 210 40% 96%;
   --popover: 222 40% 11%;
   --popover-foreground: 210 40% 96%;
-  --primary: 217 91% 63%;
+  --primary: 215 75% 60%;      /* steel blue, lightened for dark bg */
   --primary-foreground: 222 47% 9%;
-  --secondary: 189 94% 48%;
+  --secondary: 200 68% 52%;    /* deep teal-blue */
   --secondary-foreground: 222 47% 9%;
   --muted: 222 30% 17%;
   --muted-foreground: 217 15% 65%;
-  --accent: 189 94% 48%;
-  --accent-foreground: 210 40% 96%;
+  --accent: 185 60% 45%;       /* muted teal */
+  --accent-foreground: 222 47% 9%;
   --destructive: 0 72% 58%;
   --destructive-foreground: 0 0% 100%;
   --border: 222 25% 21%;
   --input: 222 25% 21%;
-  --ring: 217 91% 63%;
+  --ring: 215 75% 60%;
 }
 
 /* ==========================================
