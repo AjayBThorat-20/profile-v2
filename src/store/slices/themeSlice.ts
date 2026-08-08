@@ -7,8 +7,19 @@ interface ThemeState {
   scrolled: boolean;
 }
 
+// A blocking inline script (see RootLayout) sets the "dark" class on
+// <html> before React ever runs, so on the client the DOM already
+// reflects the persisted/system theme. Reading it here keeps the Redux
+// store in sync from the very first render instead of defaulting to
+// "light" and flipping after a post-mount effect (the cause of the
+// theme flash / stale-state bug).
+const getInitialMode = (): "light" | "dark" => {
+  if (typeof document === "undefined") return "light";
+  return document.documentElement.classList.contains("dark") ? "dark" : "light";
+};
+
 const initialState: ThemeState = {
-  mode: "light",
+  mode: getInitialMode(),
   isMenuOpen: false,
   scrolled: false,
 };
@@ -17,19 +28,6 @@ const themeSlice = createSlice({
   name: "theme",
   initialState,
   reducers: {
-    hydrateTheme: (state) => {
-      if (typeof window !== "undefined") {
-        const savedTheme = localStorage.getItem("theme") as "light" | "dark";
-        if (savedTheme) {
-          state.mode = savedTheme;
-        } else {
-          // Check system preference if no saved theme
-          const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-          state.mode = prefersDark ? "dark" : "light";
-          localStorage.setItem("theme", state.mode);
-        }
-      }
-    },
     toggleTheme: (state) => {
       state.mode = state.mode === "light" ? "dark" : "light";
       if (typeof window !== "undefined") {
@@ -59,14 +57,13 @@ const themeSlice = createSlice({
   },
 });
 
-export const { 
-  hydrateTheme, 
-  toggleTheme, 
-  setTheme, 
-  setMenuOpen, 
-  toggleMenu, 
+export const {
+  toggleTheme,
+  setTheme,
+  setMenuOpen,
+  toggleMenu,
   closeMenu,
-  setScrolled 
+  setScrolled
 } = themeSlice.actions;
 
 export default themeSlice.reducer;

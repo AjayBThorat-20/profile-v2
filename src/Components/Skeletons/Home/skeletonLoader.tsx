@@ -1,14 +1,5 @@
-import React from "react";
-
-interface SkeletonLoaderProps {
-  theme: string;
-}
-
-export default function SkeletonLoader({ theme }: SkeletonLoaderProps) {
+export default function SkeletonLoader() {
   return (
-    <div
-    className={`w-[300px] h-[300px] md:w-[300px] md:h-[300px] lg:w-[350px] lg:h-[350px] rounded-full animate-pulse 
-    ${theme === "dark" ? "bg-gray-700" : "bg-gray-300"}`}
-  ></div>
+    <div className="w-[220px] h-[220px] sm:w-[280px] sm:h-[280px] lg:w-[350px] lg:h-[350px] rounded-full bg-muted animate-pulse"></div>
   );
 }

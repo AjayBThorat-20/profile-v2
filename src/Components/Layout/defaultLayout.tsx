@@ -2,23 +2,21 @@
 
 import React, { useEffect, useState } from "react";
 import Navbar from "../Header/navbar";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { hydrateTheme } from "@/store/slices/themeSlice";
+import { useAppSelector } from "@/store/hooks";
 import Footer from "../Footer/footer";
 import { usePathname } from "next/navigation";
 
 const DefaultLayout = ({ children }: { children: React.ReactNode }) => {
-  const dispatch = useAppDispatch();
   const theme = useAppSelector((state) => state.theme.mode);
   const [isMounted, setIsMounted] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
     setIsMounted(true);
-    dispatch(hydrateTheme());
-  }, [dispatch]);
+  }, []);
 
-  // Apply theme class to document root
+  // Keep the document class in sync whenever the user toggles theme.
+  // (Initial load is already handled by the blocking script in layout.tsx.)
   useEffect(() => {
     if (isMounted) {
       document.documentElement.classList.toggle("dark", theme === "dark");

@@ -19,7 +19,7 @@ export default function Navbar() {
   const [lastScrollY, setLastScrollY] = useState(0);
   const [flagError, setFlagError] = useState(false);
   
-  const { mode: theme, isMenuOpen, scrolled } = useAppSelector((state) => state.theme);
+  const { isMenuOpen, scrolled } = useAppSelector((state) => state.theme);
 
   const handleToggleMenu = () => {
     dispatch(toggleMenu());
@@ -250,23 +250,17 @@ const FlagIcon = ({ size = 28 }: { size?: number }) => {
             >
               <div className="w-6 h-5 flex flex-col justify-between">
                 <span
-                  className={`w-full h-0.5 rounded-full transition-all duration-300 ${
-                    theme === 'dark' ? 'bg-white' : 'bg-black'
-                  } ${
+                  className={`w-full h-0.5 rounded-full bg-foreground transition-all duration-300 ${
                     isMenuOpen ? "rotate-45 translate-y-2" : ""
                   }`}
                 ></span>
                 <span
-                  className={`w-full h-0.5 rounded-full transition-all duration-300 ${
-                    theme === 'dark' ? 'bg-white' : 'bg-black'
-                  } ${
+                  className={`w-full h-0.5 rounded-full bg-foreground transition-all duration-300 ${
                     isMenuOpen ? "opacity-0" : ""
                   }`}
                 ></span>
                 <span
-                  className={`w-full h-0.5 rounded-full transition-all duration-300 ${
-                    theme === 'dark' ? 'bg-white' : 'bg-black'
-                  } ${
+                  className={`w-full h-0.5 rounded-full bg-foreground transition-all duration-300 ${
                     isMenuOpen ? "-rotate-45 -translate-y-2" : ""
                   }`}
                 ></span>

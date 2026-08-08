@@ -12,10 +12,11 @@ export default function ThemeToggleButton() {
   return (
     <button
       onClick={() => dispatch(toggleTheme())}
-      className="p-2 rounded-full hover:bg-gray-600 dark:hover:bg-gray-400 transition-colors duration-200"
+      aria-label={theme === "light" ? "Switch to dark theme" : "Switch to light theme"}
+      className="p-2 rounded-full hover:bg-muted transition-colors duration-200"
     >
       {theme === "light" ? (
-        <FaMoon className="w-6 h-6 text-gray-800 dark:text-gray-800" />
+        <FaMoon className="w-6 h-6 text-foreground" />
       ) : (
         <FaSun className="w-6 h-6 text-yellow-400" />
       )}
