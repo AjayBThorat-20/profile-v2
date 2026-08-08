@@ -55,12 +55,12 @@ export const metadata: Metadata = {
       },
     ],
   },
-  // twitter: {
-  //   card: "summary_large_image",
-  //   title: "Ajay Thorat | Full Stack Developer",
-  //   description: "Next.js and MERN Stack Developer passionate about solving real-world problems",
-  //   images: ["/Images/Profile/Ajay3.png"],
-  // },
+  twitter: {
+    card: "summary_large_image",
+    title: "Ajay Thorat | Full Stack Developer",
+    description: "Next.js and MERN Stack Developer passionate about solving real-world problems through innovative solutions.",
+    images: ["/Images/Profile/Ajay3.png"],
+  },
   robots: {
     index: true,
     follow: true,
@@ -101,6 +101,17 @@ export default function RootLayout({
     "email": "ajaythorat988@gmail.com"
   };
 
+  const websiteStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Ajay Thorat Portfolio",
+    "url": siteUrl,
+    "author": {
+      "@type": "Person",
+      "name": "Ajay Thorat"
+    }
+  };
+
   return (
     <html lang="en" className="scroll-smooth" data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
@@ -138,12 +149,23 @@ export default function RootLayout({
           </>
         )}
         
-        {/* Structured Data */}
-        <Script
+        {/* Structured Data - plain <script> tags, not next/script: Next.js
+            defers next/script content to client-side injection regardless
+            of strategy, so it never appears in the static/SSR HTML that
+            crawlers and social unfurlers read. A plain script tag renders
+            as real static markup. */}
+        <script
           id="structured-data"
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(structuredData),
+          }}
+        />
+        <script
+          id="website-structured-data"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(websiteStructuredData),
           }}
         />
       </head>

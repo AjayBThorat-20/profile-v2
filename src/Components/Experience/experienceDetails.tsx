@@ -174,7 +174,7 @@ export default function ExperienceDetails() {
                   <div className="relative w-full h-72 md:h-96 overflow-hidden">
                     <Image
                       src={detail.picture}
-                      alt={detail.title}
+                      alt={`${experience.name} - ${detail.title} - Ajay Thorat`}
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-700"
                       sizes="(max-width: 768px) 100vw, 80vw"

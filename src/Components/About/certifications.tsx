@@ -8,7 +8,7 @@ import { HiOutlineAcademicCap } from "react-icons/hi";
 import { certificationsData } from "@/constants/about";
 
 export default function Certifications() {
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [selectedImage, setSelectedImage] = useState<{ image: string; title: string } | null>(null);
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 
   useEffect(() => {
@@ -103,7 +103,7 @@ export default function Certifications() {
 
                   {/* View Button */}
                   <button
-                    onClick={() => setSelectedImage(cert.image)}
+                    onClick={() => setSelectedImage({ image: cert.image, title: cert.title })}
                     className={`w-full group/btn relative overflow-hidden px-5 py-3 bg-gradient-to-r ${colors.from} ${colors.to} hover:shadow-lg text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98]`}
                   >
                     <div className="absolute inset-0 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
@@ -148,8 +148,8 @@ export default function Certifications() {
               <div className="relative w-full p-8" style={{ maxHeight: "85vh" }}>
                 <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-muted">
                   <Image
-                    src={selectedImage}
-                    alt="Certificate"
+                    src={selectedImage.image}
+                    alt={`${selectedImage.title} certificate - Ajay Thorat`}
                     width={1200}
                     height={800}
                     className="w-full h-auto object-contain"

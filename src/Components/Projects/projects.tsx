@@ -80,7 +80,7 @@ export default function Projects() {
                         
                         <div className="relative aspect-video rounded-2xl overflow-hidden shadow-lg border-2 border-border group-hover:border-primary/50 transition-all duration-500">
                           <Image
-                            alt={`${project.title} preview`}
+                            alt={`${project.title} - screenshot ${currentImageIndexes[activityIdx] + 1} - project by Ajay Thorat`}
                             className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700"
                             src={project.pictures[currentImageIndexes[activityIdx]].picture}
                             fill

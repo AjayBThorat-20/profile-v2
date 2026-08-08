@@ -5,6 +5,10 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Experience | Ajay Thorat",
   description: "View my professional experience as a Full Stack Developer, including current projects and work history in web development.",
+  keywords: ["Ajay Thorat experience", "full stack developer work history", "MERN stack developer resume"],
+  alternates: {
+    canonical: "/experience",
+  },
   openGraph: {
     title: "Experience | Ajay Thorat",
     description: "View my professional experience as a Full Stack Developer, including current projects and work history.",
@@ -12,9 +16,22 @@ export const metadata: Metadata = {
   },
 };
 
+const breadcrumbStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://portfolio.ajaythorat.com/" },
+    { "@type": "ListItem", position: 2, name: "Experience", item: "https://portfolio.ajaythorat.com/experience" },
+  ],
+};
+
 export default function page() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbStructuredData) }}
+      />
       <WelcomeToExperience />
       <Experience />
       <CurrentlyWorkingOn />

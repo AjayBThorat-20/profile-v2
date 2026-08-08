@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import { BasicInfo } from "@/Components/Home/page";
@@ -9,23 +8,10 @@ import Image from "next/image";
 
 export default function Home() {
   const theme = useSelector((state: RootState) => state.theme.mode);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   // Initialize parallax and magnetic effects
   useParallax();
   useMagneticCursor();
-
-  if (!mounted) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-pulse text-lg">Loading...</div>
-      </div>
-    );
-  }
 
   return (
     <div className="relative min-h-screen overflow-hidden">
