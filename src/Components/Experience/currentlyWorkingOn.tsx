@@ -1,11 +1,14 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { currentlyWorkingOnData } from "@/constants/experience";
 import { FaRocket, FaChevronDown, FaChevronUp, FaCode } from "react-icons/fa";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 export default function CurrentlyWorkingOn() {
   const [expandedId, setExpandedId] = useState<number | null>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const isRevealed = useScrollReveal(sectionRef);
 
   const toggleExpand = (id: number) => {
     setExpandedId(expandedId === id ? null : id);
@@ -26,7 +29,7 @@ export default function CurrentlyWorkingOn() {
   }
 
   return (
-    <div className="container-custom section">
+    <div ref={sectionRef} className={`container-custom section scroll-reveal ${isRevealed ? "is-visible" : ""}`}>
       <div className="max-w-5xl mx-auto space-y-12">
         {/* Header */}
         <div className="text-center space-y-4 animate-fadeIn">

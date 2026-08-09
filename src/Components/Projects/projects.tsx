@@ -1,15 +1,18 @@
 "use client";
 
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { projectsData } from "@/constants/project";
 import { FaGithub, FaExternalLinkAlt, FaCode, FaRocket } from "react-icons/fa";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 export default function Projects() {
   const [currentImageIndexes, setCurrentImageIndexes] = useState<number[]>(
     Array(projectsData.length).fill(0)
   );
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const isRevealed = useScrollReveal(sectionRef);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -36,7 +39,7 @@ export default function Projects() {
   };
 
   return (
-    <div className="container-custom section">
+    <div ref={sectionRef} className={`container-custom section scroll-reveal ${isRevealed ? "is-visible" : ""}`}>
       <div className="max-w-7xl mx-auto space-y-12">
         {/* Header */}
         <div className="text-center space-y-4 animate-fadeIn">

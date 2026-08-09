@@ -48,13 +48,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
       images: experienceImages,
     },
-    {
-      url: `${baseUrl}/experience/details`,
+    ...experienceData.map((exp) => ({
+      url: `${baseUrl}/experience/details/${exp.id}`,
       lastModified: new Date(),
-      changeFrequency: 'monthly',
+      changeFrequency: 'monthly' as const,
       priority: 0.7,
-      images: experienceImages,
-    },
+      images: exp.details.map((detail) => abs(detail.picture)),
+    })),
     {
       url: `${baseUrl}/contact`,
       lastModified: new Date(),

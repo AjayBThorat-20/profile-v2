@@ -2,11 +2,14 @@
 
 import Image from "next/image";
 import { FaRocket } from "react-icons/fa";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 export default function About() {
   const [mounted, setMounted] = useState(false);
   const [imageError, setImageError] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const isRevealed = useScrollReveal(sectionRef);
 
   useEffect(() => {
     setMounted(true);
@@ -23,7 +26,7 @@ export default function About() {
 
   return (
     <div className="min-h-screen">
-      <div className="container-custom section">
+      <div ref={sectionRef} className={`container-custom section scroll-reveal ${isRevealed ? "is-visible" : ""}`}>
         <div className="max-w-7xl mx-auto space-y-16">
           
           {/* Main Content */}

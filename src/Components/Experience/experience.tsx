@@ -1,19 +1,16 @@
 "use client";
 
-import React, { useState } from "react";
-import { useRouter } from "next/navigation";
+import React, { useRef, useState } from "react";
+import Link from "next/link";
 import { experienceData } from "@/constants/experience";
 import { FaBriefcase, FaCalendar, FaMapMarkerAlt, FaArrowRight, FaCheckCircle, FaExternalLinkAlt } from "react-icons/fa";
 import { HiBuildingOffice2 } from "react-icons/hi2";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 export default function Experience() {
-  const router = useRouter();
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
-
-  const handleViewDetails = (companyId: number) => {
-    localStorage.setItem("selectedCompanyId", companyId.toString());
-    router.push("/experience/details");
-  };
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const isRevealed = useScrollReveal(sectionRef);
 
   const getGradientColors = (index: number) => {
     const gradients = [
@@ -47,7 +44,7 @@ export default function Experience() {
   };
 
   return (
-    <div className="container-custom section">
+    <div ref={sectionRef} className={`container-custom section scroll-reveal ${isRevealed ? "is-visible" : ""}`}>
       <div className="max-w-7xl mx-auto space-y-12">
         {/* Header */}
         <div className="text-center space-y-4 animate-fadeIn">
@@ -195,18 +192,18 @@ export default function Experience() {
 
                         {/* Action Buttons */}
                         <div className="flex flex-col sm:flex-row gap-3 pt-2">
-                          <button
-                            onClick={() => handleViewDetails(exp.id)}
+                          <Link
+                            href={`/experience/details/${exp.id}`}
                             className={`magnetic group/btn flex-1 inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r ${colors.from} ${colors.to} text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 relative overflow-hidden`}
                           >
                             {/* Shimmer effect */}
                             <div className="absolute inset-0 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
-                            
+
                             <span className="relative flex items-center gap-2">
                               <span>View Details</span>
                               <FaArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
                             </span>
-                          </button>
+                          </Link>
 
                           <a
                             href={exp.companyUrl}

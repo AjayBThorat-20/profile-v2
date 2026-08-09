@@ -1,12 +1,15 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { coCurricularActivitiesData } from "@/constants/about";
 import { FaFire, FaHandsHelping, FaLaptopCode, FaRocket } from "react-icons/fa";
 import { IconType } from "react-icons";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 export default function CoCurricularActivities() {
   const [hoveredActivity, setHoveredActivity] = useState<number | null>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const isRevealed = useScrollReveal(sectionRef);
 
   // Map activity names to specific icons and colors
   const getActivityDetails = (activityName: string): { icon: IconType; gradient: { from: string; to: string } } => {
@@ -36,7 +39,7 @@ export default function CoCurricularActivities() {
   };
 
   return (
-    <div className="container-custom section">
+    <div ref={sectionRef} className={`container-custom section scroll-reveal ${isRevealed ? "is-visible" : ""}`}>
       <div className="max-w-7xl mx-auto space-y-12">
         {/* Header Section */}
         <div className="text-center space-y-4 animate-fadeIn">

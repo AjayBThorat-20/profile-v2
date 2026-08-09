@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useState, FormEvent } from "react";
+import React, { useRef, useState, FormEvent } from "react";
 import { FaEnvelope, FaUser, FaPaperPlane, FaCheckCircle, FaExclamationCircle, FaLinkedin, FaGithub, FaTag, FaCommentDots } from "react-icons/fa";
 import { IoMdMail } from "react-icons/io";
 import { sendContactEmail } from "@/app/actions/contact.action";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 type FormStatus = "idle" | "loading" | "success" | "error";
 
@@ -17,6 +18,8 @@ export default function Contact() {
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const isRevealed = useScrollReveal(sectionRef);
 
   const validateEmail = (email: string) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -73,7 +76,7 @@ export default function Contact() {
   const isLoading = status === "loading";
 
   return (
-    <div className="container-custom section">
+    <div ref={sectionRef} className={`container-custom section scroll-reveal ${isRevealed ? "is-visible" : ""}`}>
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
           

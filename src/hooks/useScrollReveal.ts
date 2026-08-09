@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, RefObject } from 'react';
+import { useEffect, useState, RefObject } from 'react';
 
 interface UseScrollRevealOptions {
   threshold?: number;
@@ -8,11 +8,21 @@ interface UseScrollRevealOptions {
   triggerOnce?: boolean;
 }
 
+// Returns whether the element has scrolled into view, as React state -
+// NOT by mutating classList directly. That used to be done imperatively
+// via entry.target.classList.add('is-visible'), which worked until the
+// component's next unrelated re-render (a hover state, an interval tick,
+// anything) - React reapplies the literal className string from JSX on
+// every render, silently wiping out that manually-added class and
+// leaving the section stuck at opacity:0 forever while still occupying
+// its full layout height (a permanent blank gap). Returning state here
+// means the visibility survives any re-render.
 export const useScrollReveal = (
   ref: RefObject<HTMLElement | null>,
   options: UseScrollRevealOptions = {}
 ) => {
   const { threshold = 0.1, rootMargin = '0px', triggerOnce = true } = options;
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const element = ref.current;
@@ -22,12 +32,12 @@ export const useScrollReveal = (
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
+            setIsVisible(true);
             if (triggerOnce) {
               observer.unobserve(entry.target);
             }
           } else if (!triggerOnce) {
-            entry.target.classList.remove('is-visible');
+            setIsVisible(false);
           }
         });
       },
@@ -40,11 +50,11 @@ export const useScrollReveal = (
     observer.observe(element);
 
     return () => {
-      if (element) {
-        observer.unobserve(element);
-      }
+      observer.unobserve(element);
     };
   }, [ref, threshold, rootMargin, triggerOnce]);
+
+  return isVisible;
 };
 
 export const useParallax = () => {

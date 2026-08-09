@@ -23,8 +23,12 @@ const DefaultLayout = ({ children }: { children: React.ReactNode }) => {
 
       {/* Main Content with proper spacing for fixed navbar */}
       <main className="w-full min-h-[calc(100vh-4rem)]">
-        <div className="w-full min-h-full">
-          <React.Fragment key={pathname}>{children}</React.Fragment>
+        {/* No animation here on purpose: every page already fades/slides its
+            own content in on mount, and wrapping that in another fade
+            compounds with it (opacity multiplies, translateY adds up),
+            which reads as everything taking noticeably longer to settle. */}
+        <div key={pathname} className="w-full min-h-full">
+          {children}
         </div>
       </main>
 

@@ -1,7 +1,7 @@
 // navbar.tsx - Responsive navigation bar with scroll effects, theme toggle, and animated links
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
@@ -16,7 +16,7 @@ export default function Navbar() {
   const router = useRouter();
   const pathname = usePathname();
   const [isVisible, setIsVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
+  const lastScrollY = useRef(0);
   const [flagError, setFlagError] = useState(false);
   
   const { isMenuOpen, scrolled } = useAppSelector((state) => state.theme);
@@ -34,23 +34,23 @@ export default function Navbar() {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      
+
       // Update scrolled state
       dispatch(setScrolled(currentScrollY > 20));
-      
+
       // Hide/show navbar based on scroll direction
-      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+      if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
         setIsVisible(false);
       } else {
         setIsVisible(true);
       }
-      
-      setLastScrollY(currentScrollY);
+
+      lastScrollY.current = currentScrollY;
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [dispatch, lastScrollY]);
+  }, [dispatch]);
 
   // Handle responsive resize
   useEffect(() => {
@@ -147,8 +147,8 @@ const FlagIcon = ({ size = 28 }: { size?: number }) => {
     <>
       {/* Desktop & Tablet Navbar */}
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          isVisible ? "translate-y-0" : "-translate-y-full"
+        className={`fixed top-0 left-0 right-0 z-50 transition-all ease-out ${
+          isVisible ? "duration-200 translate-y-0" : "duration-500 -translate-y-full"
         } ${
           scrolled
             ? "glass shadow-lg"

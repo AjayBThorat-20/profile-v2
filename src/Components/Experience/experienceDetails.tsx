@@ -1,10 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import Link from "next/link";
 import Image from "next/image";
 import { FaArrowLeft, FaExternalLinkAlt, FaCalendar, FaCheckCircle, FaBuilding } from "react-icons/fa";
-import { experienceData } from "@/constants/experience";
 import CompanyReviews from "./CompanyReviews";
 
 interface Experience {
@@ -22,30 +21,10 @@ interface Experience {
   }[];
 }
 
-export default function ExperienceDetails() {
-  const router = useRouter();
-  const [experience, setExperience] = useState<Experience | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const companyId = localStorage.getItem("selectedCompanyId");
-    if (companyId) {
-      const found = experienceData.find((exp) => exp.id === parseInt(companyId));
-      if (found) {
-        setExperience(found as Experience);
-      }
-    }
-    setLoading(false);
-  }, []);
-
+export default function ExperienceDetails({ experience }: { experience: Experience }) {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
-
-  const handleBack = () => {
-    localStorage.removeItem("selectedCompanyId");
-    router.push("/experience");
-  };
 
   const getGradientColors = (index: number) => {
     const gradients = [
@@ -56,33 +35,6 @@ export default function ExperienceDetails() {
     ];
     return gradients[index % gradients.length];
   };
-
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="text-center space-y-4">
-          <div className="w-16 h-16 border-4 border-primary/30 border-t-primary rounded-full animate-spin mx-auto"></div>
-          <p className="text-lg font-semibold text-muted-foreground">Loading experience details...</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (!experience) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="text-center space-y-4 glass-card p-8 rounded-3xl border-2 border-border">
-          <p className="text-xl font-bold text-foreground">Experience not found</p>
-          <button
-            onClick={() => router.push("/experience")}
-            className="btn-primary px-6 py-3"
-          >
-            Go Back to Experience
-          </button>
-        </div>
-      </div>
-    );
-  }
 
   const mainGradient = getGradientColors(0);
 
@@ -245,18 +197,18 @@ export default function ExperienceDetails() {
  
           {/* Navigation Footer */}
           <div className="flex justify-center pt-8 animate-fadeIn" style={{ animationDelay: '600ms' }}>
-            <button
-              onClick={handleBack}
+            <Link
+              href="/experience"
               className="magnetic group inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-primary to-secondary text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 relative overflow-hidden"
             >
               {/* Shimmer effect */}
               <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
-              
+
               <span className="relative flex items-center gap-3">
                 <FaArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform duration-300" />
                 <span>Back to Experience</span>
               </span>
-            </button>
+            </Link>
           </div>
         </div>
       </div>

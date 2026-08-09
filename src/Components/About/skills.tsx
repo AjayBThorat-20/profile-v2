@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { skillsData } from "@/constants/about";
 import { 
   FaNode, 
@@ -29,6 +30,8 @@ import { IconType } from "react-icons";
 export default function Skills() {
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [hoveredSkill, setHoveredSkill] = useState<number | null>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const isRevealed = useScrollReveal(sectionRef);
 
   // Map skill names to specific icons
   const getSkillIcon = (skillText: string): IconType => {
@@ -107,7 +110,7 @@ export default function Skills() {
     : skillsData.filter(skill => getSkillDetails(skill.text).category === selectedCategory);
 
   return (
-    <div className="container-custom section">
+    <div ref={sectionRef} className={`container-custom section scroll-reveal ${isRevealed ? "is-visible" : ""}`}>
       <div className="space-y-12 max-w-7xl mx-auto">
         
         {/* Category Filter */}

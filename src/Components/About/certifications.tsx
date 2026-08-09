@@ -1,15 +1,18 @@
 "use client";
 
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { IoClose } from "react-icons/io5";
 import { FaAward, FaExternalLinkAlt, FaCheckCircle, FaCertificate } from "react-icons/fa";
 import { HiOutlineAcademicCap } from "react-icons/hi";
 import { certificationsData } from "@/constants/about";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 export default function Certifications() {
   const [selectedImage, setSelectedImage] = useState<{ image: string; title: string } | null>(null);
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const isRevealed = useScrollReveal(sectionRef);
 
   useEffect(() => {
     if (selectedImage) {
@@ -32,7 +35,7 @@ export default function Certifications() {
   };
 
   return (
-    <div className="container-custom section">
+    <div ref={sectionRef} className={`container-custom section scroll-reveal ${isRevealed ? "is-visible" : ""}`}>
       <div className="max-w-7xl mx-auto space-y-12">
         {/* Header Section */}
         <div className="text-center space-y-4 animate-fadeIn">
