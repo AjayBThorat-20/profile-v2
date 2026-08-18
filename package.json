@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.11.2",
@@ -19,10 +22,16 @@
     "react-redux": "^9.2.0"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.5",
+    "@types/jest": "^30.0.0",
     "@types/node": "^25",
     "@types/nodemailer": "^8.0.0",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "jest": "^30.4.2",
+    "jest-environment-jsdom": "^30.4.1",
     "postcss": "^8.5.14",
     "tailwindcss": "^4.3.0",
     "typescript": "^6"
