@@ -17,7 +17,7 @@ const DefaultLayout = ({ children }: { children: React.ReactNode }) => {
   }, [theme]);
 
   return (
-    <div className="min-h-screen overflow-x-hidden bg-background text-foreground transition-colors duration-300">
+    <div className="min-h-screen overflow-x-hidden bg-background text-foreground transition-colors duration-200">
       {/* Fixed Navbar */}
       <Navbar />
 

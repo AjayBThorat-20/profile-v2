@@ -275,9 +275,9 @@ export default function CompanyReviews() {
         </div>
 
         {/* Stats Overview */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 animate-fadeIn" style={{ animationDelay: '100ms' }}>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 animate-fadeIn" style={{ animationDelay: '60ms' }}>
           {/* Average Rating */}
-          <div className="glass-card rounded-2xl p-6 border-2 border-primary/20 hover:border-primary/40 transition-all duration-300">
+          <div className="glass-card rounded-2xl p-6 border-2 border-primary/20 hover:border-primary/40 transition-all duration-200">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-sm font-bold text-muted-foreground uppercase">Average Rating</h3>
               <FaStar className="w-6 h-6 text-yellow-500" />
@@ -292,7 +292,7 @@ export default function CompanyReviews() {
           </div>
 
           {/* Total Reviews */}
-          <div className="glass-card rounded-2xl p-6 border-2 border-purple-500/20 hover:border-purple-500/40 transition-all duration-300">
+          <div className="glass-card rounded-2xl p-6 border-2 border-purple-500/20 hover:border-purple-500/40 transition-all duration-200">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-sm font-bold text-muted-foreground uppercase">Total Reviews</h3>
               <FaThumbsUp className="w-6 h-6 text-purple-500" />
@@ -304,7 +304,7 @@ export default function CompanyReviews() {
           </div>
 
           {/* Recommendation Rate */}
-          <div className="glass-card rounded-2xl p-6 border-2 border-green-500/20 hover:border-green-500/40 transition-all duration-300">
+          <div className="glass-card rounded-2xl p-6 border-2 border-green-500/20 hover:border-green-500/40 transition-all duration-200">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-sm font-bold text-muted-foreground uppercase">Would Work Again</h3>
               <FaChartLine className="w-6 h-6 text-green-500" />
@@ -327,14 +327,14 @@ export default function CompanyReviews() {
               <div
                 key={index}
                 className="group relative animate-fadeIn"
-                style={{ animationDelay: `${(index + 2) * 100}ms` }}
+                style={{ animationDelay: `${(index + 2) * 60}ms` }}
               >
-                <div className="relative bg-card border-2 border-border/50 hover:border-primary/50 rounded-3xl overflow-hidden transition-all duration-500 hover:shadow-2xl">
+                <div className="relative bg-card border-2 border-border/50 hover:border-primary/50 rounded-3xl overflow-hidden transition-all duration-300 hover:shadow-2xl">
                   {/* Top Gradient Bar */}
                   <div className={`h-2 bg-gradient-to-r ${colors.from} ${colors.to}`}></div>
 
                   {/* Gradient Background on Hover */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${colors.from}/5 ${colors.to}/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
+                  <div className={`absolute inset-0 bg-gradient-to-br ${colors.from}/5 ${colors.to}/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
 
                   {/* Content */}
                   <div className="relative p-6 md:p-8 space-y-6">
@@ -342,7 +342,7 @@ export default function CompanyReviews() {
                     {/* Header with Avatar and Name */}
                     <div className="flex items-start gap-4">
                       {/* Avatar */}
-                      <div className={`flex-shrink-0 w-20 h-20 bg-gradient-to-br ${colors.from} ${colors.to} rounded-full flex items-center justify-center shadow-xl ring-4 ring-background group-hover:scale-110 transition-transform duration-300`}>
+                      <div className={`flex-shrink-0 w-20 h-20 bg-gradient-to-br ${colors.from} ${colors.to} rounded-full flex items-center justify-center shadow-xl ring-4 ring-background group-hover:scale-110 transition-transform duration-200`}>
                         <span className="text-2xl font-black text-white">
                           {review.fullName.split(' ').map(n => n[0]).join('').slice(0, 2)}
                         </span>
@@ -501,13 +501,13 @@ export default function CompanyReviews() {
 
                   {/* Decorative Quote Icon */}
                   <div className="absolute top-6 right-6 pointer-events-none">
-                    <div className={`p-3 bg-gradient-to-br ${colors.from}/10 ${colors.to}/10 rounded-xl opacity-30 group-hover:opacity-50 transition-opacity duration-300`}>
+                    <div className={`p-3 bg-gradient-to-br ${colors.from}/10 ${colors.to}/10 rounded-xl opacity-30 group-hover:opacity-50 transition-opacity duration-200`}>
                       <FaQuoteLeft className="w-5 h-5 text-primary" />
                     </div>
                   </div>
 
                   {/* Bottom Gradient Decoration */}
-                  <div className={`h-1 bg-gradient-to-r ${colors.from} ${colors.to} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
+                  <div className={`h-1 bg-gradient-to-r ${colors.from} ${colors.to} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
                 </div>
               </div>
             );

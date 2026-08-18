@@ -63,7 +63,7 @@ export default function Education() {
                   className={`relative flex flex-col lg:flex-row ${
                     isLeft ? "lg:flex-row" : "lg:flex-row-reverse"
                   } items-center gap-6 lg:gap-16 animate-fadeIn`}
-                  style={{ animationDelay: `${index * 100}ms` }}
+                  style={{ animationDelay: `${index * 60}ms` }}
                 >
                   {/* Timeline Node - Desktop Only */}
                   <div className="hidden lg:flex absolute left-1/2 top-8 -translate-x-1/2 z-20">
@@ -81,7 +81,7 @@ export default function Education() {
                   {/* Card */}
                   <div className={`w-full lg:w-[calc(50%-5rem)] ${isLeft ? "lg:pr-4" : "lg:pl-4"}`}>
                     <div
-                      className={`group relative bg-card border-2 border-border/50 hover:border-primary/50 rounded-2xl p-6 md:p-8 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl ${
+                      className={`group relative bg-card border-2 border-border/50 hover:border-primary/50 rounded-2xl p-6 md:p-8 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl ${
                         activeCard === edu.id ? "border-primary/50 shadow-2xl scale-[1.02]" : ""
                       }`}
                       onMouseEnter={() => setActiveCard(edu.id)}
@@ -91,7 +91,7 @@ export default function Education() {
                       <div className={`absolute top-0 ${isLeft ? "left-0" : "right-0"} ${isLeft ? "rounded-tl-2xl" : "rounded-tr-2xl"} w-32 h-1.5 bg-gradient-to-r ${colors.from} ${colors.to}`}></div>
 
                       {/* Gradient Background on Hover */}
-                      <div className={`absolute inset-0 bg-gradient-to-br ${colors.from}/5 ${colors.to}/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl`}></div>
+                      <div className={`absolute inset-0 bg-gradient-to-br ${colors.from}/5 ${colors.to}/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl`}></div>
 
                       {/* Content */}
                       <div className="relative space-y-5">
@@ -174,12 +174,12 @@ export default function Education() {
                           </div>
 
                           {/* Decorative Line */}
-                          <div className={`h-1 flex-grow max-w-[100px] ml-4 bg-gradient-to-r ${colors.from} ${colors.to} rounded-full opacity-0 group-hover:opacity-100 transition-all duration-700`}></div>
+                          <div className={`h-1 flex-grow max-w-[100px] ml-4 bg-gradient-to-r ${colors.from} ${colors.to} rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300`}></div>
                         </div>
                       </div>
 
                       {/* Corner Decoration */}
-                      <div className={`absolute ${isLeft ? "-bottom-3 -left-3" : "-bottom-3 -right-3"} w-32 h-32 bg-gradient-to-br ${colors.from}/10 ${colors.to}/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10`}></div>
+                      <div className={`absolute ${isLeft ? "-bottom-3 -left-3" : "-bottom-3 -right-3"} w-32 h-32 bg-gradient-to-br ${colors.from}/10 ${colors.to}/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10`}></div>
                     </div>
                   </div>
 

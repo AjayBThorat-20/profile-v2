@@ -62,11 +62,11 @@ export default function Projects() {
               <div
                 key={project.id}
                 className="group relative animate-fadeIn"
-                style={{ animationDelay: `${activityIdx * 100}ms` }}
+                style={{ animationDelay: `${activityIdx * 60}ms` }}
                 onMouseEnter={() => setHoveredProject(project.id)}
                 onMouseLeave={() => setHoveredProject(null)}
               >
-                <div className={`bg-card border-2 border-border/50 hover:border-primary/50 rounded-3xl overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl ${
+                <div className={`bg-card border-2 border-border/50 hover:border-primary/50 rounded-3xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl ${
                   hoveredProject === project.id ? "shadow-2xl border-primary/50" : ""
                 }`}>
                   
@@ -79,12 +79,12 @@ export default function Projects() {
                     <div className="lg:w-2/5 flex justify-center items-center">
                       <div className="relative w-full max-w-md">
                         {/* Glow effect */}
-                        <div className={`absolute -inset-4 bg-gradient-to-r ${colors.from}/20 ${colors.to}/20 rounded-2xl blur-2xl opacity-0 group-hover:opacity-60 transition-opacity duration-500`}></div>
+                        <div className={`absolute -inset-4 bg-gradient-to-r ${colors.from}/20 ${colors.to}/20 rounded-2xl blur-2xl opacity-0 group-hover:opacity-60 transition-opacity duration-300`}></div>
                         
-                        <div className="relative aspect-video rounded-2xl overflow-hidden shadow-lg border-2 border-border group-hover:border-primary/50 transition-all duration-500">
+                        <div className="relative aspect-video rounded-2xl overflow-hidden shadow-lg border-2 border-border group-hover:border-primary/50 transition-all duration-300">
                           <Image
                             alt={`${project.title} - screenshot ${currentImageIndexes[activityIdx] + 1} - project by Ajay Thorat`}
-                            className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700"
+                            className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-300"
                             src={project.pictures[currentImageIndexes[activityIdx]].picture}
                             fill
                             sizes="(max-width: 768px) 100vw, 40vw"
@@ -108,10 +108,10 @@ export default function Projects() {
                     <div className="lg:w-3/5 space-y-5">
                       {/* Title */}
                       <div>
-                        <h3 className="text-2xl md:text-3xl font-black text-foreground mb-2 leading-tight group-hover:text-primary transition-colors duration-300">
+                        <h3 className="text-2xl md:text-3xl font-black text-foreground mb-2 leading-tight group-hover:text-primary transition-colors duration-200">
                           {project.title}
                         </h3>
-                        <div className={`h-1.5 w-20 bg-gradient-to-r ${colors.from} ${colors.to} rounded-full group-hover:w-32 transition-all duration-500`}></div>
+                        <div className={`h-1.5 w-20 bg-gradient-to-r ${colors.from} ${colors.to} rounded-full group-hover:w-32 transition-all duration-300`}></div>
                       </div>
 
                       {/* Description */}
@@ -129,7 +129,7 @@ export default function Projects() {
                           {project.techStack.split(", ").map((tech, idx) => (
                             <span
                               key={idx}
-                              className={`px-3 py-1.5 ${colors.badge} rounded-lg text-sm font-semibold border hover:scale-105 transition-transform duration-200 cursor-default`}
+                              className={`px-3 py-1.5 ${colors.badge} rounded-lg text-sm font-semibold border hover:scale-105 transition-transform duration-150 cursor-default`}
                             >
                               {tech}
                             </span>
@@ -141,17 +141,17 @@ export default function Projects() {
                       <div className="pt-2">
                         <a
                           href={project.url}
-                          className={`magnetic group/btn inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r ${colors.from} ${colors.to} text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 relative overflow-hidden`}
+                          className={`magnetic group/btn inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r ${colors.from} ${colors.to} text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 active:scale-95 relative overflow-hidden`}
                           target="_blank"
                           rel="noopener noreferrer"
                         >
                           {/* Shimmer effect */}
-                          <div className="absolute inset-0 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+                          <div className="absolute inset-0 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-300 bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
                           
                           <span className="relative flex items-center gap-2">
                             <FaExternalLinkAlt className="w-4 h-4" />
                             <span>View Project</span>
-                            <FaRocket className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
+                            <FaRocket className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-200" />
                           </span>
                         </a>
                       </div>
@@ -171,14 +171,14 @@ export default function Projects() {
         </div>
 
         {/* GitHub CTA Card */}
-        <div className="relative group animate-fadeIn" style={{ animationDelay: '400ms' }}>
-          <div className="glass-card rounded-3xl overflow-hidden border-2 border-dashed border-primary/30 hover:border-primary/50 hover:border-solid transition-all duration-500 hover:shadow-2xl">
+        <div className="relative group animate-fadeIn" style={{ animationDelay: '220ms' }}>
+          <div className="glass-card rounded-3xl overflow-hidden border-2 border-dashed border-primary/30 hover:border-primary/50 hover:border-solid transition-all duration-300 hover:shadow-2xl">
             {/* Gradient Background */}
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             
             <div className="relative p-8 md:p-12 text-center space-y-6">
               {/* Icon */}
-              <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-primary to-secondary text-primary-foreground rounded-2xl shadow-lg group-hover:scale-110 transition-transform duration-300">
+              <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-primary to-secondary text-primary-foreground rounded-2xl shadow-lg group-hover:scale-110 transition-transform duration-200">
                 <FaGithub className="w-10 h-10" />
               </div>
 
@@ -196,17 +196,17 @@ export default function Projects() {
               {/* Button */}
               <a
                 href="https://github.com/AjayBThorat-20?tab=repositories"
-                className="magnetic inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-gray-900 to-gray-800 dark:from-white dark:to-gray-100 text-white dark:text-gray-900 font-bold rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 active:scale-95 group/btn relative overflow-hidden"
+                className="magnetic inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-gray-900 to-gray-800 dark:from-white dark:to-gray-100 text-white dark:text-gray-900 font-bold rounded-xl shadow-lg hover:shadow-2xl transition-all duration-200 hover:scale-105 active:scale-95 group/btn relative overflow-hidden"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 {/* Shimmer effect */}
-                <div className="absolute inset-0 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+                <div className="absolute inset-0 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-300 bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
                 
                 <span className="relative flex items-center gap-3">
                   <FaGithub className="w-6 h-6" />
                   <span>View All on GitHub</span>
-                  <FaExternalLinkAlt className="w-4 h-4 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform duration-300" />
+                  <FaExternalLinkAlt className="w-4 h-4 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform duration-200" />
                 </span>
               </a>
             </div>

@@ -52,7 +52,7 @@ export default function ExperienceDetails({ experience }: { experience: Experien
           {/* Header Card */}
           <div className="glass-card rounded-3xl p-8 md:p-10 border-2 border-primary/20 relative overflow-hidden group animate-fadeIn">
             {/* Background gradient */}
-            <div className={`absolute inset-0 bg-gradient-to-br ${mainGradient.from}/5 ${mainGradient.to}/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
+            <div className={`absolute inset-0 bg-gradient-to-br ${mainGradient.from}/5 ${mainGradient.to}/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
             
             <div className="relative space-y-6">
               {/* Company & Title */}
@@ -73,7 +73,7 @@ export default function ExperienceDetails({ experience }: { experience: Experien
                   className="inline-flex items-center gap-2 text-xl md:text-2xl font-bold text-primary hover:text-secondary transition-colors group/link"
                 >
                   {experience.name}
-                  <FaExternalLinkAlt className="w-5 h-5 group-hover/link:translate-x-1 group-hover/link:-translate-y-1 transition-transform duration-300" />
+                  <FaExternalLinkAlt className="w-5 h-5 group-hover/link:translate-x-1 group-hover/link:-translate-y-1 transition-transform duration-200" />
                 </a>
               </div>
 
@@ -98,7 +98,7 @@ export default function ExperienceDetails({ experience }: { experience: Experien
                   {experience.techStack.split(",").map((tech, idx) => (
                     <span
                       key={idx}
-                      className={`px-4 py-2 ${mainGradient.badge} rounded-lg text-sm font-semibold border hover:scale-105 transition-transform duration-200`}
+                      className={`px-4 py-2 ${mainGradient.badge} rounded-lg text-sm font-semibold border hover:scale-105 transition-transform duration-150`}
                     >
                       {tech.trim()}
                     </span>
@@ -116,8 +116,8 @@ export default function ExperienceDetails({ experience }: { experience: Experien
               return (
                 <div
                   key={detail.id}
-                  className="group relative bg-card border-2 border-border/50 hover:border-primary/50 rounded-3xl overflow-hidden transition-all duration-500 hover:shadow-2xl animate-fadeIn"
-                  style={{ animationDelay: `${index * 100}ms` }}
+                  className="group relative bg-card border-2 border-border/50 hover:border-primary/50 rounded-3xl overflow-hidden transition-all duration-300 hover:shadow-2xl animate-fadeIn"
+                  style={{ animationDelay: `${index * 60}ms` }}
                 >
                   {/* Top Gradient Bar */}
                   <div className={`h-1.5 bg-gradient-to-r ${colors.from} ${colors.to}`}></div>
@@ -128,7 +128,7 @@ export default function ExperienceDetails({ experience }: { experience: Experien
                       src={detail.picture}
                       alt={`${experience.name} - ${detail.title} - Ajay Thorat`}
                       fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-700"
+                      className="object-cover group-hover:scale-105 transition-transform duration-300"
                       sizes="(max-width: 768px) 100vw, 80vw"
                       priority={index === 0}
                       quality={85}
@@ -172,7 +172,7 @@ export default function ExperienceDetails({ experience }: { experience: Experien
                               {value.map((item, itemIdx) => (
                                 <li
                                   key={itemIdx}
-                                  className="flex items-start gap-3 text-base text-muted-foreground hover:text-foreground transition-colors duration-200"
+                                  className="flex items-start gap-3 text-base text-muted-foreground hover:text-foreground transition-colors duration-150"
                                 >
                                   <FaCheckCircle className={`mt-1 w-4 h-4 flex-shrink-0 ${colors.from.replace('from-', 'text-')}`} />
                                   <span className="leading-relaxed">{item}</span>
@@ -186,7 +186,7 @@ export default function ExperienceDetails({ experience }: { experience: Experien
                   </div>
 
                   {/* Gradient decoration at bottom */}
-                  <div className={`h-1 bg-gradient-to-r ${colors.from} ${colors.to} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
+                  <div className={`h-1 bg-gradient-to-r ${colors.from} ${colors.to} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
                 </div>
               );
             })}
@@ -196,16 +196,16 @@ export default function ExperienceDetails({ experience }: { experience: Experien
  <CompanyReviews />
  
           {/* Navigation Footer */}
-          <div className="flex justify-center pt-8 animate-fadeIn" style={{ animationDelay: '600ms' }}>
+          <div className="flex justify-center pt-8 animate-fadeIn" style={{ animationDelay: '320ms' }}>
             <Link
               href="/experience"
-              className="magnetic group inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-primary to-secondary text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 relative overflow-hidden"
+              className="magnetic group inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-primary to-secondary text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 active:scale-95 relative overflow-hidden"
             >
               {/* Shimmer effect */}
-              <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+              <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-300 bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
 
               <span className="relative flex items-center gap-3">
-                <FaArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform duration-300" />
+                <FaArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform duration-200" />
                 <span>Back to Experience</span>
               </span>
             </Link>

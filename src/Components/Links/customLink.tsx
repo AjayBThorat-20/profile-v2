@@ -31,7 +31,7 @@ export default function CustomLink({ href, title, className = "" }: CustomLinkPr
           -bottom-0.5 
           group-hover:w-full 
           transition-[width] 
-          ease duration-300
+          ease duration-200
           ${isActive ? 'w-full' : 'w-0'}
         `}
       />

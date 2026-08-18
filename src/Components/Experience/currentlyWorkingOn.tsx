@@ -52,24 +52,24 @@ export default function CurrentlyWorkingOn() {
               <div
                 key={activity.id}
                 className="group relative animate-fadeIn"
-                style={{ animationDelay: `${index * 100}ms` }}
+                style={{ animationDelay: `${index * 60}ms` }}
               >
-                <div className={`relative bg-card border-2 border-border/50 hover:border-primary/50 rounded-2xl overflow-hidden transition-all duration-500 ${
+                <div className={`relative bg-card border-2 border-border/50 hover:border-primary/50 rounded-2xl overflow-hidden transition-all duration-300 ${
                   isExpanded ? "border-primary/50 shadow-2xl" : ""
                 }`}>
                   {/* Top Gradient Bar */}
                   <div className={`h-1.5 bg-gradient-to-r ${colors.from} ${colors.to}`}></div>
 
                   {/* Gradient Background on Hover */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${colors.from}/5 ${colors.to}/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
+                  <div className={`absolute inset-0 bg-gradient-to-br ${colors.from}/5 ${colors.to}/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
 
                   {/* Main Content */}
                   <div className="relative p-6 md:p-8">
                     <div className="flex items-start gap-4">
                       {/* Icon */}
-                      <div className={`flex-shrink-0 relative p-4 ${colors.iconBg} rounded-2xl group-hover:scale-110 transition-transform duration-300`}>
-                        <div className={`absolute inset-0 bg-gradient-to-br ${colors.from} ${colors.to} opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity duration-300`}></div>
-                        <FaCode className={`relative w-6 h-6 text-${colors.from.split('-')[1]}-600 dark:text-${colors.from.split('-')[1]}-400 group-hover:text-white transition-colors duration-300`} />
+                      <div className={`flex-shrink-0 relative p-4 ${colors.iconBg} rounded-2xl group-hover:scale-110 transition-transform duration-200`}>
+                        <div className={`absolute inset-0 bg-gradient-to-br ${colors.from} ${colors.to} opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity duration-200`}></div>
+                        <FaCode className={`relative w-6 h-6 text-${colors.from.split('-')[1]}-600 dark:text-${colors.from.split('-')[1]}-400 group-hover:text-white transition-colors duration-200`} />
                       </div>
 
                       {/* Content */}
@@ -82,13 +82,13 @@ export default function CurrentlyWorkingOn() {
                         {/* Expand Button */}
                         <button
                           onClick={() => toggleExpand(activity.id)}
-                          className={`inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r ${colors.from} ${colors.to} text-white text-sm font-semibold rounded-lg hover:shadow-lg transition-all duration-300 hover:scale-105 active:scale-95 group/btn`}
+                          className={`inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r ${colors.from} ${colors.to} text-white text-sm font-semibold rounded-lg hover:shadow-lg transition-all duration-200 hover:scale-105 active:scale-95 group/btn`}
                         >
                           <span>{isExpanded ? "Show Less" : "Show More"}</span>
                           {isExpanded ? (
-                            <FaChevronUp className="w-3 h-3 group-hover/btn:-translate-y-0.5 transition-transform duration-300" />
+                            <FaChevronUp className="w-3 h-3 group-hover/btn:-translate-y-0.5 transition-transform duration-200" />
                           ) : (
-                            <FaChevronDown className="w-3 h-3 group-hover/btn:translate-y-0.5 transition-transform duration-300" />
+                            <FaChevronDown className="w-3 h-3 group-hover/btn:translate-y-0.5 transition-transform duration-200" />
                           )}
                         </button>
                       </div>
@@ -111,7 +111,7 @@ export default function CurrentlyWorkingOn() {
                   </div>
 
                   {/* Corner Decoration */}
-                  <div className={`absolute -bottom-2 -right-2 w-24 h-24 bg-gradient-to-br ${colors.from}/10 ${colors.to}/10 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10`}></div>
+                  <div className={`absolute -bottom-2 -right-2 w-24 h-24 bg-gradient-to-br ${colors.from}/10 ${colors.to}/10 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10`}></div>
                 </div>
               </div>
             );

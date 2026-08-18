@@ -72,7 +72,7 @@ export default function OrbImage({
 
           {/* Main image container */}
           <div
-            className={`relative transition-all duration-300 ease-out ${
+            className={`relative transition-all duration-200 ease-out ${
               forceHoverState ? "scale-[1.03]" : ""
             } hover:scale-[1.03] group`}
             style={{
@@ -86,7 +86,7 @@ export default function OrbImage({
                 theme === "dark"
                   ? "shadow-[0_0_50px_rgba(59,130,246,0.4),0_0_100px_rgba(139,92,246,0.2)]"
                   : "shadow-[0_0_50px_rgba(59,130,246,0.3),0_0_100px_rgba(6,182,212,0.2)]"
-              } group-hover:shadow-[0_0_60px_rgba(59,130,246,0.5),0_0_120px_rgba(139,92,246,0.3)] transition-shadow duration-500`}
+              } group-hover:shadow-[0_0_60px_rgba(59,130,246,0.5),0_0_120px_rgba(139,92,246,0.3)] transition-shadow duration-300`}
             >
               {/* Animated gradient border */}
               <div className="absolute inset-0 rounded-full overflow-hidden">
@@ -115,7 +115,7 @@ export default function OrbImage({
                   src={src}
                   alt={alt}
                   fill
-                  className={`object-cover transition-transform duration-700 ease-out group-hover:scale-110 ${className}`}
+                  className={`object-cover transition-transform duration-300 ease-out group-hover:scale-110 ${className}`}
                   priority
                   sizes="(max-width: 640px) 290px, (max-width: 768px) 330px, 370px"
                   style={{ objectPosition: 'center 30%' }}
@@ -129,12 +129,12 @@ export default function OrbImage({
                 } pointer-events-none`} />
                 
                 {/* Shine effect overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-white/0 via-white/30 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none shimmer" />
+                <div className="absolute inset-0 bg-gradient-to-br from-white/0 via-white/30 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none shimmer" />
               </div>
             </div>
 
             {/* Glow effect on hover */}
-            <div className={`absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl -z-10 ${
+            <div className={`absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl -z-10 ${
               theme === "dark"
                 ? "bg-primary/30"
                 : "bg-primary/20"

@@ -65,7 +65,7 @@ export default function WrapperLayout({
             
             {/* Decorative underline */}
             <div className="flex justify-center mt-6">
-              <div className="h-1 w-24 bg-gradient-to-r from-primary via-secondary to-accent rounded-full animate-fadeIn" style={{ animationDelay: '400ms' }}></div>
+              <div className="h-1 w-24 bg-gradient-to-r from-primary via-secondary to-accent rounded-full animate-fadeIn" style={{ animationDelay: '220ms' }}></div>
             </div>
           </div>
         ) : null}

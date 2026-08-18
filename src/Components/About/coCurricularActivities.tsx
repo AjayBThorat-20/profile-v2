@@ -53,7 +53,7 @@ export default function CoCurricularActivities() {
         </div>
 
         {/* Activities Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 animate-fadeIn" style={{ animationDelay: '100ms' }}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 animate-fadeIn" style={{ animationDelay: '60ms' }}>
           {coCurricularActivitiesData.map((activity, index) => {
             const { icon: ActivityIcon, gradient } = getActivityDetails(activity.Name);
             
@@ -65,23 +65,23 @@ export default function CoCurricularActivities() {
                 onMouseLeave={() => setHoveredActivity(null)}
               >
                 {/* Gradient border effect on hover */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${gradient.from} ${gradient.to} opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 blur-xl`}></div>
+                <div className={`absolute inset-0 bg-gradient-to-br ${gradient.from} ${gradient.to} opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10 blur-xl`}></div>
                 
                 {/* Gradient background overlay */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${gradient.from}/10 ${gradient.to}/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
+                <div className={`absolute inset-0 bg-gradient-to-br ${gradient.from}/10 ${gradient.to}/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
 
                 {/* Shimmer Effect */}
-                <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+                <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-500 bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
 
                 {/* Content */}
                 <div className="relative h-full flex flex-col space-y-4">
                   {/* Icon */}
-                  <div className={`inline-flex items-center justify-center w-14 h-14 bg-gradient-to-br ${gradient.from} ${gradient.to} rounded-xl shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-all duration-300`}>
+                  <div className={`inline-flex items-center justify-center w-14 h-14 bg-gradient-to-br ${gradient.from} ${gradient.to} rounded-xl shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-all duration-200`}>
                     <ActivityIcon className="w-7 h-7 text-white" />
                   </div>
 
                   {/* Activity Name */}
-                  <h3 className="text-xl font-bold text-foreground leading-tight group-hover:text-primary transition-colors duration-300">
+                  <h3 className="text-xl font-bold text-foreground leading-tight group-hover:text-primary transition-colors duration-200">
                     {activity.Name}
                   </h3>
 
@@ -92,15 +92,15 @@ export default function CoCurricularActivities() {
 
                   {/* Decorative line */}
                   <div className="pt-2">
-                    <div className={`h-1 w-12 bg-gradient-to-r ${gradient.from} ${gradient.to} rounded-full group-hover:w-20 transition-all duration-500`}></div>
+                    <div className={`h-1 w-12 bg-gradient-to-r ${gradient.from} ${gradient.to} rounded-full group-hover:w-20 transition-all duration-300`}></div>
                   </div>
 
                   {/* Bottom decoration */}
-                  <div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${gradient.from} ${gradient.to} transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left`}></div>
+                  <div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${gradient.from} ${gradient.to} transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left`}></div>
                 </div>
 
                 {/* Corner accent */}
-                <div className={`absolute top-0 right-0 w-20 h-20 bg-gradient-to-br ${gradient.from}/5 ${gradient.to}/5 rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
+                <div className={`absolute top-0 right-0 w-20 h-20 bg-gradient-to-br ${gradient.from}/5 ${gradient.to}/5 rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
               </div>
             );
           })}

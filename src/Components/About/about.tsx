@@ -33,20 +33,20 @@ export default function About() {
           <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
             
             {/* Image Section - Now first on mobile, second on desktop */}
-            <div className="w-full lg:w-[45%] flex justify-center animate-fadeIn" style={{ animationDelay: '200ms' }}>
+            <div className="w-full lg:w-[45%] flex justify-center animate-fadeIn" style={{ animationDelay: '120ms' }}>
               <div className="relative w-full max-w-md">
                 {/* Glow effect */}
                 <div className="absolute -inset-6 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-3xl blur-3xl opacity-60 animate-pulse-slow"></div>
                 
                 {/* Main image container */}
                 <div className="relative group">
-                  <div className="relative aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl border-2 border-primary/20 group-hover:border-primary/40 transition-all duration-500 bg-muted/20">
+                  <div className="relative aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl border-2 border-primary/20 group-hover:border-primary/40 transition-all duration-300 bg-muted/20">
                     {!imageError ? (
                       <Image
                         src="/Images/Profile/Ajay4.webp"
                         alt="Ajay Thorat - Full Stack Developer"
                         fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-110"
+                        className="object-cover transition-transform duration-300 group-hover:scale-110"
                         priority
                         quality={85}
                         sizes="(max-width: 768px) 90vw, (max-width: 1024px) 50vw, 45vw"
@@ -77,9 +77,9 @@ export default function About() {
             {/* Text Section */}
             <div className="w-full lg:w-[55%] space-y-8 animate-fadeIn">
               {/* Name & Title Card */}
-              <div className="glass-card p-8 rounded-2xl border-2 border-primary/20 relative overflow-hidden group hover:border-primary/40 transition-all duration-500">
+              <div className="glass-card p-8 rounded-2xl border-2 border-primary/20 relative overflow-hidden group hover:border-primary/40 transition-all duration-300">
                 {/* Background gradient */}
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-secondary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-secondary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 
                 <div className="relative z-10 space-y-4">
                   <h2 className="text-3xl md:text-4xl font-black">
@@ -114,7 +114,7 @@ export default function About() {
                 {achievements.map((achievement, index) => (
                   <div
                     key={index}
-                    className="flex items-start gap-3 p-4 glass-card rounded-xl hover:scale-105 transition-transform duration-300 border border-border/50 hover:border-primary/50 group"
+                    className="flex items-start gap-3 p-4 glass-card rounded-xl hover:scale-105 transition-transform duration-200 border border-border/50 hover:border-primary/50 group"
                   >
                     <div className="mt-0.5 flex-shrink-0">
                       <div className="w-5 h-5 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
@@ -133,9 +133,9 @@ export default function About() {
           </div>
 
           {/* Call to Action Section */}
-          <div className="glass-card p-8 md:p-12 rounded-3xl border-2 border-primary/20 text-center space-y-6 relative overflow-hidden group animate-fadeIn" style={{ animationDelay: '600ms' }}>
+          <div className="glass-card p-8 md:p-12 rounded-3xl border-2 border-primary/20 text-center space-y-6 relative overflow-hidden group animate-fadeIn" style={{ animationDelay: '320ms' }}>
             {/* Animated background */}
-            <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-secondary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-secondary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             
             <div className="relative z-10">
               <h3 className="text-2xl md:text-3xl font-bold mb-4">

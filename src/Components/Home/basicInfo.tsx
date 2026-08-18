@@ -63,14 +63,14 @@ export default function BasicInfo({ theme }: BasicInfoProps) {
             </span>
           </div>
           <div className="overflow-hidden">
-            <span className="block animate-slideInUp" style={{ animationDelay: '100ms' }}>
+            <span className="block animate-slideInUp" style={{ animationDelay: '60ms' }}>
               <span className="gradient-text-animated text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
                 Digital Solutions
               </span>
             </span>
           </div>
           <div className="overflow-hidden">
-            <span className="block animate-slideInUp" style={{ animationDelay: '200ms' }}>
+            <span className="block animate-slideInUp" style={{ animationDelay: '120ms' }}>
               <span className="text-foreground/80">That Scale</span>
             </span>
           </div>
@@ -78,11 +78,11 @@ export default function BasicInfo({ theme }: BasicInfoProps) {
       </div>
 
       {/* Role Tags */}
-      <div className="flex flex-wrap gap-2 md:gap-3 animate-fadeIn" style={{ animationDelay: '300ms' }}>
+      <div className="flex flex-wrap gap-2 md:gap-3 animate-fadeIn" style={{ animationDelay: '180ms' }}>
         {["Full-Stack Developer", "MERN Stack", "System Architect"].map((role, index) => (
           <div 
             key={index}
-            className="px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-gradient-to-r from-primary/10 to-secondary/10 border border-primary/20 hover:border-primary/50 transition-all duration-300 hover:scale-105 cursor-default"
+            className="px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-gradient-to-r from-primary/10 to-secondary/10 border border-primary/20 hover:border-primary/50 transition-all duration-200 hover:scale-105 cursor-default"
           >
             <span className="text-xs md:text-sm font-medium text-foreground">{role}</span>
           </div>
@@ -90,11 +90,11 @@ export default function BasicInfo({ theme }: BasicInfoProps) {
       </div>
 
       {/* Interactive Metrics Carousel */}
-      <div className="relative animate-fadeIn" style={{ animationDelay: '400ms' }}>
+      <div className="relative animate-fadeIn" style={{ animationDelay: '220ms' }}>
         {/* Active Metric Display */}
         <div className="glass-card p-6 md:p-8 rounded-2xl border-2 border-primary/20 relative overflow-hidden">
           {/* Background gradient animation */}
-          <div className={`absolute inset-0 bg-gradient-to-r ${metrics[activeMetric].color} opacity-5 transition-opacity duration-500`}></div>
+          <div className={`absolute inset-0 bg-gradient-to-r ${metrics[activeMetric].color} opacity-5 transition-opacity duration-300`}></div>
           
           <div className="relative z-10">
             <div className="flex items-start gap-4 md:gap-6">
@@ -126,7 +126,7 @@ export default function BasicInfo({ theme }: BasicInfoProps) {
                   key={index}
                   onClick={() => setActiveMetric(index)}
                   aria-label={`View metric ${index + 1}`}
-                  className={`h-1.5 rounded-full transition-all duration-300 ${
+                  className={`h-1.5 rounded-full transition-all duration-200 ${
                     index === activeMetric 
                       ? "w-12 bg-gradient-to-r " + metrics[index].color
                       : "w-1.5 bg-muted-foreground/30 hover:bg-muted-foreground/50"
@@ -146,7 +146,7 @@ export default function BasicInfo({ theme }: BasicInfoProps) {
                 key={index}
                 onClick={() => setActiveMetric(index)}
                 aria-label={`Select ${metric.label}`}
-                className={`p-2 md:p-3 rounded-xl transition-all duration-300 ${
+                className={`p-2 md:p-3 rounded-xl transition-all duration-200 ${
                   index === activeMetric
                     ? "glass-card border-2 border-primary/30 scale-105"
                     : "bg-muted/50 hover:bg-muted border-2 border-transparent hover:border-border"
@@ -167,7 +167,7 @@ export default function BasicInfo({ theme }: BasicInfoProps) {
       </div>
 
       {/* Description with reveal effect */}
-      <div className="space-y-2 md:space-y-3 animate-fadeIn" style={{ animationDelay: '500ms' }}>
+      <div className="space-y-2 md:space-y-3 animate-fadeIn" style={{ animationDelay: '280ms' }}>
         <p className="text-sm md:text-base lg:text-lg leading-relaxed text-foreground/90">
           Specialized in architecting <span className="font-bold text-primary">scalable web applications</span> from concept to deployment. 
           Experienced in building <span className="font-bold text-secondary">real-time systems</span> that handle production traffic.
@@ -178,12 +178,12 @@ export default function BasicInfo({ theme }: BasicInfoProps) {
       </div>
 
       {/* CTA Buttons */}
-      <div className="flex flex-col sm:flex-row gap-3 md:gap-4 animate-fadeIn" style={{ animationDelay: '600ms' }}>
+      <div className="flex flex-col sm:flex-row gap-3 md:gap-4 animate-fadeIn" style={{ animationDelay: '320ms' }}>
         <a
           href="/Resume/Ajay_Thorat.pdf"
           target="_blank"
           rel="noopener noreferrer"
-          className="magnetic group relative flex-1 inline-flex items-center justify-center gap-2 md:gap-3 px-5 py-3 md:px-6 md:py-4 rounded-xl font-semibold text-sm md:text-base overflow-hidden bg-gradient-to-r from-primary to-secondary text-primary-foreground shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-[1.02] active:scale-95"
+          className="magnetic group relative flex-1 inline-flex items-center justify-center gap-2 md:gap-3 px-5 py-3 md:px-6 md:py-4 rounded-xl font-semibold text-sm md:text-base overflow-hidden bg-gradient-to-r from-primary to-secondary text-primary-foreground shadow-lg hover:shadow-2xl transition-all duration-200 hover:scale-[1.02] active:scale-95"
         >
           <FaDownload className="w-4 h-4 md:w-5 md:h-5 group-hover:animate-bounce" />
           <span>Download Resume</span>
@@ -193,7 +193,7 @@ export default function BasicInfo({ theme }: BasicInfoProps) {
 
         <Link
           href="/contact"
-          className="magnetic group flex-1 inline-flex items-center justify-center gap-2 md:gap-3 px-5 py-3 md:px-6 md:py-4 rounded-xl font-semibold text-sm md:text-base border-2 border-primary/30 hover:border-primary bg-card hover:bg-primary/5 transition-all duration-300 hover:scale-[1.02] active:scale-95"
+          className="magnetic group flex-1 inline-flex items-center justify-center gap-2 md:gap-3 px-5 py-3 md:px-6 md:py-4 rounded-xl font-semibold text-sm md:text-base border-2 border-primary/30 hover:border-primary bg-card hover:bg-primary/5 transition-all duration-200 hover:scale-[1.02] active:scale-95"
         >
           <span>Let's Connect</span>
           <FaArrowRight className="w-3 h-3 md:w-4 md:h-4 group-hover:translate-x-1 transition-transform" />

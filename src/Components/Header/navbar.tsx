@@ -95,7 +95,7 @@ export default function Navbar() {
     return (
       <Link
         href={href}
-        className={`relative px-4 py-2 text-base font-medium rounded-lg transition-all duration-300 group ${
+        className={`relative px-4 py-2 text-base font-medium rounded-lg transition-all duration-200 group ${
           isActive
             ? "text-primary"
             : "text-foreground/80 hover:text-primary"
@@ -103,7 +103,7 @@ export default function Navbar() {
       >
         {label}
         <span 
-          className={`absolute bottom-1 left-1/2 -translate-x-1/2 h-0.5 bg-gradient-to-r from-primary to-secondary rounded-full transition-all duration-300 ${
+          className={`absolute bottom-1 left-1/2 -translate-x-1/2 h-0.5 bg-gradient-to-r from-primary to-secondary rounded-full transition-all duration-200 ${
             isActive ? "w-1/2" : "w-0 group-hover:w-1/2"
           }`}
         />
@@ -148,7 +148,7 @@ const FlagIcon = ({ size = 28 }: { size?: number }) => {
       {/* Desktop & Tablet Navbar */}
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all ease-out ${
-          isVisible ? "duration-200 translate-y-0" : "duration-500 -translate-y-full"
+          isVisible ? "duration-150 translate-y-0" : "duration-300 -translate-y-full"
         } ${
           scrolled
             ? "glass shadow-lg"
@@ -161,7 +161,7 @@ const FlagIcon = ({ size = 28 }: { size?: number }) => {
           <div className="flex items-center gap-3 magnetic">
             <Link
               href="/"
-              className="text-3xl font-black tracking-tight gradient-text-animated hover:scale-105 transition-transform duration-300"
+              className="text-3xl font-black tracking-tight gradient-text-animated hover:scale-105 transition-transform duration-200"
             >
               AT
             </Link>
@@ -188,26 +188,26 @@ const FlagIcon = ({ size = 28 }: { size?: number }) => {
               href="https://www.linkedin.com/in/ajay-thorat-24b4b6215"
               target="_blank"
               rel="noopener noreferrer"
-              className="magnetic p-2 rounded-lg hover:bg-primary/10 transition-all duration-300 group"
+              className="magnetic p-2 rounded-lg hover:bg-primary/10 transition-all duration-200 group"
               aria-label="LinkedIn"
             >
-              <FaLinkedin className="w-5 h-5 text-primary group-hover:scale-110 transition-transform duration-300" />
+              <FaLinkedin className="w-5 h-5 text-primary group-hover:scale-110 transition-transform duration-200" />
             </Link>
             <Link
               href="https://github.com/AjayBThorat-20"
               target="_blank"
               rel="noopener noreferrer"
-              className="magnetic p-2 rounded-lg hover:bg-muted transition-all duration-300 group"
+              className="magnetic p-2 rounded-lg hover:bg-muted transition-all duration-200 group"
               aria-label="GitHub"
             >
-              <FaGithub className="w-5 h-5 text-foreground group-hover:scale-110 transition-transform duration-300" />
+              <FaGithub className="w-5 h-5 text-foreground group-hover:scale-110 transition-transform duration-200" />
             </Link>
             <Link
               href="mailto:ajaythorat988@gmail.com"
-              className="magnetic p-2 rounded-lg hover:bg-destructive/10 transition-all duration-300 group"
+              className="magnetic p-2 rounded-lg hover:bg-destructive/10 transition-all duration-200 group"
               aria-label="Email"
             >
-              <IoMdMail className="w-5 h-5 text-destructive group-hover:scale-110 transition-transform duration-300" />
+              <IoMdMail className="w-5 h-5 text-destructive group-hover:scale-110 transition-transform duration-200" />
             </Link>
             
             {/* Divider */}
@@ -244,23 +244,23 @@ const FlagIcon = ({ size = 28 }: { size?: number }) => {
             {/* Hamburger Menu */}
             <button
               onClick={handleToggleMenu}
-              className="p-2 ml-1 rounded-lg hover:bg-muted transition-colors duration-300"
+              className="p-2 ml-1 rounded-lg hover:bg-muted transition-colors duration-200"
               aria-label="Toggle menu"
               aria-expanded={isMenuOpen}
             >
               <div className="w-6 h-5 flex flex-col justify-between">
                 <span
-                  className={`w-full h-0.5 rounded-full bg-foreground transition-all duration-300 ${
+                  className={`w-full h-0.5 rounded-full bg-foreground transition-all duration-200 ${
                     isMenuOpen ? "rotate-45 translate-y-2" : ""
                   }`}
                 ></span>
                 <span
-                  className={`w-full h-0.5 rounded-full bg-foreground transition-all duration-300 ${
+                  className={`w-full h-0.5 rounded-full bg-foreground transition-all duration-200 ${
                     isMenuOpen ? "opacity-0" : ""
                   }`}
                 ></span>
                 <span
-                  className={`w-full h-0.5 rounded-full bg-foreground transition-all duration-300 ${
+                  className={`w-full h-0.5 rounded-full bg-foreground transition-all duration-200 ${
                     isMenuOpen ? "-rotate-45 -translate-y-2" : ""
                   }`}
                 ></span>
@@ -283,7 +283,7 @@ const FlagIcon = ({ size = 28 }: { size?: number }) => {
 
       {/* Mobile Menu Sidebar */}
       <div
-        className={`fixed top-0 right-0 h-full w-80 max-w-[85vw] glass shadow-2xl transform transition-transform duration-300 ease-out z-50 md:hidden ${
+        className={`fixed top-0 right-0 h-full w-80 max-w-[85vw] glass shadow-2xl transform transition-transform duration-200 ease-out z-50 md:hidden ${
           isMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
@@ -294,7 +294,7 @@ const FlagIcon = ({ size = 28 }: { size?: number }) => {
           </h2>
           <button
             onClick={handleToggleMenu}
-            className="p-2 rounded-lg hover:bg-muted transition-colors duration-300"
+            className="p-2 rounded-lg hover:bg-muted transition-colors duration-200"
             aria-label="Close menu"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -311,7 +311,7 @@ const FlagIcon = ({ size = 28 }: { size?: number }) => {
               <button
                 key={link.href}
                 onClick={() => handleLinkClick(link.href)}
-                className={`text-left px-4 py-3 rounded-xl font-medium transition-all duration-300 ${
+                className={`text-left px-4 py-3 rounded-xl font-medium transition-all duration-200 ${
                   isActive
                     ? "bg-gradient-to-r from-primary to-secondary text-primary-foreground shadow-lg"
                     : "hover:bg-muted"
@@ -334,26 +334,26 @@ const FlagIcon = ({ size = 28 }: { size?: number }) => {
               href="https://www.linkedin.com/in/ajay-thorat-24b4b6215"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 rounded-lg bg-card hover:bg-primary/10 transition-all duration-300 group shadow-sm"
+              className="p-3 rounded-lg bg-card hover:bg-primary/10 transition-all duration-200 group shadow-sm"
               aria-label="LinkedIn"
             >
-              <FaLinkedin className="w-6 h-6 text-primary group-hover:scale-110 transition-transform duration-300" />
+              <FaLinkedin className="w-6 h-6 text-primary group-hover:scale-110 transition-transform duration-200" />
             </Link>
             <Link
               href="https://github.com/AjayBThorat-20"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 rounded-lg bg-card hover:bg-muted transition-all duration-300 group shadow-sm"
+              className="p-3 rounded-lg bg-card hover:bg-muted transition-all duration-200 group shadow-sm"
               aria-label="GitHub"
             >
-              <FaGithub className="w-6 h-6 group-hover:scale-110 transition-transform duration-300" />
+              <FaGithub className="w-6 h-6 group-hover:scale-110 transition-transform duration-200" />
             </Link>
             <Link
               href="mailto:ajaythorat988@gmail.com"
-              className="p-3 rounded-lg bg-card hover:bg-destructive/10 transition-all duration-300 group shadow-sm"
+              className="p-3 rounded-lg bg-card hover:bg-destructive/10 transition-all duration-200 group shadow-sm"
               aria-label="Email"
             >
-              <IoMdMail className="w-6 h-6 text-destructive group-hover:scale-110 transition-transform duration-300" />
+              <IoMdMail className="w-6 h-6 text-destructive group-hover:scale-110 transition-transform duration-200" />
             </Link>
           </div>
           

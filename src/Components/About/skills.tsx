@@ -119,7 +119,7 @@ export default function Skills() {
             <button
               key={category}
               onClick={() => setSelectedCategory(category)}
-              className={`px-6 py-3 rounded-xl font-semibold transition-all duration-300 ${
+              className={`px-6 py-3 rounded-xl font-semibold transition-all duration-200 ${
                 selectedCategory === category
                   ? "bg-gradient-to-r from-primary to-secondary text-primary-foreground shadow-lg scale-105"
                   : "glass-card hover:scale-105 border border-border/50 hover:border-primary/50"
@@ -134,7 +134,7 @@ export default function Skills() {
         </div>
 
         {/* Skills Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 animate-fadeIn" style={{ animationDelay: '100ms' }}>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 animate-fadeIn" style={{ animationDelay: '60ms' }}>
           {filteredSkills.map((skill, index) => {
             const SkillIcon = getSkillIcon(skill.text);
             const details = getSkillDetails(skill.text);
@@ -142,17 +142,17 @@ export default function Skills() {
             return (
               <div
                 key={skill.id}
-                className="group relative card-interactive p-6 hover:scale-105 transition-all duration-300 overflow-hidden"
+                className="group relative card-interactive p-6 hover:scale-105 transition-all duration-200 overflow-hidden"
                 onMouseEnter={() => setHoveredSkill(skill.id)}
                 onMouseLeave={() => setHoveredSkill(null)}
               >
                 {/* Gradient background overlay */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${details.from} ${details.to} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}></div>
+                <div className={`absolute inset-0 bg-gradient-to-br ${details.from} ${details.to} opacity-0 group-hover:opacity-10 transition-opacity duration-200`}></div>
 
                 {/* Content */}
                 <div className="relative z-10 flex flex-col items-center justify-center space-y-3 min-h-[100px]">
                   {/* Icon with gradient background */}
-                  <div className={`w-14 h-14 bg-gradient-to-br ${details.from} ${details.to} rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-all duration-300`}>
+                  <div className={`w-14 h-14 bg-gradient-to-br ${details.from} ${details.to} rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-all duration-200`}>
                     <SkillIcon className="w-7 h-7 text-white" />
                   </div>
 
@@ -172,7 +172,7 @@ export default function Skills() {
                 </div>
 
                 {/* Bottom gradient line */}
-                <div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${details.from} ${details.to} transform transition-transform duration-300 ${
+                <div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${details.from} ${details.to} transform transition-transform duration-200 ${
                   hoveredSkill === skill.id ? "scale-x-100" : "scale-x-0"
                 }`}></div>
               </div>
@@ -181,7 +181,7 @@ export default function Skills() {
         </div>
 
         {/* Proficiency Levels - More detailed and useful */}
-        <div className="glass-card p-8 rounded-3xl border-2 border-primary/20 animate-fadeIn" style={{ animationDelay: '200ms' }}>
+        <div className="glass-card p-8 rounded-3xl border-2 border-primary/20 animate-fadeIn" style={{ animationDelay: '120ms' }}>
           <h3 className="text-2xl font-bold mb-6 text-center">
             <span className="gradient-text-animated">Proficiency Overview</span>
           </h3>
@@ -224,7 +224,7 @@ export default function Skills() {
                 {/* Progress bar */}
                 <div className="h-3 bg-muted rounded-full overflow-hidden">
                   <div 
-                    className={`h-full bg-gradient-to-r ${item.gradient} rounded-full transition-all duration-1000 ease-out`}
+                    className={`h-full bg-gradient-to-r ${item.gradient} rounded-full transition-all duration-500 ease-out`}
                     style={{ width: `${item.level}%` }}
                   ></div>
                 </div>

@@ -102,9 +102,9 @@ export default function Contact() {
             {/* Contact Methods */}
             <div className="space-y-4">
               {/* Email */}
-              <div className="group glass-card rounded-2xl border border-border/50 hover:border-primary/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg p-5">
+              <div className="group glass-card rounded-2xl border border-border/50 hover:border-primary/50 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg p-5">
                 <div className="flex items-center gap-4">
-                  <div className="p-3 bg-gradient-to-br from-red-600 to-red-500 rounded-xl group-hover:scale-110 transition-transform duration-300">
+                  <div className="p-3 bg-gradient-to-br from-red-600 to-red-500 rounded-xl group-hover:scale-110 transition-transform duration-200">
                     <IoMdMail className="w-6 h-6 text-white" />
                   </div>
                   <div>
@@ -117,9 +117,9 @@ export default function Contact() {
               </div>
 
               {/* LinkedIn */}
-              <div className="group glass-card rounded-2xl border border-border/50 hover:border-primary/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg p-5">
+              <div className="group glass-card rounded-2xl border border-border/50 hover:border-primary/50 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg p-5">
                 <div className="flex items-center gap-4">
-                  <div className="p-3 bg-gradient-to-br from-blue-600 to-blue-500 rounded-xl group-hover:scale-110 transition-transform duration-300">
+                  <div className="p-3 bg-gradient-to-br from-blue-600 to-blue-500 rounded-xl group-hover:scale-110 transition-transform duration-200">
                     <FaLinkedin className="w-6 h-6 text-white" />
                   </div>
                   <div>
@@ -132,9 +132,9 @@ export default function Contact() {
               </div>
 
               {/* GitHub */}
-              <div className="group glass-card rounded-2xl border border-border/50 hover:border-primary/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg p-5">
+              <div className="group glass-card rounded-2xl border border-border/50 hover:border-primary/50 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg p-5">
                 <div className="flex items-center gap-4">
-                  <div className="p-3 bg-gradient-to-br from-gray-800 to-gray-700 dark:from-white dark:to-gray-100 rounded-xl group-hover:scale-110 transition-transform duration-300">
+                  <div className="p-3 bg-gradient-to-br from-gray-800 to-gray-700 dark:from-white dark:to-gray-100 rounded-xl group-hover:scale-110 transition-transform duration-200">
                     <FaGithub className="w-6 h-6 text-white dark:text-gray-900" />
                   </div>
                   <div>
@@ -164,7 +164,7 @@ export default function Contact() {
 
             {/* Decorative Quote */}
             <div className="glass-card p-6 rounded-2xl border-2 border-primary/20 relative overflow-hidden group">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-secondary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-secondary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <p className="relative text-base italic text-foreground/80 leading-relaxed">
                 "The best way to predict the future is to create it." 
                 <span className="block mt-2 text-sm font-semibold text-primary">
@@ -175,7 +175,7 @@ export default function Contact() {
           </div>
 
           {/* Right Side - Contact Form */}
-          <div className="animate-fadeIn" style={{ animationDelay: '200ms' }}>
+          <div className="animate-fadeIn" style={{ animationDelay: '120ms' }}>
             <div className="glass-card rounded-3xl p-8 md:p-10 border-2 border-border/50 relative overflow-hidden">
               {/* Gradient Background */}
               <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-secondary/5 to-transparent opacity-50"></div>
@@ -233,7 +233,7 @@ export default function Contact() {
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 bg-background border-2 border-border focus:border-primary rounded-xl text-foreground placeholder:text-muted-foreground transition-all duration-300 outline-none"
+                      className="w-full px-4 py-3 bg-background border-2 border-border focus:border-primary rounded-xl text-foreground placeholder:text-muted-foreground transition-all duration-200 outline-none"
                       placeholder="John Doe"
                     />
                   </div>
@@ -251,7 +251,7 @@ export default function Contact() {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 bg-background border-2 border-border focus:border-primary rounded-xl text-foreground placeholder:text-muted-foreground transition-all duration-300 outline-none"
+                      className="w-full px-4 py-3 bg-background border-2 border-border focus:border-primary rounded-xl text-foreground placeholder:text-muted-foreground transition-all duration-200 outline-none"
                       placeholder="john@example.com"
                     />
                   </div>
@@ -269,7 +269,7 @@ export default function Contact() {
                       value={formData.subject}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 bg-background border-2 border-border focus:border-primary rounded-xl text-foreground placeholder:text-muted-foreground transition-all duration-300 outline-none"
+                      className="w-full px-4 py-3 bg-background border-2 border-border focus:border-primary rounded-xl text-foreground placeholder:text-muted-foreground transition-all duration-200 outline-none"
                       placeholder="What's this about?"
                     />
                   </div>
@@ -287,7 +287,7 @@ export default function Contact() {
                       onChange={handleChange}
                       required
                       rows={6}
-                      className="w-full px-4 py-3 bg-background border-2 border-border focus:border-primary rounded-xl text-foreground placeholder:text-muted-foreground transition-all duration-300 outline-none resize-none"
+                      className="w-full px-4 py-3 bg-background border-2 border-border focus:border-primary rounded-xl text-foreground placeholder:text-muted-foreground transition-all duration-200 outline-none resize-none"
                       placeholder="Tell me about your project or opportunity..."
                     />
                   </div>
@@ -296,13 +296,13 @@ export default function Contact() {
                   <button
                     type="submit"
                     disabled={isLoading}
-                    className="magnetic w-full group relative px-8 py-4 bg-gradient-to-r from-primary to-secondary text-primary-foreground font-bold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 overflow-hidden"
+                    className="magnetic w-full group relative px-8 py-4 bg-gradient-to-r from-primary to-secondary text-primary-foreground font-bold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-[1.02] active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 overflow-hidden"
                   >
                     {/* Shimmer effect */}
-                    <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+                    <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-300 bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
                     
                     <span className="relative flex items-center justify-center gap-2">
-                      <FaPaperPlane className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
+                      <FaPaperPlane className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-200" />
                       <span>Send Message</span>
                     </span>
                   </button>

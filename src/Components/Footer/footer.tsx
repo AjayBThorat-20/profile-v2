@@ -43,7 +43,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="relative w-full border-t border-border bg-card transition-colors duration-300">
+    <footer className="relative w-full border-t border-border bg-card transition-colors duration-200">
       {/* Gradient decoration at top */}
       <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-secondary to-accent"></div>
 
@@ -77,7 +77,7 @@ export default function Footer() {
                 <Link
                   key={link.name}
                   href={link.href}
-                  className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200 w-fit"
+                  className="text-sm text-muted-foreground hover:text-primary transition-colors duration-150 w-fit"
                 >
                   {link.name}
                 </Link>
@@ -99,10 +99,10 @@ export default function Footer() {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group relative p-3 glass-card rounded-xl border border-border/50 hover:border-primary/50 transition-all duration-300 hover:scale-110"
+                    className="group relative p-3 glass-card rounded-xl border border-border/50 hover:border-primary/50 transition-all duration-200 hover:scale-110"
                     aria-label={social.name}
                   >
-                    <Icon className={`w-5 h-5 text-muted-foreground ${social.hoverColor} transition-colors duration-300`} />
+                    <Icon className={`w-5 h-5 text-muted-foreground ${social.hoverColor} transition-colors duration-200`} />
                   </Link>
                 );
               })}
@@ -138,10 +138,10 @@ export default function Footer() {
             {/* Scroll to top button */}
             <button
               onClick={scrollToTop}
-              className="group p-2 glass-card rounded-lg border border-border/50 hover:border-primary/50 transition-all duration-300 hover:scale-110"
+              className="group p-2 glass-card rounded-lg border border-border/50 hover:border-primary/50 transition-all duration-200 hover:scale-110"
               aria-label="Scroll to top"
             >
-              <FaArrowUp className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors duration-300" />
+              <FaArrowUp className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors duration-200" />
             </button>
           </div>
         </div>

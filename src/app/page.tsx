@@ -18,12 +18,12 @@ export default function Home() {
       {/* Animated Background Gradients with Parallax */}
       <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
         {/* Light theme gradients */}
-        <div className="parallax-slow absolute top-0 right-0 w-[500px] h-[500px] bg-primary/20 rounded-full blur-3xl dark:opacity-0 transition-opacity duration-500 animate-pulse-slow" />
-        <div className="parallax-medium absolute bottom-0 left-0 w-[600px] h-[600px] bg-secondary/15 rounded-full blur-3xl dark:opacity-0 transition-opacity duration-500 animate-pulse-slow" />
+        <div className="parallax-slow absolute top-0 right-0 w-[500px] h-[500px] bg-primary/20 rounded-full blur-3xl dark:opacity-0 transition-opacity duration-300 animate-pulse-slow" />
+        <div className="parallax-medium absolute bottom-0 left-0 w-[600px] h-[600px] bg-secondary/15 rounded-full blur-3xl dark:opacity-0 transition-opacity duration-300 animate-pulse-slow" />
         
         {/* Dark theme gradients */}
-        <div className="parallax-slow absolute top-0 left-0 w-[500px] h-[500px] bg-primary/10 rounded-full blur-3xl opacity-0 dark:opacity-100 transition-opacity duration-500 animate-float" />
-        <div className="parallax-medium absolute bottom-0 right-0 w-[600px] h-[600px] bg-accent/10 rounded-full blur-3xl opacity-0 dark:opacity-100 transition-opacity duration-500 animate-float" />
+        <div className="parallax-slow absolute top-0 left-0 w-[500px] h-[500px] bg-primary/10 rounded-full blur-3xl opacity-0 dark:opacity-100 transition-opacity duration-300 animate-float" />
+        <div className="parallax-medium absolute bottom-0 right-0 w-[600px] h-[600px] bg-accent/10 rounded-full blur-3xl opacity-0 dark:opacity-100 transition-opacity duration-300 animate-float" />
         
         {/* Additional decorative elements */}
         <div className="parallax-fast absolute top-1/4 right-1/4 w-64 h-64 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-full blur-2xl animate-pulse-slow" />
@@ -47,7 +47,7 @@ export default function Home() {
   src="/Images/Profile/Ajay3.webp" // Use .webp if you converted it
   alt="Ajay Thorat - Full Stack Developer"
   fill
-  className="object-cover object-center transition-all duration-700 group-hover:scale-105"
+  className="object-cover object-center transition-all duration-300 group-hover:scale-105"
   priority
   quality={85}
   sizes="(max-width: 640px) 280px, (max-width: 768px) 320px, (max-width: 1024px) 380px, 420px"
@@ -93,7 +93,7 @@ export default function Home() {
           </div>
 
           {/* Info Section - Better width distribution */}
-          <div className="md:w-[58%] w-full animate-fadeIn order-2" style={{ animationDelay: '200ms' }}>
+          <div className="md:w-[58%] w-full animate-fadeIn order-2" style={{ animationDelay: '120ms' }}>
             <BasicInfo theme={theme} />
           </div>
         </div>

@@ -49,7 +49,7 @@ export default function Certifications() {
         </div>
 
         {/* Certifications Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-fadeIn" style={{ animationDelay: '100ms' }}>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-fadeIn" style={{ animationDelay: '60ms' }}>
           {certificationsData.map((cert, index) => {
             const colors = getGradientColors(index);
             
@@ -67,7 +67,7 @@ export default function Certifications() {
                 <div className="space-y-4">
                   {/* Header with Icon and Badge */}
                   <div className="flex items-start justify-between">
-                    <div className={`relative p-3 bg-gradient-to-br ${colors.from} ${colors.to} rounded-xl group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
+                    <div className={`relative p-3 bg-gradient-to-br ${colors.from} ${colors.to} rounded-xl group-hover:scale-110 transition-transform duration-200 shadow-lg`}>
                       <HiOutlineAcademicCap className="w-7 h-7 text-white" />
                     </div>
                     <div className="flex items-center gap-2">
@@ -83,7 +83,7 @@ export default function Certifications() {
                     <h3 className="text-lg font-bold text-foreground leading-tight mb-3 min-h-[3rem] line-clamp-2">
                       {cert.title}
                     </h3>
-                    <div className={`h-1 w-16 bg-gradient-to-r ${colors.from} ${colors.to} rounded-full group-hover:w-24 transition-all duration-500`}></div>
+                    <div className={`h-1 w-16 bg-gradient-to-r ${colors.from} ${colors.to} rounded-full group-hover:w-24 transition-all duration-300`}></div>
                   </div>
 
                   {/* Organization & Year */}
@@ -107,14 +107,14 @@ export default function Certifications() {
                   {/* View Button */}
                   <button
                     onClick={() => setSelectedImage({ image: cert.image, title: cert.title })}
-                    className={`w-full group/btn relative overflow-hidden px-5 py-3 bg-gradient-to-r ${colors.from} ${colors.to} hover:shadow-lg text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98]`}
+                    className={`w-full group/btn relative overflow-hidden px-5 py-3 bg-gradient-to-r ${colors.from} ${colors.to} hover:shadow-lg text-white font-semibold rounded-xl transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98]`}
                   >
-                    <div className="absolute inset-0 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+                    <div className="absolute inset-0 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-300 bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
                     
                     <span className="relative flex items-center justify-center gap-2">
                       <FaCertificate className="w-4 h-4" />
                       <span>View Certificate</span>
-                      <FaExternalLinkAlt className="w-3.5 h-3.5 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform duration-300" />
+                      <FaExternalLinkAlt className="w-3.5 h-3.5 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform duration-200" />
                     </span>
                   </button>
                 </div>
@@ -142,10 +142,10 @@ export default function Certifications() {
             >
               <button
                 onClick={() => setSelectedImage(null)}
-                className="absolute top-6 right-6 z-10 p-3 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white rounded-full shadow-xl transition-all duration-300 hover:scale-110 active:scale-95 group"
+                className="absolute top-6 right-6 z-10 p-3 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white rounded-full shadow-xl transition-all duration-200 hover:scale-110 active:scale-95 group"
                 aria-label="Close"
               >
-                <IoClose className="w-6 h-6 group-hover:rotate-90 transition-transform duration-300" />
+                <IoClose className="w-6 h-6 group-hover:rotate-90 transition-transform duration-200" />
               </button>
 
               <div className="relative w-full p-8" style={{ maxHeight: "85vh" }}>
