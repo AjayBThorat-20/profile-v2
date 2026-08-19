@@ -11,7 +11,24 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Contact Me | Ajay Thorat",
     description: "Get in touch with Ajay Thorat for web development projects, collaborations, or job opportunities.",
+    type: "website",
+    locale: "en_US",
     url: "https://portfolio.ajaythorat.com/contact",
+    siteName: "Ajay Thorat Portfolio",
+    images: [
+      {
+        url: "/Images/Profile/Ajay3.png",
+        width: 1200,
+        height: 630,
+        alt: "Ajay Thorat - Full Stack Developer",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Contact Me | Ajay Thorat",
+    description: "Get in touch with Ajay Thorat for web development projects, collaborations, or job opportunities.",
+    images: ["/Images/Profile/Ajay3.png"],
   },
 };
 

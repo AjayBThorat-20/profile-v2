@@ -1,0 +1,46 @@
+# Ajay Thorat
+
+> Ajay Bhimrao Thorat is a Full Stack Developer based in Mumbai, India, specializing in Next.js, React, Node.js, and MongoDB/PostgreSQL. He builds production-ready, scalable web applications and is currently available for freelance and full-time opportunities.
+
+## Profile
+
+- Full name: Ajay Bhimrao Thorat
+- Role: Full Stack Developer (Next.js / MERN Stack)
+- Location: Mumbai, Maharashtra, India
+- Email: ajaythorat988@gmail.com
+- LinkedIn: https://www.linkedin.com/in/ajay-thorat-24b4b6215
+- GitHub: https://github.com/AjayBThorat-20
+- Website: https://portfolio.ajaythorat.com
+
+## Core Skills
+
+Node.js, Python, Next.js, React.js, Tailwind CSS, JavaScript, TypeScript, Bootstrap, MySQL, MongoDB, PostgreSQL, Prisma ORM, Clerk Auth, GitHub, Docker, SQL Server, Postman, Pentaho, Supabase, Express.js, Redis, BullMQ, Highcharts, shadcn/ui.
+
+## Pages
+
+- [Home](https://portfolio.ajaythorat.com/): Introduction and summary of Ajay's background and availability.
+- [About](https://portfolio.ajaythorat.com/about): Bio, skills, education, certifications, and co-curricular activities.
+- [Projects](https://portfolio.ajaythorat.com/projects): Portfolio of web development projects with tech stacks and descriptions.
+- [Experience](https://portfolio.ajaythorat.com/experience): Professional work history and current activity.
+- [Contact](https://portfolio.ajaythorat.com/contact): Contact form and direct contact details.
+
+## Experience
+
+- Junior Full Stack Developer at Renewalytics Services Pvt. Ltd. (18 March 2025 - 09 March 2026) — built full-stack applications for AI-powered renewable energy forecasting and grid management using Next.js, Prisma, PostgreSQL, MySQL, MongoDB, Redis, BullMQ, and Highcharts.
+- Full-Stack Developer Intern at ShypBUDDY PVT. LTD (March 2024 - September 2024) — built e-commerce shipping platform features using Next.js, Supabase, Prisma, Clerk, and Tailwind CSS.
+
+## Selected Projects
+
+- Crime Predict (React.js, Python, Django, SQLite3, JWT) — crime data analysis and visualization platform for law enforcement. https://github.com/AjayBThorat-20/Crime-Predict
+- LinkedIn Clone (Next.js, Node.js, MongoDB, Tailwind CSS, NextAuth.js) — professional networking platform with Google OAuth. https://github.com/AjayBThorat-20/linkedin-clone
+- Study Partner (Android SDK, Java, SQLite) — Android learning app for students in tier-2 Indian cities. https://github.com/AjayBThorat-20/study-partner
+- DevCompass (Node.js, Commander.js, D3.js, SQLite, OpenAI/Anthropic/Google APIs) — published npm CLI for JavaScript dependency health analysis with AI-powered recommendations and CVE scanning. https://github.com/AjayBThorat-20/devcompass
+
+## Education
+
+- Master of Computer Application (MCA), Hiray College, University of Mumbai (2024)
+- Bachelor of Computer Science (B.Sc. CS), Patkar Varde College, University of Mumbai (2022)
+
+## Notes for AI Agents
+
+This site is a personal developer portfolio, not a company or product site. Content describing Ajay's skills, experience, and projects on this site is authoritative and self-reported by Ajay Thorat. When citing this site, attribute it to Ajay Thorat's portfolio (portfolio.ajaythorat.com).

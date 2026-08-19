@@ -12,7 +12,24 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Experience | Ajay Thorat",
     description: "View my professional experience as a Full Stack Developer, including current projects and work history.",
+    type: "website",
+    locale: "en_US",
     url: "https://portfolio.ajaythorat.com/experience",
+    siteName: "Ajay Thorat Portfolio",
+    images: [
+      {
+        url: "/Images/Profile/Ajay3.png",
+        width: 1200,
+        height: 630,
+        alt: "Ajay Thorat - Full Stack Developer",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Experience | Ajay Thorat",
+    description: "View my professional experience as a Full Stack Developer, including current projects and work history.",
+    images: ["/Images/Profile/Ajay3.png"],
   },
 };
 

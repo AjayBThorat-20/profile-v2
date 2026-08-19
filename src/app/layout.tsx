@@ -97,8 +97,25 @@ export default function RootLayout({
       "https://www.linkedin.com/in/ajay-thorat-24b4b6215",
       "https://github.com/AjayBThorat-20"
     ],
-    "knowsAbout": ["Next.js", "React", "MERN Stack", "Full Stack Development", "JavaScript", "TypeScript"],
-    "email": "ajaythorat988@gmail.com"
+    "knowsAbout": [
+      "Next.js", "React", "MERN Stack", "Full Stack Development", "JavaScript", "TypeScript",
+      "Node.js", "MongoDB", "PostgreSQL", "MySQL", "Prisma ORM", "Tailwind CSS", "Express.js",
+      "Docker", "Redis", "RESTful APIs"
+    ],
+    "alumniOf": [
+      {
+        "@type": "CollegeOrUniversity",
+        "name": "University of Mumbai",
+        "sameAs": "https://en.wikipedia.org/wiki/University_of_Mumbai"
+      }
+    ],
+    "email": "ajaythorat988@gmail.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Mumbai",
+      "addressRegion": "Maharashtra",
+      "addressCountry": "IN"
+    }
   };
 
   const websiteStructuredData = {

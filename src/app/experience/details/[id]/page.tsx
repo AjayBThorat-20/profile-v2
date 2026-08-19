@@ -27,6 +27,7 @@ export async function generateMetadata({
 
   const title = `${experience.title} at ${experience.name} | Ajay Thorat`;
   const description = `Ajay Thorat's role as ${experience.title} at ${experience.name} (${experience.duration}). Tech stack: ${experience.techStack}.`;
+  const image = experience.details[0]?.picture || "/Images/Profile/Ajay3.png";
 
   return {
     title,
@@ -37,7 +38,24 @@ export async function generateMetadata({
     openGraph: {
       title,
       description,
+      type: "website",
+      locale: "en_US",
       url: `https://portfolio.ajaythorat.com/experience/details/${experience.id}`,
+      siteName: "Ajay Thorat Portfolio",
+      images: [
+        {
+          url: image,
+          width: 1200,
+          height: 630,
+          alt: `${experience.name} - ${experience.title}`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [image],
     },
   };
 }
