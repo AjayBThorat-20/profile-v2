@@ -5,6 +5,9 @@ import { FaEnvelope, FaUser, FaPaperPlane, FaCheckCircle, FaExclamationCircle, F
 import { IoMdMail } from "react-icons/io";
 import { sendContactEmail } from "@/app/actions/contact.action";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { getAccent } from "@/Components/UI/accentColor";
+import IconTile from "@/Components/UI/IconTile";
+import SectionEyebrow from "@/Components/UI/SectionEyebrow";
 
 type FormStatus = "idle" | "loading" | "success" | "error";
 
@@ -84,71 +87,45 @@ export default function Contact() {
           <div className="space-y-8 animate-fadeIn">
             {/* Header */}
             <div className="space-y-4">
-              <div className="inline-flex items-center gap-2 px-4 py-2 glass-card rounded-full border border-primary/20">
-                <FaEnvelope className="w-4 h-4 text-primary" />
-                <span className="text-sm font-semibold text-primary">Get In Touch</span>
-              </div>
-              
-              <h2 className="text-3xl md:text-4xl font-black gradient-text-animated">
+              <SectionEyebrow icon={FaEnvelope} label="Get In Touch" />
+
+              <h2 className="text-3xl md:text-4xl font-black gradient-text">
                 Let's Work Together
               </h2>
-              
+
               <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
-                Have a project in mind or want to discuss opportunities? Feel free to reach out. 
+                Have a project in mind or want to discuss opportunities? Feel free to reach out.
                 I'm always open to new challenges and collaborations.
               </p>
             </div>
 
             {/* Contact Methods */}
             <div className="space-y-4">
-              {/* Email */}
-              <div className="group glass-card rounded-2xl border border-border/50 hover:border-primary/50 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg p-5">
-                <div className="flex items-center gap-4">
-                  <div className="p-3 bg-gradient-to-br from-red-600 to-red-500 rounded-xl group-hover:scale-110 transition-transform duration-200">
-                    <IoMdMail className="w-6 h-6 text-white" />
+              {[
+                { icon: IoMdMail, label: "Email", value: "ajaythorat988@gmail.com" },
+                { icon: FaLinkedin, label: "LinkedIn", value: "Connect on LinkedIn" },
+                { icon: FaGithub, label: "GitHub", value: "View My Repositories" },
+              ].map((method, index) => {
+                const accent = getAccent(index);
+                return (
+                  <div
+                    key={method.label}
+                    className={`rounded-2xl border ${accent.border} hover:-translate-y-0.5 transition-transform duration-200 p-5`}
+                  >
+                    <div className="flex items-center gap-4">
+                      <IconTile icon={method.icon} accent={accent} size="md" />
+                      <div>
+                        <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1">{method.label}</p>
+                        <p className="font-bold text-foreground">{method.value}</p>
+                      </div>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1">Email</p>
-                    <p className="font-bold text-foreground group-hover:text-primary transition-colors">
-                      ajaythorat988@gmail.com
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* LinkedIn */}
-              <div className="group glass-card rounded-2xl border border-border/50 hover:border-primary/50 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg p-5">
-                <div className="flex items-center gap-4">
-                  <div className="p-3 bg-gradient-to-br from-blue-600 to-blue-500 rounded-xl group-hover:scale-110 transition-transform duration-200">
-                    <FaLinkedin className="w-6 h-6 text-white" />
-                  </div>
-                  <div>
-                    <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1">LinkedIn</p>
-                    <p className="font-bold text-foreground group-hover:text-primary transition-colors">
-                      Connect on LinkedIn
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* GitHub */}
-              <div className="group glass-card rounded-2xl border border-border/50 hover:border-primary/50 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg p-5">
-                <div className="flex items-center gap-4">
-                  <div className="p-3 bg-gradient-to-br from-gray-800 to-gray-700 dark:from-white dark:to-gray-100 rounded-xl group-hover:scale-110 transition-transform duration-200">
-                    <FaGithub className="w-6 h-6 text-white dark:text-gray-900" />
-                  </div>
-                  <div>
-                    <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1">GitHub</p>
-                    <p className="font-bold text-foreground group-hover:text-primary transition-colors">
-                      View My Repositories
-                    </p>
-                  </div>
-                </div>
-              </div>
+                );
+              })}
             </div>
 
             {/* Quick Response Badge */}
-            <div className="glass-card p-6 rounded-2xl border border-border/50">
+            <div className="p-6 rounded-2xl border border-green-500/20 bg-green-500/5">
               <div className="flex items-center gap-3">
                 <div className="p-3 bg-green-500/10 rounded-full">
                   <FaCheckCircle className="w-6 h-6 text-green-600 dark:text-green-400" />
@@ -163,10 +140,9 @@ export default function Contact() {
             </div>
 
             {/* Decorative Quote */}
-            <div className="glass-card p-6 rounded-2xl border-2 border-primary/20 relative overflow-hidden group">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-secondary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <p className="relative text-base italic text-foreground/80 leading-relaxed">
-                "The best way to predict the future is to create it." 
+            <div className="panel p-6 rounded-2xl border-l-4 border-l-primary">
+              <p className="text-base italic text-foreground/80 leading-relaxed">
+                "The best way to predict the future is to create it."
                 <span className="block mt-2 text-sm font-semibold text-primary">
                   — Let's build something amazing together
                 </span>
@@ -176,10 +152,7 @@ export default function Contact() {
 
           {/* Right Side - Contact Form */}
           <div className="animate-fadeIn" style={{ animationDelay: '120ms' }}>
-            <div className="glass-card rounded-3xl p-8 md:p-10 border-2 border-border/50 relative overflow-hidden">
-              {/* Gradient Background */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-secondary/5 to-transparent opacity-50"></div>
-
+            <div className="panel rounded-3xl p-8 md:p-10">
               {status === "loading" ? (
                 <div className="relative flex flex-col items-center justify-center py-20">
                   <div className="w-16 h-16 border-4 border-primary/30 border-t-primary rounded-full animate-spin mb-4"></div>
@@ -222,7 +195,7 @@ export default function Contact() {
 
                   {/* Name Field */}
                   <div>
-                    <label htmlFor="name" className=" text-sm font-bold text-foreground mb-2 flex items-center gap-2">
+                    <label htmlFor="name" className="font-mono text-xs font-bold uppercase tracking-wide text-muted-foreground mb-2 flex items-center gap-2">
                       <FaUser className="w-4 h-4 text-primary" />
                       Your Name
                     </label>
@@ -240,7 +213,7 @@ export default function Contact() {
 
                   {/* Email Field */}
                   <div>
-                    <label htmlFor="email" className=" text-sm font-bold text-foreground mb-2 flex items-center gap-2">
+                    <label htmlFor="email" className="font-mono text-xs font-bold uppercase tracking-wide text-muted-foreground mb-2 flex items-center gap-2">
                       <FaEnvelope className="w-4 h-4 text-primary" />
                       Your Email
                     </label>
@@ -258,7 +231,7 @@ export default function Contact() {
 
                   {/* Subject Field */}
                   <div>
-                    <label htmlFor="subject" className=" text-sm font-bold text-foreground mb-2 flex items-center gap-2">
+                    <label htmlFor="subject" className="font-mono text-xs font-bold uppercase tracking-wide text-muted-foreground mb-2 flex items-center gap-2">
                       <FaTag className="w-4 h-4 text-primary" />
                       Subject
                     </label>
@@ -276,7 +249,7 @@ export default function Contact() {
 
                   {/* Message Field */}
                   <div>
-                    <label htmlFor="message" className=" text-sm font-bold text-foreground mb-2 flex items-center gap-2">
+                    <label htmlFor="message" className="font-mono text-xs font-bold uppercase tracking-wide text-muted-foreground mb-2 flex items-center gap-2">
                       <FaCommentDots className="w-4 h-4 text-primary" />
                       Your Message
                     </label>
@@ -296,15 +269,10 @@ export default function Contact() {
                   <button
                     type="submit"
                     disabled={isLoading}
-                    className="magnetic w-full group relative px-8 py-4 bg-gradient-to-r from-primary to-secondary text-primary-foreground font-bold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-[1.02] active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 overflow-hidden"
+                    className="magnetic w-full group flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-primary to-secondary text-primary-foreground font-bold rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    {/* Shimmer effect */}
-                    <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-300 bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
-                    
-                    <span className="relative flex items-center justify-center gap-2">
-                      <FaPaperPlane className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-200" />
-                      <span>Send Message</span>
-                    </span>
+                    <FaPaperPlane className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-200" />
+                    <span>Send Message</span>
                   </button>
                 </form>
               )}

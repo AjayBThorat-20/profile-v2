@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import { BasicInfo } from "@/Components/Home/page";
 import { useParallax, useMagneticCursor } from "@/hooks/useScrollReveal";
+import { getAccent } from "@/Components/UI/accentColor";
 import Image from "next/image";
 
 export default function Home() {
@@ -63,30 +64,31 @@ export default function Home() {
                 <div className="absolute -bottom-3 -left-3 w-20 h-20 md:w-24 md:h-24 border-3 border-secondary/30 rounded-2xl animate-float" style={{ animationDelay: '1s' }}></div>
               </div>
 
-              {/* Floating Stats Badges - Compact */}
+              {/* Floating Stats - bordered chips, mono numerals, one brand
+                  accent each instead of a saturated gradient pill fill */}
               <div className="absolute -left-3 md:-left-4 top-[20%] animate-float">
-                <div className="px-3 py-2 md:px-4 md:py-2.5 rounded-xl md:rounded-2xl bg-gradient-to-br from-primary to-secondary shadow-xl border-2 border-white/20">
+                <div className={`px-3 py-2 md:px-4 md:py-2.5 rounded-xl bg-card shadow-xl border-2 ${getAccent(0).border}`}>
                   <div className="text-center">
-                    <div className="text-lg md:text-xl font-black text-white">1.5+</div>
-                    <div className="text-[10px] md:text-xs text-white/90 font-semibold whitespace-nowrap">Years Exp</div>
+                    <div className={`font-mono text-lg md:text-xl font-bold ${getAccent(0).text}`}>1.5+</div>
+                    <div className="text-[10px] md:text-xs text-muted-foreground font-semibold whitespace-nowrap">Years Exp</div>
                   </div>
                 </div>
               </div>
 
               <div className="absolute -right-3 md:-right-4 bottom-[35%] animate-float" style={{ animationDelay: '0.5s' }}>
-                <div className="px-3 py-2 md:px-4 md:py-2.5 rounded-xl md:rounded-2xl bg-gradient-to-br from-secondary to-accent shadow-xl border-2 border-white/20">
+                <div className={`px-3 py-2 md:px-4 md:py-2.5 rounded-xl bg-card shadow-xl border-2 ${getAccent(1).border}`}>
                   <div className="text-center">
-                    <div className="text-lg md:text-xl font-black text-white">4+</div>
-                    <div className="text-[10px] md:text-xs text-white/90 font-semibold whitespace-nowrap">Live Projects</div>
+                    <div className={`font-mono text-lg md:text-xl font-bold ${getAccent(1).text}`}>4+</div>
+                    <div className="text-[10px] md:text-xs text-muted-foreground font-semibold whitespace-nowrap">Live Projects</div>
                   </div>
                 </div>
               </div>
 
               {/* Available Badge - Top right */}
               <div className="absolute top-4 md:top-6 right-4 md:right-6 animate-float" style={{ animationDelay: '0.3s' }}>
-                <div className="flex items-center gap-1.5 md:gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-gradient-to-r from-green-500 to-emerald-500 shadow-lg border-2 border-white/20">
-                  <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
-                  <span className="text-xs md:text-sm font-bold text-white">Available</span>
+                <div className="flex items-center gap-1.5 md:gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-lg bg-card shadow-lg border-2 border-green-500/30">
+                  <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                  <span className="text-xs md:text-sm font-bold text-foreground">Available</span>
                 </div>
               </div>
             </div>

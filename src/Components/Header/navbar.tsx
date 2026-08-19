@@ -102,8 +102,8 @@ export default function Navbar() {
         }`}
       >
         {label}
-        <span 
-          className={`absolute bottom-1 left-1/2 -translate-x-1/2 h-0.5 bg-gradient-to-r from-primary to-secondary rounded-full transition-all duration-200 ${
+        <span
+          className={`absolute bottom-1 left-1/2 -translate-x-1/2 h-0.5 bg-primary rounded-full transition-all duration-200 ${
             isActive ? "w-1/2" : "w-0 group-hover:w-1/2"
           }`}
         />
@@ -161,9 +161,9 @@ const FlagIcon = ({ size = 28 }: { size?: number }) => {
           <div className="flex items-center gap-3 magnetic">
             <Link
               href="/"
-              className="text-3xl font-black tracking-tight gradient-text-animated hover:scale-105 transition-transform duration-200"
+              className="font-mono text-xl font-bold tracking-tight border-2 border-primary/30 hover:border-primary rounded-lg px-2.5 py-1 text-foreground transition-colors duration-200"
             >
-              AT
+              <span className="text-primary">&lt;</span>AT<span className="text-primary">/&gt;</span>
             </Link>
             <FlagIcon size={28} />
           </div>
@@ -226,9 +226,9 @@ const FlagIcon = ({ size = 28 }: { size?: number }) => {
           <div className="flex items-center gap-2">
             <Link
               href="/"
-              className="text-2xl font-black gradient-text-animated"
+              className="font-mono text-lg font-bold border-2 border-primary/30 rounded-lg px-2 py-0.5 text-foreground"
             >
-              AT
+              <span className="text-primary">&lt;</span>AT<span className="text-primary">/&gt;</span>
             </Link>
             <FlagIcon size={24} />
           </div>
@@ -311,10 +311,10 @@ const FlagIcon = ({ size = 28 }: { size?: number }) => {
               <button
                 key={link.href}
                 onClick={() => handleLinkClick(link.href)}
-                className={`text-left px-4 py-3 rounded-xl font-medium transition-all duration-200 ${
+                className={`text-left px-4 py-3 rounded-xl font-medium border transition-all duration-200 ${
                   isActive
-                    ? "bg-gradient-to-r from-primary to-secondary text-primary-foreground shadow-lg"
-                    : "hover:bg-muted"
+                    ? "bg-primary/10 border-primary/40 text-primary"
+                    : "border-transparent hover:bg-muted"
                 }`}
                 style={{
                   animation: `slideInRight 0.3s ease-out ${index * 0.05}s both`,

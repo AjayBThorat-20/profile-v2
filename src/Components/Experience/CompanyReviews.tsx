@@ -3,7 +3,8 @@
 import React, { useState, useEffect } from "react";
 import { FaStar, FaQuoteLeft, FaUserCircle, FaBriefcase, FaCalendar, FaChartLine, FaClock, FaThumbsUp } from "react-icons/fa";
 import { HiSparkles } from "react-icons/hi2";
-import { REVIEW_FORM_URL } from "@/constants/experience";
+import { getAccent } from "@/Components/UI/accentColor";
+import SectionEyebrow from "@/Components/UI/SectionEyebrow";
 
 interface Review {
   timestamp: string;
@@ -173,16 +174,6 @@ export default function CompanyReviews() {
     return (sum / reviews.length).toFixed(1);
   };
 
-  const getGradientColors = (index: number) => {
-    const gradients = [
-      { from: "from-blue-600", to: "to-cyan-600", badge: "bg-blue-500/10 border-blue-500/20" },
-      { from: "from-purple-600", to: "to-pink-600", badge: "bg-purple-500/10 border-purple-500/20" },
-      { from: "from-green-600", to: "to-emerald-600", badge: "bg-green-500/10 border-green-500/20" },
-      { from: "from-orange-600", to: "to-red-600", badge: "bg-orange-500/10 border-orange-500/20" },
-    ];
-    return gradients[index % gradients.length];
-  };
-
   const renderStars = (rating: number, size: "sm" | "lg" = "sm") => {
     const sizeClass = size === "sm" ? "w-4 h-4" : "w-5 h-5";
     return (
@@ -225,8 +216,8 @@ export default function CompanyReviews() {
     return (
       <div className="container-custom section">
         <div className="flex items-center justify-center min-h-[400px]">
-          <div className="text-center space-y-4 glass-card p-8 rounded-3xl border-2 border-red-500/20">
-            <p className="text-xl font-bold text-red-600">{error}</p>
+          <div className="text-center space-y-4 panel p-8 rounded-3xl border-l-4 border-l-destructive">
+            <p className="text-xl font-bold text-destructive">{error}</p>
             <button
               onClick={fetchReviews}
               className="btn-primary px-6 py-3"
@@ -243,11 +234,10 @@ export default function CompanyReviews() {
     return (
       <div className="container-custom section">
         <div className="text-center space-y-4 animate-fadeIn">
-          <div className="inline-flex items-center gap-2 px-4 py-2 glass-card rounded-full border border-primary/20">
-            <HiSparkles className="w-4 h-4 text-primary" />
-            <span className="text-sm font-semibold text-primary">Team Reviews</span>
+          <div className="flex justify-center">
+            <SectionEyebrow icon={HiSparkles} label="Team Reviews" />
           </div>
-          <div className="glass-card p-8 rounded-3xl border-2 border-dashed border-border max-w-md mx-auto">
+          <div className="panel p-8 rounded-3xl border-dashed max-w-md mx-auto">
             <p className="text-xl font-bold text-foreground mb-2">No Reviews Yet</p>
             <p className="text-muted-foreground">Reviews will appear here once submitted.</p>
           </div>
@@ -262,11 +252,10 @@ export default function CompanyReviews() {
         
         {/* Header */}
         <div className="text-center space-y-4 animate-fadeIn">
-          <div className="inline-flex items-center gap-2 px-4 py-2 glass-card rounded-full border border-primary/20">
-            <HiSparkles className="w-4 h-4 text-primary" />
-            <span className="text-sm font-semibold text-primary">Team Reviews</span>
+          <div className="flex justify-center">
+            <SectionEyebrow icon={HiSparkles} label="Team Reviews" />
           </div>
-          <h2 className="text-3xl md:text-4xl font-black gradient-text-animated">
+          <h2 className="text-3xl md:text-4xl font-black gradient-text">
             What My Colleagues Say
           </h2>
           <p className="text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
@@ -277,7 +266,7 @@ export default function CompanyReviews() {
         {/* Stats Overview */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 animate-fadeIn" style={{ animationDelay: '60ms' }}>
           {/* Average Rating */}
-          <div className="glass-card rounded-2xl p-6 border-2 border-primary/20 hover:border-primary/40 transition-all duration-200">
+          <div className="panel rounded-2xl p-6 border-l-4 border-l-primary">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-sm font-bold text-muted-foreground uppercase">Average Rating</h3>
               <FaStar className="w-6 h-6 text-yellow-500" />
@@ -292,10 +281,10 @@ export default function CompanyReviews() {
           </div>
 
           {/* Total Reviews */}
-          <div className="glass-card rounded-2xl p-6 border-2 border-purple-500/20 hover:border-purple-500/40 transition-all duration-200">
+          <div className="panel rounded-2xl p-6 border-l-4 border-l-secondary">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-sm font-bold text-muted-foreground uppercase">Total Reviews</h3>
-              <FaThumbsUp className="w-6 h-6 text-purple-500" />
+              <FaThumbsUp className="w-6 h-6 text-secondary" />
             </div>
             <div className="flex items-baseline gap-2">
               <span className="text-4xl font-black text-foreground">{reviews.length}</span>
@@ -304,10 +293,10 @@ export default function CompanyReviews() {
           </div>
 
           {/* Recommendation Rate */}
-          <div className="glass-card rounded-2xl p-6 border-2 border-green-500/20 hover:border-green-500/40 transition-all duration-200">
+          <div className="panel rounded-2xl p-6 border-l-4 border-l-accent">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-sm font-bold text-muted-foreground uppercase">Would Work Again</h3>
-              <FaChartLine className="w-6 h-6 text-green-500" />
+              <FaChartLine className="w-6 h-6 text-accent" />
             </div>
             <div className="flex items-baseline gap-2">
               <span className="text-4xl font-black text-foreground">
@@ -321,28 +310,25 @@ export default function CompanyReviews() {
         {/* Reviews Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {reviews.map((review, index) => {
-            const colors = getGradientColors(index);
-            
+            const accent = getAccent(index);
+
             return (
               <div
                 key={index}
                 className="group relative animate-fadeIn"
                 style={{ animationDelay: `${(index + 2) * 60}ms` }}
               >
-                <div className="relative bg-card border-2 border-border/50 hover:border-primary/50 rounded-3xl overflow-hidden transition-all duration-300 hover:shadow-2xl">
-                  {/* Top Gradient Bar */}
-                  <div className={`h-2 bg-gradient-to-r ${colors.from} ${colors.to}`}></div>
-
-                  {/* Gradient Background on Hover */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${colors.from}/5 ${colors.to}/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
+                <div className={`relative border ${accent.border} rounded-3xl overflow-hidden`}>
+                  {/* Top Accent Bar */}
+                  <div className={`h-1.5 ${accent.bg}`}></div>
 
                   {/* Content */}
                   <div className="relative p-6 md:p-8 space-y-6">
-                    
+
                     {/* Header with Avatar and Name */}
                     <div className="flex items-start gap-4">
                       {/* Avatar */}
-                      <div className={`flex-shrink-0 w-20 h-20 bg-gradient-to-br ${colors.from} ${colors.to} rounded-full flex items-center justify-center shadow-xl ring-4 ring-background group-hover:scale-110 transition-transform duration-200`}>
+                      <div className={`flex-shrink-0 w-20 h-20 ${accent.bg} rounded-full flex items-center justify-center shadow-xl ring-4 ring-background`}>
                         <span className="text-2xl font-black text-white">
                           {review.fullName.split(' ').map(n => n[0]).join('').slice(0, 2)}
                         </span>
@@ -501,13 +487,10 @@ export default function CompanyReviews() {
 
                   {/* Decorative Quote Icon */}
                   <div className="absolute top-6 right-6 pointer-events-none">
-                    <div className={`p-3 bg-gradient-to-br ${colors.from}/10 ${colors.to}/10 rounded-xl opacity-30 group-hover:opacity-50 transition-opacity duration-200`}>
-                      <FaQuoteLeft className="w-5 h-5 text-primary" />
+                    <div className={`p-3 ${accent.bgSoft} rounded-xl`}>
+                      <FaQuoteLeft className={`w-5 h-5 ${accent.text}`} />
                     </div>
                   </div>
-
-                  {/* Bottom Gradient Decoration */}
-                  <div className={`h-1 bg-gradient-to-r ${colors.from} ${colors.to} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
                 </div>
               </div>
             );

@@ -33,6 +33,15 @@
   --color-input: hsl(var(--input));
   --color-ring: hsl(var(--ring));
 
+  /* Wires the Geist font files (already loaded in layout.tsx via
+     localFont, but previously never consumed anywhere - body had a
+     hardcoded system font-family and `font-mono` fell back to
+     Tailwind's default stack) into real font-sans/font-mono utilities,
+     so the mono face can be used deliberately for eyebrows, dates,
+     and tech-stack labels instead of sitting on disk unused. */
+  --font-sans: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
@@ -183,8 +192,7 @@ body {
   background-color: hsl(var(--background));
   color: hsl(var(--foreground));
   font-feature-settings: "rlig" 1, "calt" 1;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, 
-               "Helvetica Neue", Arial, sans-serif;
+  font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -266,13 +274,17 @@ html {
   background-image: linear-gradient(to right, hsl(var(--primary)), hsl(var(--secondary)), hsl(var(--accent)));
 }
 
+/* Runs the gradient sweep once on mount instead of looping forever -
+   a perpetually shifting rainbow headline is one of the most obvious
+   "AI-generated template" tells, so this is reserved for a single
+   deliberate flourish rather than the default heading treatment. */
 .gradient-text-animated {
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-image: linear-gradient(to right, hsl(var(--primary)), hsl(var(--secondary)), hsl(var(--accent)));
   background-size: 200% auto;
-  animation: gradient 3s ease-in-out infinite;
+  animation: gradient 2.2s ease-in-out 1;
 }
 
 /* Buttons */
@@ -445,6 +457,57 @@ html {
   border-radius: 9999px;
   border: 1px solid hsl(var(--primary) / 0.2);
 }
+
+/* Eyebrow: the monospace "// 03 · SECTION" label used to head every
+   section instead of the old glass-pill badge, so section metadata
+   reads as deliberately technical rather than another rounded chip. */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: hsl(var(--primary));
+}
+
+/* Bordered statement panel: replaces the full-bleed rainbow CTA
+   banners (from-primary via-secondary to-accent) and the glass-blur
+   intro/CTA shells copy-pasted across welcome/about/contact panels. */
+.panel {
+  background-color: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  border-radius: 1rem;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.08);
+}
+
+/* Left-rail timeline scaffolding shared by Education and Experience. */
+.timeline-rail {
+  position: relative;
+}
+.timeline-rail::before {
+  content: "";
+  position: absolute;
+  left: 0.5625rem;
+  top: 0.5rem;
+  bottom: 0.5rem;
+  width: 2px;
+  background-color: hsl(var(--border));
+}
+.timeline-node {
+  position: relative;
+  z-index: 1;
+  width: 1.25rem;
+  height: 1.25rem;
+  flex-shrink: 0;
+  border-radius: 0.25rem;
+  border: 2px solid hsl(var(--card));
+}
+.timeline-node-primary { box-shadow: 0 0 0 2px hsl(var(--primary)); background-color: hsl(var(--primary)); }
+.timeline-node-secondary { box-shadow: 0 0 0 2px hsl(var(--secondary)); background-color: hsl(var(--secondary)); }
+.timeline-node-accent { box-shadow: 0 0 0 2px hsl(var(--accent)); background-color: hsl(var(--accent)); }
 
 /* Hide Scrollbar */
 .hide-scrollbar {

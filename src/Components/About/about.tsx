@@ -77,13 +77,10 @@ export default function About() {
             {/* Text Section */}
             <div className="w-full lg:w-[55%] space-y-8 animate-fadeIn">
               {/* Name & Title Card */}
-              <div className="glass-card p-8 rounded-2xl border-2 border-primary/20 relative overflow-hidden group hover:border-primary/40 transition-all duration-300">
-                {/* Background gradient */}
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-secondary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                
+              <div className="panel p-8 rounded-2xl border-l-4 border-l-primary">
                 <div className="relative z-10 space-y-4">
                   <h2 className="text-3xl md:text-4xl font-black">
-                    <span className="gradient-text-animated">AJAY BHIMRAO THORAT</span>
+                    <span className="gradient-text">AJAY BHIMRAO THORAT</span>
                   </h2>
 
                   <div className="space-y-4 text-base md:text-lg leading-relaxed">
@@ -114,14 +111,12 @@ export default function About() {
                 {achievements.map((achievement, index) => (
                   <div
                     key={index}
-                    className="flex items-start gap-3 p-4 glass-card rounded-xl hover:scale-105 transition-transform duration-200 border border-border/50 hover:border-primary/50 group"
+                    className="flex items-start gap-3 p-4 rounded-xl border border-border hover:border-primary/50 transition-colors duration-150 group"
                   >
-                    <div className="mt-0.5 flex-shrink-0">
-                      <div className="w-5 h-5 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
-                        <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                        </svg>
-                      </div>
+                    <div className="mt-0.5 flex-shrink-0 w-5 h-5 rounded-md border border-primary/30 bg-primary/10 flex items-center justify-center">
+                      <svg className="w-3 h-3 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
                     </div>
                     <p className="text-sm font-medium text-foreground/80 group-hover:text-foreground transition-colors">
                       {achievement}
@@ -133,13 +128,10 @@ export default function About() {
           </div>
 
           {/* Call to Action Section */}
-          <div className="glass-card p-8 md:p-12 rounded-3xl border-2 border-primary/20 text-center space-y-6 relative overflow-hidden group animate-fadeIn" style={{ animationDelay: '320ms' }}>
-            {/* Animated background */}
-            <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-secondary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            
+          <div className="panel p-8 md:p-12 rounded-3xl border-l-4 border-l-primary text-center space-y-6 animate-fadeIn" style={{ animationDelay: '320ms' }}>
             <div className="relative z-10">
               <h3 className="text-2xl md:text-3xl font-bold mb-4">
-                <span className="gradient-text-animated">Let's Build Something Amazing Together</span>
+                <span className="gradient-text">Let's Build Something Amazing Together</span>
               </h3>
               <p className="text-muted-foreground text-lg mb-6 max-w-2xl mx-auto">
                 Ready to bring your ideas to life with cutting-edge technology and innovative solutions.

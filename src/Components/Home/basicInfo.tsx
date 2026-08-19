@@ -3,6 +3,7 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { FaArrowRight, FaDownload, FaCode, FaRocket, FaCog } from "react-icons/fa";
+import { getAccent } from "@/Components/UI/accentColor";
 
 interface BasicInfoProps {
   theme: "light" | "dark";
@@ -20,38 +21,36 @@ export default function BasicInfo({ theme }: BasicInfoProps) {
   }, []);
 
   const metrics = [
-    { 
-      icon: FaCode, 
-      value: "1.5+", 
+    {
+      icon: FaCode,
+      value: "1.5+",
       label: "Years Experience",
-      color: "from-primary to-secondary",
       description: "Building production-ready solutions"
     },
-    { 
-      icon: FaRocket, 
-      value: "4+", 
+    {
+      icon: FaRocket,
+      value: "4+",
       label: "Real-Time Projects",
-      color: "from-secondary to-accent",
       description: "Live systems serving users"
     },
-    { 
-      icon: FaCog, 
-      value: "100%", 
+    {
+      icon: FaCog,
+      value: "100%",
       label: "Build & Scale",
-      color: "from-primary to-accent",
       description: "From scratch to optimization"
     },
   ];
+  const activeAccent = getAccent(activeMetric);
 
   return (
     <div className="w-full space-y-8 md:space-y-10">
-      {/* Animated Badge */}
-      <div className="inline-flex items-center gap-2 px-4 py-2 glass-card rounded-full animate-fadeIn">
-        <div className="relative flex h-3 w-3">
+      {/* Availability status */}
+      <div className="eyebrow animate-fadeIn">
+        <div className="relative flex h-2.5 w-2.5">
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-          <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+          <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
         </div>
-        <span className="text-sm font-semibold gradient-text">Available for opportunities</span>
+        <span>Available for opportunities</span>
       </div>
 
       {/* Main Heading - Staggered reveal */}
@@ -79,35 +78,35 @@ export default function BasicInfo({ theme }: BasicInfoProps) {
 
       {/* Role Tags */}
       <div className="flex flex-wrap gap-2 md:gap-3 animate-fadeIn" style={{ animationDelay: '180ms' }}>
-        {["Full-Stack Developer", "MERN Stack", "System Architect"].map((role, index) => (
-          <div 
-            key={index}
-            className="px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-gradient-to-r from-primary/10 to-secondary/10 border border-primary/20 hover:border-primary/50 transition-all duration-200 hover:scale-105 cursor-default"
-          >
-            <span className="text-xs md:text-sm font-medium text-foreground">{role}</span>
-          </div>
-        ))}
+        {["Full-Stack Developer", "MERN Stack", "System Architect"].map((role, index) => {
+          const accent = getAccent(index);
+          return (
+            <div
+              key={role}
+              className={`px-3 py-1.5 md:px-4 md:py-2 rounded-lg font-mono text-xs md:text-sm font-medium border ${accent.border} ${accent.bgSoft} ${accent.text} hover:scale-105 transition-transform duration-150 cursor-default`}
+            >
+              {role}
+            </div>
+          );
+        })}
       </div>
 
       {/* Interactive Metrics Carousel */}
       <div className="relative animate-fadeIn" style={{ animationDelay: '220ms' }}>
         {/* Active Metric Display */}
-        <div className="glass-card p-6 md:p-8 rounded-2xl border-2 border-primary/20 relative overflow-hidden">
-          {/* Background gradient animation */}
-          <div className={`absolute inset-0 bg-gradient-to-r ${metrics[activeMetric].color} opacity-5 transition-opacity duration-300`}></div>
-          
+        <div className={`panel p-6 md:p-8 rounded-2xl border-l-4 ${activeAccent.borderStrong} relative overflow-hidden`}>
           <div className="relative z-10">
             <div className="flex items-start gap-4 md:gap-6">
               {/* Icon */}
-              <div className={`p-3 md:p-4 rounded-xl bg-gradient-to-br ${metrics[activeMetric].color} shadow-lg flex-shrink-0`}>
-                {React.createElement(metrics[activeMetric].icon, { 
-                  className: "w-6 h-6 md:w-8 md:h-8 text-white" 
+              <div className={`p-3 md:p-4 rounded-xl border ${activeAccent.border} ${activeAccent.bgSoft} flex-shrink-0`}>
+                {React.createElement(metrics[activeMetric].icon, {
+                  className: `w-6 h-6 md:w-8 md:h-8 ${activeAccent.text}`
                 })}
               </div>
-              
+
               {/* Content */}
               <div className="flex-1 min-w-0">
-                <div className={`text-4xl md:text-5xl font-black bg-gradient-to-r ${metrics[activeMetric].color} bg-clip-text text-transparent mb-1 md:mb-2`}>
+                <div className={`font-mono text-4xl md:text-5xl font-bold ${activeAccent.text} mb-1 md:mb-2`}>
                   {metrics[activeMetric].value}
                 </div>
                 <div className="text-lg md:text-xl font-bold text-foreground mb-1">
@@ -121,18 +120,21 @@ export default function BasicInfo({ theme }: BasicInfoProps) {
 
             {/* Indicator Dots */}
             <div className="flex gap-2 mt-4 md:mt-6">
-              {metrics.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setActiveMetric(index)}
-                  aria-label={`View metric ${index + 1}`}
-                  className={`h-1.5 rounded-full transition-all duration-200 ${
-                    index === activeMetric 
-                      ? "w-12 bg-gradient-to-r " + metrics[index].color
-                      : "w-1.5 bg-muted-foreground/30 hover:bg-muted-foreground/50"
-                  }`}
-                />
-              ))}
+              {metrics.map((_, index) => {
+                const dotAccent = getAccent(index);
+                return (
+                  <button
+                    key={index}
+                    onClick={() => setActiveMetric(index)}
+                    aria-label={`View metric ${index + 1}`}
+                    className={`h-1.5 rounded-full transition-all duration-200 ${
+                      index === activeMetric
+                        ? `w-12 ${dotAccent.bg}`
+                        : "w-1.5 bg-muted-foreground/30 hover:bg-muted-foreground/50"
+                    }`}
+                  />
+                );
+              })}
             </div>
           </div>
         </div>
@@ -141,23 +143,21 @@ export default function BasicInfo({ theme }: BasicInfoProps) {
         <div className="grid grid-cols-3 gap-2 md:gap-3 mt-3 md:mt-4">
           {metrics.map((metric, index) => {
             const Icon = metric.icon;
+            const accent = getAccent(index);
+            const isActive = index === activeMetric;
             return (
               <button
                 key={index}
                 onClick={() => setActiveMetric(index)}
                 aria-label={`Select ${metric.label}`}
-                className={`p-2 md:p-3 rounded-xl transition-all duration-200 ${
-                  index === activeMetric
-                    ? "glass-card border-2 border-primary/30 scale-105"
-                    : "bg-muted/50 hover:bg-muted border-2 border-transparent hover:border-border"
+                className={`p-2 md:p-3 rounded-xl border transition-colors duration-150 ${
+                  isActive
+                    ? `${accent.border} ${accent.bgSoft}`
+                    : "border-border bg-muted/30 hover:bg-muted"
                 }`}
               >
-                <Icon className={`w-4 h-4 md:w-5 md:h-5 mx-auto mb-1 ${
-                  index === activeMetric ? "text-primary" : "text-muted-foreground"
-                }`} />
-                <div className={`text-xs font-semibold ${
-                  index === activeMetric ? "text-foreground" : "text-muted-foreground"
-                }`}>
+                <Icon className={`w-4 h-4 md:w-5 md:h-5 mx-auto mb-1 ${isActive ? accent.text : "text-muted-foreground"}`} />
+                <div className={`font-mono text-xs font-semibold ${isActive ? "text-foreground" : "text-muted-foreground"}`}>
                   {metric.value}
                 </div>
               </button>
@@ -188,7 +188,6 @@ export default function BasicInfo({ theme }: BasicInfoProps) {
           <FaDownload className="w-4 h-4 md:w-5 md:h-5 group-hover:animate-bounce" />
           <span>Download Resume</span>
           <FaArrowRight className="w-3 h-3 md:w-4 md:h-4 group-hover:translate-x-1 transition-transform" />
-          <div className="shimmer absolute inset-0" />
         </a>
 
         <Link

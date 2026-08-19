@@ -5,12 +5,13 @@ import React, { useEffect, useRef, useState } from "react";
 import { projectsData } from "@/constants/project";
 import { FaGithub, FaExternalLinkAlt, FaCode, FaRocket } from "react-icons/fa";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { getAccent } from "@/Components/UI/accentColor";
+import SectionEyebrow from "@/Components/UI/SectionEyebrow";
 
 export default function Projects() {
   const [currentImageIndexes, setCurrentImageIndexes] = useState<number[]>(
     Array(projectsData.length).fill(0)
   );
-  const [hoveredProject, setHoveredProject] = useState<number | null>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
   const isRevealed = useScrollReveal(sectionRef);
 
@@ -28,24 +29,13 @@ export default function Projects() {
     return () => clearInterval(interval);
   }, []);
 
-  const getGradientColors = (index: number) => {
-    const gradients = [
-      { from: "from-blue-600", to: "to-cyan-600", badge: "bg-blue-500/10 text-blue-600 border-blue-500/20" },
-      { from: "from-purple-600", to: "to-pink-600", badge: "bg-purple-500/10 text-purple-600 border-purple-500/20" },
-      { from: "from-green-600", to: "to-emerald-600", badge: "bg-green-500/10 text-green-600 border-green-500/20" },
-      { from: "from-orange-600", to: "to-red-600", badge: "bg-orange-500/10 text-orange-600 border-orange-500/20" },
-    ];
-    return gradients[index % gradients.length];
-  };
-
   return (
     <div ref={sectionRef} className={`container-custom section scroll-reveal ${isRevealed ? "is-visible" : ""}`}>
       <div className="max-w-7xl mx-auto space-y-12">
         {/* Header */}
         <div className="text-center space-y-4 animate-fadeIn">
-          <div className="inline-flex items-center gap-2 px-4 py-2 glass-card rounded-full border border-primary/20">
-            <FaCode className="w-4 h-4 text-primary" />
-            <span className="text-sm font-semibold text-primary">Featured Work</span>
+          <div className="flex justify-center">
+            <SectionEyebrow icon={FaCode} label="Featured Work" />
           </div>
           <p className="text-base text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             Showcase of technical skills, creativity, and problem-solving abilities across various technologies.
@@ -55,33 +45,26 @@ export default function Projects() {
         {/* Projects Grid */}
         <div className="space-y-8">
           {projectsData.map((project, activityIdx) => {
-            const colors = getGradientColors(activityIdx);
+            const accent = getAccent(activityIdx);
             const isEven = activityIdx % 2 === 0;
-            
+
             return (
               <div
                 key={project.id}
                 className="group relative animate-fadeIn"
                 style={{ animationDelay: `${activityIdx * 60}ms` }}
-                onMouseEnter={() => setHoveredProject(project.id)}
-                onMouseLeave={() => setHoveredProject(null)}
               >
-                <div className={`bg-card border-2 border-border/50 hover:border-primary/50 rounded-3xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl ${
-                  hoveredProject === project.id ? "shadow-2xl border-primary/50" : ""
-                }`}>
-                  
-                  {/* Top Gradient Bar */}
-                  <div className={`h-1.5 bg-gradient-to-r ${colors.from} ${colors.to}`}></div>
+                <div className={`border ${accent.border} rounded-3xl overflow-hidden hover:-translate-y-1 transition-transform duration-200`}>
+
+                  {/* Top Accent Bar */}
+                  <div className={`h-1.5 ${accent.bg}`}></div>
 
                   <div className={`flex flex-col ${isEven ? "lg:flex-row" : "lg:flex-row-reverse"} gap-8 p-6 md:p-8`}>
-                    
+
                     {/* Image Section */}
                     <div className="lg:w-2/5 flex justify-center items-center">
                       <div className="relative w-full max-w-md">
-                        {/* Glow effect */}
-                        <div className={`absolute -inset-4 bg-gradient-to-r ${colors.from}/20 ${colors.to}/20 rounded-2xl blur-2xl opacity-0 group-hover:opacity-60 transition-opacity duration-300`}></div>
-                        
-                        <div className="relative aspect-video rounded-2xl overflow-hidden shadow-lg border-2 border-border group-hover:border-primary/50 transition-all duration-300">
+                        <div className={`relative aspect-video rounded-2xl overflow-hidden shadow-lg border-2 ${accent.border}`}>
                           <Image
                             alt={`${project.title} - screenshot ${currentImageIndexes[activityIdx] + 1} - project by Ajay Thorat`}
                             className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-300"
@@ -97,7 +80,7 @@ export default function Projects() {
                           </div>
 
                           {/* Project Number Badge */}
-                          <div className={`absolute top-3 left-3 w-10 h-10 bg-gradient-to-br ${colors.from} ${colors.to} rounded-full flex items-center justify-center text-white font-black shadow-lg`}>
+                          <div className={`absolute top-3 left-3 w-10 h-10 ${accent.bg} rounded-full flex items-center justify-center text-white font-black shadow-lg`}>
                             {activityIdx + 1}
                           </div>
                         </div>
@@ -111,7 +94,7 @@ export default function Projects() {
                         <h3 className="text-2xl md:text-3xl font-black text-foreground mb-2 leading-tight group-hover:text-primary transition-colors duration-200">
                           {project.title}
                         </h3>
-                        <div className={`h-1.5 w-20 bg-gradient-to-r ${colors.from} ${colors.to} rounded-full group-hover:w-32 transition-all duration-300`}></div>
+                        <div className={`h-0.5 w-20 ${accent.bg} rounded-full group-hover:w-32 transition-all duration-300`}></div>
                       </div>
 
                       {/* Description */}
@@ -126,10 +109,10 @@ export default function Projects() {
                           Technologies Used
                         </h4>
                         <div className="flex flex-wrap gap-2">
-                          {project.techStack.split(", ").map((tech, idx) => (
+                          {project.techStack.split(", ").map((tech) => (
                             <span
-                              key={idx}
-                              className={`px-3 py-1.5 ${colors.badge} rounded-lg text-sm font-semibold border hover:scale-105 transition-transform duration-150 cursor-default`}
+                              key={tech}
+                              className={`px-3 py-1.5 ${accent.badge} rounded-lg text-sm font-semibold border hover:scale-105 transition-transform duration-150 cursor-default`}
                             >
                               {tech}
                             </span>
@@ -141,29 +124,17 @@ export default function Projects() {
                       <div className="pt-2">
                         <a
                           href={project.url}
-                          className={`magnetic group/btn inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r ${colors.from} ${colors.to} text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 active:scale-95 relative overflow-hidden`}
+                          className={`magnetic group/btn inline-flex items-center gap-2 px-6 py-3 ${accent.bg} text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-200`}
                           target="_blank"
                           rel="noopener noreferrer"
                         >
-                          {/* Shimmer effect */}
-                          <div className="absolute inset-0 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-300 bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
-                          
-                          <span className="relative flex items-center gap-2">
-                            <FaExternalLinkAlt className="w-4 h-4" />
-                            <span>View Project</span>
-                            <FaRocket className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-200" />
-                          </span>
+                          <FaExternalLinkAlt className="w-4 h-4" />
+                          <span>View Project</span>
+                          <FaRocket className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-200" />
                         </a>
                       </div>
                     </div>
                   </div>
-
-                  {/* Hover Border Effect */}
-                  {hoveredProject === project.id && (
-                    <div className="absolute inset-0 rounded-3xl pointer-events-none">
-                      <div className={`absolute -inset-[2px] rounded-3xl bg-gradient-to-r ${colors.from} ${colors.to} opacity-20 blur-sm`}></div>
-                    </div>
-                  )}
                 </div>
               </div>
             );
@@ -172,42 +143,34 @@ export default function Projects() {
 
         {/* GitHub CTA Card */}
         <div className="relative group animate-fadeIn" style={{ animationDelay: '220ms' }}>
-          <div className="glass-card rounded-3xl overflow-hidden border-2 border-dashed border-primary/30 hover:border-primary/50 hover:border-solid transition-all duration-300 hover:shadow-2xl">
-            {/* Gradient Background */}
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            
+          <div className="panel rounded-3xl overflow-hidden border-dashed border-2 border-primary/30 hover:border-primary/50 hover:border-solid transition-colors duration-200">
             <div className="relative p-8 md:p-12 text-center space-y-6">
               {/* Icon */}
-              <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-primary to-secondary text-primary-foreground rounded-2xl shadow-lg group-hover:scale-110 transition-transform duration-200">
+              <div className="inline-flex items-center justify-center w-20 h-20 border border-primary/30 bg-primary/10 text-primary rounded-2xl">
                 <FaGithub className="w-10 h-10" />
               </div>
 
               {/* Title */}
-              <h3 className="text-2xl md:text-3xl font-black gradient-text-animated">
+              <h3 className="text-2xl md:text-3xl font-black gradient-text">
                 Explore More Projects
               </h3>
 
               {/* Description */}
               <p className="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
-                Battle King, Companion-AI, Marathi Matrimony, and many more exciting projects await. 
+                Battle King, Companion-AI, Marathi Matrimony, and many more exciting projects await.
                 Check out my complete portfolio on GitHub!
               </p>
 
               {/* Button */}
               <a
                 href="https://github.com/AjayBThorat-20?tab=repositories"
-                className="magnetic inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-gray-900 to-gray-800 dark:from-white dark:to-gray-100 text-white dark:text-gray-900 font-bold rounded-xl shadow-lg hover:shadow-2xl transition-all duration-200 hover:scale-105 active:scale-95 group/btn relative overflow-hidden"
+                className="magnetic inline-flex items-center gap-3 px-8 py-4 bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-bold rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-200"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {/* Shimmer effect */}
-                <div className="absolute inset-0 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-300 bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
-                
-                <span className="relative flex items-center gap-3">
-                  <FaGithub className="w-6 h-6" />
-                  <span>View All on GitHub</span>
-                  <FaExternalLinkAlt className="w-4 h-4 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform duration-200" />
-                </span>
+                <FaGithub className="w-6 h-6" />
+                <span>View All on GitHub</span>
+                <FaExternalLinkAlt className="w-4 h-4" />
               </a>
             </div>
           </div>

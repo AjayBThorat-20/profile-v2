@@ -57,7 +57,7 @@ export default function WrapperLayout({
                 </span>
               </div>
               <div className="overflow-hidden">
-                <span className="inline-block gradient-text-animated animate-slideInRight">
+                <span className="inline-block gradient-text animate-slideInRight">
                   {secondPosition}
                 </span>
               </div>
