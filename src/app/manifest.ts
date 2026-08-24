@@ -4,7 +4,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: 'Ajay Thorat Portfolio',
     short_name: 'AT Portfolio',
-    description: 'Full Stack Developer Portfolio - Next.js and MERN Stack Developer',
+    description: 'Full Stack Developer Portfolio - Next.js, Node.js, PostgreSQL & MongoDB Developer',
     start_url: '/',
     display: 'standalone',
     background_color: '#ffffff',

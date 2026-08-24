@@ -4,7 +4,7 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Contact Me | Ajay Thorat",
   description: "Get in touch with Ajay Thorat for web development projects, collaborations, or job opportunities. Full Stack Developer available for hire.",
-  keywords: ["Contact Ajay Thorat", "hire full stack developer", "MERN stack developer for hire"],
+  keywords: ["Contact Ajay Thorat", "hire full stack developer", "hire Next.js developer"],
   alternates: {
     canonical: "/contact",
   },

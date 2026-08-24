@@ -6,6 +6,8 @@ import { BasicInfo } from "@/Components/Home/page";
 import { useParallax, useMagneticCursor } from "@/hooks/useScrollReveal";
 import { getAccent } from "@/Components/UI/accentColor";
 import Image from "next/image";
+import Link from "next/link";
+import { FaArrowRight } from "react-icons/fa";
 
 export default function Home() {
   const theme = useSelector((state: RootState) => state.theme.mode);
@@ -69,7 +71,7 @@ export default function Home() {
               <div className="absolute -left-3 md:-left-4 top-[20%] animate-float">
                 <div className={`px-3 py-2 md:px-4 md:py-2.5 rounded-xl bg-card shadow-xl border-2 ${getAccent(0).border}`}>
                   <div className="text-center">
-                    <div className={`font-mono text-lg md:text-xl font-bold ${getAccent(0).text}`}>1.5+</div>
+                    <div className={`font-mono text-lg md:text-xl font-bold ${getAccent(0).text}`}>1.7+</div>
                     <div className="text-[10px] md:text-xs text-muted-foreground font-semibold whitespace-nowrap">Years Exp</div>
                   </div>
                 </div>
@@ -99,6 +101,32 @@ export default function Home() {
             <BasicInfo theme={theme} />
           </div>
         </div>
+      </div>
+
+      {/* Featured Project Teaser */}
+      <div className="container-custom pb-16 md:pb-24 animate-fadeIn" style={{ animationDelay: '360ms' }}>
+        <Link
+          href="/projects"
+          className="magnetic group block panel p-6 md:p-8 rounded-2xl border-l-4 border-l-primary hover:border-l-secondary transition-colors duration-200"
+        >
+          <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-6">
+            <div className="flex-1 space-y-2">
+              <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full border text-xs font-bold uppercase tracking-wide ${getAccent(1).border} ${getAccent(1).bgSoft} ${getAccent(1).text}`}>
+                Featured Project
+              </div>
+              <h2 className="text-xl md:text-2xl font-black text-foreground">
+                DevCompass — Open-Source Dependency Health CLI
+              </h2>
+              <p className="text-sm md:text-base text-muted-foreground max-w-2xl">
+                A production npm CLI I built and maintain: real-time CVE scanning, AI-powered fix recommendations across four LLM providers, and an interactive D3.js dependency graph.
+              </p>
+            </div>
+            <div className="flex items-center gap-2 text-primary font-semibold text-sm md:text-base flex-shrink-0 group-hover:gap-3 transition-all duration-200">
+              <span>See how it works</span>
+              <FaArrowRight className="w-4 h-4" />
+            </div>
+          </div>
+        </Link>
       </div>
     </div>
   );

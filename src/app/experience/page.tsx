@@ -5,7 +5,7 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Experience | Ajay Thorat",
   description: "View my professional experience as a Full Stack Developer, including current projects and work history in web development.",
-  keywords: ["Ajay Thorat experience", "full stack developer work history", "MERN stack developer resume"],
+  keywords: ["Ajay Thorat experience", "full stack developer work history", "Next.js developer resume"],
   alternates: {
     canonical: "/experience",
   },

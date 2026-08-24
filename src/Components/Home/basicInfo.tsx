@@ -22,22 +22,22 @@ export default function BasicInfo({ theme }: BasicInfoProps) {
 
   const metrics = [
     {
-      icon: FaCode,
-      value: "1.5+",
-      label: "Years Experience",
-      description: "Building production-ready solutions"
-    },
-    {
       icon: FaRocket,
       value: "4+",
-      label: "Real-Time Projects",
-      description: "Live systems serving users"
+      label: "Production Systems",
+      description: "Live full-stack apps serving real users"
+    },
+    {
+      icon: FaCode,
+      value: "500+",
+      label: "Packages Tracked",
+      description: "By DevCompass, my open-source dependency CLI"
     },
     {
       icon: FaCog,
-      value: "100%",
-      label: "Build & Scale",
-      description: "From scratch to optimization"
+      value: "1.7+",
+      label: "Years Experience",
+      description: "Building production-ready solutions"
     },
   ];
   const activeAccent = getAccent(activeMetric);
@@ -78,7 +78,7 @@ export default function BasicInfo({ theme }: BasicInfoProps) {
 
       {/* Role Tags */}
       <div className="flex flex-wrap gap-2 md:gap-3 animate-fadeIn" style={{ animationDelay: '180ms' }}>
-        {["Full-Stack Developer", "MERN Stack", "System Architect"].map((role, index) => {
+        {["Full-Stack Developer", "Next.js · Node.js · PostgreSQL", "System Architect"].map((role, index) => {
           const accent = getAccent(index);
           return (
             <div

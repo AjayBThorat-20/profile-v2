@@ -4,14 +4,14 @@ import { projectsData } from "@/constants/project";
 
 export const metadata: Metadata = {
   title: "Projects | Ajay Thorat",
-  description: "Explore my portfolio of web development projects including Next.js applications, MERN stack projects, and full-stack solutions.",
-  keywords: ["Ajay Thorat projects", "Next.js portfolio projects", "MERN stack projects", "full stack developer projects"],
+  description: "Explore my portfolio of web development projects including Next.js applications, Node.js/PostgreSQL backends, and full-stack solutions.",
+  keywords: ["Ajay Thorat projects", "Next.js portfolio projects", "Node.js developer projects", "full stack developer projects"],
   alternates: {
     canonical: "/projects",
   },
   openGraph: {
     title: "Projects | Ajay Thorat",
-    description: "Explore my portfolio of web development projects including Next.js applications, MERN stack projects, and full-stack solutions.",
+    description: "Explore my portfolio of web development projects including Next.js applications, Node.js/PostgreSQL backends, and full-stack solutions.",
     type: "website",
     locale: "en_US",
     url: "https://portfolio.ajaythorat.com/projects",
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Projects | Ajay Thorat",
-    description: "Explore my portfolio of web development projects including Next.js applications, MERN stack projects, and full-stack solutions.",
+    description: "Explore my portfolio of web development projects including Next.js applications, Node.js/PostgreSQL backends, and full-stack solutions.",
     images: ["/Images/Profile/Ajay3.png"],
   },
 };

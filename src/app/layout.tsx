@@ -24,8 +24,8 @@ const bingVerification = process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION;
 
 export const metadata: Metadata = {
   title: "Ajay Thorat | Full Stack Developer",
-  description: "Next.js and MERN Stack Developer passionate about solving real-world problems through innovative solutions.",
-  keywords: ["Next.js", "React", "MERN Stack", "Full Stack Developer", "Web Development", "Ajay Thorat", "Software Engineer", "JavaScript", "TypeScript", "Node.js", "MongoDB"],
+  description: "Full-Stack Developer specializing in Next.js, Node.js, PostgreSQL, MongoDB & Redis, passionate about solving real-world problems through innovative solutions.",
+  keywords: ["Next.js", "React", "Node.js", "PostgreSQL", "MongoDB", "Redis", "Docker", "Full Stack Developer", "Web Development", "Ajay Thorat", "Software Engineer", "JavaScript", "TypeScript", "MERN Stack"],
   authors: [{ name: "Ajay Thorat" }],
   creator: "Ajay Thorat",
   publisher: "Ajay Thorat",
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Ajay Thorat | Full Stack Developer",
-    description: "Next.js and MERN Stack Developer passionate about solving real-world problems through innovative solutions.",
+    description: "Full-Stack Developer specializing in Next.js, Node.js, PostgreSQL, MongoDB & Redis, passionate about solving real-world problems through innovative solutions.",
     type: "website",
     locale: "en_US",
     url: siteUrl,
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Ajay Thorat | Full Stack Developer",
-    description: "Next.js and MERN Stack Developer passionate about solving real-world problems through innovative solutions.",
+    description: "Full-Stack Developer specializing in Next.js, Node.js, PostgreSQL, MongoDB & Redis, passionate about solving real-world problems through innovative solutions.",
     images: ["/Images/Profile/Ajay3.png"],
   },
   robots: {
@@ -98,7 +98,7 @@ export default function RootLayout({
       "https://github.com/AjayBThorat-20"
     ],
     "knowsAbout": [
-      "Next.js", "React", "MERN Stack", "Full Stack Development", "JavaScript", "TypeScript",
+      "Next.js", "React", "Full Stack Development", "JavaScript", "TypeScript",
       "Node.js", "MongoDB", "PostgreSQL", "MySQL", "Prisma ORM", "Tailwind CSS", "Express.js",
       "Docker", "Redis", "RESTful APIs"
     ],

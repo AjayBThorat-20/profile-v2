@@ -3,14 +3,14 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "About Me | Ajay Thorat",
-  description: "Learn more about Ajay Thorat - Full Stack Developer with expertise in Next.js, React, and MERN Stack. View my skills, certifications, and educational background.",
-  keywords: ["Ajay Thorat about", "full stack developer skills", "React developer India", "MERN stack certifications"],
+  description: "Learn more about Ajay Thorat - Full Stack Developer with expertise in Next.js, Node.js, PostgreSQL & MongoDB. View my skills, certifications, and educational background.",
+  keywords: ["Ajay Thorat about", "full stack developer skills", "React developer India", "Next.js developer certifications"],
   alternates: {
     canonical: "/about",
   },
   openGraph: {
     title: "About Me | Ajay Thorat",
-    description: "Learn more about Ajay Thorat - Full Stack Developer with expertise in Next.js, React, and MERN Stack.",
+    description: "Learn more about Ajay Thorat - Full Stack Developer with expertise in Next.js, Node.js, PostgreSQL & MongoDB.",
     type: "website",
     locale: "en_US",
     url: "https://portfolio.ajaythorat.com/about",
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "About Me | Ajay Thorat",
-    description: "Learn more about Ajay Thorat - Full Stack Developer with expertise in Next.js, React, and MERN Stack.",
+    description: "Learn more about Ajay Thorat - Full Stack Developer with expertise in Next.js, Node.js, PostgreSQL & MongoDB.",
     images: ["/Images/Profile/Ajay4.png"],
   },
 };

@@ -13,6 +13,21 @@ export interface ProjectItem {
   // 🔹 Projects Data
   export const projectsData: readonly ProjectItem[] = [
     {
+      id: 4,
+      title: "DevCompass (Open Source npm Package)",
+      url: "https://github.com/AjayBThorat-20/devcompass",
+      techStack: "Node.js, Commander.js, D3.js, SQLite, OpenAI/Anthropic/Google APIs, GitHub Actions",
+      discription:
+        "DevCompass is a production npm CLI tool I published and actively maintain for JavaScript dependency health analysis, combining real-time CVE vulnerability scanning through OSV and NVD database integration with AI-powered recommendations across four LLM providers (OpenAI, Anthropic, Google Gemini, and local Ollama). I engineered an interactive dependency graph dashboard using D3.js with four distinct layouts (tree, force-directed, radial, and conflict-highlighting) featuring real-time search and filtering, plus an intelligent auto-fix system with risk classification, dry-run previews, and automatic backups before any change is applied. A parallel GitHub Issues API integration tracks 500+ popular npm packages for deprecation and security alerts with an 80% performance gain from concurrent processing. During a recent security hardening pass I identified and fixed a shell-injection vulnerability and a path-traversal gap, upgraded API key encryption from unsalted SHA-256 to salted scrypt, and set up a GitHub Actions CI pipeline that gates every change on an automated test suite and npm audit so dependency vulnerabilities get caught before release.",
+      pictures: [
+        { id: 1, picture: "/Images/Projects/DevCompass/help.jpeg" },
+        { id: 2, picture: "/Images/Projects/DevCompass/analyze.jpeg" },
+        { id: 3, picture: "/Images/Projects/DevCompass/fix_plan.jpeg" },
+        { id: 4, picture: "/Images/Projects/DevCompass/fix_complete.jpeg" },
+        { id: 5, picture: "/Images/Projects/DevCompass/dashboard.jpeg" },
+      ],
+    },
+    {
       id: 1,
       title: "Crime Predict",
       url: "https://github.com/AjayBThorat-20/Crime-Predict",
@@ -55,21 +70,6 @@ export interface ProjectItem {
         { id: 4, picture: "/Images/Projects/Study_Partner/quizz.jpeg" },
         { id: 5, picture: "/Images/Projects/Study_Partner/course.jpeg" },
         { id: 6, picture: "/Images/Projects/Study_Partner/python.jpeg" },
-      ],
-    },
-    {
-      id: 4,
-      title: "DevCompass (Open Source npm Package)",
-      url: "https://github.com/AjayBThorat-20/devcompass",
-      techStack: "Node.js, Commander.js, D3.js, SQLite, OpenAI/Anthropic/Google APIs, GitHub Actions",
-      discription:
-        "DevCompass is a production npm CLI tool I published and actively maintain for JavaScript dependency health analysis, combining real-time CVE vulnerability scanning through OSV and NVD database integration with AI-powered recommendations across four LLM providers (OpenAI, Anthropic, Google Gemini, and local Ollama). I engineered an interactive dependency graph dashboard using D3.js with four distinct layouts (tree, force-directed, radial, and conflict-highlighting) featuring real-time search and filtering, plus an intelligent auto-fix system with risk classification, dry-run previews, and automatic backups before any change is applied. A parallel GitHub Issues API integration tracks 500+ popular npm packages for deprecation and security alerts with an 80% performance gain from concurrent processing. During a recent security hardening pass I identified and fixed a shell-injection vulnerability and a path-traversal gap, upgraded API key encryption from unsalted SHA-256 to salted scrypt, and set up a GitHub Actions CI pipeline that gates every change on an automated test suite and npm audit so dependency vulnerabilities get caught before release.",
-      pictures: [
-        { id: 1, picture: "/Images/Projects/DevCompass/help.jpeg" },
-        { id: 2, picture: "/Images/Projects/DevCompass/analyze.jpeg" },
-        { id: 3, picture: "/Images/Projects/DevCompass/fix_plan.jpeg" },
-        { id: 4, picture: "/Images/Projects/DevCompass/fix_complete.jpeg" },
-        { id: 5, picture: "/Images/Projects/DevCompass/dashboard.jpeg" },
       ],
     },
   ] as const;
