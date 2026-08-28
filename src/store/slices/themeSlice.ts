@@ -14,7 +14,7 @@ interface ThemeState {
 // "light" and flipping after a post-mount effect (the cause of the
 // theme flash / stale-state bug).
 const getInitialMode = (): "light" | "dark" => {
-  if (typeof document === "undefined") return "light";
+  if (typeof document === "undefined") return "dark";
   return document.documentElement.classList.contains("dark") ? "dark" : "light";
 };
 

@@ -146,13 +146,15 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth" data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
-        {/* Applies the persisted/system theme before first paint to avoid
-            a light-theme flash and keep the DOM class in sync with the
-            Redux store's initial state (see themeSlice.getInitialMode). */}
+        {/* Applies the persisted theme before first paint to avoid a
+            wrong-theme flash and keep the DOM class in sync with the
+            Redux store's initial state (see themeSlice.getInitialMode).
+            Dark is the default for first-time visitors (no stored
+            preference yet) rather than following system preference. */}
         <script
           id="theme-init"
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem("theme");if(!t){t=window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";localStorage.setItem("theme",t);}document.documentElement.classList.toggle("dark",t==="dark");}catch(e){}})();`,
+            __html: `(function(){try{var t=localStorage.getItem("theme");if(!t){t="dark";localStorage.setItem("theme",t);}document.documentElement.classList.toggle("dark",t==="dark");}catch(e){}})();`,
           }}
         />
 
