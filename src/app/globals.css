@@ -602,10 +602,16 @@ html {
   transform: translate3d(-100px, -100px, 0);
 }
 
+/* mix-blend-mode: difference only inverts correctly against a FIXED
+   pure white - diff(white, pageColor) reads as black on light
+   backgrounds and white on dark ones. Using the theme's --foreground
+   here would blend near-black-on-near-black in light mode (diff ~
+   light gray on white = invisible), so this stays hardcoded regardless
+   of theme. */
 .cursor-dot {
   width: 6px;
   height: 6px;
-  background-color: hsl(var(--foreground));
+  background-color: #fff;
   mix-blend-mode: difference;
 }
 
@@ -614,7 +620,7 @@ html {
   height: 32px;
   margin-top: -13px;
   margin-left: -13px;
-  border: 1px solid hsl(var(--foreground));
+  border: 1px solid #fff;
   mix-blend-mode: difference;
   opacity: 1;
   transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1),
@@ -629,7 +635,7 @@ html {
   height: 56px;
   margin-top: -25px;
   margin-left: -25px;
-  background-color: hsl(var(--foreground) / 0.08);
+  background-color: rgba(255, 255, 255, 0.08);
 }
 
 /* Swapped out for the .cursor-label bubble while hovering a
