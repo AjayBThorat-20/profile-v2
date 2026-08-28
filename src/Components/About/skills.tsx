@@ -28,6 +28,8 @@ import {
 import { IconType } from "react-icons";
 import { getAccent } from "@/Components/UI/accentColor";
 import IconTile from "@/Components/UI/IconTile";
+import Badge from "@/Components/UI/Badge";
+import SectionEyebrow from "@/Components/UI/SectionEyebrow";
 
 export default function Skills() {
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
@@ -83,16 +85,21 @@ export default function Skills() {
     : skillsData.filter(skill => getSkillDetails(skill.text).category === selectedCategory);
 
   return (
-    <div ref={sectionRef} className={`container-custom section scroll-reveal ${isRevealed ? "is-visible" : ""}`}>
+    <div id="skills" ref={sectionRef} className={`container-custom section scroll-reveal scroll-mt-36 ${isRevealed ? "is-visible" : ""}`}>
       <div className="space-y-12 max-w-7xl mx-auto">
-        
+
+        {/* Header */}
+        <div className="flex justify-center animate-fadeIn">
+          <SectionEyebrow index="01" icon={FaCode} label="Skills & Stack" />
+        </div>
+
         {/* Category Filter */}
         <div className="flex flex-wrap justify-center gap-3 animate-fadeIn">
           {categories.map((category, index) => (
             <button
               key={category}
               onClick={() => setSelectedCategory(category)}
-              className={`px-6 py-3 rounded-xl font-semibold border transition-colors duration-150 ${
+              className={`px-6 py-3 rounded-2xl font-semibold border transition-colors duration-150 ${
                 selectedCategory === category
                   ? "bg-primary text-primary-foreground border-primary shadow-lg"
                   : "border-border hover:border-primary/50"
@@ -132,9 +139,7 @@ export default function Skills() {
                   {/* Category Badge - shows on hover */}
                   {hoveredSkill === skill.id && (
                     <div className="absolute -top-2 -right-2 animate-fadeIn">
-                      <div className={`px-2 py-1 rounded-lg text-[10px] font-bold border ${accent.border} ${accent.bgSoft} ${accent.text}`}>
-                        {details.category}
-                      </div>
+                      <Badge accent={accent} className="text-[10px]">{details.category}</Badge>
                     </div>
                   )}
                 </div>
@@ -149,7 +154,7 @@ export default function Skills() {
         </div>
 
         {/* Proficiency Levels - More detailed and useful */}
-        <div className="panel p-8 rounded-3xl animate-fadeIn" style={{ animationDelay: '120ms' }}>
+        <div className="panel p-8 rounded-2xl animate-fadeIn" style={{ animationDelay: '120ms' }}>
           <div className="flex justify-center mb-6">
             <h3 className="eyebrow">Proficiency Overview</h3>
           </div>
@@ -166,7 +171,7 @@ export default function Skills() {
                 <div key={item.category} className="space-y-3">
                   <div className="flex justify-between items-center">
                     <h4 className="font-bold text-foreground">{item.category}</h4>
-                    <span className={`font-mono text-sm font-bold ${accent.text}`}>{item.level}%</span>
+                    <span className="font-mono text-sm font-bold text-foreground">{item.level}%</span>
                   </div>
 
                   {/* Progress bar */}
@@ -180,12 +185,7 @@ export default function Skills() {
                   {/* Skills list */}
                   <div className="flex flex-wrap gap-2">
                     {item.skills.map((skill) => (
-                      <span
-                        key={skill}
-                        className="text-xs px-3 py-1 rounded-full bg-muted text-muted-foreground font-medium"
-                      >
-                        {skill}
-                      </span>
+                      <Badge key={skill}>{skill}</Badge>
                     ))}
                   </div>
                 </div>

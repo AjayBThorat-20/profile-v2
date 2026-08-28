@@ -3,7 +3,7 @@ export default function CurrentlyWorkingOnSkeleton() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-7xl">
         {[1, 2, 3].map((id) => (
           <div key={id} className="flex flex-col">
-            <div className="bg-card border border-border w-full p-6 rounded-lg shadow-md">
+            <div className="bg-card border border-border w-full p-6 rounded-2xl shadow-md">
               <div className="flex justify-between items-center">
                 <div className="flex-grow pr-4">
                   {/* Placeholder for description */}

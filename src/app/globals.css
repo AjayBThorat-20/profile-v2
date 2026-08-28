@@ -39,7 +39,8 @@
      Tailwind's default stack) into real font-sans/font-mono utilities,
      so the mono face can be used deliberately for eyebrows, dates,
      and tech-stack labels instead of sitting on disk unused. */
-  --font-sans: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-sans: var(--font-sora), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-display: var(--font-fraunces), Georgia, "Times New Roman", serif;
   --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
   --radius-lg: var(--radius);
@@ -51,16 +52,17 @@
   --animate-slideInLeft: slideInLeft 0.22s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   --animate-slideInRight: slideInRight 0.22s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   --animate-slideInUp: slideInUp 0.22s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  --animate-gradient: gradient 3s ease-in-out infinite;
-  --animate-shimmer: shimmer 2s infinite;
-  --animate-pulse-slow: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  --animate-float: float 3s ease-in-out infinite;
-  --animate-rotate: rotate 20s linear infinite;
-  --animate-bounce-slow: bounce-slow 2s infinite;
-  --animate-glow: glow 2s ease-in-out infinite;
-  --animate-reveal: reveal 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  --animate-ping-slow: ping-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  --animate-ping-slower: ping-slower 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* --font-fraunces/--font-sora/--font-geist-mono (from next/font) are
+   only defined starting at <body> via its CSS-module class - declaring
+   a var() reference to them on :root (an ancestor of body) computes as
+   permanently invalid there and stays invalid through inheritance, even
+   though the referenced property is visible further down the tree. So
+   these live on body, not :root. */
+body {
+  --heading-typeface: var(--font-fraunces), Georgia, "Times New Roman", serif;
+  --body-typeface: var(--font-sora), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 @keyframes fadeIn {
@@ -83,102 +85,80 @@
   0% { opacity: 0; transform: translateY(30px); }
   100% { opacity: 1; transform: translateY(0); }
 }
-@keyframes gradient {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+@keyframes recPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
 }
-@keyframes shimmer {
-  100% { transform: translateX(100%); }
+@keyframes pageEnter {
+  0% { opacity: 0; transform: scale(0.99); }
+  100% { opacity: 1; transform: scale(1); }
 }
-@keyframes pulse-slow {
-  0%, 100% { opacity: 0.6; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.05); }
-}
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-}
-@keyframes rotate {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-@keyframes bounce-slow {
-  0%, 100% { transform: translateY(0); animation-timing-function: cubic-bezier(0.8, 0, 1, 1); }
-  50% { transform: translateY(-10px); animation-timing-function: cubic-bezier(0, 0, 0.2, 1); }
-}
-@keyframes glow {
-  0%, 100% { box-shadow: 0 0 20px hsl(var(--primary) / 0.2); }
-  50% { box-shadow: 0 0 40px hsl(var(--primary) / 0.4); }
-}
-@keyframes reveal {
-  0% { clip-path: inset(0 100% 0 0); }
-  100% { clip-path: inset(0 0 0 0); }
-}
-@keyframes ping-slow {
-  0% { transform: scale(1); opacity: 0.8; }
-  50% { transform: scale(1.05); opacity: 0.4; }
-  100% { transform: scale(1); opacity: 0.8; }
-}
-@keyframes ping-slower {
-  0% { transform: scale(1); opacity: 0.6; }
-  50% { transform: scale(1.08); opacity: 0.2; }
-  100% { transform: scale(1); opacity: 0.6; }
+
+/* Route-change enter transition on DefaultLayout's key={pathname}
+   wrapper. Deliberately short and opacity/scale-only (no translateY) so
+   it settles before each page's own staggered content animations
+   become the dominant motion, rather than competing with them - this
+   softens the "instant snap" of a route change, it isn't a full
+   crossfade (the old page unmounts immediately when React swaps the
+   key, there's nothing to fade out). */
+.page-transition {
+  animation: pageEnter 0.22s ease-out;
 }
 
 /* ==========================================
-   ROOT VARIABLES
+   ROOT VARIABLES — monochrome editorial
+   A binary black/white/gray system (one hue
+   family, zero saturation) instead of a
+   colored brand palette - matches the light,
+   high-contrast, minimalist reference this
+   redesign is based on. --destructive stays a
+   real semantic error color, not a decorative
+   accent, and is the only non-neutral hue on
+   the page.
    ========================================== */
 :root {
-  /* Colors - cool slate neutrals instead of flat grays, with the
-     card/popover surfaces slightly separated from the page background
-     so panels read as distinct surfaces rather than blending in. */
-  --background: 210 40% 100%;
-  --foreground: 222 47% 11%;
-  --card: 210 40% 99%;
-  --card-foreground: 222 47% 11%;
-  --popover: 210 40% 99%;
-  --popover-foreground: 222 47% 11%;
-  /* One muted blue-to-teal hue family instead of a multi-hue rainbow
-     gradient — reads as a deliberate brand color rather than a
-     stock AI-template gradient, and every existing gradient in the
-     codebase (from-primary via-secondary to-accent) now moves
-     smoothly through a single tonal range instead of clashing hues. */
-  --primary: 215 70% 45%;      /* steel blue */
+  --background: 0 0% 100%;     /* pure white */
+  --foreground: 0 0% 9%;       /* near-black ink */
+  --card: 0 0% 100%;
+  --card-foreground: 0 0% 9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 0 0% 9%;
+  --primary: 0 0% 9%;          /* near-black - the dominant "accent" is ink itself */
   --primary-foreground: 0 0% 100%;
-  --secondary: 200 65% 40%;    /* deep teal-blue */
+  --secondary: 0 0% 32%;       /* dark gray, secondary tier */
   --secondary-foreground: 0 0% 100%;
-  --muted: 214 32% 95%;
-  --muted-foreground: 215 16% 42%;
-  --accent: 185 55% 36%;       /* muted teal */
-  --accent-foreground: 0 0% 100%;
-  --destructive: 0 84% 60%;
+  --muted: 0 0% 95%;
+  --muted-foreground: 0 0% 40%;
+  --accent: 0 0% 58%;          /* mid gray, quiet third tier */
+  --accent-foreground: 0 0% 9%;
+  --destructive: 0 75% 45%;    /* semantic only - real error states, not a brand accent */
   --destructive-foreground: 0 0% 100%;
-  --border: 214 20% 89%;
-  --input: 214 20% 89%;
-  --ring: 215 70% 45%;
-  --radius: 0.5rem;
+  --border: 0 0% 88%;
+  --input: 0 0% 88%;
+  --ring: 0 0% 9%;
+  --radius: 0.375rem;
 }
 
 .dark {
-  --background: 222 47% 7%;
-  --foreground: 210 40% 96%;
-  --card: 222 40% 11%;
-  --card-foreground: 210 40% 96%;
-  --popover: 222 40% 11%;
-  --popover-foreground: 210 40% 96%;
-  --primary: 215 75% 60%;      /* steel blue, lightened for dark bg */
-  --primary-foreground: 222 47% 9%;
-  --secondary: 200 68% 52%;    /* deep teal-blue */
-  --secondary-foreground: 222 47% 9%;
-  --muted: 222 30% 17%;
-  --muted-foreground: 217 15% 65%;
-  --accent: 185 60% 45%;       /* muted teal */
-  --accent-foreground: 222 47% 9%;
-  --destructive: 0 72% 58%;
+  --background: 0 0% 7%;       /* near-black */
+  --foreground: 0 0% 96%;      /* near-white ink */
+  --card: 0 0% 10%;
+  --card-foreground: 0 0% 96%;
+  --popover: 0 0% 10%;
+  --popover-foreground: 0 0% 96%;
+  --primary: 0 0% 96%;         /* near-white - dominant accent on dark */
+  --primary-foreground: 0 0% 9%;
+  --secondary: 0 0% 68%;       /* light gray, secondary tier */
+  --secondary-foreground: 0 0% 9%;
+  --muted: 0 0% 15%;
+  --muted-foreground: 0 0% 62%;
+  --accent: 0 0% 42%;          /* mid gray, quiet third tier */
+  --accent-foreground: 0 0% 96%;
+  --destructive: 0 80% 60%;    /* semantic only - real error states, not a brand accent */
   --destructive-foreground: 0 0% 100%;
-  --border: 222 25% 21%;
-  --input: 222 25% 21%;
-  --ring: 215 75% 60%;
+  --border: 0 0% 20%;
+  --input: 0 0% 20%;
+  --ring: 0 0% 96%;
 }
 
 /* ==========================================
@@ -192,9 +172,16 @@ body {
   background-color: hsl(var(--background));
   color: hsl(var(--foreground));
   font-feature-settings: "rlig" 1, "calt" 1;
-  font-family: var(--font-sans);
+  font-family: var(--body-typeface);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Display face on every heading site-wide, so the Fraunces/Sora pairing
+   reads consistently without touching every component's className. */
+h1, h2, h3, h4 {
+  font-family: var(--heading-typeface);
+  font-optical-sizing: auto;
 }
 
 html {
@@ -232,7 +219,7 @@ html {
    SELECTION
    ========================================== */
 ::selection {
-  background-color: hsl(var(--primary) / 0.2);
+  background-color: hsl(var(--foreground) / 0.12);
   color: hsl(var(--foreground));
 }
 
@@ -242,73 +229,48 @@ html {
 :focus-visible {
   outline: 2px solid hsl(var(--ring));
   outline-offset: 2px;
-  border-radius: 0.375rem;
+  border-radius: var(--radius-sm);
 }
 
 /* ==========================================
-   COMPONENT CLASSES
+   COMPONENT CLASSES — flat editorial surfaces
+   Hairline borders, no blur/backdrop-filter,
+   no colored glow. Depth comes from spacing
+   and typography, not lighting effects.
    ========================================== */
 
-/* Glass Morphism */
 .glass {
-  background-color: hsl(var(--background) / 0.8);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid hsl(var(--border) / 0.5);
+  background-color: hsl(var(--background) / 0.96);
+  border: 1px solid hsl(var(--border));
 }
 
 .glass-card {
-  background-color: hsl(var(--background) / 0.8);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid hsl(var(--border) / 0.5);
-  border-radius: 1rem;
-  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  background-color: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius-lg);
 }
 
-/* Gradient Text */
-.gradient-text {
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-image: linear-gradient(to right, hsl(var(--primary)), hsl(var(--secondary)), hsl(var(--accent)));
-}
-
-/* Runs the gradient sweep once on mount instead of looping forever -
-   a perpetually shifting rainbow headline is one of the most obvious
-   "AI-generated template" tells, so this is reserved for a single
-   deliberate flourish rather than the default heading treatment. */
-.gradient-text-animated {
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-image: linear-gradient(to right, hsl(var(--primary)), hsl(var(--secondary)), hsl(var(--accent)));
-  background-size: 200% auto;
-  animation: gradient 2.2s ease-in-out 1;
-}
-
-/* Buttons */
+/* Buttons — flat fill, hairline border, no gradient sheen or glow halo. */
 .btn-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
-  background-image: linear-gradient(to right, hsl(var(--primary)), hsl(var(--secondary)));
+  padding: 0.75rem 1.75rem;
+  background-color: hsl(var(--primary));
   color: hsl(var(--primary-foreground));
   font-weight: 600;
-  border-radius: 0.75rem;
-  box-shadow: 0 10px 15px -3px hsl(var(--primary) / 0.25);
-  transition: all 0.2s;
+  border-radius: 999px;
+  transition: opacity 0.2s ease, transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .btn-primary:hover {
-  box-shadow: 0 20px 25px -5px hsl(var(--primary) / 0.4);
-  transform: scale(1.05);
+  opacity: 0.85;
+  transform: translateY(-1px);
 }
 
 .btn-primary:active {
-  transform: scale(0.95);
+  transform: translateY(0) scale(0.98);
 }
 
 .btn-secondary {
@@ -316,22 +278,22 @@ html {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
-  background-color: hsl(var(--card));
-  border: 2px solid hsl(var(--border));
+  padding: 0.75rem 1.75rem;
+  background-color: transparent;
+  border: 1px solid hsl(var(--border));
   color: hsl(var(--foreground));
   font-weight: 600;
-  border-radius: 0.75rem;
-  transition: all 0.2s;
+  border-radius: 999px;
+  transition: border-color 0.2s ease, transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .btn-secondary:hover {
-  background-color: hsl(var(--muted));
-  border-color: hsl(var(--primary) / 0.5);
+  border-color: hsl(var(--foreground));
+  transform: translateY(-1px);
 }
 
 .btn-secondary:active {
-  transform: scale(0.95);
+  transform: translateY(0) scale(0.98);
 }
 
 .btn-ghost {
@@ -342,45 +304,45 @@ html {
   padding: 0.5rem 1rem;
   color: hsl(var(--foreground));
   font-weight: 500;
-  border-radius: 0.5rem;
-  transition: all 0.2s;
+  border-radius: var(--radius-md);
+  transition: background-color 0.2s;
 }
 
 .btn-ghost:hover {
   background-color: hsl(var(--muted));
 }
 
-.btn-ghost:active {
-  transform: scale(0.95);
+/* Cards — flat fill, hairline border, a subtle lift and border darken on
+   hover instead of a colored glow. */
+.card,
+.card-interactive,
+.panel {
+  position: relative;
 }
 
-/* Cards */
 .card {
   background-color: hsl(var(--card));
   border: 1px solid hsl(var(--border));
-  border-radius: 1rem;
-  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  transition: all 0.3s;
+  border-radius: var(--radius-lg);
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.25s;
 }
 
 .card:hover {
-  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-  transform: translateY(-0.25rem);
+  transform: translateY(-2px);
+  border-color: hsl(var(--foreground) / 0.4);
 }
 
 .card-interactive {
   background-color: hsl(var(--card));
   border: 1px solid hsl(var(--border));
-  border-radius: 1rem;
-  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  transition: all 0.3s;
+  border-radius: var(--radius-lg);
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.25s;
   cursor: pointer;
 }
 
 .card-interactive:hover {
-  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-  transform: translateY(-0.25rem);
-  border-color: hsl(var(--primary) / 0.5);
+  transform: translateY(-2px);
+  border-color: hsl(var(--foreground) / 0.4);
 }
 
 /* Container */
@@ -407,41 +369,24 @@ html {
   }
 }
 
-/* Section */
+/* Section — generous vertical breathing room, editorial-scale rather
+   than app-dashboard-scale. Kept moderate on purpose: adjacent sections
+   each carry this top+bottom, so it stacks (e.g. one section's bottom
+   padding plus the next section's top padding) - at the original 6rem/
+   8rem values that stacked gap reached 192-256px, which combined with
+   scroll-reveal's opacity:0-until-triggered start state (see
+   useScrollReveal.ts) could read as a broken blank void between
+   sections rather than deliberate whitespace. */
 .section {
-  padding-top: 4rem;
-  padding-bottom: 4rem;
+  padding-top: 3.5rem;
+  padding-bottom: 3.5rem;
 }
 
 @media (min-width: 768px) {
   .section {
-    padding-top: 3rem;
-    padding-bottom: 3rem;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
   }
-}
-
-/* Gradient Backgrounds */
-.gradient-bg-1 {
-  background-image: linear-gradient(to bottom right, hsl(var(--primary) / 0.1), hsl(var(--secondary) / 0.05), transparent);
-}
-
-.gradient-bg-2 {
-  background-image: linear-gradient(to top right, hsl(var(--accent) / 0.1), hsl(var(--primary) / 0.05), transparent);
-}
-
-/* Shimmer Effect */
-.shimmer {
-  position: relative;
-  overflow: hidden;
-}
-
-.shimmer::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  transform: translateX(-100%);
-  background-image: linear-gradient(to right, transparent, hsl(var(--foreground) / 0.1), transparent);
-  animation: shimmer 2s infinite;
 }
 
 /* Badge */
@@ -450,17 +395,16 @@ html {
   align-items: center;
   gap: 0.375rem;
   padding: 0.25rem 0.75rem;
-  background-color: hsl(var(--primary) / 0.1);
-  color: hsl(var(--primary));
+  background-color: transparent;
+  color: hsl(var(--foreground));
   font-size: 0.75rem;
   font-weight: 600;
   border-radius: 9999px;
-  border: 1px solid hsl(var(--primary) / 0.2);
+  border: 1px solid hsl(var(--border));
 }
 
-/* Eyebrow: the monospace "// 03 · SECTION" label used to head every
-   section instead of the old glass-pill badge, so section metadata
-   reads as deliberately technical rather than another rounded chip. */
+/* Eyebrow: the monospace "01 · SECTION" label used to head every
+   section, echoing a chapter number rather than another rounded chip. */
 .eyebrow {
   display: inline-flex;
   align-items: center;
@@ -470,18 +414,57 @@ html {
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: hsl(var(--primary));
+  color: hsl(var(--foreground));
 }
 
-/* Bordered statement panel: replaces the full-bleed rainbow CTA
-   banners (from-primary via-secondary to-accent) and the glass-blur
-   intro/CTA shells copy-pasted across welcome/about/contact panels. */
+/* Bordered statement panel. Use for single prose/statement/CTA blocks
+   (bio card, closing CTAs, hero teaser) - not for repeatable items, see
+   .entry-card below. */
 .panel {
   background-color: hsl(var(--card));
   border: 1px solid hsl(var(--border));
-  border-radius: 1rem;
-  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.08);
+  border-radius: var(--radius-lg);
 }
+
+/* Entry card - item-level surface for discrete repeatable content:
+   timeline entries, certifications, activities, project & review cards. */
+.entry-card {
+  background-color: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius-lg);
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.2s ease;
+}
+.entry-card:hover {
+  transform: translateY(-2px);
+  border-color: hsl(var(--foreground) / 0.4);
+}
+
+/* Stat figure - typographic metric display, no card shell: a big mono
+   numeral + label behind a short border-left rule. For numbers that
+   should read as data, not another rounded box. */
+.stat-figure {
+  padding-left: 1rem;
+  border-left: 2px solid hsl(var(--border));
+}
+.stat-figure-value {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* List row - compact horizontal item for dense repeatable rows (e.g.
+   contact methods): a hairline divider between rows instead of each
+   row getting its own bordered box. */
+.list-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid hsl(var(--border));
+}
+.list-row:first-child { padding-top: 0; }
+.list-row:last-child { border-bottom: none; padding-bottom: 0; }
 
 /* Left-rail timeline scaffolding shared by Education and Experience. */
 .timeline-rail {
@@ -502,7 +485,7 @@ html {
   width: 1.25rem;
   height: 1.25rem;
   flex-shrink: 0;
-  border-radius: 0.25rem;
+  border-radius: 9999px;
   border: 2px solid hsl(var(--card));
 }
 .timeline-node-primary { box-shadow: 0 0 0 2px hsl(var(--primary)); background-color: hsl(var(--primary)); }
@@ -517,6 +500,18 @@ html {
 
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
+}
+
+/* Live REC indicator — a pulsing dot paired with mono type. Kept as a
+   small "live" cue on the hero timecode, restyled neutral (no colored
+   glow) to fit the monochrome palette. */
+.rec-dot {
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background-color: hsl(var(--foreground));
+  animation: recPulse 1.6s ease-in-out infinite;
 }
 
 /* ==========================================
@@ -571,41 +566,12 @@ html {
 }
 
 /* ==========================================
-   PARALLAX SCROLL EFFECTS
-   ========================================== */
-.parallax-slow {
-  will-change: transform;
-}
-
-.parallax-medium {
-  will-change: transform;
-}
-
-.parallax-fast {
-  will-change: transform;
-}
-
-/* ==========================================
    MAGNETIC HOVER EFFECTS
    ========================================== */
 .magnetic {
   will-change: transform;
   transition: transform 0.18s cubic-bezier(0.23, 1, 0.32, 1);
 }
-
-/* ==========================================
-   SMOOTH FADE VARIANTS
-   ========================================== */
-.fade-in-delayed {
-  animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.1s forwards;
-  opacity: 0;
-}
-
-.fade-in-slow {
-  animation: fadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  opacity: 0;
-}
-
 
 /* Reduce layout shift */
 img {

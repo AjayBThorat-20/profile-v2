@@ -15,13 +15,10 @@ export default function About() {
     setMounted(true);
   }, []);
 
-  const achievements = [
-    "Building production-ready web applications",
-    "Real-time systems handling live traffic",
-    "Database optimization & architecture",
-    "Modern UI/UX with Next.js & React",
-    "RESTful APIs & server-side development",
-    "Agile team collaboration & leadership"
+  const highlights = [
+    "Built and maintain DevCompass, an open-source npm CLI tracking 500+ packages for CVE and deprecation risk",
+    "Shipped production systems — FNS and ExcelFlow — at Renewalytics, helping manage 3.22+ GW of renewable energy capacity across 34+ sites",
+    "1.7+ years of full-stack experience across Next.js, Node.js, PostgreSQL, and MongoDB, now building at Mumbai Biocluster",
   ];
 
   return (
@@ -35,41 +32,28 @@ export default function About() {
             {/* Image Section - Now first on mobile, second on desktop */}
             <div className="w-full lg:w-[45%] flex justify-center animate-fadeIn" style={{ animationDelay: '120ms' }}>
               <div className="relative w-full max-w-md">
-                {/* Glow effect */}
-                <div className="absolute -inset-6 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-3xl blur-3xl opacity-60 animate-pulse-slow"></div>
-                
-                {/* Main image container */}
-                <div className="relative group">
-                  <div className="relative aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl border-2 border-primary/20 group-hover:border-primary/40 transition-all duration-300 bg-muted/20">
-                    {!imageError ? (
-                      <Image
-                        src="/Images/Profile/Ajay4.webp"
-                        alt="Ajay Thorat - Full Stack Developer"
-                        fill
-                        className="object-cover transition-transform duration-300 group-hover:scale-110"
-                        priority
-                        quality={85}
-                        sizes="(max-width: 768px) 90vw, (max-width: 1024px) 50vw, 45vw"
-                        onError={() => setImageError(true)}
-                      />
-                    ) : (
-                      <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-primary/10 to-secondary/10">
-                        <div className="text-center p-6">
-                          <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-primary/20 flex items-center justify-center">
-                            <span className="text-4xl font-bold text-primary">AT</span>
-                          </div>
-                          <p className="text-muted-foreground text-sm">Ajay Thorat</p>
+                <div className="relative aspect-[3/4] overflow-hidden border border-border bg-muted/20">
+                  {!imageError ? (
+                    <Image
+                      src="/Images/Profile/Ajay4.webp"
+                      alt="Ajay Thorat - Full Stack Developer"
+                      fill
+                      className="object-cover grayscale"
+                      priority
+                      quality={85}
+                      sizes="(max-width: 768px) 90vw, (max-width: 1024px) 50vw, 45vw"
+                      onError={() => setImageError(true)}
+                    />
+                  ) : (
+                    <div className="absolute inset-0 flex items-center justify-center bg-muted">
+                      <div className="text-center p-6">
+                        <div className="w-20 h-20 mx-auto mb-4 rounded-full border border-border flex items-center justify-center">
+                          <span className="text-4xl font-bold text-foreground">AT</span>
                         </div>
+                        <p className="text-muted-foreground text-sm">Ajay Thorat</p>
                       </div>
-                    )}
-                    
-                    {/* Gradient overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent"></div>
-                  </div>
-
-                  {/* Floating accent borders */}
-                  <div className="absolute -top-4 -right-4 w-20 h-20 border-3 border-primary/40 rounded-3xl animate-float"></div>
-                  <div className="absolute -bottom-4 -left-4 w-24 h-24 border-3 border-secondary/40 rounded-3xl animate-float" style={{ animationDelay: '1s' }}></div>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -79,15 +63,15 @@ export default function About() {
               {/* Name & Title Card */}
               <div className="panel p-8 rounded-2xl border-l-4 border-l-primary">
                 <div className="relative z-10 space-y-4">
-                  <h2 className="text-3xl md:text-4xl font-black">
-                    <span className="gradient-text">AJAY BHIMRAO THORAT</span>
+                  <h2 className="text-3xl md:text-4xl font-black text-foreground">
+                    AJAY BHIMRAO THORAT
                   </h2>
 
                   <div className="space-y-4 text-base md:text-lg leading-relaxed">
                     <p className="text-foreground/90">
-                      Based in <span className="font-bold text-primary">Mumbai, India</span>, 
+                      Based in <span className="font-bold text-foreground">Mumbai, India</span>,
                       I'm a passionate full-stack developer specializing in{" "}
-                      <span className="font-semibold text-secondary">Next.js, React, Node.js, and MongoDB</span>.
+                      <span className="font-semibold text-foreground">Next.js, React, Node.js, and MongoDB</span>.
                     </p>
 
                     <p className="text-muted-foreground">
@@ -106,20 +90,17 @@ export default function About() {
                 </div>
               </div>
 
-              {/* Achievements Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {achievements.map((achievement, index) => (
-                  <div
-                    key={index}
-                    className="flex items-start gap-3 p-4 rounded-xl border border-border hover:border-primary/50 transition-colors duration-150 group"
-                  >
-                    <div className="mt-0.5 flex-shrink-0 w-5 h-5 rounded-md border border-primary/30 bg-primary/10 flex items-center justify-center">
+              {/* Highlights */}
+              <div className="panel rounded-2xl p-2 md:p-4">
+                {highlights.map((highlight) => (
+                  <div key={highlight} className="list-row px-2">
+                    <div className="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full border border-primary/30 bg-primary/10 flex items-center justify-center">
                       <svg className="w-3 h-3 text-primary" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                       </svg>
                     </div>
-                    <p className="text-sm font-medium text-foreground/80 group-hover:text-foreground transition-colors">
-                      {achievement}
+                    <p className="text-sm font-medium text-foreground/80">
+                      {highlight}
                     </p>
                   </div>
                 ))}
@@ -128,10 +109,10 @@ export default function About() {
           </div>
 
           {/* Call to Action Section */}
-          <div className="panel p-8 md:p-12 rounded-3xl border-l-4 border-l-primary text-center space-y-6 animate-fadeIn" style={{ animationDelay: '320ms' }}>
+          <div className="panel p-8 md:p-12 rounded-2xl border-l-4 border-l-primary text-center space-y-6 animate-fadeIn" style={{ animationDelay: '320ms' }}>
             <div className="relative z-10">
-              <h3 className="text-2xl md:text-3xl font-bold mb-4">
-                <span className="gradient-text">Let's Build Something Amazing Together</span>
+              <h3 className="text-2xl md:text-3xl font-bold mb-4 text-foreground">
+                Let's Build Something Amazing Together
               </h3>
               <p className="text-muted-foreground text-lg mb-6 max-w-2xl mx-auto">
                 Ready to bring your ideas to life with cutting-edge technology and innovative solutions.

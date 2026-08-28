@@ -22,12 +22,12 @@ export default function CurrentlyWorkingOn() {
   }
 
   return (
-    <div ref={sectionRef} className={`container-custom section scroll-reveal ${isRevealed ? "is-visible" : ""}`}>
+    <div id="currently-working-on" ref={sectionRef} className={`container-custom section scroll-reveal scroll-mt-36 ${isRevealed ? "is-visible" : ""}`}>
       <div className="max-w-5xl mx-auto space-y-12">
         {/* Header */}
         <div className="text-center space-y-4 animate-fadeIn">
           <div className="flex justify-center">
-            <SectionEyebrow icon={FaRocket} label="Currently Working On" />
+            <SectionEyebrow index="02" icon={FaRocket} label="Currently Working On" />
           </div>
           <p className="text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             Active projects and initiatives I'm currently focused on.
@@ -60,7 +60,7 @@ export default function CurrentlyWorkingOn() {
 
                         <button
                           onClick={() => toggleExpand(activity.id)}
-                          className={`inline-flex items-center gap-2 px-4 py-2 border ${accent.border} ${accent.bgSoft} ${accent.text} text-sm font-semibold rounded-lg transition-colors duration-150`}
+                          className={`inline-flex items-center gap-2 px-4 py-2 border ${accent.border} ${accent.bgSoft} ${accent.text} text-sm font-semibold rounded-2xl transition-colors duration-150`}
                         >
                           <span>{isExpanded ? "Show Less" : "Show More"}</span>
                           {isExpanded ? (
@@ -75,7 +75,7 @@ export default function CurrentlyWorkingOn() {
                     {/* Expanded Content */}
                     {isExpanded && (
                       <div className="mt-6 pt-6 border-t border-border animate-fadeIn">
-                        <div className={`p-6 rounded-xl border ${accent.border} ${accent.bgSoft}`}>
+                        <div className={`p-6 rounded-2xl border ${accent.border} ${accent.bgSoft}`}>
                           <h4 className={`text-sm font-bold mb-3 flex items-center gap-2 ${accent.text}`}>
                             <div className={`w-1.5 h-1.5 rounded-full ${accent.bg} animate-pulse`}></div>
                             Additional Details

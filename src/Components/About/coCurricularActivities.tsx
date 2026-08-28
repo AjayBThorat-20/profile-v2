@@ -21,12 +21,12 @@ export default function CoCurricularActivities() {
   const isRevealed = useScrollReveal(sectionRef);
 
   return (
-    <div ref={sectionRef} className={`container-custom section scroll-reveal ${isRevealed ? "is-visible" : ""}`}>
+    <div id="activities" ref={sectionRef} className={`container-custom section scroll-reveal scroll-mt-36 ${isRevealed ? "is-visible" : ""}`}>
       <div className="max-w-7xl mx-auto space-y-12">
         {/* Header Section */}
         <div className="text-center space-y-4 animate-fadeIn">
           <div className="flex justify-center">
-            <SectionEyebrow icon={FaRocket} label="Beyond Academics" />
+            <SectionEyebrow index="03" icon={FaRocket} label="Beyond Academics" />
           </div>
           <p className="text-base text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             Activities that shaped leadership, teamwork, and creative problem-solving skills.
@@ -42,7 +42,7 @@ export default function CoCurricularActivities() {
             return (
               <div
                 key={activity.id}
-                className={`group relative border ${accent.border} rounded-2xl p-6 hover:-translate-y-1 transition-transform duration-200 overflow-hidden`}
+                className={`spotlight group relative entry-card ${accent.border} p-6 overflow-hidden`}
               >
                 {/* Content */}
                 <div className="relative h-full flex flex-col space-y-4">

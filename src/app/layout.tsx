@@ -1,16 +1,30 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { Fraunces, Sora } from "next/font/google";
 import "./globals.css";
 import DefaultLayout from "../Components/Layout/defaultLayout";
 import ReduxProvider from "@/providers/ReduxProvider";
 import Script from "next/script";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-  display: 'swap', // Add this
+// Display face for headings - a warm expressive serif matching the
+// site's existing cinematic treatment (film grain, letterbox, Ken
+// Burns) rather than a neutral sans headline.
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  variable: "--font-fraunces",
+  weight: ["500", "600", "800"],
+  display: "swap",
 });
+// Body face - pairs with Fraunces, replaces Geist Sans for running text.
+const sora = Sora({
+  subsets: ["latin"],
+  variable: "--font-sora",
+  weight: ["400", "500", "600"],
+  display: "swap",
+});
+// Geist Mono stays as the utility face for eyebrows, the REC indicator,
+// stat figures, and code/data labels - untouched by this font pairing
+// swap, which only replaces the display + body roles.
 const geistMono = localFont({
   src: "./fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
@@ -187,7 +201,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased transition-colors duration-200`}
+        className={`${fraunces.variable} ${sora.variable} ${geistMono.variable} antialiased transition-colors duration-200`}
       >
         <ReduxProvider>
           <DefaultLayout>{children}</DefaultLayout>

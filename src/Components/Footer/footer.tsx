@@ -40,9 +40,6 @@ export default function Footer() {
 
   return (
     <footer className="relative w-full border-t border-border bg-card transition-colors duration-200">
-      {/* Gradient decoration at top */}
-      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-secondary to-accent"></div>
-
       <div className="max-w-7xl mx-auto px-6 py-12">
         {/* Main Content */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
@@ -50,10 +47,10 @@ export default function Footer() {
           {/* Left: Brand & Description */}
           <div className="space-y-4">
             <div className="flex items-center gap-2">
-              <span className="font-mono text-sm font-bold border-2 border-primary/30 rounded-lg px-2 py-0.5 text-foreground">
+              <span className="font-mono text-sm font-bold border-2 border-primary/30 rounded-md px-2 py-0.5 text-foreground">
                 <span className="text-primary">&lt;</span>AT<span className="text-primary">/&gt;</span>
               </span>
-              <h3 className="text-xl font-black gradient-text">
+              <h3 className="text-xl font-black text-foreground">
                 Ajay Thorat
               </h3>
             </div>
@@ -90,6 +87,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.name}
+                  className="group"
                 >
                   <IconTile icon={social.icon} accent={getAccent(index)} size="sm" />
                 </Link>
@@ -119,14 +117,14 @@ export default function Footer() {
           <div className="flex items-center gap-6">
             <p className="text-sm text-muted-foreground flex items-center gap-2">
               Made with{" "}
-              <FaHeart className="w-4 h-4 text-red-500 animate-pulse" />{" "}
+              <FaHeart className="w-4 h-4 text-foreground animate-pulse" />{" "}
               using Next.js & TypeScript
             </p>
             
             {/* Scroll to top button */}
             <button
               onClick={scrollToTop}
-              className="group p-2 rounded-lg border border-border hover:border-primary/50 transition-colors duration-150"
+              className="group p-2 rounded-2xl border border-border hover:border-primary/50 transition-colors duration-150"
               aria-label="Scroll to top"
             >
               <FaArrowUp className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors duration-200" />

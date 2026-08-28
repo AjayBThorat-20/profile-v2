@@ -25,12 +25,12 @@ export default function Education() {
   };
 
   return (
-    <div ref={sectionRef} className={`container-custom section scroll-reveal ${isRevealed ? "is-visible" : ""}`}>
+    <div id="education" ref={sectionRef} className={`container-custom section scroll-reveal scroll-mt-36 ${isRevealed ? "is-visible" : ""}`}>
       <div className="max-w-4xl mx-auto space-y-12">
         {/* Header Section */}
         <div className="text-center space-y-4 animate-fadeIn">
           <div className="flex justify-center">
-            <SectionEyebrow icon={HiAcademicCap} label="Academic Journey" />
+            <SectionEyebrow index="04" icon={HiAcademicCap} label="Academic Journey" />
           </div>
           <p className="text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             Educational background building a strong foundation in computer science and technology.
@@ -46,12 +46,12 @@ export default function Education() {
             return (
               <div key={edu.id} className="animate-fadeIn" style={{ animationDelay: `${index * 60}ms` }}>
                 <TimelineItem icon={FaGraduationCap} accent={accent} meta={edu.passingYear}>
-                  <div className={`border ${accent.border} rounded-2xl p-5 md:p-6 hover:-translate-y-0.5 transition-transform duration-200`}>
+                  <div className={`spotlight entry-card ${accent.border} p-5 md:p-6`}>
                     <h3 className="text-lg md:text-xl font-bold text-foreground leading-tight mb-4">
                       {edu.course}
                     </h3>
 
-                    <div className="flex items-start gap-3 bg-muted/50 rounded-xl p-4">
+                    <div className="flex items-start gap-3 bg-muted/50 rounded-2xl p-4">
                       <IconTile icon={HiAcademicCap} accent={accent} size="sm" />
                       <div className="min-w-0">
                         <p className="font-bold text-foreground text-sm md:text-base leading-tight">

@@ -1,6 +1,12 @@
 import React from 'react'
 import { CurrentlyWorkingOn, Experience, WelcomeToExperience } from "@/Components/Experience/page";
+import ChapterNav from "@/Components/UI/ChapterNav";
 import { Metadata } from "next";
+
+const chapters = [
+  { id: "experience-journey", index: "01", label: "Journey" },
+  { id: "currently-working-on", index: "02", label: "Currently On" },
+];
 
 export const metadata: Metadata = {
   title: "Experience | Ajay Thorat",
@@ -50,6 +56,7 @@ export default function page() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbStructuredData) }}
       />
       <WelcomeToExperience />
+      <ChapterNav items={chapters} />
       <Experience />
       <CurrentlyWorkingOn />
     </>

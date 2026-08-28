@@ -1,11 +1,12 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { FaArrowLeft, FaExternalLinkAlt, FaCalendar, FaCheckCircle, FaBuilding } from "react-icons/fa";
 import CompanyReviews from "./CompanyReviews";
 import { getAccent } from "@/Components/UI/accentColor";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 interface Experience {
   id: number;
@@ -29,19 +30,20 @@ export default function ExperienceDetails({ experience }: { experience: Experien
 
   const mainAccent = getAccent(0);
 
+  const headerRef = useRef<HTMLDivElement>(null);
+  const isHeaderRevealed = useScrollReveal(headerRef);
+  const detailsRef = useRef<HTMLDivElement>(null);
+  const isDetailsRevealed = useScrollReveal(detailsRef);
+  const footerRef = useRef<HTMLDivElement>(null);
+  const isFooterRevealed = useScrollReveal(footerRef);
+
   return (
     <div className="relative min-h-screen pb-20">
-      {/* Background Gradients */}
-      <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
-        <div className="parallax-slow absolute top-0 right-0 w-[500px] h-[500px] bg-primary/10 rounded-full blur-3xl opacity-60 animate-pulse-slow" />
-        <div className="parallax-medium absolute bottom-0 left-0 w-[600px] h-[600px] bg-secondary/10 rounded-full blur-3xl opacity-60 animate-pulse-slow" />
-      </div>
-
       <div className="container-custom section">
         <div className="max-w-6xl mx-auto space-y-8">
 
           {/* Header Card */}
-          <div className="panel rounded-3xl p-8 md:p-10 border-l-4 border-l-primary animate-fadeIn">
+          <div ref={headerRef} className={`panel rounded-2xl p-8 md:p-10 border-l-4 border-l-primary scroll-reveal ${isHeaderRevealed ? "is-visible" : ""}`}>
             <div className="relative space-y-6">
               {/* Company & Title */}
               <div className="space-y-3">
@@ -50,7 +52,7 @@ export default function ExperienceDetails({ experience }: { experience: Experien
                   <span>COMPANY PROFILE</span>
                 </div>
 
-                <h1 className="text-3xl md:text-4xl lg:text-5xl font-black gradient-text">
+                <h1 className="text-3xl md:text-4xl lg:text-5xl font-black text-foreground">
                   {experience.title}
                 </h1>
 
@@ -66,8 +68,8 @@ export default function ExperienceDetails({ experience }: { experience: Experien
               </div>
 
               {/* Duration */}
-              <div className="flex items-center gap-3 px-5 py-3 bg-muted/50 rounded-xl border border-border/50 w-fit">
-                <div className="p-2 bg-primary/10 border border-primary/30 rounded-lg">
+              <div className="flex items-center gap-3 px-5 py-3 bg-muted/50 rounded-2xl border border-border/50 w-fit">
+                <div className="p-2 bg-primary/10 border border-primary/30 rounded-2xl">
                   <FaCalendar className="w-4 h-4 text-primary" />
                 </div>
                 <div>
@@ -86,7 +88,7 @@ export default function ExperienceDetails({ experience }: { experience: Experien
                   {experience.techStack.split(",").map((tech) => (
                     <span
                       key={tech}
-                      className={`px-4 py-2 ${mainAccent.badge} rounded-lg text-sm font-semibold border hover:scale-105 transition-transform duration-150`}
+                      className={`px-4 py-2 ${mainAccent.badge} rounded-2xl text-sm font-semibold border hover:scale-105 transition-transform duration-150`}
                     >
                       {tech.trim()}
                     </span>
@@ -97,14 +99,14 @@ export default function ExperienceDetails({ experience }: { experience: Experien
           </div>
 
           {/* Details Section */}
-          <div className="space-y-8">
+          <div ref={detailsRef} className={`space-y-8 scroll-reveal ${isDetailsRevealed ? "is-visible" : ""}`}>
             {experience.details.map((detail, index) => {
               const accent = getAccent(index);
 
               return (
                 <div
                   key={detail.id}
-                  className={`relative border ${accent.border} rounded-3xl overflow-hidden animate-fadeIn`}
+                  className={`relative border ${accent.border} rounded-2xl overflow-hidden animate-fadeIn`}
                   style={{ animationDelay: `${index * 60}ms` }}
                 >
                   <div className={`h-1 ${accent.bg}`}></div>
@@ -179,10 +181,10 @@ export default function ExperienceDetails({ experience }: { experience: Experien
           <CompanyReviews />
 
           {/* Navigation Footer */}
-          <div className="flex justify-center pt-8 animate-fadeIn" style={{ animationDelay: '320ms' }}>
+          <div ref={footerRef} className={`flex justify-center pt-8 scroll-reveal ${isFooterRevealed ? "is-visible" : ""}`}>
             <Link
               href="/experience"
-              className="magnetic group inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-primary to-secondary text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-200"
+              className="btn-primary group px-8 py-4 font-bold"
             >
               <FaArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform duration-200" />
               <span>Back to Experience</span>

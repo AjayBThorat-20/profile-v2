@@ -4,7 +4,7 @@ export default function ExperienceSkeleton() {
         {[1, 2, 3].map((_, idx) => (
           <div
             key={idx}
-            className={`relative bg-card rounded-xl shadow-lg overflow-hidden transition-all duration-200 border-2 border-border ${
+            className={`relative bg-card rounded-2xl shadow-lg overflow-hidden transition-all duration-200 border-2 border-border ${
               idx === 0 ? "md:col-start-1 md:row-start-1" :
               idx === 1 ? "md:col-start-2 md:row-start-1" :
               idx === 2 ? "md:col-start-1 md:row-start-2 lg:col-start-3 lg:row-start-1" : ""
@@ -20,7 +20,7 @@ export default function ExperienceSkeleton() {
               <div className="h-4 bg-muted rounded w-2/3 mb-2 animate-pulse"></div>
 
               {/* Placeholder for button */}
-              <div className="h-10 bg-muted rounded-lg mt-4 animate-pulse"></div>
+              <div className="h-10 bg-muted rounded-2xl mt-4 animate-pulse"></div>
             </div>
           </div>
         ))}

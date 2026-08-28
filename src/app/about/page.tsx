@@ -1,5 +1,13 @@
 import { About, Certifications, CoCurricularActivities, Education, Skills } from "@/Components/About/page";
+import ChapterNav from "@/Components/UI/ChapterNav";
 import { Metadata } from "next";
+
+const chapters = [
+  { id: "skills", index: "01", label: "Skills" },
+  { id: "certifications", index: "02", label: "Certifications" },
+  { id: "activities", index: "03", label: "Activities" },
+  { id: "education", index: "04", label: "Education" },
+];
 
 export const metadata: Metadata = {
   title: "About Me | Ajay Thorat",
@@ -100,6 +108,7 @@ export default function page() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqStructuredData) }}
       />
       <About />
+      <ChapterNav items={chapters} />
       <Skills />
       <Certifications />
       <CoCurricularActivities />

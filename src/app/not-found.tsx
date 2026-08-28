@@ -14,8 +14,8 @@ export default function NotFound() {
   return (
     <div className="container-custom section flex min-h-[60vh] flex-col items-center justify-center text-center">
       <p className="font-mono text-sm font-bold text-primary">404</p>
-      <h1 className="mt-4 text-3xl md:text-4xl font-black">
-        <span className="gradient-text">Page Not Found</span>
+      <h1 className="mt-4 text-3xl md:text-4xl font-black text-foreground">
+        Page Not Found
       </h1>
       <p className="mt-4 max-w-md text-muted-foreground">
         The page you're looking for doesn't exist or may have moved. Here are a few places to go instead.

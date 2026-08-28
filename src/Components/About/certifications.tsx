@@ -10,6 +10,7 @@ import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { getAccent } from "@/Components/UI/accentColor";
 import IconTile from "@/Components/UI/IconTile";
 import SectionEyebrow from "@/Components/UI/SectionEyebrow";
+import Badge from "@/Components/UI/Badge";
 
 export default function Certifications() {
   const [selectedImage, setSelectedImage] = useState<{ image: string; title: string } | null>(null);
@@ -28,12 +29,12 @@ export default function Certifications() {
   }, [selectedImage]);
 
   return (
-    <div ref={sectionRef} className={`container-custom section scroll-reveal ${isRevealed ? "is-visible" : ""}`}>
+    <div id="certifications" ref={sectionRef} className={`container-custom section scroll-reveal scroll-mt-36 ${isRevealed ? "is-visible" : ""}`}>
       <div className="max-w-7xl mx-auto space-y-12">
         {/* Header Section */}
         <div className="text-center space-y-4 animate-fadeIn">
           <div className="flex justify-center">
-            <SectionEyebrow icon={FaCheckCircle} label="Verified Credentials" />
+            <SectionEyebrow index="02" icon={FaCheckCircle} label="Verified Credentials" />
           </div>
           <p className="text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             Professional certifications validating expertise and commitment to continuous learning in cutting-edge technologies.
@@ -48,7 +49,7 @@ export default function Certifications() {
             return (
               <div
                 key={cert.id}
-                className={`group relative border ${accent.border} rounded-2xl p-6 hover:-translate-y-1 transition-transform duration-200 overflow-hidden`}
+                className={`spotlight group relative entry-card ${accent.border} p-6 overflow-hidden`}
               >
                 {/* Top Accent Bar */}
                 <div className={`absolute top-0 left-0 right-0 h-1 ${accent.bg}`}></div>
@@ -58,12 +59,7 @@ export default function Certifications() {
                   {/* Header with Icon and Badge */}
                   <div className="flex items-start justify-between">
                     <IconTile icon={HiOutlineAcademicCap} accent={accent} size="md" />
-                    <div className="flex items-center gap-2">
-                      <div className="bg-green-500/10 text-green-600 dark:text-green-400 px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">
-                        <FaCheckCircle className="w-3 h-3" />
-                        <span>Verified</span>
-                      </div>
-                    </div>
+                    <Badge tone="success" icon={FaCheckCircle}>Verified</Badge>
                   </div>
 
                   {/* Title */}
@@ -95,7 +91,7 @@ export default function Certifications() {
                   {/* View Button */}
                   <button
                     onClick={() => setSelectedImage({ image: cert.image, title: cert.title })}
-                    className={`w-full px-5 py-3 border ${accent.border} ${accent.bgSoft} ${accent.text} font-semibold rounded-xl transition-colors duration-150 ${accent.hoverBgSolid}`}
+                    className={`w-full px-5 py-3 border ${accent.border} ${accent.bgSoft} ${accent.text} font-semibold rounded-2xl transition-colors duration-150 ${accent.hoverBgSolid}`}
                   >
                     <span className="flex items-center justify-center gap-2">
                       <FaCertificate className="w-4 h-4" />
@@ -116,7 +112,7 @@ export default function Certifications() {
             onClick={() => setSelectedImage(null)}
           >
             <div
-              className="relative w-full max-w-6xl bg-card rounded-3xl shadow-2xl overflow-hidden border border-border"
+              className="relative w-full max-w-6xl bg-card rounded-2xl shadow-2xl overflow-hidden border border-border"
               onClick={(e) => e.stopPropagation()}
             >
               <button

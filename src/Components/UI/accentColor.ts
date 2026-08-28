@@ -13,6 +13,12 @@ export interface AccentClasses {
   text: string;
   bg: string;
   bgSoft: string;
+  /* Text color for content sitting on a solid `.bg` fill. --primary
+     flips between near-black and near-white across light/dark mode, so
+     a hardcoded `text-white` (fine under the old colored palette) can
+     land white-on-white - always pair `.bg` with `.fg`, never
+     `text-white`, for anything drawn on top of it. */
+  fg: string;
   border: string;
   borderStrong: string;
   groupHoverBorder: string;
@@ -27,6 +33,7 @@ const ACCENTS: Record<AccentToken, AccentClasses> = {
     text: "text-primary",
     bg: "bg-primary",
     bgSoft: "bg-primary/10",
+    fg: "text-primary-foreground",
     border: "border-primary/30",
     borderStrong: "border-primary/60",
     groupHoverBorder: "group-hover:border-primary/60",
@@ -39,6 +46,7 @@ const ACCENTS: Record<AccentToken, AccentClasses> = {
     text: "text-secondary",
     bg: "bg-secondary",
     bgSoft: "bg-secondary/10",
+    fg: "text-secondary-foreground",
     border: "border-secondary/30",
     borderStrong: "border-secondary/60",
     groupHoverBorder: "group-hover:border-secondary/60",
@@ -51,6 +59,7 @@ const ACCENTS: Record<AccentToken, AccentClasses> = {
     text: "text-accent",
     bg: "bg-accent",
     bgSoft: "bg-accent/10",
+    fg: "text-accent-foreground",
     border: "border-accent/30",
     borderStrong: "border-accent/60",
     groupHoverBorder: "group-hover:border-accent/60",
@@ -60,7 +69,10 @@ const ACCENTS: Record<AccentToken, AccentClasses> = {
   },
 };
 
-const ORDER: AccentToken[] = ["primary", "secondary", "accent"];
+// Gold appears twice as often as teal or wine - it's the key light and
+// should dominate; the other two are situational shadow/highlight tones,
+// not equal thirds of a rotating brand-color wheel.
+const ORDER: AccentToken[] = ["primary", "secondary", "primary", "accent"];
 
 export function getAccent(index: number): AccentClasses {
   return ACCENTS[ORDER[((index % ORDER.length) + ORDER.length) % ORDER.length]];

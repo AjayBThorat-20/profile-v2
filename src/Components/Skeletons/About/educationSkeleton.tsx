@@ -13,7 +13,7 @@ export default function EducationSkeleton() {
                   index % 2 === 0 ? "ml-auto md:mr-12" : "mr-auto md:ml-12"
                 }`}
               >
-                <div className="p-5 bg-card rounded-lg shadow-lg border-l-4 border-primary/50 animate-pulse">
+                <div className="p-5 bg-card rounded-2xl shadow-lg border-l-4 border-primary/50 animate-pulse">
                   <div className="h-6 w-3/4 bg-muted rounded mb-2"></div>
                   <div className="h-4 w-full bg-muted rounded mb-2"></div>
                   <div className="h-4 w-1/3 bg-muted rounded"></div>

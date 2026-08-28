@@ -26,7 +26,7 @@ export function TimelineItem({ icon: Icon, accent, meta, children }: TimelineIte
       <div
         className={`timeline-node ${accent.timelineNode} mt-1.5 flex items-center justify-center`}
       >
-        <Icon className="w-3 h-3 text-white" />
+        <Icon className={`w-3 h-3 ${accent.fg}`} />
       </div>
       <div className="flex-1 min-w-0 space-y-2">
         <p className={`font-mono text-xs font-semibold tracking-wide ${accent.text}`}>{meta}</p>

@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { FaCode, FaLightbulb, FaRocket } from "react-icons/fa";
 import SectionIntro from "@/Components/UI/SectionIntro";
 
 export default function WelcomeToProject() {
@@ -11,29 +10,17 @@ export default function WelcomeToProject() {
         <SectionIntro
           intro={
             <>
-              Explore the journey of my <span className="font-bold text-primary">creativity</span> and{" "}
-              <span className="font-bold text-secondary">technical expertise</span> through the projects showcased here.
-              Each project represents a blend of innovation, problem-solving, and dedication to building impactful solutions.
+              Four production projects and one open-source npm package I actively maintain —{" "}
+              <span className="font-bold text-foreground">DevCompass</span>, a dependency-health CLI
+              with real-time CVE scanning and AI-assisted fixes.
             </>
           }
-          features={[
-            {
-              icon: FaLightbulb,
-              title: "Innovation",
-              description: "Creative solutions that push boundaries and explore new possibilities",
-            },
-            {
-              icon: FaCode,
-              title: "Technical Excellence",
-              description: "Built with cutting-edge technologies and best practices",
-            },
-            {
-              icon: FaRocket,
-              title: "Real Impact",
-              description: "Solutions designed to make a meaningful difference",
-            },
+          facts={[
+            { value: "4", label: "Live projects" },
+            { value: "1", label: "Open-source npm package" },
+            { value: "500+", label: "Packages tracked by DevCompass" },
+            { value: "4", label: "LLM providers integrated" },
           ]}
-          closingStatement="Dive in, and feel free to connect if any of my work inspires or resonates with you."
         />
       </div>
     </div>

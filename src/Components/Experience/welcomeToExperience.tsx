@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { FaBriefcase, FaRocket, FaUsers } from "react-icons/fa";
 import SectionIntro from "@/Components/UI/SectionIntro";
 
 export default function WelcomeToExperience() {
@@ -11,30 +10,16 @@ export default function WelcomeToExperience() {
         <SectionIntro
           intro={
             <>
-              My professional journey reflects a commitment to{" "}
-              <span className="font-bold text-primary">continuous learning</span>,{" "}
-              <span className="font-bold text-secondary">collaborative teamwork</span>, and delivering{" "}
-              <span className="font-bold text-accent">scalable solutions</span> that drive real business impact.
+              Currently a Junior Full Stack Developer at{" "}
+              <span className="font-bold text-foreground">Mumbai Biocluster</span>, building
+              production systems for real teams end to end.
             </>
           }
-          features={[
-            {
-              icon: FaBriefcase,
-              title: "Hands-On Experience",
-              description: "Building production-ready applications and managing real-world projects",
-            },
-            {
-              icon: FaUsers,
-              title: "Team Collaboration",
-              description: "Working in agile teams to deliver high-quality solutions on time",
-            },
-            {
-              icon: FaRocket,
-              title: "Growth Mindset",
-              description: "Constantly learning new technologies and adapting to challenges",
-            },
+          facts={[
+            { value: "2", label: "Companies" },
+            { value: "1.7+", label: "Years experience" },
+            { value: "Present", label: "Currently at Mumbai Biocluster" },
           ]}
-          closingStatement="Explore my journey and see how I've contributed to building innovative solutions."
         />
       </div>
     </div>

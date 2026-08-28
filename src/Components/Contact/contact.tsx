@@ -87,9 +87,9 @@ export default function Contact() {
           <div className="space-y-8 animate-fadeIn">
             {/* Header */}
             <div className="space-y-4">
-              <SectionEyebrow icon={FaEnvelope} label="Get In Touch" />
+              <SectionEyebrow index="01" icon={FaEnvelope} label="Get In Touch" />
 
-              <h2 className="text-3xl md:text-4xl font-black gradient-text">
+              <h2 className="text-3xl md:text-4xl font-black text-foreground">
                 Let's Work Together
               </h2>
 
@@ -100,7 +100,7 @@ export default function Contact() {
             </div>
 
             {/* Contact Methods */}
-            <div className="space-y-4">
+            <div className="panel rounded-2xl p-2 md:p-4">
               {[
                 { icon: IoMdMail, label: "Email", value: "ajaythorat988@gmail.com" },
                 { icon: FaLinkedin, label: "LinkedIn", value: "Connect on LinkedIn" },
@@ -108,16 +108,11 @@ export default function Contact() {
               ].map((method, index) => {
                 const accent = getAccent(index);
                 return (
-                  <div
-                    key={method.label}
-                    className={`rounded-2xl border ${accent.border} hover:-translate-y-0.5 transition-transform duration-200 p-5`}
-                  >
-                    <div className="flex items-center gap-4">
-                      <IconTile icon={method.icon} accent={accent} size="md" />
-                      <div>
-                        <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1">{method.label}</p>
-                        <p className="font-bold text-foreground">{method.value}</p>
-                      </div>
+                  <div key={method.label} className="list-row px-2">
+                    <IconTile icon={method.icon} accent={accent} size="md" />
+                    <div>
+                      <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1">{method.label}</p>
+                      <p className="font-bold text-foreground">{method.value}</p>
                     </div>
                   </div>
                 );
@@ -152,7 +147,7 @@ export default function Contact() {
 
           {/* Right Side - Contact Form */}
           <div className="animate-fadeIn" style={{ animationDelay: '120ms' }}>
-            <div className="panel rounded-3xl p-8 md:p-10">
+            <div className="panel rounded-2xl p-8 md:p-10">
               {status === "loading" ? (
                 <div className="relative flex flex-col items-center justify-center py-20">
                   <div className="w-16 h-16 border-4 border-primary/30 border-t-primary rounded-full animate-spin mb-4"></div>
@@ -185,7 +180,7 @@ export default function Contact() {
 
                   {/* Error Message */}
                   {status === "error" && errorMessage && (
-                    <div className="flex items-center gap-3 p-4 bg-red-500/10 border-2 border-red-500/20 rounded-xl animate-fadeIn">
+                    <div className="flex items-center gap-3 p-4 bg-red-500/10 border-2 border-red-500/20 rounded-2xl animate-fadeIn">
                       <FaExclamationCircle className="w-5 h-5 text-red-600 dark:text-red-400 flex-shrink-0" />
                       <p className="text-sm font-semibold text-red-600 dark:text-red-400">
                         {errorMessage}
@@ -206,7 +201,7 @@ export default function Contact() {
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 bg-background border-2 border-border focus:border-primary rounded-xl text-foreground placeholder:text-muted-foreground transition-all duration-200 outline-none"
+                      className="w-full px-4 py-3 bg-background border-2 border-border focus:border-primary rounded-2xl text-foreground placeholder:text-muted-foreground transition-all duration-200 outline-none"
                       placeholder="John Doe"
                     />
                   </div>
@@ -224,7 +219,7 @@ export default function Contact() {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 bg-background border-2 border-border focus:border-primary rounded-xl text-foreground placeholder:text-muted-foreground transition-all duration-200 outline-none"
+                      className="w-full px-4 py-3 bg-background border-2 border-border focus:border-primary rounded-2xl text-foreground placeholder:text-muted-foreground transition-all duration-200 outline-none"
                       placeholder="john@example.com"
                     />
                   </div>
@@ -242,7 +237,7 @@ export default function Contact() {
                       value={formData.subject}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 bg-background border-2 border-border focus:border-primary rounded-xl text-foreground placeholder:text-muted-foreground transition-all duration-200 outline-none"
+                      className="w-full px-4 py-3 bg-background border-2 border-border focus:border-primary rounded-2xl text-foreground placeholder:text-muted-foreground transition-all duration-200 outline-none"
                       placeholder="What's this about?"
                     />
                   </div>
@@ -260,7 +255,7 @@ export default function Contact() {
                       onChange={handleChange}
                       required
                       rows={6}
-                      className="w-full px-4 py-3 bg-background border-2 border-border focus:border-primary rounded-xl text-foreground placeholder:text-muted-foreground transition-all duration-200 outline-none resize-none"
+                      className="w-full px-4 py-3 bg-background border-2 border-border focus:border-primary rounded-2xl text-foreground placeholder:text-muted-foreground transition-all duration-200 outline-none resize-none"
                       placeholder="Tell me about your project or opportunity..."
                     />
                   </div>
@@ -269,7 +264,7 @@ export default function Contact() {
                   <button
                     type="submit"
                     disabled={isLoading}
-                    className="magnetic w-full group flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-primary to-secondary text-primary-foreground font-bold rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="btn-primary w-full group px-8 py-4 font-bold disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <FaPaperPlane className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-200" />
                     <span>Send Message</span>

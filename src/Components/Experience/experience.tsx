@@ -9,6 +9,7 @@ import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { getAccent } from "@/Components/UI/accentColor";
 import SectionEyebrow from "@/Components/UI/SectionEyebrow";
 import { TimelineRail, TimelineItem } from "@/Components/UI/Timeline";
+import Badge from "@/Components/UI/Badge";
 
 export default function Experience() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -27,12 +28,12 @@ export default function Experience() {
   };
 
   return (
-    <div ref={sectionRef} className={`container-custom section scroll-reveal ${isRevealed ? "is-visible" : ""}`}>
+    <div id="experience-journey" ref={sectionRef} className={`container-custom section scroll-reveal scroll-mt-36 ${isRevealed ? "is-visible" : ""}`}>
       <div className="max-w-4xl mx-auto space-y-12">
         {/* Header */}
         <div className="text-center space-y-4 animate-fadeIn">
           <div className="flex justify-center">
-            <SectionEyebrow icon={FaBriefcase} label="Professional Journey" />
+            <SectionEyebrow index="01" icon={FaBriefcase} label="Professional Journey" />
           </div>
           <p className="text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             Building expertise through hands-on experience in innovative companies and impactful projects.
@@ -49,14 +50,9 @@ export default function Experience() {
             return (
               <div key={exp.id} className="animate-fadeIn" style={{ animationDelay: `${index * 60}ms` }}>
                 <TimelineItem icon={HiBuildingOffice2} accent={accent} meta={exp.duration}>
-                  <div className={`border ${accent.border} rounded-2xl p-5 md:p-6 hover:-translate-y-0.5 transition-transform duration-200`}>
+                  <div className={`spotlight entry-card ${accent.border} p-5 md:p-6`}>
                     <div className="flex items-center gap-2 mb-2">
-                      {current && (
-                        <span className="px-3 py-1 text-xs font-bold rounded-full bg-green-500/10 border border-green-500/20 text-green-600 dark:text-green-400 flex items-center gap-1">
-                          <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                          Current
-                        </span>
-                      )}
+                      {current && <Badge tone="success" dot>Current</Badge>}
                     </div>
                     <h3 className="text-lg md:text-xl font-bold text-foreground leading-tight mb-1">
                       {exp.title}
@@ -79,7 +75,7 @@ export default function Experience() {
                         {exp.techStack.split(", ").slice(0, 6).map((tech) => (
                           <span
                             key={tech}
-                            className={`px-3 py-1.5 ${accent.badge} rounded-lg text-xs font-semibold border hover:scale-105 transition-transform duration-150 cursor-default`}
+                            className={`px-3 py-1.5 ${accent.badge} rounded-2xl text-xs font-semibold border hover:scale-105 transition-transform duration-150 cursor-default`}
                           >
                             {tech}
                           </span>
@@ -91,7 +87,7 @@ export default function Experience() {
                     <div className="flex flex-col sm:flex-row gap-3">
                       <Link
                         href={`/experience/details/${exp.id}`}
-                        className={`magnetic group/btn flex-1 inline-flex items-center justify-center gap-2 px-6 py-3 ${accent.bg} text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-200`}
+                        className={`group/btn flex-1 inline-flex items-center justify-center gap-2 px-6 py-3 ${accent.bg} ${accent.fg} font-bold rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-200`}
                       >
                         <span>View Details</span>
                         <FaArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-200" />
@@ -101,7 +97,7 @@ export default function Experience() {
                         href={exp.companyUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group/link inline-flex items-center justify-center gap-2 px-6 py-3 border-2 border-border hover:border-primary/50 bg-card hover:bg-muted rounded-xl font-bold transition-colors duration-200"
+                        className="group/link inline-flex items-center justify-center gap-2 px-6 py-3 border-2 border-border hover:border-primary/50 bg-card hover:bg-muted rounded-2xl font-bold transition-colors duration-200"
                       >
                         <span>Visit Company</span>
                         <FaExternalLinkAlt className="w-3.5 h-3.5 group-hover/link:translate-x-1 group-hover/link:-translate-y-1 transition-transform duration-200" />

@@ -5,6 +5,7 @@ import Navbar from "../Header/navbar";
 import { useAppSelector } from "@/store/hooks";
 import Footer from "../Footer/footer";
 import { usePathname } from "next/navigation";
+import ScrollProgressBar from "../UI/ScrollProgressBar";
 
 const DefaultLayout = ({ children }: { children: React.ReactNode }) => {
   const theme = useAppSelector((state) => state.theme.mode);
@@ -17,17 +18,24 @@ const DefaultLayout = ({ children }: { children: React.ReactNode }) => {
   }, [theme]);
 
   return (
-    <div className="min-h-screen overflow-x-hidden bg-background text-foreground transition-colors duration-200">
+    // overflow-x-clip, not overflow-x-hidden: `hidden` still establishes a
+    // scroll container per the CSS overflow spec (even though this div never
+    // actually scrolls - the window does), which silently breaks
+    // `position: sticky` for every descendant (e.g. ChapterNav). `clip`
+    // gets the same "no horizontal scrollbar" result without that side effect.
+    <div className="min-h-screen overflow-x-clip bg-background text-foreground transition-colors duration-200">
+      <ScrollProgressBar />
+
       {/* Fixed Navbar */}
       <Navbar />
 
       {/* Main Content with proper spacing for fixed navbar */}
       <main className="w-full min-h-[calc(100vh-4rem)]">
-        {/* No animation here on purpose: every page already fades/slides its
-            own content in on mount, and wrapping that in another fade
-            compounds with it (opacity multiplies, translateY adds up),
-            which reads as everything taking noticeably longer to settle. */}
-        <div key={pathname} className="w-full min-h-full">
+        {/* .page-transition is a short opacity+scale settle (see globals.css)
+            deliberately distinct from each page's own translateY-based
+            content stagger, so the two don't visually compound - it softens
+            the route-change snap without delaying each page's own reveal. */}
+        <div key={pathname} className="w-full min-h-full page-transition">
           {children}
         </div>
       </main>

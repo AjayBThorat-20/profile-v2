@@ -4,14 +4,14 @@ export default function CertificationsSkeleton() {
         {Array.from({ length: 3 }).map((_, index) => (
           <div
             key={index}
-            className="relative bg-card rounded-xl shadow-lg p-6 flex flex-col items-center animate-pulse border border-border"
+            className="relative bg-card rounded-2xl shadow-lg p-6 flex flex-col items-center animate-pulse border border-border"
           >
-            <div className="w-full h-[250px] bg-muted rounded-lg"></div>
+            <div className="w-full h-[250px] bg-muted rounded-2xl"></div>
             <div className="text-center mt-4">
               <div className="h-4 w-1/2 bg-muted rounded mb-2"></div>
               <div className="h-3 w-1/3 bg-muted rounded"></div>
             </div>
-            <div className="mt-4 h-10 w-32 bg-muted rounded-lg"></div>
+            <div className="mt-4 h-10 w-32 bg-muted rounded-2xl"></div>
           </div>
         ))}
       </div>

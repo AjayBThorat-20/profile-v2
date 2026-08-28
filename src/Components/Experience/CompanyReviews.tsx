@@ -1,10 +1,12 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { FaStar, FaQuoteLeft, FaUserCircle, FaBriefcase, FaCalendar, FaChartLine, FaClock, FaThumbsUp } from "react-icons/fa";
 import { HiSparkles } from "react-icons/hi2";
 import { getAccent } from "@/Components/UI/accentColor";
 import SectionEyebrow from "@/Components/UI/SectionEyebrow";
+import Badge from "@/Components/UI/Badge";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 interface Review {
   timestamp: string;
@@ -36,6 +38,8 @@ export default function CompanyReviews() {
   const [error, setError] = useState<string | null>(null);
   const [selectedReview, setSelectedReview] = useState<number | null>(null);
   const [shouldDisplay, setShouldDisplay] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const isRevealed = useScrollReveal(sectionRef);
 
   useEffect(() => {
     // Check if the current company is Renewalytics (id: 2)
@@ -182,7 +186,7 @@ export default function CompanyReviews() {
           <FaStar
             key={i}
             className={`${sizeClass} ${
-              i < rating ? "text-yellow-500" : "text-gray-300 dark:text-gray-600"
+              i < rating ? "text-foreground" : "text-muted-foreground/40"
             }`}
           />
         ))}
@@ -216,7 +220,7 @@ export default function CompanyReviews() {
     return (
       <div className="container-custom section">
         <div className="flex items-center justify-center min-h-[400px]">
-          <div className="text-center space-y-4 panel p-8 rounded-3xl border-l-4 border-l-destructive">
+          <div className="text-center space-y-4 panel p-8 rounded-2xl border-l-4 border-l-destructive">
             <p className="text-xl font-bold text-destructive">{error}</p>
             <button
               onClick={fetchReviews}
@@ -237,7 +241,7 @@ export default function CompanyReviews() {
           <div className="flex justify-center">
             <SectionEyebrow icon={HiSparkles} label="Team Reviews" />
           </div>
-          <div className="panel p-8 rounded-3xl border-dashed max-w-md mx-auto">
+          <div className="panel p-8 rounded-2xl border-dashed max-w-md mx-auto">
             <p className="text-xl font-bold text-foreground mb-2">No Reviews Yet</p>
             <p className="text-muted-foreground">Reviews will appear here once submitted.</p>
           </div>
@@ -247,15 +251,15 @@ export default function CompanyReviews() {
   }
 
   return (
-    <div className="container-custom section">
+    <div ref={sectionRef} className={`container-custom section scroll-reveal ${isRevealed ? "is-visible" : ""}`}>
       <div className="max-w-7xl mx-auto space-y-12">
-        
+
         {/* Header */}
         <div className="text-center space-y-4 animate-fadeIn">
           <div className="flex justify-center">
             <SectionEyebrow icon={HiSparkles} label="Team Reviews" />
           </div>
-          <h2 className="text-3xl md:text-4xl font-black gradient-text">
+          <h2 className="text-3xl md:text-4xl font-black text-foreground">
             What My Colleagues Say
           </h2>
           <p className="text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
@@ -264,15 +268,15 @@ export default function CompanyReviews() {
         </div>
 
         {/* Stats Overview */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 animate-fadeIn" style={{ animationDelay: '60ms' }}>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 animate-fadeIn" style={{ animationDelay: '60ms' }}>
           {/* Average Rating */}
-          <div className="panel rounded-2xl p-6 border-l-4 border-l-primary">
-            <div className="flex items-center justify-between mb-4">
+          <div className="stat-figure border-l-primary">
+            <div className="flex items-center gap-2 mb-2">
+              <FaStar className="w-4 h-4 text-foreground" />
               <h3 className="text-sm font-bold text-muted-foreground uppercase">Average Rating</h3>
-              <FaStar className="w-6 h-6 text-yellow-500" />
             </div>
             <div className="flex items-baseline gap-2">
-              <span className="text-4xl font-black text-foreground">{calculateAverageRating()}</span>
+              <span className="stat-figure-value text-4xl text-foreground">{calculateAverageRating()}</span>
               <span className="text-2xl text-muted-foreground">/5</span>
             </div>
             <div className="mt-3">
@@ -281,25 +285,25 @@ export default function CompanyReviews() {
           </div>
 
           {/* Total Reviews */}
-          <div className="panel rounded-2xl p-6 border-l-4 border-l-secondary">
-            <div className="flex items-center justify-between mb-4">
+          <div className="stat-figure border-l-secondary">
+            <div className="flex items-center gap-2 mb-2">
+              <FaThumbsUp className="w-4 h-4 text-secondary" />
               <h3 className="text-sm font-bold text-muted-foreground uppercase">Total Reviews</h3>
-              <FaThumbsUp className="w-6 h-6 text-secondary" />
             </div>
             <div className="flex items-baseline gap-2">
-              <span className="text-4xl font-black text-foreground">{reviews.length}</span>
+              <span className="stat-figure-value text-4xl text-foreground">{reviews.length}</span>
               <span className="text-2xl text-muted-foreground">reviews</span>
             </div>
           </div>
 
           {/* Recommendation Rate */}
-          <div className="panel rounded-2xl p-6 border-l-4 border-l-accent">
-            <div className="flex items-center justify-between mb-4">
+          <div className="stat-figure border-l-accent">
+            <div className="flex items-center gap-2 mb-2">
+              <FaChartLine className="w-4 h-4 text-accent" />
               <h3 className="text-sm font-bold text-muted-foreground uppercase">Would Work Again</h3>
-              <FaChartLine className="w-6 h-6 text-accent" />
             </div>
             <div className="flex items-baseline gap-2">
-              <span className="text-4xl font-black text-foreground">
+              <span className="stat-figure-value text-4xl text-foreground">
                 {Math.round((reviews.filter(r => r.workAgain.includes("yes")).length / reviews.length) * 100)}%
               </span>
             </div>
@@ -318,7 +322,7 @@ export default function CompanyReviews() {
                 className="group relative animate-fadeIn"
                 style={{ animationDelay: `${(index + 2) * 60}ms` }}
               >
-                <div className={`relative border ${accent.border} rounded-3xl overflow-hidden`}>
+                <div className={`spotlight relative entry-card ${accent.border} overflow-hidden`}>
                   {/* Top Accent Bar */}
                   <div className={`h-1.5 ${accent.bg}`}></div>
 
@@ -329,7 +333,7 @@ export default function CompanyReviews() {
                     <div className="flex items-start gap-4">
                       {/* Avatar */}
                       <div className={`flex-shrink-0 w-20 h-20 ${accent.bg} rounded-full flex items-center justify-center shadow-xl ring-4 ring-background`}>
-                        <span className="text-2xl font-black text-white">
+                        <span className={`text-2xl font-black ${accent.fg}`}>
                           {review.fullName.split(' ').map(n => n[0]).join('').slice(0, 2)}
                         </span>
                       </div>
@@ -341,12 +345,9 @@ export default function CompanyReviews() {
                             {review.fullName}
                           </h3>
                           {/* Overall Rating Badge */}
-                          <div className="flex-shrink-0 flex items-center gap-1.5 px-3 py-1.5 bg-yellow-500/10 border border-yellow-500/20 rounded-full">
-                            <span className="text-xl font-black text-foreground">
-                              {review.overallRating}
-                            </span>
-                            <FaStar className="w-4 h-4 text-yellow-500" />
-                          </div>
+                          <Badge className="shrink-0 text-xl! py-1.5!" icon={FaStar}>
+                            {review.overallRating}
+                          </Badge>
                         </div>
                         
                         <p className="text-base font-bold text-primary mb-1">
@@ -360,21 +361,12 @@ export default function CompanyReviews() {
 
                     {/* Quick Info Badges */}
                     <div className="flex flex-wrap gap-3">
-                      {/* Duration Badge */}
-                      <div className="inline-flex items-center gap-2 px-4 py-2 bg-muted/50 rounded-full border border-border/50">
-                        <FaCalendar className="w-3.5 h-3.5 text-primary" />
-                        <span className="text-sm font-semibold text-foreground">
-                          {review.monthsWorked}
-                        </span>
-                      </div>
-
-                      {/* Projects Badge */}
-                      <div className="inline-flex items-center gap-2 px-4 py-2 bg-muted/50 rounded-full border border-border/50">
-                        <FaBriefcase className="w-3.5 h-3.5 text-primary" />
-                        <span className="text-sm font-semibold text-foreground">
-                          {review.projects.split(';').length} project{review.projects.split(';').length > 1 ? 's' : ''}
-                        </span>
-                      </div>
+                      <Badge icon={FaCalendar} className="text-sm py-2 px-4">
+                        {review.monthsWorked}
+                      </Badge>
+                      <Badge icon={FaBriefcase} className="text-sm py-2 px-4">
+                        {review.projects.split(';').length} project{review.projects.split(';').length > 1 ? 's' : ''}
+                      </Badge>
                     </div>
 
                     {/* Performance Ratings */}
@@ -395,7 +387,7 @@ export default function CompanyReviews() {
                                 <FaStar
                                   key={i}
                                   className={`w-4 h-4 ${
-                                    i < review.fullStackRating ? "text-yellow-500" : "text-gray-300 dark:text-gray-700"
+                                    i < review.fullStackRating ? "text-foreground" : "text-muted-foreground/40"
                                   }`}
                                 />
                               ))}
@@ -410,7 +402,7 @@ export default function CompanyReviews() {
                                 <FaStar
                                   key={i}
                                   className={`w-4 h-4 ${
-                                    i < review.uiUxRating ? "text-yellow-500" : "text-gray-300 dark:text-gray-700"
+                                    i < review.uiUxRating ? "text-foreground" : "text-muted-foreground/40"
                                   }`}
                                 />
                               ))}
@@ -425,7 +417,7 @@ export default function CompanyReviews() {
                                 <FaStar
                                   key={i}
                                   className={`w-4 h-4 ${
-                                    i < review.adaptabilityRating ? "text-yellow-500" : "text-gray-300 dark:text-gray-700"
+                                    i < review.adaptabilityRating ? "text-foreground" : "text-muted-foreground/40"
                                   }`}
                                 />
                               ))}
@@ -437,7 +429,7 @@ export default function CompanyReviews() {
 
                     {/* Impact & Results */}
                     {(review.systemImprovement || review.workloadReduction !== "Not applicable") && (
-                      <div className="relative overflow-hidden rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 p-5">
+                      <div className="relative overflow-hidden rounded-2xl border border-border bg-muted/40 p-5">
                         <div className="relative space-y-3">
                           <div className="flex items-center gap-2">
                             <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
@@ -462,7 +454,7 @@ export default function CompanyReviews() {
                                 <span className="text-sm font-medium text-muted-foreground">
                                   Workload Reduction:
                                 </span>
-                                <span className="text-sm font-bold text-blue-600 dark:text-blue-400 text-right">
+                                <span className="text-sm font-bold text-foreground text-right">
                                   {review.workloadReduction}
                                 </span>
                               </div>
@@ -477,17 +469,13 @@ export default function CompanyReviews() {
                       <span className="text-xs font-medium text-muted-foreground">
                         {formatDate(review.timestamp)}
                       </span>
-                      <div className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-primary/10 border border-primary/20 rounded-full">
-                        <span className="text-xs font-bold text-primary">
-                          NPS: {review.recommendationScore}/10
-                        </span>
-                      </div>
+                      <Badge accent={getAccent(0)}>NPS: {review.recommendationScore}/10</Badge>
                     </div>
                   </div>
 
                   {/* Decorative Quote Icon */}
                   <div className="absolute top-6 right-6 pointer-events-none">
-                    <div className={`p-3 ${accent.bgSoft} rounded-xl`}>
+                    <div className={`p-3 ${accent.bgSoft} rounded-2xl`}>
                       <FaQuoteLeft className={`w-5 h-5 ${accent.text}`} />
                     </div>
                   </div>

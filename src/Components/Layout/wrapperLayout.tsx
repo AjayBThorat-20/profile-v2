@@ -32,9 +32,9 @@ export default function WrapperLayout({
       <div className="container-custom">
         <div className="section">
           {firstPosition || secondPosition ? (
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-center mb-8 sm:mb-12">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-center mb-8 sm:mb-12">
               <span className="text-foreground">{firstPosition}</span>{" "}
-              <span className="gradient-text">{secondPosition}</span>
+              <span className="text-primary">{secondPosition}</span>
             </h1>
           ) : null}
           <div id="content-wrapper" style={{ visibility: "hidden" }}>
@@ -50,22 +50,22 @@ export default function WrapperLayout({
       <div className="section animate-fadeIn">
         {firstPosition || secondPosition ? (
           <div className="mb-12 md:mb-16">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-center leading-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-center leading-tight">
               <div className="overflow-hidden mb-2">
                 <span className="inline-block animate-slideInLeft text-foreground">
                   {firstPosition}
                 </span>
               </div>
               <div className="overflow-hidden">
-                <span className="inline-block gradient-text animate-slideInRight">
+                <span className="inline-block text-primary animate-slideInRight">
                   {secondPosition}
                 </span>
               </div>
             </h1>
-            
+
             {/* Decorative underline */}
             <div className="flex justify-center mt-6">
-              <div className="h-1 w-24 bg-gradient-to-r from-primary via-secondary to-accent rounded-full animate-fadeIn" style={{ animationDelay: '220ms' }}></div>
+              <div className="h-1 w-24 bg-primary rounded-full animate-fadeIn" style={{ animationDelay: '220ms' }}></div>
             </div>
           </div>
         ) : null}

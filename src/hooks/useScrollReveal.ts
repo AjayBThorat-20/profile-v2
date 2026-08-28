@@ -21,7 +21,23 @@ export const useScrollReveal = (
   ref: RefObject<HTMLElement | null>,
   options: UseScrollRevealOptions = {}
 ) => {
-  const { threshold = 0.1, rootMargin = '0px', triggerOnce = true } = options;
+  // Positive bottom margin grows the intersection root downward, so a
+  // section still below the fold starts revealing before the user
+  // actually scrolls it into view - without this, a section sitting
+  // just past the viewport at initial load (nothing to do with being
+  // "far down the page") renders as a big blank gap the full height of
+  // its content until scroll crosses its top edge, which reads as
+  // broken rather than as a deliberate reveal effect.
+  //
+  // threshold 0 (not 0.1): a percentage threshold needs that fraction of
+  // the target's own area inside the root, which for a short target is a
+  // few dozen px but for a TALL target (e.g. a whole project list) can be
+  // hundreds of px - meaning taller sections would need much deeper
+  // scroll before ever triggering, reintroducing the same blank-gap
+  // symptom just for tall content specifically. 0 fires as soon as any
+  // part of the target enters the (already-expanded) root, independent
+  // of the target's own height.
+  const { threshold = 0, rootMargin = '0px 0px 300px 0px', triggerOnce = true } = options;
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -57,80 +73,27 @@ export const useScrollReveal = (
   return isVisible;
 };
 
-export const useParallax = () => {
+// Global scroll progress, 0–100, for a top-of-page progress bar.
+export const useScrollProgress = () => {
+  const [progress, setProgress] = useState(0);
+
   useEffect(() => {
     const handleScroll = () => {
-      const scrolled = window.scrollY;
-      
-      // Parallax slow elements
-      document.querySelectorAll('.parallax-slow').forEach((element) => {
-        const el = element as HTMLElement;
-        el.style.transform = `translateY(${scrolled * 0.1}px)`;
-      });
-
-      // Parallax medium elements
-      document.querySelectorAll('.parallax-medium').forEach((element) => {
-        const el = element as HTMLElement;
-        el.style.transform = `translateY(${scrolled * 0.2}px)`;
-      });
-
-      // Parallax fast elements
-      document.querySelectorAll('.parallax-fast').forEach((element) => {
-        const el = element as HTMLElement;
-        el.style.transform = `translateY(${scrolled * 0.3}px)`;
-      });
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      setProgress(docHeight > 0 ? Math.min(100, (scrollTop / docHeight) * 100) : 0);
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-};
-
-export const useMagneticCursor = () => {
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      const magneticElements = document.querySelectorAll('.magnetic');
-      
-      magneticElements.forEach((element) => {
-        const el = element as HTMLElement;
-        const rect = el.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-        
-        const distanceX = e.clientX - centerX;
-        const distanceY = e.clientY - centerY;
-        const distance = Math.sqrt(distanceX ** 2 + distanceY ** 2);
-        
-        const maxDistance = 100;
-        
-        if (distance < maxDistance) {
-          const strength = (maxDistance - distance) / maxDistance;
-          const moveX = distanceX * strength * 0.3;
-          const moveY = distanceY * strength * 0.3;
-          
-          el.style.transform = `translate(${moveX}px, ${moveY}px)`;
-        } else {
-          el.style.transform = 'translate(0, 0)';
-        }
-      });
-    };
-
-    const handleMouseLeave = () => {
-      const magneticElements = document.querySelectorAll('.magnetic');
-      magneticElements.forEach((element) => {
-        const el = element as HTMLElement;
-        el.style.transform = 'translate(0, 0)';
-      });
-    };
-
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mouseleave', handleMouseLeave);
-    
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll);
     return () => {
-      document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mouseleave', handleMouseLeave);
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
     };
   }, []);
+
+  return progress;
 };
 
 export const useSmoothScroll = () => {

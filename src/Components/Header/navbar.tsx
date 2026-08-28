@@ -86,27 +86,29 @@ export default function Navbar() {
     { href: "/about", label: "About" },
     { href: "/projects", label: "Projects" },
     { href: "/experience", label: "Experience" },
-    { href: "/contact", label: "Contact" },
   ];
 
+  // Contact is rendered as a persistent filled CTA rather than a plain
+  // link, so "get in touch" stays visible the way it does on the
+  // nabilissa.com reference instead of blending in with the other tabs.
+  const contactLink = { href: "/contact", label: "Contact" };
+
+  // Segmented-control style: the active tab gets a solid filled pill
+  // instead of an underline, so the nav reads as a single grouped
+  // control rather than a row of independent links.
   const NavLink = ({ href, label }: { href: string; label: string }) => {
     const isActive = pathname === href;
-    
+
     return (
       <Link
         href={href}
-        className={`relative px-4 py-2 text-base font-medium rounded-lg transition-all duration-200 group ${
+        className={`px-4 py-1.5 text-sm font-medium rounded-full transition-all duration-200 ${
           isActive
-            ? "text-primary"
-            : "text-foreground/80 hover:text-primary"
+            ? "bg-foreground text-background shadow-sm"
+            : "text-foreground/70 hover:text-foreground"
         }`}
       >
         {label}
-        <span
-          className={`absolute bottom-1 left-1/2 -translate-x-1/2 h-0.5 bg-primary rounded-full transition-all duration-200 ${
-            isActive ? "w-1/2" : "w-0 group-hover:w-1/2"
-          }`}
-        />
       </Link>
     );
   };
@@ -115,7 +117,7 @@ const FlagIcon = ({ size = 28 }: { size?: number }) => {
   if (flagError) {
     return (
       <div 
-        className="rounded-sm overflow-hidden flex-shrink-0"
+        className="rounded-2xl overflow-hidden flex-shrink-0"
         style={{ 
           width: `${size}px`, 
           height: `${size}px`,
@@ -145,31 +147,33 @@ const FlagIcon = ({ size = 28 }: { size?: number }) => {
 
   return (
     <>
-      {/* Desktop & Tablet Navbar */}
+      {/* Desktop & Tablet Navbar — floating inset pill, not a full-bleed
+          bar, with the nav links grouped into their own segmented-control
+          sub-pill instead of a row of independent links. */}
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all ease-out ${
-          isVisible ? "duration-150 translate-y-0" : "duration-300 -translate-y-full"
+        className={`fixed top-3 left-3 right-3 md:top-4 md:left-6 md:right-6 lg:left-10 lg:right-10 z-50 rounded-2xl border border-border transition-all ease-out ${
+          isVisible ? "duration-150 translate-y-0" : "duration-300 -translate-y-[calc(100%+2rem)]"
         } ${
           scrolled
             ? "glass shadow-lg"
-            : "bg-background shadow-md"
+            : "bg-background shadow-sm"
         }`}
       >
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center justify-between px-8 lg:px-16 xl:px-24 py-4">
+        <div className="hidden md:flex items-center justify-between px-6 lg:px-8 py-3">
           {/* Logo/Brand with Flag */}
           <div className="flex items-center gap-3 magnetic">
             <Link
               href="/"
-              className="font-mono text-xl font-bold tracking-tight border-2 border-primary/30 hover:border-primary rounded-lg px-2.5 py-1 text-foreground transition-colors duration-200"
+              className="font-mono text-xl font-bold tracking-tight border-2 border-primary/30 hover:border-primary rounded-md px-2.5 py-1 text-foreground transition-colors duration-200"
             >
               <span className="text-primary">&lt;</span>AT<span className="text-primary">/&gt;</span>
             </Link>
             <FlagIcon size={28} />
           </div>
 
-          {/* Navigation Links */}
-          <nav className="flex items-center gap-2">
+          {/* Navigation Links — segmented control */}
+          <nav className="flex items-center gap-1 bg-muted/60 rounded-full p-1">
             {navLinks.map((link, index) => (
               <div
                 key={link.href}
@@ -188,7 +192,7 @@ const FlagIcon = ({ size = 28 }: { size?: number }) => {
               href="https://www.linkedin.com/in/ajay-thorat-24b4b6215"
               target="_blank"
               rel="noopener noreferrer"
-              className="magnetic p-2 rounded-lg hover:bg-primary/10 transition-all duration-200 group"
+              className="magnetic p-2 rounded-2xl hover:bg-primary/10 transition-all duration-200 group"
               aria-label="LinkedIn"
             >
               <FaLinkedin className="w-5 h-5 text-primary group-hover:scale-110 transition-transform duration-200" />
@@ -197,14 +201,14 @@ const FlagIcon = ({ size = 28 }: { size?: number }) => {
               href="https://github.com/AjayBThorat-20"
               target="_blank"
               rel="noopener noreferrer"
-              className="magnetic p-2 rounded-lg hover:bg-muted transition-all duration-200 group"
+              className="magnetic p-2 rounded-2xl hover:bg-muted transition-all duration-200 group"
               aria-label="GitHub"
             >
               <FaGithub className="w-5 h-5 text-foreground group-hover:scale-110 transition-transform duration-200" />
             </Link>
             <Link
               href="mailto:ajaythorat988@gmail.com"
-              className="magnetic p-2 rounded-lg hover:bg-destructive/10 transition-all duration-200 group"
+              className="magnetic p-2 rounded-2xl hover:bg-destructive/10 transition-all duration-200 group"
               aria-label="Email"
             >
               <IoMdMail className="w-5 h-5 text-destructive group-hover:scale-110 transition-transform duration-200" />
@@ -212,21 +216,26 @@ const FlagIcon = ({ size = 28 }: { size?: number }) => {
             
             {/* Divider */}
             <div className="w-px h-6 bg-border mx-1"></div>
-            
+
             {/* Theme Toggle */}
             <div className="magnetic">
               <ThemeToggleButton />
             </div>
+
+            {/* Persistent Contact CTA */}
+            <Link href={contactLink.href} className="btn-primary px-4 py-2 text-sm">
+              {contactLink.label}
+            </Link>
           </div>
         </div>
 
         {/* Mobile Navigation Header */}
-        <div className="md:hidden flex justify-between items-center px-6 py-4">
+        <div className="md:hidden flex justify-between items-center px-5 py-3">
           {/* Logo with Flag */}
           <div className="flex items-center gap-2">
             <Link
               href="/"
-              className="font-mono text-lg font-bold border-2 border-primary/30 rounded-lg px-2 py-0.5 text-foreground"
+              className="font-mono text-lg font-bold border-2 border-primary/30 rounded-md px-2 py-0.5 text-foreground"
             >
               <span className="text-primary">&lt;</span>AT<span className="text-primary">/&gt;</span>
             </Link>
@@ -244,7 +253,7 @@ const FlagIcon = ({ size = 28 }: { size?: number }) => {
             {/* Hamburger Menu */}
             <button
               onClick={handleToggleMenu}
-              className="p-2 ml-1 rounded-lg hover:bg-muted transition-colors duration-200"
+              className="p-2 ml-1 rounded-2xl hover:bg-muted transition-colors duration-200"
               aria-label="Toggle menu"
               aria-expanded={isMenuOpen}
             >
@@ -270,8 +279,9 @@ const FlagIcon = ({ size = 28 }: { size?: number }) => {
         </div>
       </header>
 
-      {/* Spacer */}
-      <div className="h-16 md:h-20"></div>
+      {/* Spacer — matches the floating header's footprint (top offset +
+          bar height) so page content clears it. */}
+      <div className="h-17 md:h-21"></div>
 
       {/* Mobile Menu Overlay */}
       {isMenuOpen && (
@@ -283,18 +293,18 @@ const FlagIcon = ({ size = 28 }: { size?: number }) => {
 
       {/* Mobile Menu Sidebar */}
       <div
-        className={`fixed top-0 right-0 h-full w-80 max-w-[85vw] glass shadow-2xl transform transition-transform duration-200 ease-out z-50 md:hidden ${
+        className={`fixed top-0 right-0 h-full w-80 max-w-[85vw] rounded-l-2xl glass shadow-2xl transform transition-transform duration-200 ease-out z-50 md:hidden ${
           isMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
         {/* Mobile Menu Header */}
         <div className="flex items-center justify-between p-6 border-b border-border">
-          <h2 className="text-xl font-bold gradient-text">
+          <h2 className="text-xl font-bold text-foreground">
             Navigation
           </h2>
           <button
             onClick={handleToggleMenu}
-            className="p-2 rounded-lg hover:bg-muted transition-colors duration-200"
+            className="p-2 rounded-2xl hover:bg-muted transition-colors duration-200"
             aria-label="Close menu"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -311,7 +321,7 @@ const FlagIcon = ({ size = 28 }: { size?: number }) => {
               <button
                 key={link.href}
                 onClick={() => handleLinkClick(link.href)}
-                className={`text-left px-4 py-3 rounded-xl font-medium border transition-all duration-200 ${
+                className={`text-left px-4 py-3 rounded-2xl font-medium border transition-all duration-200 hover:translate-x-1 active:translate-x-0.5 ${
                   isActive
                     ? "bg-primary/10 border-primary/40 text-primary"
                     : "border-transparent hover:bg-muted"
@@ -324,6 +334,15 @@ const FlagIcon = ({ size = 28 }: { size?: number }) => {
               </button>
             );
           })}
+          <button
+            onClick={() => handleLinkClick(contactLink.href)}
+            className="btn-primary w-full justify-start px-4 py-3 mt-2"
+            style={{
+              animation: `slideInRight 0.3s ease-out ${navLinks.length * 0.05}s both`,
+            }}
+          >
+            {contactLink.label}
+          </button>
         </nav>
 
         {/* Mobile Menu Footer with Social Links */}
@@ -334,7 +353,7 @@ const FlagIcon = ({ size = 28 }: { size?: number }) => {
               href="https://www.linkedin.com/in/ajay-thorat-24b4b6215"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 rounded-lg bg-card hover:bg-primary/10 transition-all duration-200 group shadow-sm"
+              className="p-3 rounded-2xl hover:bg-muted transition-all duration-200 group"
               aria-label="LinkedIn"
             >
               <FaLinkedin className="w-6 h-6 text-primary group-hover:scale-110 transition-transform duration-200" />
@@ -343,14 +362,14 @@ const FlagIcon = ({ size = 28 }: { size?: number }) => {
               href="https://github.com/AjayBThorat-20"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 rounded-lg bg-card hover:bg-muted transition-all duration-200 group shadow-sm"
+              className="p-3 rounded-2xl hover:bg-muted transition-all duration-200 group"
               aria-label="GitHub"
             >
               <FaGithub className="w-6 h-6 group-hover:scale-110 transition-transform duration-200" />
             </Link>
             <Link
               href="mailto:ajaythorat988@gmail.com"
-              className="p-3 rounded-lg bg-card hover:bg-destructive/10 transition-all duration-200 group shadow-sm"
+              className="p-3 rounded-2xl hover:bg-muted transition-all duration-200 group"
               aria-label="Email"
             >
               <IoMdMail className="w-6 h-6 text-destructive group-hover:scale-110 transition-transform duration-200" />
@@ -360,7 +379,7 @@ const FlagIcon = ({ size = 28 }: { size?: number }) => {
           {/* Copyright */}
           <div className="px-6 py-4 bg-card">
             <p className="text-sm text-muted-foreground text-center">
-              © 2024 Ajay Thorat
+              © {new Date().getFullYear()} Ajay Thorat
             </p>
           </div>
         </div>

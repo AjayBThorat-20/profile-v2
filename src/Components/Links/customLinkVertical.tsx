@@ -8,7 +8,7 @@ interface CustomLinkProps {
 
 export default function CustomLinkVertical({ href, title, onClick }: CustomLinkProps) {
   return (
-    <Link href={href} className="hover:text-blue-600 dark:hover:text-blue-400"  onClick={onClick}>
+    <Link href={href} className="hover:text-foreground" onClick={onClick}>
       {title}
     </Link>
   );
