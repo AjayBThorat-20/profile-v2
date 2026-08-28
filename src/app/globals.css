@@ -47,11 +47,17 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
 
-  --animate-fadeIn: fadeIn 0.22s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  --animate-fadeInScale: fadeInScale 0.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  --animate-slideInLeft: slideInLeft 0.22s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  --animate-slideInRight: slideInRight 0.22s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  --animate-slideInUp: slideInUp 0.22s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  /* Expo-out (0.16, 1, 0.3, 1) - a slow-decelerating curve, not the
+     material ease-out (0.4, 0, 0.2, 1) these used before - is what gives
+     nabilissa.com-style entrances their smooth, weighted settle instead
+     of a quick linear-ish snap. Durations bumped alongside it (0.22s
+     read as instant at this easing) so the deceleration is actually
+     visible. */
+  --animate-fadeIn: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-fadeInScale: fadeInScale 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-slideInLeft: slideInLeft 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-slideInRight: slideInRight 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-slideInUp: slideInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 /* --font-fraunces/--font-sora/--font-geist-mono (from next/font) are
@@ -520,8 +526,8 @@ html {
 .scroll-reveal {
   opacity: 0;
   transform: translateY(30px);
-  transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1),
-              transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .scroll-reveal.is-visible {
@@ -532,8 +538,8 @@ html {
 .scroll-reveal-left {
   opacity: 0;
   transform: translateX(-30px);
-  transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1),
-              transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .scroll-reveal-left.is-visible {
@@ -544,8 +550,8 @@ html {
 .scroll-reveal-right {
   opacity: 0;
   transform: translateX(30px);
-  transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1),
-              transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .scroll-reveal-right.is-visible {
@@ -556,8 +562,8 @@ html {
 .scroll-reveal-scale {
   opacity: 0;
   transform: scale(0.9);
-  transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1),
-              transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .scroll-reveal-scale.is-visible {
@@ -567,10 +573,208 @@ html {
 
 /* ==========================================
    MAGNETIC HOVER EFFECTS
+   Actual pull-toward-cursor motion comes from
+   useMagnetic (inline transform, see
+   hooks/useMagnetic.ts) - this just gives that
+   inline transform a smooth spring-like easing
+   in and a matching easing back out on release.
    ========================================== */
 .magnetic {
   will-change: transform;
-  transition: transform 0.18s cubic-bezier(0.23, 1, 0.32, 1);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ==========================================
+   CUSTOM CURSOR
+   Desktop/fine-pointer only (see CustomCursor.tsx,
+   which no-ops and never adds this class under
+   coarse pointers or prefers-reduced-motion).
+   ========================================== */
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  border-radius: 9999px;
+  pointer-events: none;
+  z-index: 200;
+  will-change: transform;
+  transform: translate3d(-100px, -100px, 0);
+}
+
+.cursor-dot {
+  width: 6px;
+  height: 6px;
+  background-color: hsl(var(--foreground));
+  mix-blend-mode: difference;
+}
+
+.cursor-ring {
+  width: 32px;
+  height: 32px;
+  margin-top: -13px;
+  margin-left: -13px;
+  border: 1px solid hsl(var(--foreground));
+  mix-blend-mode: difference;
+  opacity: 1;
+  transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              height 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              margin 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.25s ease,
+              opacity 0.25s ease;
+}
+
+.cursor-ring-active {
+  width: 56px;
+  height: 56px;
+  margin-top: -25px;
+  margin-left: -25px;
+  background-color: hsl(var(--foreground) / 0.08);
+}
+
+/* Swapped out for the .cursor-label bubble while hovering a
+   data-cursor-label target - two overlapping circles reads as broken,
+   not intentional. */
+.cursor-ring-hidden {
+  opacity: 0;
+}
+
+/* Text bubble that replaces the ring over elements carrying
+   data-cursor-label (e.g. project cards - "View"). Position is driven
+   by the same lerped JS loop as the ring; size/visibility by CSS. */
+.cursor-label {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 72px;
+  height: 72px;
+  margin-top: -36px;
+  margin-left: -36px;
+  border-radius: 9999px;
+  background-color: hsl(var(--foreground));
+  color: hsl(var(--background));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  pointer-events: none;
+  z-index: 201;
+  will-change: transform;
+  opacity: 0;
+  scale: 0.6;
+  transform: translate3d(-200px, -200px, 0);
+  transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              scale 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cursor-label-active {
+  opacity: 1;
+  scale: 1;
+}
+
+body.custom-cursor-active,
+body.custom-cursor-active * {
+  cursor: none !important;
+}
+
+body.custom-cursor-active input,
+body.custom-cursor-active textarea,
+body.custom-cursor-active [contenteditable="true"] {
+  cursor: text !important;
+}
+
+@media (pointer: coarse), (hover: none) {
+  .cursor-dot,
+  .cursor-ring,
+  .cursor-label {
+    display: none;
+  }
+}
+
+/* ==========================================
+   LINK UNDERLINE SWEEP
+   A thin rule draws in from the left on hover
+   instead of a hard color swap - the inline-text
+   equivalent of the image shutter reveal.
+   ========================================== */
+.link-underline {
+  position: relative;
+  display: inline-block;
+}
+
+.link-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 1px;
+  background-color: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.link-underline:hover::after {
+  transform: scaleX(1);
+}
+
+/* ==========================================
+   TILT CARD
+   Continuous rotateX/rotateY tracking the cursor
+   (see TiltCard.tsx), this just smooths each
+   update and the snap-back on mouseleave.
+   ========================================== */
+.tilt-card {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+/* ==========================================
+   WORD-STAGGER TEXT REVEAL (RevealText)
+   Each word sits in an overflow-hidden mask and
+   slides up from below it into place, staggered
+   per-word - the headline "wipes" into view
+   rather than just fading.
+   ========================================== */
+.reveal-word-mask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+}
+
+.reveal-word {
+  display: inline-block;
+  transform: translateY(110%);
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-word[data-visible="true"] {
+  transform: translateY(0);
+}
+
+/* ==========================================
+   IMAGE SHUTTER REVEAL
+   A solid panel covers the media on mount and
+   wipes away left-to-right, so the image
+   "reveals" rather than just appearing.
+   ========================================== */
+@keyframes shutterReveal {
+  0% { transform: scaleX(1); }
+  100% { transform: scaleX(0); }
+}
+
+.img-reveal-shutter {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background-color: hsl(var(--background));
+  transform-origin: right;
+  animation: shutterReveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 /* Reduce layout shift */

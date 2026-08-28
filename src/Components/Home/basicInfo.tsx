@@ -97,7 +97,7 @@ export default function BasicInfo({ theme }: BasicInfoProps) {
           href="/Resume/Ajay_Thorat.pdf"
           target="_blank"
           rel="noopener noreferrer"
-          className="btn-primary group flex-1 px-5 py-3 md:px-6 md:py-4 text-sm md:text-base"
+          className="magnetic btn-primary group flex-1 px-5 py-3 md:px-6 md:py-4 text-sm md:text-base"
         >
           <FaDownload className="w-4 h-4 md:w-5 md:h-5" />
           <span>Download Resume</span>
@@ -106,7 +106,7 @@ export default function BasicInfo({ theme }: BasicInfoProps) {
 
         <Link
           href="/contact"
-          className="btn-secondary group flex-1 px-5 py-3 md:px-6 md:py-4 text-sm md:text-base"
+          className="magnetic btn-secondary group flex-1 px-5 py-3 md:px-6 md:py-4 text-sm md:text-base"
         >
           <span>Let's Connect</span>
           <FaArrowRight className="w-3 h-3 md:w-4 md:h-4 group-hover:translate-x-1 transition-transform" />

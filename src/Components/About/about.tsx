@@ -4,6 +4,7 @@ import Image from "next/image";
 import { FaRocket } from "react-icons/fa";
 import { useEffect, useRef, useState } from "react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import RevealText from "@/Components/UI/RevealText";
 
 export default function About() {
   const [mounted, setMounted] = useState(false);
@@ -63,9 +64,11 @@ export default function About() {
               {/* Name & Title Card */}
               <div className="panel p-8 rounded-2xl border-l-4 border-l-primary">
                 <div className="relative z-10 space-y-4">
-                  <h2 className="text-3xl md:text-4xl font-black text-foreground">
-                    AJAY BHIMRAO THORAT
-                  </h2>
+                  <RevealText
+                    as="h2"
+                    text="AJAY BHIMRAO THORAT"
+                    className="text-3xl md:text-4xl font-black text-foreground"
+                  />
 
                   <div className="space-y-4 text-base md:text-lg leading-relaxed">
                     <p className="text-foreground/90">

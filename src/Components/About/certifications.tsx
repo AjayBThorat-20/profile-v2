@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { IoClose } from "react-icons/io5";
 import { FaAward, FaExternalLinkAlt, FaCheckCircle, FaCertificate } from "react-icons/fa";
 import { HiOutlineAcademicCap } from "react-icons/hi";
@@ -26,6 +27,19 @@ export default function Certifications() {
     return () => {
       document.body.style.overflow = "unset";
     };
+  }, [selectedImage]);
+
+  // A tall certificate image can exceed the viewport height - without an
+  // Escape fallback, the only way to close was clicking the button
+  // inside the card, which scrolls off-screen along with the rest of
+  // the card in that case.
+  useEffect(() => {
+    if (!selectedImage) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setSelectedImage(null);
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, [selectedImage]);
 
   return (
@@ -104,25 +118,36 @@ export default function Certifications() {
             );
           })}
         </div>
+      </div>
 
-        {/* Full-screen Modal */}
-        {selectedImage && (
-          <div
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-lg p-4 animate-fadeIn"
+      {/* Full-screen Modal, rendered via portal straight to <body> - this
+          section (id="certifications") carries `.scroll-reveal`, which
+          sets `transform: translateY(...)` during its reveal. ANY
+          non-none transform on an ancestor makes that ancestor the
+          containing block for `position: fixed` descendants, so a modal
+          nested in the normal tree here would be "fixed" relative to
+          this scrolled, content-sized section box instead of the real
+          browser viewport - which is exactly why it used to drift up or
+          down and become unreachable rather than covering the screen.
+          Portaling to document.body sidesteps that ancestor entirely. */}
+      {selectedImage && createPortal(
+        <div
+          className="fixed inset-0 z-50 overflow-y-auto bg-black/90 backdrop-blur-lg animate-fadeIn"
+          onClick={() => setSelectedImage(null)}
+        >
+          <button
             onClick={() => setSelectedImage(null)}
+            className="fixed top-4 right-4 md:top-6 md:right-6 z-60 p-3 bg-destructive hover:bg-destructive/90 text-destructive-foreground rounded-full shadow-xl transition-colors duration-150 active:scale-95"
+            aria-label="Close"
           >
+            <IoClose className="w-6 h-6" />
+          </button>
+
+          <div className="min-h-full flex items-center justify-center p-4 py-20">
             <div
               className="relative w-full max-w-6xl bg-card rounded-2xl shadow-2xl overflow-hidden border border-border"
               onClick={(e) => e.stopPropagation()}
             >
-              <button
-                onClick={() => setSelectedImage(null)}
-                className="absolute top-6 right-6 z-10 p-3 bg-destructive hover:bg-destructive/90 text-destructive-foreground rounded-full shadow-xl transition-colors duration-150 active:scale-95"
-                aria-label="Close"
-              >
-                <IoClose className="w-6 h-6" />
-              </button>
-
               <div className="relative w-full p-8" style={{ maxHeight: "85vh" }}>
                 <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-muted">
                   <Image
@@ -141,14 +166,15 @@ export default function Certifications() {
                 <div className="flex items-center justify-center gap-2">
                   <FaCheckCircle className="w-4 h-4 text-primary" />
                   <p className="text-sm text-muted-foreground">
-                    Click outside or press the close button to exit
+                    Click outside or press Escape to exit
                   </p>
                 </div>
               </div>
             </div>
           </div>
-        )}
-      </div>
+        </div>,
+        document.body
+      )}
     </div>
   );
 }

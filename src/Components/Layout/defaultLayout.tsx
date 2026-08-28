@@ -6,6 +6,8 @@ import { useAppSelector } from "@/store/hooks";
 import Footer from "../Footer/footer";
 import { usePathname } from "next/navigation";
 import ScrollProgressBar from "../UI/ScrollProgressBar";
+import CustomCursor from "../UI/CustomCursor";
+import { useMagnetic } from "@/hooks/useMagnetic";
 
 const DefaultLayout = ({ children }: { children: React.ReactNode }) => {
   const theme = useAppSelector((state) => state.theme.mode);
@@ -17,6 +19,10 @@ const DefaultLayout = ({ children }: { children: React.ReactNode }) => {
     document.documentElement.classList.toggle("dark", theme === "dark");
   }, [theme]);
 
+  // Site-wide pull-toward-cursor effect for every `.magnetic` element
+  // (navbar logo, social icons, theme toggle) - see useMagnetic.ts.
+  useMagnetic();
+
   return (
     // overflow-x-clip, not overflow-x-hidden: `hidden` still establishes a
     // scroll container per the CSS overflow spec (even though this div never
@@ -24,6 +30,7 @@ const DefaultLayout = ({ children }: { children: React.ReactNode }) => {
     // `position: sticky` for every descendant (e.g. ChapterNav). `clip`
     // gets the same "no horizontal scrollbar" result without that side effect.
     <div className="min-h-screen overflow-x-clip bg-background text-foreground transition-colors duration-200">
+      <CustomCursor />
       <ScrollProgressBar />
 
       {/* Fixed Navbar */}

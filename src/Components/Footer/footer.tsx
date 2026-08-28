@@ -68,7 +68,7 @@ export default function Footer() {
                 <Link
                   key={link.name}
                   href={link.href}
-                  className="text-sm text-muted-foreground hover:text-primary transition-colors duration-150 w-fit"
+                  className="link-underline text-sm text-muted-foreground hover:text-primary transition-colors duration-150 w-fit"
                 >
                   {link.name}
                 </Link>
@@ -87,7 +87,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.name}
-                  className="group"
+                  className="magnetic group"
                 >
                   <IconTile icon={social.icon} accent={getAccent(index)} size="sm" />
                 </Link>
@@ -97,7 +97,7 @@ export default function Footer() {
               <p className="text-xs text-muted-foreground mb-2">Get in touch</p>
               <a
                 href="mailto:ajaythorat988@gmail.com"
-                className="text-sm font-semibold text-foreground hover:text-primary transition-colors"
+                className="link-underline text-sm font-semibold text-foreground hover:text-primary transition-colors"
               >
                 ajaythorat988@gmail.com
               </a>
@@ -124,7 +124,7 @@ export default function Footer() {
             {/* Scroll to top button */}
             <button
               onClick={scrollToTop}
-              className="group p-2 rounded-2xl border border-border hover:border-primary/50 transition-colors duration-150"
+              className="magnetic group p-2 rounded-2xl border border-border hover:border-primary/50 transition-colors duration-150"
               aria-label="Scroll to top"
             >
               <FaArrowUp className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors duration-200" />

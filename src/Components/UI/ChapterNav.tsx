@@ -98,10 +98,15 @@ export default function ChapterNav({ items }: { items: ChapterNavItem[] }) {
 
       {/* Desktop: floating vertical rail, pinned to the left edge and
           vertically centered - grouped in the same muted track/filled-tab
-          treatment as the mobile row and the navbar, just stacked. */}
+          treatment as the mobile row and the navbar, just stacked.
+          rounded-2xl, not rounded-full: the mobile strip above is a
+          single wide row, so a huge radius reads as a clean pill - this
+          is a narrow, ~150px-tall stack of 4 rows, where the same
+          min(width,height)/2 radius ballooned into quarter-circles big
+          enough to eat into the "01 SKILLS" label at the corners. */}
       <nav
         aria-label="Section navigation"
-        className={`hidden md:flex fixed left-4 lg:left-8 top-1/2 -translate-y-1/2 z-30 flex-col items-stretch gap-1 bg-muted/60 rounded-full p-1 transition-all duration-300 ${
+        className={`hidden md:flex fixed left-4 lg:left-8 top-1/2 -translate-y-1/2 z-30 flex-col items-stretch gap-1 bg-muted/60 rounded-2xl p-1 transition-all duration-300 ${
           showRail ? "opacity-100 translate-x-0 pointer-events-auto" : "opacity-0 -translate-x-3 pointer-events-none"
         }`}
       >

@@ -8,6 +8,7 @@ import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { getAccent } from "@/Components/UI/accentColor";
 import IconTile from "@/Components/UI/IconTile";
 import SectionEyebrow from "@/Components/UI/SectionEyebrow";
+import RevealText from "@/Components/UI/RevealText";
 
 type FormStatus = "idle" | "loading" | "success" | "error";
 
@@ -89,9 +90,11 @@ export default function Contact() {
             <div className="space-y-4">
               <SectionEyebrow index="01" icon={FaEnvelope} label="Get In Touch" />
 
-              <h2 className="text-3xl md:text-4xl font-black text-foreground">
-                Let's Work Together
-              </h2>
+              <RevealText
+                as="h2"
+                text="Let's Work Together"
+                className="text-3xl md:text-4xl font-black text-foreground"
+              />
 
               <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
                 Have a project in mind or want to discuss opportunities? Feel free to reach out.

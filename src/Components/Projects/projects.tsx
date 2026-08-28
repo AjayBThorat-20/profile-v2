@@ -7,6 +7,7 @@ import { FaGithub, FaExternalLinkAlt, FaCode, FaRocket } from "react-icons/fa";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { getAccent } from "@/Components/UI/accentColor";
 import SectionEyebrow from "@/Components/UI/SectionEyebrow";
+import TiltCard from "@/Components/UI/TiltCard";
 
 export default function Projects() {
   const [currentImageIndexes, setCurrentImageIndexes] = useState<number[]>(
@@ -52,6 +53,7 @@ export default function Projects() {
                 key={project.id}
                 className="group relative animate-fadeIn"
                 style={{ animationDelay: `${activityIdx * 60}ms` }}
+                data-cursor-label="View"
               >
                 <div className={`spotlight entry-card ${accent.border} overflow-hidden`}>
 
@@ -59,8 +61,11 @@ export default function Projects() {
                   <div className={`h-1.5 ${accent.bg}`}></div>
 
                   {/* Full-width image block, catalogue-style: image on top,
-                      details below, at every breakpoint - not side-by-side. */}
-                  <div className="relative aspect-video md:aspect-[21/9] overflow-hidden border-b border-border">
+                      details below, at every breakpoint - not side-by-side.
+                      TiltCard tracks the cursor within its own bounds for a
+                      subtle 3D tilt + zoom, independent of the image's own
+                      group-hover scale below. */}
+                  <TiltCard className="relative aspect-video md:aspect-[21/9] overflow-hidden border-b border-border">
                     <Image
                       alt={`${project.title} - screenshot ${currentImageIndexes[activityIdx] + 1} - project by Ajay Thorat`}
                       className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
@@ -70,6 +75,14 @@ export default function Projects() {
                       priority={activityIdx === 0}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none"></div>
+                    {/* Solid panel that wipes away left-to-right on mount,
+                        staggered per card, so the whole card "reveals"
+                        rather than just popping in - see .img-reveal-shutter
+                        in globals.css. */}
+                    <span
+                      className="img-reveal-shutter"
+                      style={{ animationDelay: `${activityIdx * 60 + 120}ms` }}
+                    ></span>
 
                     {/* Image Counter */}
                     <div className="absolute bottom-3 right-3 px-3 py-1.5 bg-black/80 backdrop-blur-sm text-white text-xs font-bold font-mono rounded-full border border-white/20">
@@ -80,7 +93,7 @@ export default function Projects() {
                     <div className={`absolute top-3 left-3 w-10 h-10 ${accent.bg} rounded-full flex items-center justify-center ${accent.fg} font-black shadow-lg`}>
                       {activityIdx + 1}
                     </div>
-                  </div>
+                  </TiltCard>
 
                   {/* Details Section */}
                   <div className="space-y-5 p-6 md:p-8">
@@ -119,7 +132,7 @@ export default function Projects() {
                     <div className="pt-2">
                       <a
                         href={project.url}
-                        className={`group/btn inline-flex items-center gap-2 px-6 py-3 ${accent.bg} ${accent.fg} font-bold rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-200`}
+                        className={`magnetic group/btn inline-flex items-center gap-2 px-6 py-3 ${accent.bg} ${accent.fg} font-bold rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-200`}
                         target="_blank"
                         rel="noopener noreferrer"
                       >
@@ -158,7 +171,7 @@ export default function Projects() {
               {/* Button */}
               <a
                 href="https://github.com/AjayBThorat-20?tab=repositories"
-                className="btn-primary px-8 py-4 font-bold"
+                className="magnetic btn-primary px-8 py-4 font-bold"
                 target="_blank"
                 rel="noopener noreferrer"
               >
