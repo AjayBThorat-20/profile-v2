@@ -3,7 +3,7 @@
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 import { projectsData } from "@/constants/project";
-import { FaGithub, FaExternalLinkAlt, FaCode, FaRocket } from "react-icons/fa";
+import { FaGithub, FaExternalLinkAlt, FaCode, FaRocket, FaBook } from "react-icons/fa";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { getAccent } from "@/Components/UI/accentColor";
 import SectionEyebrow from "@/Components/UI/SectionEyebrow";
@@ -71,7 +71,7 @@ export default function Projects() {
                       className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
                       src={project.pictures[currentImageIndexes[activityIdx]].picture}
                       fill
-                      sizes="100vw"
+                      sizes="(min-width: 1280px) 1152px, (min-width: 1024px) calc(100vw - 8rem), (min-width: 640px) calc(100vw - 5rem), calc(100vw - 3rem)"
                       priority={activityIdx === 0}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none"></div>
@@ -128,8 +128,8 @@ export default function Projects() {
                       </div>
                     </div>
 
-                    {/* Action Button */}
-                    <div className="pt-2">
+                    {/* Action Buttons */}
+                    <div className="pt-2 flex flex-wrap items-center gap-3">
                       <a
                         href={project.url}
                         className={`magnetic group/btn inline-flex items-center gap-2 px-6 py-3 ${accent.bg} ${accent.fg} font-bold rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-200`}
@@ -140,6 +140,17 @@ export default function Projects() {
                         <span>View Project</span>
                         <FaRocket className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-200" />
                       </a>
+                      {project.docsUrl && (
+                        <a
+                          href={project.docsUrl}
+                          className="magnetic inline-flex items-center gap-2 px-6 py-3 border border-border font-bold rounded-2xl hover:bg-foreground/5 transition-colors duration-200"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <FaBook className="w-4 h-4" />
+                          <span>View Docs</span>
+                        </a>
+                      )}
                     </div>
                   </div>
                 </div>

@@ -35,7 +35,7 @@ Node.js, Python, Next.js, React.js, Tailwind CSS, JavaScript, TypeScript, Bootst
 - Crime Predict (React.js, Python, Django, SQLite3, JWT) — crime data analysis and visualization platform for law enforcement. https://github.com/AjayBThorat-20/Crime-Predict
 - LinkedIn Clone (Next.js, Node.js, MongoDB, Tailwind CSS, NextAuth.js) — professional networking platform with Google OAuth. https://github.com/AjayBThorat-20/linkedin-clone
 - Study Partner (Android SDK, Java, SQLite) — Android learning app for students in tier-2 Indian cities. https://github.com/AjayBThorat-20/study-partner
-- DevCompass (Node.js, Commander.js, D3.js, SQLite, OpenAI/Anthropic/Google APIs) — published npm CLI for JavaScript dependency health analysis with AI-powered recommendations and CVE scanning. https://github.com/AjayBThorat-20/devcompass
+- DevCompass (Node.js, Commander.js, D3.js, SQLite, OpenAI/Anthropic/Google APIs) — published npm CLI for JavaScript dependency health analysis with AI-powered recommendations and CVE scanning. https://github.com/AjayBThorat-20/devcompass | Docs: https://devcompass.ajaythorat.com/
 
 ## Education
 

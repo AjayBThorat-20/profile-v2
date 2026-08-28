@@ -61,8 +61,8 @@ export type RealSyncProjectData = {
     // },
     {
       id: 1,
-      description: "Working on personal web application",
-      hiddenDisc: "Working on Navigation Bar components and responsiveness of all components",
+      description: "Maintaining DevCompass, my open-source dependency-health CLI",
+      hiddenDisc: "Reworked the documentation and demo recordings so every command example matches the current release, and fixed a CI fixture bug that was breaking the integration test suite",
     },
     // {
     //   id: 3,
