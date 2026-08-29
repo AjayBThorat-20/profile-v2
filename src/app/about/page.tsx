@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     description: "Learn more about Ajay Thorat - Full Stack Developer with expertise in Next.js, Node.js, PostgreSQL & MongoDB.",
     type: "website",
     locale: "en_US",
-    url: "https://portfolio.ajaythorat.com/about",
+    url: "https://ajaythorat.com/about",
     siteName: "Ajay Thorat Portfolio",
     images: [
       {
@@ -44,8 +44,8 @@ const breadcrumbStructuredData = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Home", item: "https://portfolio.ajaythorat.com/" },
-    { "@type": "ListItem", position: 2, name: "About", item: "https://portfolio.ajaythorat.com/about" },
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://ajaythorat.com/" },
+    { "@type": "ListItem", position: 2, name: "About", item: "https://ajaythorat.com/about" },
   ],
 };
 
@@ -90,7 +90,7 @@ const faqStructuredData = {
       name: "How can I contact Ajay Thorat?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Ajay Thorat can be reached via email at ajaythorat988@gmail.com, through the contact form at portfolio.ajaythorat.com/contact, or on LinkedIn and GitHub.",
+        text: "Ajay Thorat can be reached via email at ajaythorat988@gmail.com, through the contact form at ajaythorat.com/contact, or on LinkedIn and GitHub.",
       },
     },
   ],

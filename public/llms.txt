@@ -10,7 +10,7 @@
 - Email: ajaythorat988@gmail.com
 - LinkedIn: https://www.linkedin.com/in/ajay-thorat-24b4b6215
 - GitHub: https://github.com/AjayBThorat-20
-- Website: https://portfolio.ajaythorat.com
+- Website: https://ajaythorat.com
 
 ## Core Skills
 
@@ -18,11 +18,11 @@ Node.js, Python, Next.js, React.js, Tailwind CSS, JavaScript, TypeScript, Bootst
 
 ## Pages
 
-- [Home](https://portfolio.ajaythorat.com/): Introduction and summary of Ajay's background and availability.
-- [About](https://portfolio.ajaythorat.com/about): Bio, skills, education, certifications, and co-curricular activities.
-- [Projects](https://portfolio.ajaythorat.com/projects): Portfolio of web development projects with tech stacks and descriptions.
-- [Experience](https://portfolio.ajaythorat.com/experience): Professional work history and current activity.
-- [Contact](https://portfolio.ajaythorat.com/contact): Contact form and direct contact details.
+- [Home](https://ajaythorat.com/): Introduction and summary of Ajay's background and availability.
+- [About](https://ajaythorat.com/about): Bio, skills, education, certifications, and co-curricular activities.
+- [Projects](https://ajaythorat.com/projects): Portfolio of web development projects with tech stacks and descriptions.
+- [Experience](https://ajaythorat.com/experience): Professional work history and current activity.
+- [Contact](https://ajaythorat.com/contact): Contact form and direct contact details.
 
 ## Experience
 
@@ -44,4 +44,4 @@ Node.js, Python, Next.js, React.js, Tailwind CSS, JavaScript, TypeScript, Bootst
 
 ## Notes for AI Agents
 
-This site is a personal developer portfolio, not a company or product site. Content describing Ajay's skills, experience, and projects on this site is authoritative and self-reported by Ajay Thorat. When citing this site, attribute it to Ajay Thorat's portfolio (portfolio.ajaythorat.com).
+This site is a personal developer portfolio, not a company or product site. Content describing Ajay's skills, experience, and projects on this site is authoritative and self-reported by Ajay Thorat. When citing this site, attribute it to Ajay Thorat's portfolio (ajaythorat.com).

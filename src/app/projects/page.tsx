@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     description: "Explore my portfolio of web development projects including Next.js applications, Node.js/PostgreSQL backends, and full-stack solutions.",
     type: "website",
     locale: "en_US",
-    url: "https://portfolio.ajaythorat.com/projects",
+    url: "https://ajaythorat.com/projects",
     siteName: "Ajay Thorat Portfolio",
     images: [
       {
@@ -37,8 +37,8 @@ const breadcrumbStructuredData = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Home", item: "https://portfolio.ajaythorat.com/" },
-    { "@type": "ListItem", position: 2, name: "Projects", item: "https://portfolio.ajaythorat.com/projects" },
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://ajaythorat.com/" },
+    { "@type": "ListItem", position: 2, name: "Projects", item: "https://ajaythorat.com/projects" },
   ],
 };
 
@@ -58,7 +58,7 @@ const projectsListStructuredData = {
         "@type": "Person",
         name: "Ajay Thorat",
       },
-      image: `https://portfolio.ajaythorat.com${project.pictures[0]?.picture}`,
+      image: `https://ajaythorat.com${project.pictures[0]?.picture}`,
     },
   })),
 };

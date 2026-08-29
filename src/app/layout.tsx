@@ -32,7 +32,7 @@ const geistMono = localFont({
   display: 'swap', // Add this
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://portfolio.ajaythorat.com';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://ajaythorat.com';
 const googleVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
 const bingVerification = process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION;
 

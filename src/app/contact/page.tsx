@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     description: "Get in touch with Ajay Thorat for web development projects, collaborations, or job opportunities.",
     type: "website",
     locale: "en_US",
-    url: "https://portfolio.ajaythorat.com/contact",
+    url: "https://ajaythorat.com/contact",
     siteName: "Ajay Thorat Portfolio",
     images: [
       {
@@ -36,8 +36,8 @@ const breadcrumbStructuredData = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Home", item: "https://portfolio.ajaythorat.com/" },
-    { "@type": "ListItem", position: 2, name: "Contact", item: "https://portfolio.ajaythorat.com/contact" },
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://ajaythorat.com/" },
+    { "@type": "ListItem", position: 2, name: "Contact", item: "https://ajaythorat.com/contact" },
   ],
 };
 

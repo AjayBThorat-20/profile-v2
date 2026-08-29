@@ -4,7 +4,7 @@ import { certificationsData } from '@/constants/about'
 import { experienceData } from '@/constants/experience'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://portfolio.ajaythorat.com'
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://ajaythorat.com'
   const abs = (path: string) => `${baseUrl}${path}`
 
   const projectImages = projectsData.flatMap((project) =>

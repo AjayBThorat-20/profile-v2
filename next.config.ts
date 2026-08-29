@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'portfolio.ajaythorat.com',
+        hostname: 'ajaythorat.com',
         port: '',
         pathname: '/**',
       },

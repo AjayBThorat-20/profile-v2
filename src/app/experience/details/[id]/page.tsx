@@ -40,7 +40,7 @@ export async function generateMetadata({
       description,
       type: "website",
       locale: "en_US",
-      url: `https://portfolio.ajaythorat.com/experience/details/${experience.id}`,
+      url: `https://ajaythorat.com/experience/details/${experience.id}`,
       siteName: "Ajay Thorat Portfolio",
       images: [
         {
@@ -72,13 +72,13 @@ export default async function Page({ params }: { params: Promise<Params> }) {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://portfolio.ajaythorat.com/" },
-      { "@type": "ListItem", position: 2, name: "Experience", item: "https://portfolio.ajaythorat.com/experience" },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://ajaythorat.com/" },
+      { "@type": "ListItem", position: 2, name: "Experience", item: "https://ajaythorat.com/experience" },
       {
         "@type": "ListItem",
         position: 3,
         name: experience.name,
-        item: `https://portfolio.ajaythorat.com/experience/details/${experience.id}`,
+        item: `https://ajaythorat.com/experience/details/${experience.id}`,
       },
     ],
   };

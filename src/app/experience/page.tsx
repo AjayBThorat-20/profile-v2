@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     description: "View my professional experience as a Full Stack Developer, including current projects and work history.",
     type: "website",
     locale: "en_US",
-    url: "https://portfolio.ajaythorat.com/experience",
+    url: "https://ajaythorat.com/experience",
     siteName: "Ajay Thorat Portfolio",
     images: [
       {
@@ -43,8 +43,8 @@ const breadcrumbStructuredData = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Home", item: "https://portfolio.ajaythorat.com/" },
-    { "@type": "ListItem", position: 2, name: "Experience", item: "https://portfolio.ajaythorat.com/experience" },
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://ajaythorat.com/" },
+    { "@type": "ListItem", position: 2, name: "Experience", item: "https://ajaythorat.com/experience" },
   ],
 };
 
