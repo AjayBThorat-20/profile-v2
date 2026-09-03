@@ -2,6 +2,7 @@
 
 import React from "react";
 import SectionIntro from "@/Components/UI/SectionIntro";
+import { getYearsOfExperienceLabel } from "@/lib/experience";
 
 export default function WelcomeToExperience() {
   return (
@@ -17,7 +18,7 @@ export default function WelcomeToExperience() {
           }
           facts={[
             { value: "2", label: "Companies" },
-            { value: "1.7+", label: "Years experience" },
+            { value: getYearsOfExperienceLabel(), label: "Years experience" },
             { value: "Present", label: "Currently at Mumbai Biocluster" },
           ]}
         />

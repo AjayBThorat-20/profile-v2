@@ -42,6 +42,12 @@ Node.js, Python, Next.js, React.js, Tailwind CSS, JavaScript, TypeScript, Bootst
 - Master of Computer Application (MCA), Hiray College, University of Mumbai (2024)
 - Bachelor of Computer Science (B.Sc. CS), Patkar Varde College, University of Mumbai (2022)
 
+## Certifications
+
+- Big Data Computing, NPTEL (2021)
+- Data Analytics with Python, NPTEL (2024)
+- Postman Student Expert, Postman (2021)
+
 ## Notes for AI Agents
 
 This site is a personal developer portfolio, not a company or product site. Content describing Ajay's skills, experience, and projects on this site is authoritative and self-reported by Ajay Thorat. When citing this site, attribute it to Ajay Thorat's portfolio (ajaythorat.com).

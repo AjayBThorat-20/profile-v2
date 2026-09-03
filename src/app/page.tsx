@@ -1,86 +1,116 @@
 "use client";
 
-import { useSelector } from "react-redux";
-import { RootState } from "@/store/store";
-import { BasicInfo } from "@/Components/Home/page";
-import { getAccent } from "@/Components/UI/accentColor";
-import Image from "next/image";
-import Link from "next/link";
-import { FaArrowRight } from "react-icons/fa";
-import Badge from "@/Components/UI/Badge";
+import { Hero } from "@/Components/Home/page";
+import { About, Certifications, CoCurricularActivities, Education, Skills } from "@/Components/About/page";
+import { Projects, WelcomeToProject } from "@/Components/Projects/page";
+import { CurrentlyWorkingOn, Experience, WelcomeToExperience } from "@/Components/Experience/page";
+import { Contact } from "@/Components/Contact/page";
+import { projectsData } from "@/constants/project";
+
+const faqStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "What does Ajay Thorat specialize in?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Ajay Thorat is a full stack developer specializing in Next.js, React, Node.js, and MongoDB/PostgreSQL, with hands-on experience building scalable, production-ready web applications and managing agile teams.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Where is Ajay Thorat based?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Ajay Thorat is based in Mumbai, Maharashtra, India.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What is Ajay Thorat's educational background?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Ajay Thorat holds a Master of Computer Application (MCA) from Hiray College, University of Mumbai (2024), and a Bachelor of Computer Science (B.Sc. CS) from Patkar Varde College, University of Mumbai (2022).",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Is Ajay Thorat available for freelance or full-time work?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes, Ajay Thorat is currently available for freelance projects and full-time opportunities as a full stack developer.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "How can I contact Ajay Thorat?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Ajay Thorat can be reached via email at ajaythorat988@gmail.com, through the contact section at ajaythorat.com, or on LinkedIn and GitHub.",
+      },
+    },
+  ],
+};
+
+const projectsListStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  itemListElement: projectsData.map((project, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    item: {
+      "@type": "CreativeWork",
+      name: project.title,
+      description: project.discription,
+      url: project.url,
+      keywords: project.techStack,
+      author: {
+        "@type": "Person",
+        name: "Ajay Thorat",
+      },
+      image: `https://ajaythorat.com${project.pictures[0]?.picture}`,
+    },
+  })),
+};
 
 export default function Home() {
-  const theme = useSelector((state: RootState) => state.theme.mode);
-
   return (
-    <div className="relative min-h-screen overflow-hidden">
-      {/* Cinematic backdrop now lives site-wide in DefaultLayout - see there. */}
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqStructuredData) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(projectsListStructuredData) }}
+      />
 
-      {/* Main Content */}
-      <div className="container-custom min-h-[calc(100vh-140px)] flex items-center py-8 md:py-12">
-        <div className="flex flex-col md:flex-row-reverse items-center justify-between w-full gap-8 md:gap-12 lg:gap-16">
-          
-          {/* Image Section - Better proportions */}
-          <div className="relative w-full md:w-[46%] flex items-center justify-center md:justify-end order-1 animate-fadeIn">
-            <div className="relative w-full max-w-[280px] sm:max-w-[320px] md:max-w-none">
-              {/* Main Image */}
-              <div className="relative">
-                <div className="relative aspect-[3/4] overflow-hidden border border-border">
-                  <Image
-                    src="/Images/Profile/Ajay3.webp" // Use .webp if you converted it
-                    alt="Ajay Thorat - Full Stack Developer"
-                    fill
-                    className="object-cover object-center grayscale"
-                    priority
-                    quality={85}
-                    sizes="(max-width: 640px) 280px, (max-width: 768px) 320px, (max-width: 1024px) 380px, 420px"
-                    loading="eager"
-                  />
-                </div>
-              </div>
+      <Hero />
 
-              {/* Available Badge - Top right */}
-              <div className="absolute top-4 md:top-6 right-4 md:right-6">
-                <div className="flex items-center gap-1.5 md:gap-2 px-3 py-1.5 md:px-4 md:py-2 bg-background border border-border">
-                  <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                  <span className="text-xs md:text-sm font-bold text-foreground">Available</span>
-                </div>
-              </div>
-            </div>
-          </div>
+      <section id="about">
+        <About />
+        <Skills />
+        <Certifications />
+        <CoCurricularActivities />
+        <Education />
+      </section>
 
-          {/* Info Section - Better width distribution */}
-          <div className="md:w-[58%] w-full animate-fadeIn order-2" style={{ animationDelay: '120ms' }}>
-            <BasicInfo theme={theme} />
-          </div>
-        </div>
-      </div>
+      <section id="projects">
+        <WelcomeToProject />
+        <Projects />
+      </section>
 
-      {/* Featured Project Teaser */}
-      <div className="container-custom pb-16 md:pb-24 animate-fadeIn" style={{ animationDelay: '360ms' }}>
-        <Link
-          href="/projects"
-          className="group block panel p-6 md:p-8 border-l-4 border-l-primary transition-colors duration-300 hover:border-l-secondary"
-        >
-          <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-6">
-            <div className="flex-1 space-y-2">
-              <Badge accent={getAccent(1)} className="uppercase tracking-wide font-mono">
-                Featured Project
-              </Badge>
-              <h2 className="text-xl md:text-2xl font-black text-foreground">
-                DevCompass — Open-Source Dependency Health CLI
-              </h2>
-              <p className="text-sm md:text-base text-muted-foreground max-w-2xl">
-                A production npm CLI I built and maintain: real-time CVE scanning, AI-powered fix recommendations across four LLM providers, and an interactive D3.js dependency graph.
-              </p>
-            </div>
-            <div className="flex items-center gap-2 text-primary font-semibold text-sm md:text-base flex-shrink-0 group-hover:gap-3 transition-all duration-200">
-              <span>See how it works</span>
-              <FaArrowRight className="w-4 h-4" />
-            </div>
-          </div>
-        </Link>
-      </div>
-    </div>
+      <section id="experience">
+        <WelcomeToExperience />
+        <Experience />
+        <CurrentlyWorkingOn />
+      </section>
+
+      <section id="contact">
+        <Contact />
+      </section>
+    </>
   );
 }

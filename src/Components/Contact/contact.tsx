@@ -12,22 +12,48 @@ import RevealText from "@/Components/UI/RevealText";
 
 type FormStatus = "idle" | "loading" | "success" | "error";
 
+const BLOCKED_EMAIL_DOMAINS = new Set([
+  "example.com", "example.org", "example.net", "test.com", "testing.com",
+  "sample.com", "domain.com", "asdf.com", "notreal.com", "fake.com", "noemail.com",
+  "mailinator.com", "guerrillamail.com", "guerrillamail.info", "sharklasers.com",
+  "grr.la", "trashmail.com", "trashmail.net", "temp-mail.org", "tempmail.com",
+  "tempmail.net", "10minutemail.com", "10minutemail.net", "yopmail.com",
+  "yopmail.net", "throwawaymail.com", "getnada.com", "fakeinbox.com",
+  "dispostable.com", "mailnesia.com", "mintemail.com", "mytrashmail.com",
+  "tempinbox.com", "discard.email", "maildrop.cc", "mohmal.com", "moakt.com",
+  "emailondeck.com", "fakemailgenerator.com", "mailcatch.com", "mailsac.com",
+]);
+
+const BLOCKED_LOCAL_PARTS = new Set([
+  "test", "test123", "testing", "dummy", "fake", "sample", "asdf",
+  "asdfasdf", "admin", "noreply", "no-reply", "foo", "foobar", "xyz",
+  "abc", "qwerty", "example", "demo", "user", "spam", "aaa", "xxx",
+]);
+
 export default function Contact() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     subject: "",
     message: "",
+    website: "", // honeypot - must remain empty
   });
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const sectionRef = useRef<HTMLDivElement>(null);
   const isRevealed = useScrollReveal(sectionRef);
+  const formStartTimeRef = useRef<number>(Date.now());
 
   const validateEmail = (email: string) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(email);
+    if (!re.test(email)) return false;
+
+    const [localPart, domain] = email.toLowerCase().split("@");
+    if (BLOCKED_EMAIL_DOMAINS.has(domain)) return false;
+    if (BLOCKED_LOCAL_PARTS.has(localPart)) return false;
+
+    return true;
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -45,17 +71,27 @@ export default function Contact() {
 
     if (!validateEmail(formData.email)) {
       setStatus("error");
-      setErrorMessage("Please enter a valid email address");
+      setErrorMessage("Please use a real, reachable email address");
+      return;
+    }
+
+    if (formData.message.trim().length < 10) {
+      setStatus("error");
+      setErrorMessage("Please provide a bit more detail in your message");
       return;
     }
 
     try {
-      const result = await sendContactEmail(formData);
-      
+      const result = await sendContactEmail({
+        ...formData,
+        formStartTime: formStartTimeRef.current,
+      });
+
       if (result.success) {
         setStatus("success");
         setSuccessMessage(result.message || "Message sent successfully! I'll get back to you soon.");
-        setFormData({ name: "", email: "", subject: "", message: "" });
+        setFormData({ name: "", email: "", subject: "", message: "", website: "" });
+        formStartTimeRef.current = Date.now();
         setTimeout(() => {
           setStatus("idle");
           setSuccessMessage("");
@@ -159,14 +195,14 @@ export default function Contact() {
                   </p>
                 </div>
               ) : status === "success" ? (
-                <div className="relative flex flex-col items-center justify-center py-20 text-center animate-fadeIn">
-                  <div className="w-20 h-20 bg-green-500/10 rounded-full flex items-center justify-center mb-4">
+                <div className="relative flex flex-col items-center justify-center py-20 text-center">
+                  <div className="w-20 h-20 bg-green-500/10 rounded-full flex items-center justify-center mb-4 animate-fadeInScale">
                     <FaCheckCircle className="w-12 h-12 text-green-600 dark:text-green-400" />
                   </div>
-                  <h3 className="text-2xl font-bold text-foreground mb-2">
+                  <h3 className="text-2xl font-bold text-foreground mb-2 animate-fadeIn" style={{ animationDelay: '80ms' }}>
                     Message Sent!
                   </h3>
-                  <p className="text-green-600 dark:text-green-400 font-semibold">
+                  <p className="text-green-600 dark:text-green-400 font-semibold animate-fadeIn" style={{ animationDelay: '140ms' }}>
                     {successMessage}
                   </p>
                 </div>
@@ -183,13 +219,27 @@ export default function Contact() {
 
                   {/* Error Message */}
                   {status === "error" && errorMessage && (
-                    <div className="flex items-center gap-3 p-4 bg-red-500/10 border-2 border-red-500/20 rounded-2xl animate-fadeIn">
+                    <div className="flex items-center gap-3 p-4 bg-red-500/10 border-2 border-red-500/20 rounded-2xl animate-shake">
                       <FaExclamationCircle className="w-5 h-5 text-red-600 dark:text-red-400 flex-shrink-0" />
                       <p className="text-sm font-semibold text-red-600 dark:text-red-400">
                         {errorMessage}
                       </p>
                     </div>
                   )}
+
+                  {/* Honeypot field - hidden from real users, catches bots */}
+                  <div className="absolute -left-2499.75 w-px h-px overflow-hidden" aria-hidden="true">
+                    <label htmlFor="website">Website</label>
+                    <input
+                      type="text"
+                      id="website"
+                      name="website"
+                      value={formData.website}
+                      onChange={handleChange}
+                      tabIndex={-1}
+                      autoComplete="off"
+                    />
+                  </div>
 
                   {/* Name Field */}
                   <div>
@@ -204,7 +254,7 @@ export default function Contact() {
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 bg-background border-2 border-border focus:border-primary rounded-2xl text-foreground placeholder:text-muted-foreground transition-all duration-200 outline-none"
+                      className="w-full px-4 py-3 bg-background border-2 border-border focus:border-primary focus:ring-4 focus:ring-foreground/5 rounded-2xl text-foreground placeholder:text-muted-foreground transition-all duration-200 outline-none"
                       placeholder="John Doe"
                     />
                   </div>
@@ -222,7 +272,7 @@ export default function Contact() {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 bg-background border-2 border-border focus:border-primary rounded-2xl text-foreground placeholder:text-muted-foreground transition-all duration-200 outline-none"
+                      className="w-full px-4 py-3 bg-background border-2 border-border focus:border-primary focus:ring-4 focus:ring-foreground/5 rounded-2xl text-foreground placeholder:text-muted-foreground transition-all duration-200 outline-none"
                       placeholder="john@example.com"
                     />
                   </div>
@@ -240,7 +290,7 @@ export default function Contact() {
                       value={formData.subject}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 bg-background border-2 border-border focus:border-primary rounded-2xl text-foreground placeholder:text-muted-foreground transition-all duration-200 outline-none"
+                      className="w-full px-4 py-3 bg-background border-2 border-border focus:border-primary focus:ring-4 focus:ring-foreground/5 rounded-2xl text-foreground placeholder:text-muted-foreground transition-all duration-200 outline-none"
                       placeholder="What's this about?"
                     />
                   </div>
@@ -258,7 +308,7 @@ export default function Contact() {
                       onChange={handleChange}
                       required
                       rows={6}
-                      className="w-full px-4 py-3 bg-background border-2 border-border focus:border-primary rounded-2xl text-foreground placeholder:text-muted-foreground transition-all duration-200 outline-none resize-none"
+                      className="w-full px-4 py-3 bg-background border-2 border-border focus:border-primary focus:ring-4 focus:ring-foreground/5 rounded-2xl text-foreground placeholder:text-muted-foreground transition-all duration-200 outline-none resize-none"
                       placeholder="Tell me about your project or opportunity..."
                     />
                   </div>

@@ -5,6 +5,7 @@ import { FaRocket } from "react-icons/fa";
 import { useEffect, useRef, useState } from "react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import RevealText from "@/Components/UI/RevealText";
+import { getYearsOfExperienceLabel } from "@/lib/experience";
 
 export default function About() {
   const [mounted, setMounted] = useState(false);
@@ -19,7 +20,7 @@ export default function About() {
   const highlights = [
     "Built and maintain DevCompass, an open-source npm CLI tracking 500+ packages for CVE and deprecation risk",
     "Shipped production systems — FNS and ExcelFlow — at Renewalytics, helping manage 3.22+ GW of renewable energy capacity across 34+ sites",
-    "1.7+ years of full-stack experience across Next.js, Node.js, PostgreSQL, and MongoDB, now building at Mumbai Biocluster",
+    `${getYearsOfExperienceLabel()} years of full-stack experience across Next.js, Node.js, PostgreSQL, and MongoDB, now building at Mumbai Biocluster`,
   ];
 
   return (
@@ -122,14 +123,14 @@ export default function About() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <a
-                  href="/contact"
+                  href="#contact"
                   className="btn-primary magnetic px-8 py-4 text-lg"
                 >
                   Get In Touch
                   <FaRocket className="w-5 h-5 ml-2" />
                 </a>
                 <a
-                  href="/projects"
+                  href="#projects"
                   className="btn-secondary magnetic px-8 py-4 text-lg"
                 >
                   View My Work

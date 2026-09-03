@@ -56,14 +56,15 @@ export default function Certifications() {
         </div>
 
         {/* Certifications Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-fadeIn" style={{ animationDelay: '60ms' }}>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {certificationsData.map((cert, index) => {
             const accent = getAccent(index);
 
             return (
               <div
                 key={cert.id}
-                className={`spotlight group relative entry-card ${accent.border} p-6 overflow-hidden`}
+                className={`spotlight group relative entry-card ${accent.border} p-6 overflow-hidden animate-fadeIn`}
+                style={{ animationDelay: `${index * 60}ms` }}
               >
                 {/* Top Accent Bar */}
                 <div className={`absolute top-0 left-0 right-0 h-1 ${accent.bg}`}></div>
@@ -132,12 +133,12 @@ export default function Certifications() {
           Portaling to document.body sidesteps that ancestor entirely. */}
       {selectedImage && createPortal(
         <div
-          className="fixed inset-0 z-50 overflow-y-auto bg-black/90 backdrop-blur-lg animate-fadeIn"
+          className="fixed inset-0 z-80 overflow-y-auto bg-black/90 backdrop-blur-lg animate-fadeIn"
           onClick={() => setSelectedImage(null)}
         >
           <button
             onClick={() => setSelectedImage(null)}
-            className="fixed top-4 right-4 md:top-6 md:right-6 z-60 p-3 bg-destructive hover:bg-destructive/90 text-destructive-foreground rounded-full shadow-xl transition-colors duration-150 active:scale-95"
+            className="fixed top-4 right-4 md:top-6 md:right-6 z-90 p-3 bg-destructive hover:bg-destructive/90 text-destructive-foreground rounded-full shadow-xl transition-colors duration-150 active:scale-95"
             aria-label="Close"
           >
             <IoClose className="w-6 h-6" />
@@ -145,7 +146,7 @@ export default function Certifications() {
 
           <div className="min-h-full flex items-center justify-center p-4 py-20">
             <div
-              className="relative w-full max-w-6xl bg-card rounded-2xl shadow-2xl overflow-hidden border border-border"
+              className="relative w-full max-w-6xl bg-card rounded-2xl shadow-2xl overflow-hidden border border-border animate-fadeInScale"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="relative w-full p-8" style={{ maxHeight: "85vh" }}>

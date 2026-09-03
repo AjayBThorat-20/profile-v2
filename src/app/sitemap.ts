@@ -25,28 +25,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 1,
-      images: profileImages,
-    },
-    {
-      url: `${baseUrl}/about`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-      images: [...profileImages, ...certificationImages],
-    },
-    {
-      url: `${baseUrl}/projects`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.9,
-      images: projectImages,
-    },
-    {
-      url: `${baseUrl}/experience`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-      images: experienceImages,
+      images: [...profileImages, ...certificationImages, ...projectImages, ...experienceImages],
     },
     ...experienceData.map((exp) => ({
       url: `${baseUrl}/experience/details/${exp.id}`,
@@ -55,12 +34,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
       images: exp.details.map((detail) => abs(detail.picture)),
     })),
-    {
-      url: `${baseUrl}/contact`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.7,
-      images: profileImages,
-    },
   ]
 }

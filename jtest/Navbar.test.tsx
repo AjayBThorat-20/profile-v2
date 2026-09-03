@@ -5,67 +5,48 @@ import { Provider } from "react-redux";
 import themeReducer from "@/store/slices/themeSlice";
 import Navbar from "@/Components/Header/navbar";
 
-const mockPush = jest.fn();
-const mockUsePathname = jest.fn();
-
-jest.mock("next/navigation", () => ({
-  useRouter: () => ({ push: mockPush }),
-  usePathname: () => mockUsePathname(),
-}));
-
 function renderWithStore() {
   const store = configureStore({ reducer: { theme: themeReducer } });
-  render(
+  const utils = render(
     <Provider store={store}>
       <Navbar />
     </Provider>
   );
-  return store;
+  return { store, ...utils };
 }
 
 describe("Navbar", () => {
-  beforeEach(() => {
-    mockUsePathname.mockReturnValue("/");
-    mockPush.mockClear();
+  it("renders the logo and menu trigger", () => {
+    const { container } = renderWithStore();
+
+    expect(container.querySelector('a[href="#home"]')).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /toggle menu/i })).toBeInTheDocument();
   });
 
-  it("renders every top-level nav link", () => {
-    renderWithStore();
-
-    ["Home", "About", "Projects", "Experience", "Contact"].forEach((label) => {
-      expect(screen.getAllByText(label).length).toBeGreaterThan(0);
-    });
-  });
-
-  it("mobile hamburger button toggles the menu open state", async () => {
+  it("menu trigger toggles the overlay open state", async () => {
     const user = userEvent.setup();
-    const store = renderWithStore();
+    const { store } = renderWithStore();
 
-    const hamburger = screen.getByRole("button", { name: /toggle menu/i });
-    expect(hamburger).toHaveAttribute("aria-expanded", "false");
+    const trigger = screen.getByRole("button", { name: /toggle menu/i });
+    expect(trigger).toHaveAttribute("aria-expanded", "false");
     expect(store.getState().theme.isMenuOpen).toBe(false);
 
-    await user.click(hamburger);
+    await user.click(trigger);
 
-    expect(hamburger).toHaveAttribute("aria-expanded", "true");
+    expect(trigger).toHaveAttribute("aria-expanded", "true");
     expect(store.getState().theme.isMenuOpen).toBe(true);
   });
 
-  it("clicking a mobile menu link closes the menu and navigates", async () => {
+  it("clicking an overlay link closes the menu", async () => {
     const user = userEvent.setup();
-    const store = renderWithStore();
+    const { store } = renderWithStore();
 
     await user.click(screen.getByRole("button", { name: /toggle menu/i }));
     expect(store.getState().theme.isMenuOpen).toBe(true);
 
-    const mobileAboutLink = screen.getAllByText("About").find(
-      (el) => el.tagName === "BUTTON"
-    );
-    expect(mobileAboutLink).toBeDefined();
+    const aboutLink = screen.getByRole("link", { name: /about/i });
+    await user.click(aboutLink);
 
-    await user.click(mobileAboutLink!);
-
-    expect(mockPush).toHaveBeenCalledWith("/about");
     expect(store.getState().theme.isMenuOpen).toBe(false);
   });
 });

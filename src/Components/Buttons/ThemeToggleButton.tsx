@@ -18,7 +18,7 @@ export default function ThemeToggleButton() {
     <button
       onClick={() => dispatch(toggleTheme())}
       aria-label="Toggle theme"
-      className="relative p-2 rounded-2xl hover:bg-muted transition-colors duration-150"
+      className="relative p-2 rounded-2xl hover:bg-muted transition-colors duration-150 active:scale-90"
     >
       <FaMoon className="w-6 h-6 text-foreground transition-all duration-200 ease-out scale-100 rotate-0 dark:scale-0 dark:-rotate-90" />
       <FaSun className="absolute inset-0 m-auto w-6 h-6 text-foreground transition-all duration-200 ease-out scale-0 rotate-90 dark:scale-100 dark:rotate-0" />

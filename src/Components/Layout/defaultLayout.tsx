@@ -6,6 +6,7 @@ import { useAppSelector } from "@/store/hooks";
 import Footer from "../Footer/footer";
 import { usePathname } from "next/navigation";
 import ScrollProgressBar from "../UI/ScrollProgressBar";
+import SectionIndicator from "../UI/SectionIndicator";
 import CustomCursor from "../UI/CustomCursor";
 import { useMagnetic } from "@/hooks/useMagnetic";
 
@@ -27,11 +28,12 @@ const DefaultLayout = ({ children }: { children: React.ReactNode }) => {
     // overflow-x-clip, not overflow-x-hidden: `hidden` still establishes a
     // scroll container per the CSS overflow spec (even though this div never
     // actually scrolls - the window does), which silently breaks
-    // `position: sticky` for every descendant (e.g. ChapterNav). `clip`
+    // `position: sticky` for every descendant (e.g. SectionIndicator). `clip`
     // gets the same "no horizontal scrollbar" result without that side effect.
     <div className="min-h-screen overflow-x-clip bg-background text-foreground transition-colors duration-200">
       <CustomCursor />
       <ScrollProgressBar />
+      <SectionIndicator />
 
       {/* Fixed Navbar */}
       <Navbar />

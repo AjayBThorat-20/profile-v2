@@ -25,15 +25,15 @@ export default function NotFound() {
           <FaHome className="w-4 h-4" />
           Back to Home
         </Link>
-        <Link href="/contact" className="btn-secondary magnetic px-6 py-3">
+        <Link href="/#contact" className="btn-secondary magnetic px-6 py-3">
           <FaEnvelope className="w-4 h-4" />
           Contact Me
         </Link>
       </div>
       <div className="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm">
-        <Link href="/about" className="text-muted-foreground hover:text-primary transition-colors">About</Link>
-        <Link href="/projects" className="text-muted-foreground hover:text-primary transition-colors">Projects</Link>
-        <Link href="/experience" className="text-muted-foreground hover:text-primary transition-colors">Experience</Link>
+        <Link href="/#about" className="text-muted-foreground hover:text-primary transition-colors">About</Link>
+        <Link href="/#projects" className="text-muted-foreground hover:text-primary transition-colors">Projects</Link>
+        <Link href="/#experience" className="text-muted-foreground hover:text-primary transition-colors">Experience</Link>
       </div>
     </div>
   );

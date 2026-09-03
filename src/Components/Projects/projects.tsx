@@ -64,11 +64,17 @@ export default function Projects() {
                       details below, at every breakpoint - not side-by-side.
                       TiltCard tracks the cursor within its own bounds for a
                       subtle 3D tilt + zoom, independent of the image's own
-                      group-hover scale below. */}
-                  <TiltCard className="relative aspect-video md:aspect-[21/9] overflow-hidden border-b border-border">
+                      group-hover scale below. object-contain on a neutral
+                      fill (not object-cover) - the source screenshots range
+                      from wide dashboards to portrait mobile-app captures,
+                      and a fixed 21:9 cover crop was cutting up to ~80% off
+                      the portrait ones and overlapping the top badge on
+                      others. Containing always shows the full screenshot,
+                      letterboxed instead of chopped. */}
+                  <TiltCard className="relative aspect-video overflow-hidden border-b border-border bg-muted">
                     <Image
                       alt={`${project.title} - screenshot ${currentImageIndexes[activityIdx] + 1} - project by Ajay Thorat`}
-                      className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
+                      className="object-contain w-full h-full group-hover:scale-105 transition-transform duration-300"
                       src={project.pictures[currentImageIndexes[activityIdx]].picture}
                       fill
                       sizes="(min-width: 1280px) 1152px, (min-width: 1024px) calc(100vw - 8rem), (min-width: 640px) calc(100vw - 5rem), calc(100vw - 3rem)"

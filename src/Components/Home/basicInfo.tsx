@@ -6,6 +6,7 @@ import { FaArrowRight, FaDownload } from "react-icons/fa";
 import { getAccent } from "@/Components/UI/accentColor";
 import LiveTimecode from "@/Components/UI/LiveTimecode";
 import Badge from "@/Components/UI/Badge";
+import { getYearsOfExperienceLabel } from "@/lib/experience";
 
 interface BasicInfoProps {
   theme: "light" | "dark";
@@ -15,7 +16,7 @@ export default function BasicInfo({ theme }: BasicInfoProps) {
   const metrics = [
     { value: "4+", label: "Production Systems" },
     { value: "500+", label: "Packages Tracked" },
-    { value: "1.7+", label: "Years Experience" },
+    { value: getYearsOfExperienceLabel(), label: "Years Experience" },
   ];
 
   return (
@@ -99,13 +100,13 @@ export default function BasicInfo({ theme }: BasicInfoProps) {
           rel="noopener noreferrer"
           className="magnetic btn-primary group flex-1 px-5 py-3 md:px-6 md:py-4 text-sm md:text-base"
         >
-          <FaDownload className="w-4 h-4 md:w-5 md:h-5" />
+          <FaDownload className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-y-0.5 transition-transform duration-200" />
           <span>Download Resume</span>
           <FaArrowRight className="w-3 h-3 md:w-4 md:h-4 group-hover:translate-x-1 transition-transform" />
         </a>
 
         <Link
-          href="/contact"
+          href="#contact"
           className="magnetic btn-secondary group flex-1 px-5 py-3 md:px-6 md:py-4 text-sm md:text-base"
         >
           <span>Let's Connect</span>

@@ -34,7 +34,7 @@ export default function CoCurricularActivities() {
         </div>
 
         {/* Activities Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 animate-fadeIn" style={{ animationDelay: '60ms' }}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {coCurricularActivitiesData.map((activity, index) => {
             const ActivityIcon = ACTIVITY_ICONS[activity.Name] || FaRocket;
             const accent = getAccent(index);
@@ -42,7 +42,8 @@ export default function CoCurricularActivities() {
             return (
               <div
                 key={activity.id}
-                className={`spotlight group relative entry-card ${accent.border} p-6 overflow-hidden`}
+                className={`spotlight group relative entry-card ${accent.border} p-6 overflow-hidden animate-fadeIn`}
+                style={{ animationDelay: `${index * 60}ms` }}
               >
                 {/* Content */}
                 <div className="relative h-full flex flex-col space-y-4">

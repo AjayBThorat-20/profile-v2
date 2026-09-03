@@ -183,7 +183,7 @@ export default function ExperienceDetails({ experience }: { experience: Experien
           {/* Navigation Footer */}
           <div ref={footerRef} className={`flex justify-center pt-8 scroll-reveal ${isFooterRevealed ? "is-visible" : ""}`}>
             <Link
-              href="/experience"
+              href="/#experience"
               className="btn-primary group px-8 py-4 font-bold"
             >
               <FaArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform duration-200" />

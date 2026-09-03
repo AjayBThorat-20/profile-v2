@@ -8,6 +8,11 @@ export type ExperienceItem = {
   name: string;
   title: string;
   duration: string;
+  // ISO date strings (YYYY-MM-DD), used to compute years-of-experience
+  // stats live instead of hand-maintaining them - endDate null means the
+  // role is still ongoing ("Present" in the display duration string above).
+  startDate: string;
+  endDate: string | null;
   companyUrl: string;
   techStack: string;
   details: ExperienceDetail[];
@@ -78,6 +83,8 @@ export type RealSyncProjectData = {
       name: "ICT Mumbai Research Foundation (Mumbai Biocluster)",
       title: "Junior Full Stack Developer",
       duration: "18 May 2026 - Present",
+      startDate: "2026-05-18",
+      endDate: null,
       companyUrl: "https://www.mumbaibiocluster.org/",
       techStack: "Next.js, Prisma, Tailwind CSS, PostgreSQL, MySQL, MongoDB, Redis, BullMQ",
       details: [
@@ -95,6 +102,8 @@ export type RealSyncProjectData = {
   name: "Renewalytics Services Pvt. Ltd.",
   title: "Junior Full Stack Developer",
   duration: "18 March 2025 - 09 March 2026",
+  startDate: "2025-03-18",
+  endDate: "2026-03-09",
   companyUrl: "https://www.renewalytics.in/",
   techStack: "Next.js, Prisma, Tailwind CSS, PostgreSQL, MySQL, MongoDB, Redis, BullMQ, Highcharts, shadcn/ui, Zoho Email, Digital Ocean, PM2, Nginx",
   details: [
@@ -245,6 +254,8 @@ export type RealSyncProjectData = {
       name: "ShypBUDDY PVT. LTD",
       title: "Full-Stack Developer Intern",
       duration: "March 18 - September 18, 2024 (6 Months)",
+      startDate: "2024-03-18",
+      endDate: "2024-09-18",
       companyUrl: "https://shypbuddy.net/",
       techStack: "Next.js, Supabase, Prisma, Clerk, Tailwind CSS, Node.js",
       details: [
