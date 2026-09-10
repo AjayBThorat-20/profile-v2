@@ -61,7 +61,7 @@ export default function Experience() {
 
                     {/* Details */}
                     <div className="flex items-center gap-2 text-sm text-muted-foreground mb-4">
-                      <FaMapMarkerAlt className="w-3.5 h-3.5 flex-shrink-0" />
+                      <FaMapMarkerAlt className="w-3.5 h-3.5 shrink-0" />
                       {location}
                     </div>
 

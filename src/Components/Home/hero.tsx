@@ -21,7 +21,7 @@ export default function Hero() {
 
           {/* Image Section - Better proportions */}
           <div className="relative w-full md:w-[46%] flex items-center justify-center md:justify-end order-1 animate-fadeIn">
-            <div className="relative w-full max-w-[300px] sm:max-w-[360px] md:max-w-none">
+            <div className="relative w-full max-w-75 sm:max-w-90 md:max-w-none">
               {/* Offset frame - a solid ink rectangle behind the photo for
                   poster-like depth, stays pure black/white like everything
                   else on the page. */}
@@ -29,7 +29,7 @@ export default function Hero() {
 
               {/* Main Image */}
               <div className="relative">
-                <div className="relative aspect-[3/4] overflow-hidden border border-border">
+                <div className="relative aspect-3/4 overflow-hidden border border-border">
                   <Image
                     src="/Images/Profile/Ajay3.webp" // Use .webp if you converted it
                     alt="Ajay Thorat - Full Stack Developer"
@@ -78,7 +78,7 @@ export default function Hero() {
                 A production npm CLI I built and maintain: real-time CVE scanning, AI-powered fix recommendations across four LLM providers, and an interactive D3.js dependency graph.
               </p>
             </div>
-            <div className="flex items-center gap-2 text-primary font-semibold text-sm md:text-base flex-shrink-0 group-hover:gap-3 transition-all duration-200">
+            <div className="flex items-center gap-2 text-primary font-semibold text-sm md:text-base shrink-0 group-hover:gap-3 transition-all duration-200">
               <span>See how it works</span>
               <FaArrowRight className="w-4 h-4" />
             </div>

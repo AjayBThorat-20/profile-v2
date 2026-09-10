@@ -206,7 +206,7 @@ export default function CompanyReviews() {
   if (loading) {
     return (
       <div className="container-custom section">
-        <div className="flex items-center justify-center min-h-[400px]">
+        <div className="flex items-center justify-center min-h-100">
           <div className="text-center space-y-4">
             <div className="w-16 h-16 border-4 border-primary/30 border-t-primary rounded-full animate-spin mx-auto"></div>
             <p className="text-lg font-semibold text-muted-foreground">Loading reviews...</p>
@@ -219,7 +219,7 @@ export default function CompanyReviews() {
   if (error) {
     return (
       <div className="container-custom section">
-        <div className="flex items-center justify-center min-h-[400px]">
+        <div className="flex items-center justify-center min-h-100">
           <div className="text-center space-y-4 panel p-8 rounded-2xl border-l-4 border-l-destructive">
             <p className="text-xl font-bold text-destructive">{error}</p>
             <button
@@ -332,7 +332,7 @@ export default function CompanyReviews() {
                     {/* Header with Avatar and Name */}
                     <div className="flex items-start gap-4">
                       {/* Avatar */}
-                      <div className={`flex-shrink-0 w-20 h-20 ${accent.bg} rounded-full flex items-center justify-center shadow-xl ring-4 ring-background`}>
+                      <div className={`shrink-0 w-20 h-20 ${accent.bg} rounded-full flex items-center justify-center shadow-xl ring-4 ring-background`}>
                         <span className={`text-2xl font-black ${accent.fg}`}>
                           {review.fullName.split(' ').map(n => n[0]).join('').slice(0, 2)}
                         </span>

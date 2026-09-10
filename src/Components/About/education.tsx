@@ -65,7 +65,7 @@ export default function Education() {
 
                     {collegeInfo.location && (
                       <div className="flex items-center gap-2 mt-3 text-sm text-muted-foreground">
-                        <FaUniversity className="w-4 h-4 flex-shrink-0" />
+                        <FaUniversity className="w-4 h-4 shrink-0" />
                         {collegeInfo.location}
                       </div>
                     )}

@@ -128,7 +128,7 @@ export default function Skills() {
                 onMouseLeave={() => setHoveredSkill(null)}
               >
                 {/* Content */}
-                <div className="relative z-10 flex flex-col items-center justify-center space-y-3 min-h-[100px]">
+                <div className="relative z-10 flex flex-col items-center justify-center space-y-3 min-h-25">
                   <IconTile icon={SkillIcon} accent={accent} size="lg" />
 
                   {/* Skill Name */}

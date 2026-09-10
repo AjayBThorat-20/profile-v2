@@ -25,7 +25,7 @@ export default function IconTile({ icon: Icon, accent, index, size = "md", class
 
   return (
     <div
-      className={`relative inline-flex items-center justify-center flex-shrink-0 border ${accent.border} ${accent.bgSoft} ${box} transition-all duration-150 group-hover:scale-105 ${accent.groupHoverBorder} ${className}`}
+      className={`relative inline-flex items-center justify-center shrink-0 border ${accent.border} ${accent.bgSoft} ${box} transition-all duration-150 group-hover:scale-105 ${accent.groupHoverBorder} ${className}`}
     >
       <Icon className={`${icon} ${accent.text}`} />
       {typeof index === "number" && (

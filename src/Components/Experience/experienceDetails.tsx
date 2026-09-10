@@ -124,7 +124,7 @@ export default function ExperienceDetails({ experience }: { experience: Experien
                     />
 
                     {/* Gradient overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                    <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent"></div>
 
                     {/* Badge positioned on image */}
                     <div className={`absolute top-6 left-6 inline-flex items-center gap-2 px-4 py-2 bg-card/90 backdrop-blur-sm rounded-full text-sm font-bold shadow-lg border-2 ${accent.border}`}>
@@ -163,7 +163,7 @@ export default function ExperienceDetails({ experience }: { experience: Experien
                                   key={itemIdx}
                                   className="flex items-start gap-3 text-base text-muted-foreground hover:text-foreground transition-colors duration-150"
                                 >
-                                  <FaCheckCircle className={`mt-1 w-4 h-4 flex-shrink-0 ${accent.text}`} />
+                                  <FaCheckCircle className={`mt-1 w-4 h-4 shrink-0 ${accent.text}`} />
                                   <span className="leading-relaxed">{item}</span>
                                 </li>
                               ))}

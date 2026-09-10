@@ -23,7 +23,7 @@ export default function Navbar() {
     if (flagError) {
       return (
         <div
-          className="rounded-2xl overflow-hidden flex-shrink-0"
+          className="rounded-2xl overflow-hidden shrink-0"
           style={{
             width: `${size}px`,
             height: `${size}px`,
@@ -34,7 +34,7 @@ export default function Navbar() {
     }
 
     return (
-      <div className="relative flex-shrink-0" style={{ width: `${size}px`, height: `${size}px` }}>
+      <div className="relative shrink-0" style={{ width: `${size}px`, height: `${size}px` }}>
         <Image
           src="/Flag/flag.gif"
           alt="Indian Flag"

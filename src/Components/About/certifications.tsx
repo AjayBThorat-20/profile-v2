@@ -79,7 +79,7 @@ export default function Certifications() {
 
                   {/* Title */}
                   <div>
-                    <h3 className="text-lg font-bold text-foreground leading-tight mb-3 min-h-[3rem] line-clamp-2">
+                    <h3 className="text-lg font-bold text-foreground leading-tight mb-3 min-h-12 line-clamp-2">
                       {cert.title}
                     </h3>
                     <div className={`h-0.5 w-16 ${accent.bg} rounded-full group-hover:w-24 transition-all duration-300`}></div>

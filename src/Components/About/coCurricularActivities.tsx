@@ -53,7 +53,7 @@ export default function CoCurricularActivities() {
                     {activity.Name}
                   </h3>
 
-                  <p className="text-muted-foreground text-sm leading-relaxed flex-grow">
+                  <p className="text-muted-foreground text-sm leading-relaxed grow">
                     {activity.description}
                   </p>
 

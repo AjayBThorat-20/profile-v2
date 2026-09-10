@@ -80,7 +80,7 @@ export default function Projects() {
                       sizes="(min-width: 1280px) 1152px, (min-width: 1024px) calc(100vw - 8rem), (min-width: 640px) calc(100vw - 5rem), calc(100vw - 3rem)"
                       priority={activityIdx === 0}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none"></div>
+                    <div className="absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent pointer-events-none"></div>
                     {/* Solid panel that wipes away left-to-right on mount,
                         staggered per card, so the whole card "reveals"
                         rather than just popping in - see .img-reveal-shutter

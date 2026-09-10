@@ -5,7 +5,7 @@ export default function CurrentlyWorkingOnSkeleton() {
           <div key={id} className="flex flex-col">
             <div className="bg-card border border-border w-full p-6 rounded-2xl shadow-md">
               <div className="flex justify-between items-center">
-                <div className="flex-grow pr-4">
+                <div className="grow pr-4">
                   {/* Placeholder for description */}
                   <div className="h-4 bg-muted rounded w-3/4 mb-2"></div>
                   <div className="h-4 bg-muted rounded w-1/2"></div>
