@@ -18,15 +18,27 @@ export default function CustomCursor() {
 
     document.body.classList.add("custom-cursor-active");
 
-    let mouseX = window.innerWidth / 2;
-    let mouseY = window.innerHeight / 2;
-    let ringX = mouseX;
-    let ringY = mouseY;
+    let mouseX = 0;
+    let mouseY = 0;
+    let ringX = 0;
+    let ringY = 0;
     let rafId = 0;
+    // The ring/dot sit off-canvas (see .cursor-dot/.cursor-ring's CSS
+    // default translate3d(-100px, -100px, 0)) until the first real
+    // mousemove - without this, tick() below would paint the ring at
+    // its initial coordinates (viewport center) on mount and leave it
+    // sitting there over the page content for anyone who scrolls before
+    // ever nudging the pointer.
+    let hasMoved = false;
 
     const handleMove = (e: MouseEvent) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
+      if (!hasMoved) {
+        hasMoved = true;
+        ringX = mouseX;
+        ringY = mouseY;
+      }
       if (dotRef.current) {
         dotRef.current.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
       }
@@ -57,11 +69,13 @@ export default function CustomCursor() {
     };
 
     const tick = () => {
-      ringX += (mouseX - ringX) * 0.18;
-      ringY += (mouseY - ringY) * 0.18;
-      const transform = `translate3d(${ringX}px, ${ringY}px, 0)`;
-      if (ringRef.current) ringRef.current.style.transform = transform;
-      if (labelRef.current) labelRef.current.style.transform = transform;
+      if (hasMoved) {
+        ringX += (mouseX - ringX) * 0.18;
+        ringY += (mouseY - ringY) * 0.18;
+        const transform = `translate3d(${ringX}px, ${ringY}px, 0)`;
+        if (ringRef.current) ringRef.current.style.transform = transform;
+        if (labelRef.current) labelRef.current.style.transform = transform;
+      }
       rafId = requestAnimationFrame(tick);
     };
     rafId = requestAnimationFrame(tick);

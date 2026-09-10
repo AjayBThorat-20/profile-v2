@@ -139,13 +139,11 @@ body {
 /* ==========================================
    ROOT VARIABLES — monochrome editorial
    A binary black/white/gray system (one hue
-   family, zero saturation) instead of a
-   colored brand palette - matches the light,
-   high-contrast, minimalist reference this
-   redesign is based on. --destructive stays a
+   family, zero saturation) - no brand color
+   anywhere on the page. --destructive stays a
    real semantic error color, not a decorative
-   accent, and is the only non-neutral hue on
-   the page.
+   accent, and is the only non-neutral hue site-
+   wide.
    ========================================== */
 :root {
   --background: 0 0% 100%;     /* pure white */

@@ -35,7 +35,7 @@ export default function BasicInfo({ theme }: BasicInfoProps) {
 
       {/* Main Heading - Staggered reveal */}
       <div className="space-y-3 md:space-y-4">
-        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight leading-tight">
+        <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[0.95]">
           <div className="overflow-hidden">
             <span className="block animate-slideInUp" style={{ animationDelay: '0ms' }}>
               <span className="text-foreground">Building</span>
@@ -43,7 +43,7 @@ export default function BasicInfo({ theme }: BasicInfoProps) {
           </div>
           <div className="overflow-hidden">
             <span className="block animate-slideInUp" style={{ animationDelay: '60ms' }}>
-              <span className="italic text-foreground text-5xl sm:text-6xl md:text-7xl lg:text-8xl">
+              <span className="italic text-foreground text-6xl sm:text-7xl md:text-8xl lg:text-8xl xl:text-9xl">
                 Digital Solutions
               </span>
             </span>

@@ -21,7 +21,12 @@ export default function Hero() {
 
           {/* Image Section - Better proportions */}
           <div className="relative w-full md:w-[46%] flex items-center justify-center md:justify-end order-1 animate-fadeIn">
-            <div className="relative w-full max-w-[280px] sm:max-w-[320px] md:max-w-none">
+            <div className="relative w-full max-w-[300px] sm:max-w-[360px] md:max-w-none">
+              {/* Offset frame - a solid ink rectangle behind the photo for
+                  poster-like depth, stays pure black/white like everything
+                  else on the page. */}
+              <div className="absolute -bottom-3 -right-3 md:-bottom-4 md:-right-4 w-full h-full bg-foreground -z-10" aria-hidden="true" />
+
               {/* Main Image */}
               <div className="relative">
                 <div className="relative aspect-[3/4] overflow-hidden border border-border">
@@ -32,7 +37,7 @@ export default function Hero() {
                     className="object-cover object-center grayscale"
                     priority
                     quality={85}
-                    sizes="(max-width: 640px) 280px, (max-width: 768px) 320px, (max-width: 1024px) 380px, 420px"
+                    sizes="(max-width: 640px) 300px, (max-width: 768px) 360px, (max-width: 1024px) 420px, 460px"
                     loading="eager"
                   />
                 </div>

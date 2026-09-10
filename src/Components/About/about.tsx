@@ -34,6 +34,7 @@ export default function About() {
             {/* Image Section - Now first on mobile, second on desktop */}
             <div className="w-full lg:w-[45%] flex justify-center animate-fadeIn" style={{ animationDelay: '120ms' }}>
               <div className="relative w-full max-w-md">
+                <div className="absolute -bottom-3 -right-3 md:-bottom-4 md:-right-4 w-full h-full bg-foreground -z-10" aria-hidden="true" />
                 <div className="relative aspect-[3/4] overflow-hidden border border-border bg-muted/20">
                   {!imageError ? (
                     <Image

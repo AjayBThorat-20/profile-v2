@@ -69,9 +69,10 @@ const ACCENTS: Record<AccentToken, AccentClasses> = {
   },
 };
 
-// Gold appears twice as often as teal or wine - it's the key light and
-// should dominate; the other two are situational shadow/highlight tones,
-// not equal thirds of a rotating brand-color wheel.
+// Ink (primary) dominates - it appears twice as often as secondary or
+// accent, the "key light" of this monochrome cycle. All three tokens
+// resolve to shades of black/white/gray (see globals.css) - there is no
+// saturated color anywhere on the page.
 const ORDER: AccentToken[] = ["primary", "secondary", "primary", "accent"];
 
 export function getAccent(index: number): AccentClasses {
