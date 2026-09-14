@@ -12,11 +12,16 @@ export default function Hero() {
   const theme = useSelector((state: RootState) => state.theme.mode);
 
   return (
-    <section id="home" className="relative min-h-screen overflow-hidden pt-20 md:pt-24">
+    <section id="home" className="relative min-h-[min(100vh,900px)] overflow-hidden pt-20 md:pt-24">
       {/* Cinematic backdrop now lives site-wide in DefaultLayout - see there. */}
 
       {/* Main Content */}
-      <div className="container-custom min-h-[calc(100vh-140px)] flex items-center py-8 md:py-12">
+      {/* Capped with min() rather than a bare 100vh: mobile browsers'
+          "Request Desktop Site" mode forces a wide layout viewport while
+          scaling its height to preserve the device's real (portrait) aspect
+          ratio, which can inflate 100vh to 2000px+ and leave this
+          flex-centered content stranded in a wall of dead space. */}
+      <div className="container-custom min-h-[min(calc(100vh-140px),760px)] flex items-center py-8 md:py-12">
         <div className="flex flex-col md:flex-row-reverse items-center justify-between w-full gap-8 md:gap-12 lg:gap-16">
 
           {/* Image Section - Better proportions */}
