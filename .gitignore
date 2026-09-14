@@ -42,6 +42,8 @@ next-env.d.ts
 
 # claude code
 .claude
+AGENTS.md
+CLAUDE.md
 
 # DevCompass outputs
 .devcompass/
