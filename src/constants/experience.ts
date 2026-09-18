@@ -67,7 +67,7 @@ export type RealSyncProjectData = {
     {
       id: 1,
       description: "Maintaining DevCompass, my open-source dependency-health CLI",
-      hiddenDisc: "Reworked the documentation and demo recordings so every command example matches the current release, and fixed a CI fixture bug that was breaking the integration test suite",
+      hiddenDisc: "Hardened the remaining shell-exec call sites to execFile with argv arrays, added CodeQL and OpenSSF Scorecard scanning plus a release version-guard to CI, and shipped a migrate-syntax codemod engine with a one-command undo for auto-fix sessions — now on v4.1.8 with 50 published releases and a self-analyzed health score of 9.3/10",
     },
     // {
     //   id: 3,
@@ -86,13 +86,85 @@ export type RealSyncProjectData = {
       startDate: "2026-05-18",
       endDate: null,
       companyUrl: "https://www.mumbaibiocluster.org/",
-      techStack: "Next.js, Prisma, Tailwind CSS, PostgreSQL, MySQL, MongoDB, Redis, BullMQ",
+      techStack: "Next.js 16, TypeScript, Prisma ORM (adapter-pg), PostgreSQL, NextAuth v5, Razorpay, AWS S3, Redis, Tailwind CSS, shadcn/ui, Zod, Jest",
       details: [
         {
           id: 1,
           title: "overview",
           picture: "/Images/Experience/MBC/mbc.png",
-          data: "Currently working as a Junior Full Stack Developer at Mumbai Biocluster (ICT Mumbai Research Foundation), a Section-8 nonprofit based at ICT Mumbai in Matunga. The organization operates a single-use cGMP facility and works to translate early-stage startup and academic innovations into clinical-stage biotechnology, supporting startups, academic institutions, MSMEs, and industry partners across cancer, rare disease, and biologics research. Full role details and responsibilities coming soon."
+          data: "Working as a Junior Full Stack Developer at Mumbai Biocluster (ICT Mumbai Research Foundation), a Section-8 nonprofit based at ICT Mumbai in Matunga. The organization operates a single-use cGMP facility and works to translate early-stage startup and academic innovations into clinical-stage biotechnology, supporting startups, academic institutions, MSMEs, and industry partners across cancer, rare disease, and biologics research. Within this role I am the sole full-stack developer building and maintaining two production B2B marketplace platforms for the organization: IndiaPharmaHub (IPH), an award-winning pharma/biopharma outsourcing platform, and Yantra, a lab-instrument-booking and sample-testing marketplace built on the same architecture."
+        },
+        {
+          id: 2,
+          title: "responsibilities",
+          picture: "/Images/Experience/MBC/mbc.png",
+          data: {
+            platformOwnership: [
+              "Sole full-stack developer on two production Next.js platforms — authored 197 of the ~200 commits on IndiaPharmaHub and 125 of 125 commits on Yantra — owning architecture, Prisma schema design, and feature delivery end-to-end from spec to deployment.",
+              "Designed and evolved two independent PostgreSQL schemas of 50+ interrelated Prisma models each, covering identity verification, catalog/taxonomy, quotations, messaging, reviews, audit logging, notifications, and webhook events."
+            ],
+            backendAndIntegrations: [
+              "Integrated Razorpay for subscriptions/billing, AWS S3 for file uploads with presigned URLs and a media-proxy pipeline that pre-shrinks oversized images server-side, NextAuth v5 for authentication, and nodemailer for transactional email.",
+              "Built bulk data workflows on ExcelJS/xlsx for CSV/XLSX import and export (bulk product/account/instrument uploads with validation, duplicate prevention, and status/import history tracking), and PDF generation with pdf-lib.",
+              "Implemented GST/PAN-based verification workflows so sellers, buyers, labs, and clients are vetted before they can transact on either platform."
+            ],
+            qualityAndTooling: [
+              "Wrote a custom dependency-graph-based \"test-affected\" Jest runner (madge-based, resolves the tsconfig @/* alias) so CI only re-runs tests transitively impacted by a change instead of the full suite — backs 520+ colocated test files on IndiaPharmaHub.",
+              "Enforced canonical Tailwind utility conventions (rounded-md over arbitrary values, has-[] selectors, standard easing) across both codebases for design-system consistency.",
+              "Made deliberate build-vs-revert calls under sole ownership — see the Yantra Custom Study note below — rather than shipping a duplicate feature path."
+            ]
+          }
+        },
+        {
+          id: 3,
+          title: "project 1: IndiaPharmaHub (IPH)",
+          picture: "/Images/Experience/MBC/mbc.png",
+          data: {
+            overview: [
+              "A B2B marketplace connecting verified pharma, biopharma, and life-sciences sellers and buyers across India for outsourcing R&D, manufacturing, testing, packaging, regulatory support, and technology needs.",
+              "One account can hold a Seller profile, a Buyer profile, or both, with GST/PAN verification gating access to transact.",
+              "Recognized with the India Innovation Catalyst Award by the DBT Secretary of India at #Biologics2025 as a game-changing B2B platform."
+            ],
+            features: [
+              "Service and product catalog with category/subcategory/type taxonomy and custom fields per product structure, plus bulk CSV/XLSX upload with priority ordering and duplicate prevention.",
+              "Quotation requests, wishlist, seller/listing reviews, real-time buyer-seller chat over server-sent events, and admin dashboards with per-listing daily stats.",
+              "Subscription billing via Razorpay (plan, subscription, payment, and webhook-event models), admin support tickets, and a full audit log across sensitive actions.",
+              "Admin-side bulk provider import pipeline with per-row status history and import history for onboarding sellers at scale."
+            ],
+            technicalHighlights: [
+              "Solo-authored virtually the entire codebase: 50+ Prisma models, Next.js 16 App Router, Prisma's adapter-pg driver, and an S3-backed media pipeline that proxies and resizes multi-megabyte source images so next/image can serve them fast.",
+              "Fixed cross-cutting production bugs including bulk-upload creating duplicate listings, bulk upload collapsing product model variants into one record, a GA4 web-vitals crash on client-side route changes, and hydration mismatches in the provider browse filters.",
+              "Built the test-affected Jest runner described above specifically to keep this repo's 520+ test files fast to run in CI and locally."
+            ]
+          }
+        },
+        {
+          id: 4,
+          title: "project 2: Yantra",
+          picture: "/Images/Experience/MBC/mbc.png",
+          data: {
+            overview: [
+              "A sister marketplace to IndiaPharmaHub: connects Clients who need lab instrument bookings and sample/analytical testing with verified Labs, with Admin mediating every interaction — Client and Lab never see each other's identity directly.",
+              "Sole developer on this platform: 125 of 125 commits, full ownership of schema, RBAC, and every feature shipped."
+            ],
+            features: [
+              "Granular, database-driven RBAC (Permission, PermissionGroup, Role models) replacing blanket admin/user role checks across the app.",
+              "Instrument catalog and booking with availability blocks, sample intake and tracking, a quotation-to-purchase-order-to-study-plan pipeline, invoicing, shipments, and lab reports with separate client-facing and internal-traceability renders from one underlying record.",
+              "Admin-in-the-middle messaging (CLIENT_ADMIN / LAB_ADMIN / SUPPORT thread types, deliberately no direct client-lab channel), escalations, reviews, wishlist, and notifications.",
+              "URL-synced list filters (search/status/date/category/sort/page), lab-catalog bulk-upload templates generated as real .xlsx files, and error boundaries with loading fallbacks to stop blank-screen navigations."
+            ],
+            technicalHighlights: [
+              "Built a full AI-powered \"Custom Study\" intake subsystem (new thread type, intake model, assistant stub, admin queue) and then deliberately reverted it the same day after determining the existing quotation-to-study-plan pipeline already covered the same use case — verified zero database rows referenced the removed schema before dropping it, rather than leave two competing concepts in the app.",
+              "Iteratively simplified the Instrument model as the pricing-tier design matured — removed fixed pricing, structure, subcategory, and capacity/location fields — each change backed by its own Prisma migration.",
+              "Replaced full-page refreshes with targeted component updates and added granular RBAC enforcement in place of blanket admin checks."
+            ]
+          }
+        },
+        {
+          id: 5,
+          title: "conclusion",
+          picture: "/Images/Experience/MBC/mbc.png",
+          data: "Since joining Mumbai Biocluster, I've been the sole full-stack developer behind two live B2B marketplaces built for ICT Mumbai Research Foundation — IndiaPharmaHub, an award-winning pharma outsourcing platform, and Yantra, a lab-instrument-booking and sample-testing marketplace built on the same architectural foundations. Owning both end-to-end has meant designing 50+ table Postgres/Prisma schemas, wiring payments, storage, and verification workflows, building my own CI test tooling, and making the judgment calls that come with sole ownership — including building then deliberately reverting a redundant AI subsystem once a simpler existing flow was shown to already solve the problem. The role has deepened my experience designing multi-sided, trust-and-verification-driven marketplaces with admin-mediated transactions at production scale."
         }
       ],
       detailPageUrl: "/details"

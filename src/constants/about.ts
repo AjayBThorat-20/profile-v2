@@ -43,7 +43,12 @@ export interface SkillElement {
     { id: 15, text: "Postman" },
     { id: 16, text: "Pentaho" },
     { id: 17, text: "Supabase" },
-    { id: 18, text: "Express.js" }
+    { id: 18, text: "Express.js" },
+    { id: 19, text: "TypeScript" },
+    { id: 20, text: "PostgreSQL" },
+    { id: 21, text: "NextAuth.js" },
+    { id: 22, text: "AWS S3" },
+    { id: 23, text: "Razorpay" }
   ];
   
   // 🔹 Education Data
