@@ -100,7 +100,7 @@ export type RealSyncProjectData = {
           picture: "/Images/Experience/MBC/mbc.png",
           data: {
             platformOwnership: [
-              "Sole full-stack developer on three production Next.js platforms — authored 197 of the ~200 commits on IndiaPharmaHub, 125 of 125 commits on Yantra, and 58 of 58 commits on the internal HRMS — owning architecture, Prisma schema design, and feature delivery end-to-end from spec to deployment.",
+              "Sole full-stack developer on three production Next.js platforms — authored 197 of the ~200 commits on IndiaPharmaHub, 125 of 125 commits on Yantra, and 77 of 77 commits on the internal HRMS — owning architecture, Prisma schema design, and feature delivery end-to-end from spec to deployment.",
               "Designed and evolved three independent PostgreSQL schemas covering identity verification, catalog/taxonomy, quotations, messaging, reviews, audit logging, notifications, and webhook events (IPH/Yantra, 50+ models each), plus attendance, payroll, KPI reviews, and recruitment (HRMS, 41 models)."
             ],
             backendAndIntegrations: [
@@ -170,7 +170,7 @@ export type RealSyncProjectData = {
           data: {
             overview: [
               "An internal HR management system built for Mumbai Biocluster itself, not client-facing: attendance, leave, payroll, KPI reviews, recruitment, assets, announcements, training, and company policies in one platform.",
-              "Sole developer: 58 of 58 commits, 41 Prisma models spanning attendance/regularization, leave balances, payroll runs and salary slips, KPI cycles/assignments/reviews, job postings/applications/interviews, assets, internal chat, tasks, reimbursements, and job referrals."
+              "Sole developer: 77 of 77 commits, 41 Prisma models spanning attendance/regularization, leave balances, payroll runs and salary slips, KPI cycles/assignments/reviews, job postings/applications/interviews, assets, internal chat, tasks, reimbursements, and job referrals."
             ],
             features: [
               "Attendance with session tracking and a regularization workflow, leave balances, payroll runs with generated salary slips, and an audit log across sensitive actions.",
