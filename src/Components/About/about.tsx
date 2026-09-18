@@ -24,7 +24,7 @@ export default function About() {
   ];
 
   return (
-    <div className="min-h-screen">
+    <div>
       <div ref={sectionRef} className={`container-custom section scroll-reveal ${isRevealed ? "is-visible" : ""}`}>
         <div className="max-w-7xl mx-auto space-y-16">
           
