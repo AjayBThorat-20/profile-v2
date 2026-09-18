@@ -60,7 +60,7 @@ export default function Navbar() {
         }`}
       >
         <a
-          href="#home"
+          href="/#home"
           onClick={() => isMenuOpen && dispatch(toggleMenu())}
           className="font-mono text-lg md:text-xl font-bold tracking-tight border-2 border-primary/30 hover:border-primary rounded-md px-2 py-0.5 text-foreground transition-all duration-200 active:scale-95"
         >

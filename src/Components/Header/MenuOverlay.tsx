@@ -68,7 +68,7 @@ export default function MenuOverlay() {
           return (
             <a
               key={section.id}
-              href={`#${section.id}`}
+              href={`/#${section.id}`}
               onClick={handleClose}
               className={`group flex items-baseline gap-4 md:gap-6 py-2 md:py-3 border-b border-border/60 last:border-b-0 transition-colors duration-200 ${
                 isActive ? "text-primary" : "text-foreground hover:text-primary"
