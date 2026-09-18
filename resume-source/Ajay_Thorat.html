@@ -1,58 +1,60 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <title>Ajay Thorat Resume</title>
 <style>
-  @page { size: Letter; margin: 0.55in 0.65in; }
+  @page { size: Letter; margin: 0.5in 0.6in; }
   * { box-sizing: border-box; }
   body {
     font-family: Arial, Helvetica, sans-serif;
-    color: #1a1a1a;
-    font-size: 10.3pt;
-    line-height: 1.42;
+    color: #111;
+    font-size: 10pt;
+    line-height: 1.35;
     margin: 0;
   }
   h1 {
     text-align: center;
-    font-size: 20pt;
+    font-size: 19pt;
     letter-spacing: 0.5px;
     margin: 0 0 4px 0;
   }
   .contact {
     text-align: center;
-    font-size: 9.3pt;
+    font-size: 9.2pt;
     color: #222;
     margin-bottom: 2px;
   }
   .contact a { color: #222; text-decoration: none; }
   h2 {
-    color: #1450c9;
-    font-size: 11pt;
-    letter-spacing: 0.5px;
-    border-bottom: 1.2px solid #1450c9;
+    color: #111;
+    font-size: 10.5pt;
+    letter-spacing: 0.6px;
+    border-bottom: 1px solid #111;
     padding-bottom: 2px;
-    margin: 14px 0 6px 0;
+    margin: 11px 0 5px 0;
   }
-  h2:first-of-type { margin-top: 12px; }
-  p { margin: 0 0 8px 0; }
-  .skills-row { margin-bottom: 4px; }
+  h2 { break-after: avoid; }
+  h2:first-of-type { margin-top: 11px; }
+  p { margin: 0 0 6px 0; }
+  .skills-row { margin-bottom: 3px; }
   .skills-row b { font-weight: 700; }
-  ul { margin: 4px 0 10px 0; padding-left: 18px; }
-  li { margin-bottom: 3px; }
-  .entry-title { font-weight: 700; }
-  .entry-sub { font-style: italic; margin: 1px 0 4px 0; }
+  ul { margin: 3px 0 8px 0; padding-left: 18px; }
+  li { margin-bottom: 2px; }
   .role-line {
     display: flex;
     justify-content: space-between;
     font-weight: 700;
     margin-top: 8px;
+    break-after: avoid;
   }
-  .role-line .dates { font-weight: 400; font-style: italic; }
-  .project-title { font-weight: 700; }
-  .project-stack { font-style: italic; margin: 1px 0 4px 0; }
-  .edu-entry { margin-bottom: 6px; }
+  .role-line .dates { font-weight: 400; }
+  .entry-sub { margin: 1px 0 3px 0; }
+  .project-title { font-weight: 700; margin-top: 6px; break-after: avoid; }
+  .project-stack { margin: 1px 0 3px 0; }
+  .edu-entry { margin-bottom: 5px; }
   .edu-degree { font-weight: 700; }
+  li, .edu-entry { break-inside: avoid; }
 </style>
 </head>
 <body>
@@ -62,75 +64,85 @@
 <div class="contact">github.com/AjayBThorat-20 | linkedin.com/in/ajaythorat-dev | ajaythorat.com</div>
 
 <h2>SUMMARY</h2>
-<p>Full Stack Developer with 1.7+ years of experience building production-grade web applications and open-source tools. Expertise in scalable RESTful APIs, real-time dashboards, automated data pipelines, and npm package development. Proficient in cloud infrastructure management with DigitalOcean, PM2, and Nginx.</p>
+<p>Full Stack Developer with 1.8+ years of experience building and maintaining web applications with Next.js, Node.js, PostgreSQL, and Prisma. Currently the sole developer of three web applications at Mumbai Biocluster. Previous work includes data platforms for renewable energy forecasting and shipping software for e-commerce sellers. Maintainer of DevCompass, an open-source npm package.</p>
 
 <h2>SKILLS</h2>
-<p class="skills-row"><b>Languages &amp; Frameworks:</b> JavaScript, TypeScript, Node.js, React.js, Next.js, Express.js, Tailwind CSS, Bootstrap</p>
+<p class="skills-row"><b>Languages:</b> JavaScript, TypeScript, Python</p>
+<p class="skills-row"><b>Frameworks and Libraries:</b> Next.js, React.js, Node.js, Express.js, Tailwind CSS, Bootstrap, shadcn/ui, Prisma ORM, NextAuth.js</p>
 <p class="skills-row"><b>Databases:</b> PostgreSQL, MySQL, MongoDB, Redis, Supabase</p>
-<p class="skills-row"><b>Backend &amp; API Development:</b> RESTful API Development, Authentication &amp; Authorization (JWT, NextAuth), RBAC Systems, API Integration, Prisma ORM</p>
-<p class="skills-row"><b>Data Processing &amp; Automation:</b> BullMQ Job Queues, Cron Jobs, FTP/SFTP Data Pipelines, Excel/XLSB Data Processing</p>
-<p class="skills-row"><b>Cloud &amp; DevOps:</b> DigitalOcean, PM2, Nginx, Linux Server Management, Database Backups, Log Rotation, Server Monitoring</p>
-<p class="skills-row"><b>Architecture &amp; Concepts:</b> System Design, Scalable Architecture, API Security, Caching, Rate Limiting, Unit Testing</p>
-<p class="skills-row"><b>Certifications:</b> Big Data Computing (NPTEL) | Data Analytics with Python (NPTEL) | Postman Student Expert</p>
-
-<h2>OPEN SOURCE CONTRIBUTIONS</h2>
-<div class="entry-title">DevCompass - npm Package Maintainer | March 2026 - Present</div>
-<div class="entry-sub">Dependency health checker with 1.2k+ downloads/month, 45 published releases | npmjs.com/package/devcompass</div>
-<ul>
-  <li>Published and maintain a production npm CLI tool for JavaScript dependency analysis, combining real-time CVE detection (OSV + NVD integration), AI-powered recommendations across 4 LLM providers (OpenAI, Anthropic, Google, local Ollama), and automated dependency remediation</li>
-  <li>Led a security hardening release cycle: identified and fixed a shell-injection vulnerability (CWE-78) and a path-traversal gap in the backup subsystem, and upgraded API key encryption from unsalted SHA-256 to salted scrypt with backward-compatible key migration</li>
-  <li>Engineered interactive dependency graph visualization with D3.js supporting 5 layouts (tree, force-directed, radial, conflict-only, analytics) with real-time search/filter and zoom</li>
-  <li>Built a parallel GitHub Issues API integration tracking 500+ popular npm packages for deprecation/security alerts, achieving an 80% performance improvement through concurrent processing</li>
-  <li>Set up a CI/CD pipeline (GitHub Actions) gating every change on an automated test suite and npm audit, and shipped coordinated patch releases addressing newly-disclosed CVEs in upstream dependencies (axios, form-data)</li>
-  <li>Achieved a 9.3/10 self-analyzed health score through modern tooling (knip integration), automated backup/rollback on every fix, and 100+ validation checks</li>
-</ul>
+<p class="skills-row"><b>Backend:</b> REST APIs, JWT Authentication, Role-Based Access Control, BullMQ Job Queues, Cron Jobs, FTP/SFTP, Excel/XLSX Processing, Razorpay, AWS S3, Caching, Rate Limiting, API Security</p>
+<p class="skills-row"><b>Cloud and DevOps:</b> AWS EC2, Bluehost VPS, DigitalOcean, Linux, Nginx, PM2, Docker, GitHub Actions</p>
+<p class="skills-row"><b>Testing and Tools:</b> Jest, React Testing Library, Unit Testing, Postman, Git, GitHub</p>
 
 <h2>PROFESSIONAL EXPERIENCE</h2>
 
 <div class="role-line"><span>Junior Full Stack Developer | ICT Mumbai Research Foundation (Mumbai Biocluster)</span><span class="dates">May 2026 - Present</span></div>
 <ul>
-  <li>Joined ICT Mumbai Research Foundation (Mumbai Biocluster), a Section-8 nonprofit operating a single-use cGMP facility at ICT Mumbai (Matunga), as Junior Full Stack Developer</li>
-  <li>Supporting the organization's work translating early-stage startup and academic innovations into clinical-stage biotechnology, serving startups, academic institutions, MSMEs, and industry partners across cancer, rare disease, and biologics research</li>
+  <li>Build and maintain three Next.js and PostgreSQL applications as the sole developer: IndiaPharmaHub, Yantra, and an internal HR management system</li>
+  <li>IndiaPharmaHub: a B2B marketplace for pharma and life-sciences sellers and buyers, with GST/PAN verification, product and service catalogs, quotations, chat, and Razorpay subscription billing. The platform received the India Innovation Catalyst Award at #Biologics2025</li>
+  <li>Yantra: a marketplace for lab instrument booking and sample testing in which an admin mediates between clients and labs, with permission-based access control, quotations, purchase orders, invoices, and Razorpay payments</li>
+  <li>Internal HR management system: attendance, leave, payroll, KPI reviews, recruitment, and meeting-room booking modules on a 41-model Prisma schema</li>
+  <li>Migrated the IndiaPharmaHub database from Sequelize to Prisma and PostgreSQL, and remapped existing S3 files, using a re-runnable migration script</li>
+  <li>Reduced layout shift on the IndiaPharmaHub products page (CLS 0.112 to 0.006) and removed about 150 KB of unused JavaScript for buyers through code splitting</li>
+  <li>Wrote a script that runs only the Jest tests affected by a code change, using the import dependency graph; the IndiaPharmaHub suite has 520+ test files</li>
+  <li>Deploy and manage the applications on AWS EC2 and Bluehost VPS</li>
 </ul>
 
 <div class="role-line"><span>Junior Full Stack Developer | Renewalytics Services Pvt. Ltd.</span><span class="dates">March 2025 - March 2026</span></div>
 <ul>
-  <li>Revamped FNS platform managing 3.22+ GW renewable capacity across 34+ sites with &gt;92% forecast accuracy; improved performance 60-80% through Context API optimization</li>
-  <li>Built ExcelFlow MIS processing 20MB+ XLSB files (16+ sheets, 33 plants) using BullMQ parallel processing; implemented portfolio-based automated email delivery</li>
-  <li>Engineered data pipelines with crontab fetching FTP/SFTP/API data, processing bulk upserts with caching/rate limiting across 3 production apps (Next.js, PostgreSQL, MySQL, MongoDB, Redis)</li>
-  <li>Designed RealSync with comprehensive RBAC, API security, NextAuth/JWT authentication, and secure password reset flows</li>
-  <li>Managed DigitalOcean infrastructure: PM2, Nginx, automated DB backups, MongoDB log rotation, cron jobs, server monitoring</li>
-  <li>Resolved production security incident migrating to new droplet, restoring operations without data loss; collaborated with 10+ renewable energy clients</li>
+  <li>Rebuilt the FNS forecasting and scheduling platform, which manages 3.22+ GW of renewable energy capacity across 34+ sites, and improved application performance by up to 80% with caching, memoization, and Context API changes</li>
+  <li>Built ExcelFlow, a reporting application for 33 solar and wind plants, using BullMQ to process XLSB files of 15 MB or more with 16+ sheets in parallel, with automated email delivery of reports</li>
+  <li>Wrote cron-based data pipelines that fetch data from FTP, SFTP, and client APIs and load it with bulk upserts, caching, and rate limiting, across 3 applications (Next.js, PostgreSQL, MySQL, MongoDB, Redis)</li>
+  <li>Built RealSync user management with role-based access control, NextAuth.js and JWT authentication, and password reset</li>
+  <li>Managed DigitalOcean servers with PM2 and Nginx, including database backups, MongoDB log rotation, cron jobs, and monitoring</li>
+  <li>Migrated the servers to a new droplet after a production security incident and restored operations without data loss</li>
+  <li>Worked directly with 10+ renewable energy clients to gather requirements</li>
 </ul>
 
 <div class="role-line"><span>Full-Stack Developer Intern | ShypBUDDY Pvt. Ltd.</span><span class="dates">March 2024 - September 2024</span></div>
 <ul>
-  <li>Built admin/user panels using Next.js, React, Tailwind CSS with Clerk Authentication and PostgreSQL</li>
-  <li>Integrated 7+ logistics APIs (Delhivery, DTDC, Ekart, Shadowfax, Xpressbees, Amazon) and Shopify API for e-commerce order syncing</li>
-  <li>Implemented Order Management, Rate Calculator, Warehouse Management, MIS Reports, BUDDYSHIELD, Cashfree KYC API, Pincode Serviceability</li>
+  <li>Built admin and user panels with Next.js, React, Tailwind CSS, Clerk, and PostgreSQL</li>
+  <li>Integrated 7+ courier APIs (Delhivery, DTDC, Ekart, Shadowfax, Xpressbees, Amazon) and the Shopify API for order syncing</li>
+  <li>Implemented order management, rate calculator, warehouse management, MIS reports, BUDDYSHIELD insurance, Cashfree KYC, and pincode serviceability</li>
+</ul>
+
+<h2>OPEN SOURCE</h2>
+<div class="role-line"><span>DevCompass | npm Package Maintainer</span><span class="dates">March 2026 - Present</span></div>
+<div class="entry-sub">Dependency health checker for JavaScript projects. 50 releases, 2,000+ downloads in the last month. npmjs.com/package/devcompass</div>
+<ul>
+  <li>Publish and maintain a CLI that scans npm dependencies for known vulnerabilities (OSV, NVD), outdated and unused packages, and license conflicts</li>
+  <li>Added AI-based recommendations through four providers: OpenAI, Anthropic, Google, and local Ollama</li>
+  <li>Built an interactive D3.js dependency graph with five layouts and search, filter, and zoom</li>
+  <li>Built an auto-fix command with risk classification, dry-run preview, automatic backup, and undo</li>
+  <li>Fixed a shell-injection issue (CWE-78) and a path-traversal issue, replaced unsalted SHA-256 with salted scrypt for API key storage, and moved all command execution to execFile with argument arrays</li>
+  <li>Set up GitHub Actions for tests with a 60% line-coverage minimum, npm audit, CodeQL, OpenSSF Scorecard, and a release version check</li>
+  <li>Track 500+ popular npm packages for deprecation and security alerts through the GitHub Issues API, using concurrent requests (80% faster)</li>
 </ul>
 
 <h2>PROJECTS</h2>
-<div class="project-title">Crime Predict - Crime Data Visualization Platform</div>
-<div class="project-stack">React.js, Django, Node.js, SQLite3, JWT, REST APIs</div>
+<div class="project-title">Crime Predict</div>
+<div class="project-stack">React.js, Python, Django, SQLite3, JWT, REST APIs</div>
 <ul>
-  <li>Built full-stack analytics platform visualizing crime patterns across India with interactive charts, state-wise filters, and real-time news API integration</li>
+  <li>Built a full-stack web application for crime data analysis for law enforcement in India, with JWT authentication, admin and user interfaces for managing crime data, data visualization, and a news feed</li>
 </ul>
-<div class="project-title">LinkedIn Clone - Professional Networking Platform</div>
+<div class="project-title">LinkedIn Clone</div>
 <div class="project-stack">Next.js, Node.js, MongoDB, Tailwind CSS, NextAuth.js, REST APIs</div>
 <ul>
-  <li>Developed social networking platform with user profiles, dynamic feed, post management, and Google OAuth authentication</li>
+  <li>Built a professional networking application with Google OAuth, user profiles, a post feed with create, edit, and delete, and light and dark themes</li>
 </ul>
 
 <h2>EDUCATION</h2>
 <div class="edu-entry">
   <div class="edu-degree">Master of Computer Application (MCA) | 2024</div>
-  <div>Hiray College (Bandra East), Mumbai University</div>
+  <div>Hiray College (Bandra East), University of Mumbai</div>
 </div>
 <div class="edu-entry">
-  <div class="edu-degree">Bachelor of Computer Science (B.Sc CS) | 2022</div>
-  <div>Patkar Varde College (Goregaon West), Mumbai University</div>
+  <div class="edu-degree">Bachelor of Computer Science (B.Sc. CS) | 2022</div>
+  <div>Patkar Varde College (Goregaon West), University of Mumbai</div>
 </div>
+
+<h2>CERTIFICATIONS</h2>
+<p>Big Data Computing (NPTEL, 2021) | Data Analytics with Python (NPTEL, 2024) | Postman Student Expert (Postman, 2021)</p>
 
 </body>
 </html>
