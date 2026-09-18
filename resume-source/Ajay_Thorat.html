@@ -79,10 +79,10 @@
 <div class="role-line"><span>Junior Full Stack Developer | ICT Mumbai Research Foundation (Mumbai Biocluster)</span><span class="dates">May 2026 - Present</span></div>
 <ul>
   <li>Build and maintain three Next.js and PostgreSQL applications as the sole developer: IndiaPharmaHub, Yantra, and an internal HR management system</li>
-  <li>IndiaPharmaHub: a B2B marketplace for pharma and life-sciences sellers and buyers, with GST/PAN verification, product and service catalogs, quotations, chat, and Razorpay subscription billing. The platform received the India Innovation Catalyst Award at #Biologics2025</li>
+  <li>IndiaPharmaHub: a B2B marketplace for pharma and life-sciences sellers and buyers, with GST/PAN verification, product and service catalogs, quotations, chat, and Razorpay subscription billing. The platform received the India Innovation Catalyst Award at #Biologics2025, before the rebuild</li>
   <li>Yantra: a marketplace for lab instrument booking and sample testing in which an admin mediates between clients and labs, with permission-based access control, quotations, purchase orders, invoices, and Razorpay payments</li>
   <li>Internal HR management system: attendance, leave, payroll, KPI reviews, recruitment, and meeting-room booking modules on a 41-model Prisma schema</li>
-  <li>Migrated the IndiaPharmaHub database from Sequelize to Prisma and PostgreSQL, and remapped existing S3 files, using a re-runnable migration script</li>
+  <li>Rebuilt IndiaPharmaHub as a single TypeScript Next.js 16 application, replacing an Express and Sequelize API and a separate Pages Router client; added Redis caching, rate limiting, and server-sent events, and migrated the database to Prisma and PostgreSQL with a re-runnable script that also remapped S3 files</li>
   <li>Reduced layout shift on the IndiaPharmaHub products page (CLS 0.112 to 0.006) and removed about 150 KB of unused JavaScript for buyers through code splitting</li>
   <li>Wrote a script that runs only the Jest tests affected by a code change, using the import dependency graph; the IndiaPharmaHub suite has 520+ test files</li>
   <li>Deploy and manage the applications on AWS EC2 and Bluehost VPS</li>
