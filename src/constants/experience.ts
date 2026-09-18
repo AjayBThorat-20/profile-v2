@@ -86,13 +86,13 @@ export type RealSyncProjectData = {
       startDate: "2026-05-18",
       endDate: null,
       companyUrl: "https://www.mumbaibiocluster.org/",
-      techStack: "Next.js 16, TypeScript, Prisma ORM (adapter-pg), PostgreSQL, NextAuth v5, Razorpay, AWS S3, Redis, Tailwind CSS, shadcn/ui, Zod, Jest",
+      techStack: "Next.js 16, TypeScript, Prisma ORM (adapter-pg), PostgreSQL, NextAuth v5, Razorpay, AWS S3, AWS EC2, Bluehost VPS, Redis, BullMQ, Tailwind CSS, shadcn/ui, Zod, Jest",
       details: [
         {
           id: 1,
           title: "overview",
           picture: "/Images/Experience/MBC/mbc.png",
-          data: "Working as a Junior Full Stack Developer at Mumbai Biocluster (ICT Mumbai Research Foundation), a Section-8 nonprofit based at ICT Mumbai in Matunga. The organization operates a single-use cGMP facility and works to translate early-stage startup and academic innovations into clinical-stage biotechnology, supporting startups, academic institutions, MSMEs, and industry partners across cancer, rare disease, and biologics research. Within this role I am the sole full-stack developer building and maintaining two production B2B marketplace platforms for the organization: IndiaPharmaHub (IPH), an award-winning pharma/biopharma outsourcing platform, and Yantra, a lab-instrument-booking and sample-testing marketplace built on the same architecture."
+          data: "Working as a Junior Full Stack Developer at Mumbai Biocluster (ICT Mumbai Research Foundation), a Section-8 nonprofit based at ICT Mumbai in Matunga. The organization operates a single-use cGMP facility and works to translate early-stage startup and academic innovations into clinical-stage biotechnology, supporting startups, academic institutions, MSMEs, and industry partners across cancer, rare disease, and biologics research. Within this role I am the sole full-stack developer building and maintaining three production platforms for the organization: IndiaPharmaHub (IPH), an award-winning pharma/biopharma outsourcing marketplace; Yantra, a lab-instrument-booking and sample-testing marketplace built on the same architecture; and an internal HRMS covering attendance, payroll, KPI reviews, and recruitment for the organization itself."
         },
         {
           id: 2,
@@ -100,8 +100,8 @@ export type RealSyncProjectData = {
           picture: "/Images/Experience/MBC/mbc.png",
           data: {
             platformOwnership: [
-              "Sole full-stack developer on two production Next.js platforms — authored 197 of the ~200 commits on IndiaPharmaHub and 125 of 125 commits on Yantra — owning architecture, Prisma schema design, and feature delivery end-to-end from spec to deployment.",
-              "Designed and evolved two independent PostgreSQL schemas of 50+ interrelated Prisma models each, covering identity verification, catalog/taxonomy, quotations, messaging, reviews, audit logging, notifications, and webhook events."
+              "Sole full-stack developer on three production Next.js platforms — authored 197 of the ~200 commits on IndiaPharmaHub, 125 of 125 commits on Yantra, and 58 of 58 commits on the internal HRMS — owning architecture, Prisma schema design, and feature delivery end-to-end from spec to deployment.",
+              "Designed and evolved three independent PostgreSQL schemas covering identity verification, catalog/taxonomy, quotations, messaging, reviews, audit logging, notifications, and webhook events (IPH/Yantra, 50+ models each), plus attendance, payroll, KPI reviews, and recruitment (HRMS, 41 models)."
             ],
             backendAndIntegrations: [
               "Integrated Razorpay for subscriptions/billing, AWS S3 for file uploads with presigned URLs and a media-proxy pipeline that pre-shrinks oversized images server-side, NextAuth v5 for authentication, and nodemailer for transactional email.",
@@ -112,6 +112,9 @@ export type RealSyncProjectData = {
               "Wrote a custom dependency-graph-based \"test-affected\" Jest runner (madge-based, resolves the tsconfig @/* alias) so CI only re-runs tests transitively impacted by a change instead of the full suite — backs 520+ colocated test files on IndiaPharmaHub.",
               "Enforced canonical Tailwind utility conventions (rounded-md over arbitrary values, has-[] selectors, standard easing) across both codebases for design-system consistency.",
               "Made deliberate build-vs-revert calls under sole ownership — see the Yantra Custom Study note below — rather than shipping a duplicate feature path."
+            ],
+            infrastructure: [
+              "Deploy and manage the platforms across AWS EC2 and Bluehost VPS instances, handling server setup, environment configuration, and release deployment myself alongside the application code."
             ]
           }
         },
@@ -162,9 +165,32 @@ export type RealSyncProjectData = {
         },
         {
           id: 5,
+          title: "project 3: Internal HRMS",
+          picture: "/Images/Experience/MBC/mbc.png",
+          data: {
+            overview: [
+              "An internal HR management system built for Mumbai Biocluster itself, not client-facing: attendance, leave, payroll, KPI reviews, recruitment, assets, announcements, training, and company policies in one platform.",
+              "Sole developer: 58 of 58 commits, 41 Prisma models spanning attendance/regularization, leave balances, payroll runs and salary slips, KPI cycles/assignments/reviews, job postings/applications/interviews, assets, internal chat, tasks, reimbursements, and job referrals."
+            ],
+            features: [
+              "Attendance with session tracking and a regularization workflow, leave balances, payroll runs with generated salary slips, and an audit log across sensitive actions.",
+              "A full recruitment pipeline (job postings, applications, interview scheduling) and a KPI cycle system with templates, assignments, reviews, and comments.",
+              "Internal chat with group messaging and file sharing, task assignment with comments, company announcements with read-tracking, training enrollment, and a company-policy/holiday calendar with read-tracking.",
+              "Asset management with an asset log, reimbursement requests, and an employee job-referral flow."
+            ],
+            technicalHighlights: [
+              "Drove a sustained frontend performance pass: code-split non-default tabs across KPI, Reports, Settings, and Policies; disabled Next.js Link prefetch on always-visible nav and dashboard links; inlined critical CSS to remove a render-blocking stylesheet request.",
+              "Seeded the root layout, dashboard cards, and multiple context providers server-side to kill client-side loading flashes, and fixed a session-loading race that was wiping SSR-hydrated context data.",
+              "Closed SSE connections on pagehide so pages qualify for the back/forward cache, and gave SSE reconnects their own rate-limit bucket separate from normal API traffic.",
+              "Used BullMQ and node-cron for background jobs (payroll processing, notifications) alongside Redis-backed caching."
+            ]
+          }
+        },
+        {
+          id: 6,
           title: "conclusion",
           picture: "/Images/Experience/MBC/mbc.png",
-          data: "Since joining Mumbai Biocluster, I've been the sole full-stack developer behind two live B2B marketplaces built for ICT Mumbai Research Foundation — IndiaPharmaHub, an award-winning pharma outsourcing platform, and Yantra, a lab-instrument-booking and sample-testing marketplace built on the same architectural foundations. Owning both end-to-end has meant designing 50+ table Postgres/Prisma schemas, wiring payments, storage, and verification workflows, building my own CI test tooling, and making the judgment calls that come with sole ownership — including building then deliberately reverting a redundant AI subsystem once a simpler existing flow was shown to already solve the problem. The role has deepened my experience designing multi-sided, trust-and-verification-driven marketplaces with admin-mediated transactions at production scale."
+          data: "Since joining Mumbai Biocluster, I've been the sole full-stack developer behind three production platforms built for ICT Mumbai Research Foundation — IndiaPharmaHub, an award-winning pharma outsourcing marketplace; Yantra, a lab-instrument-booking and sample-testing marketplace; and an internal HRMS running the organization's own attendance, payroll, and recruitment operations. Owning all three end-to-end has meant designing independent Postgres/Prisma schemas, wiring payments, storage, and verification workflows, building my own CI test tooling, driving a real frontend performance pass, and making the judgment calls that come with sole ownership — including building then deliberately reverting a redundant AI subsystem once a simpler existing flow was shown to already solve the problem. The role has deepened my experience designing multi-sided, trust-and-verification-driven marketplaces and internal line-of-business systems alike, both at production scale."
         }
       ],
       detailPageUrl: "/details"
