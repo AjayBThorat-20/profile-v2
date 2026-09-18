@@ -92,7 +92,7 @@ export type RealSyncProjectData = {
           id: 1,
           title: "overview",
           picture: "/Images/Experience/MBC/mbc.png",
-          data: "Working as a Junior Full Stack Developer at Mumbai Biocluster (ICT Mumbai Research Foundation), a Section-8 nonprofit based at ICT Mumbai in Matunga. The organization operates a single-use cGMP facility and works to translate early-stage startup and academic innovations into clinical-stage biotechnology, supporting startups, academic institutions, MSMEs, and industry partners across cancer, rare disease, and biologics research. Within this role I am the sole full-stack developer building and maintaining three production platforms for the organization: IndiaPharmaHub (IPH), an award-winning pharma/biopharma outsourcing marketplace; Yantra, a lab-instrument-booking and sample-testing marketplace built on the same architecture; and an internal HRMS covering attendance, payroll, KPI reviews, and recruitment for the organization itself."
+          data: "Working as a Junior Full Stack Developer at Mumbai Biocluster (ICT Mumbai Research Foundation), a Section-8 nonprofit based at ICT Mumbai in Matunga. The organization operates a single-use cGMP facility and works to translate early-stage startup and academic innovations into clinical-stage biotechnology, supporting startups, academic institutions, MSMEs, and industry partners across cancer, rare disease, and biologics research. Within this role I am the sole full-stack developer building and maintaining three production platforms for the organization: IndiaPharmaHub (IPH), a pharma/biopharma outsourcing marketplace; Yantra, a lab-instrument-booking and sample-testing marketplace built on the same architecture; and an internal HRMS covering attendance, payroll, KPI reviews, and recruitment for the organization itself."
         },
         {
           id: 2,
@@ -125,19 +125,37 @@ export type RealSyncProjectData = {
           data: {
             overview: [
               "A B2B marketplace connecting verified pharma, biopharma, and life-sciences sellers and buyers across India for outsourcing R&D, manufacturing, testing, packaging, regulatory support, and technology needs.",
-              "One account can hold a Seller profile, a Buyer profile, or both, with GST/PAN verification gating access to transact.",
-              "Recognized with the India Innovation Catalyst Award by the DBT Secretary of India at #Biologics2025 as a game-changing B2B platform."
+              "One account can hold a Seller profile, a Buyer profile, or both, with GST/PAN verification before a user can transact.",
+              "The platform received the India Innovation Catalyst Award from the DBT Secretary of India at #Biologics2025, before this rebuild. I rebuilt the application after joining in 2026 and am its sole developer (197 of 200 commits)."
             ],
-            features: [
-              "Service and product catalog with category/subcategory/type taxonomy and custom fields per product structure, plus bulk CSV/XLSX upload with priority ordering and duplicate prevention.",
-              "Quotation requests, wishlist, seller/listing reviews, real-time buyer-seller chat over server-sent events, and admin dashboards with per-listing daily stats.",
-              "Subscription billing via Razorpay (plan, subscription, payment, and webhook-event models), admin support tickets, and a full audit log across sensitive actions.",
-              "Admin-side bulk provider import pipeline with per-row status history and import history for onboarding sellers at scale."
+            legacyPlatform: [
+              "Inherited a two-part codebase: an Express and Sequelize REST API with Socket.io chat (about 13,500 lines of JavaScript, 32 models, no automated tests) and a separate Next.js Pages Router client (about 44,000 lines) that called it over HTTP.",
+              "Audit findings: an environment file committed to the client repository, auto-increment IDs that made records guessable, no caching, rate limiting, or audit log, and email-only notifications.",
+              "The single EC2 server ran out of disk space and crashed; I restored it and assigned an Elastic IP."
+            ],
+            newArchitecture: [
+              "Replaced the two-service setup with one TypeScript application on Next.js 16 (App Router): 49 server-action modules, 120 library modules, and 12 API routes for uploads, webhooks, real-time events, health checks, and cron jobs.",
+              "Moved from Sequelize to Prisma 7 (adapter-pg) on PostgreSQL with 52 models, cuid identifiers in place of auto-increment IDs, and the pg_trgm extension for typo-tolerant search.",
+              "Replaced JWT middleware with NextAuth v5 sessions, with admin roles re-checked against the database, and split identity into User, Admin, SellerProfile, and BuyerProfile.",
+              "Added Redis for caching with TTL jitter, a Lua-script rate limiter, and pub/sub behind server-sent events, which replaced Socket.io for chat and notifications.",
+              "Moved file storage to AWS SDK v3 with presigned URLs, magic-byte upload validation, and a media proxy that resizes large images before next/image serves them.",
+              "Added idempotent Razorpay webhook handling, plan-based limits, and cron routes for plan reminders, onboarding reminders, and an email queue."
+            ],
+            newFeatures: [
+              "Guest browsing of products, services, and providers without login, with in-place sign-up, SEO metadata, JSON-LD, sitemap, and llms.txt.",
+              "Role-specific dashboards with recharts trend charts, a seller Leads page, and hot or cold lead scoring based on recency, pipeline stage, buyer intent, and deal size.",
+              "Typo-tolerant search, location-based ranking (same city, then state, then country), and plan-based limits on directory results.",
+              "Wishlist, product and service reviews with rating aggregation, and quotation cards shown inside chat threads.",
+              "Pricing plans with a super-admin switch to enable or disable pricing enforcement per role.",
+              "Admin tools: audit log, support tickets, product approval workflow with seller review of admin-added products, bulk approve, reject, and delete, and admin-onboarded accounts.",
+              "Excel bulk upload for products, services, categories, product structures, locations, and accounts, with cascading dropdowns, per-row validation, and downloadable error reports.",
+              "Account deletion that archives records to separate tables first, and disposable-email blocking at sign-up."
             ],
             technicalHighlights: [
-              "Solo-authored virtually the entire codebase: 50+ Prisma models, Next.js 16 App Router, Prisma's adapter-pg driver, and an S3-backed media pipeline that proxies and resizes multi-megabyte source images so next/image can serve them fast.",
-              "Fixed cross-cutting production bugs including bulk-upload creating duplicate listings, bulk upload collapsing product model variants into one record, a GA4 web-vitals crash on client-side route changes, and hydration mismatches in the provider browse filters.",
-              "Built the test-affected Jest runner described above specifically to keep this repo's 520+ test files fast to run in CI and locally."
+              "Wrote a re-runnable migration script that moved the legacy Sequelize database into the new schema and remapped S3 files to a new key scheme, with compare and backfill scripts to find duplicate or dangling records.",
+              "Fixed security issues found in code review, including stored XSS through SVG uploads, IDOR on support tickets, and non-atomic payment and approval updates.",
+              "Reduced layout shift on the products page (CLS 0.112 to 0.006) and removed about 150 KB of unused JavaScript through code splitting.",
+              "Built a Jest runner that runs only the tests affected by a change, using the import dependency graph; the repository has 520+ test files."
             ]
           }
         },
@@ -190,7 +208,7 @@ export type RealSyncProjectData = {
           id: 6,
           title: "conclusion",
           picture: "/Images/Experience/MBC/mbc.png",
-          data: "Since joining Mumbai Biocluster, I've been the sole full-stack developer behind three production platforms built for ICT Mumbai Research Foundation — IndiaPharmaHub, an award-winning pharma outsourcing marketplace; Yantra, a lab-instrument-booking and sample-testing marketplace; and an internal HRMS running the organization's own attendance, payroll, and recruitment operations. Owning all three end-to-end has meant designing independent Postgres/Prisma schemas, wiring payments, storage, and verification workflows, building my own CI test tooling, driving a real frontend performance pass, and making the judgment calls that come with sole ownership — including building then deliberately reverting a redundant AI subsystem once a simpler existing flow was shown to already solve the problem. The role has deepened my experience designing multi-sided, trust-and-verification-driven marketplaces and internal line-of-business systems alike, both at production scale."
+          data: "Since joining Mumbai Biocluster, I've been the sole full-stack developer behind three production platforms built for ICT Mumbai Research Foundation — IndiaPharmaHub, a pharma outsourcing marketplace; Yantra, a lab-instrument-booking and sample-testing marketplace; and an internal HRMS running the organization's own attendance, payroll, and recruitment operations. Owning all three end-to-end has meant designing independent Postgres/Prisma schemas, wiring payments, storage, and verification workflows, building my own CI test tooling, driving a real frontend performance pass, and making the judgment calls that come with sole ownership — including building then deliberately reverting a redundant AI subsystem once a simpler existing flow was shown to already solve the problem. The role has deepened my experience designing multi-sided, trust-and-verification-driven marketplaces and internal line-of-business systems alike, both at production scale."
         }
       ],
       detailPageUrl: "/details"
