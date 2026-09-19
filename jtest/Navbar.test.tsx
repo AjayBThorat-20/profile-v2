@@ -19,15 +19,16 @@ describe("Navbar", () => {
   it("renders the logo and menu trigger", () => {
     const { container } = renderWithStore();
 
-    expect(container.querySelector('a[href="#home"]')).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: /toggle menu/i })).toBeInTheDocument();
+    // "/#home", not "#home": a bare hash only works on the home page, so the logo did nothing on /experience/details/<id>.
+    expect(container.querySelector('a[href="/#home"]')).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /open menu/i })).toBeInTheDocument();
   });
 
   it("menu trigger toggles the overlay open state", async () => {
     const user = userEvent.setup();
     const { store } = renderWithStore();
 
-    const trigger = screen.getByRole("button", { name: /toggle menu/i });
+    const trigger = screen.getByRole("button", { name: /open menu/i });
     expect(trigger).toHaveAttribute("aria-expanded", "false");
     expect(store.getState().theme.isMenuOpen).toBe(false);
 
@@ -41,10 +42,12 @@ describe("Navbar", () => {
     const user = userEvent.setup();
     const { store } = renderWithStore();
 
-    await user.click(screen.getByRole("button", { name: /toggle menu/i }));
+    await user.click(screen.getByRole("button", { name: /open menu/i }));
     expect(store.getState().theme.isMenuOpen).toBe(true);
 
     const aboutLink = screen.getByRole("link", { name: /about/i });
+    // Section links must work from any route, not just the home page.
+    expect(aboutLink).toHaveAttribute("href", "/#about");
     await user.click(aboutLink);
 
     expect(store.getState().theme.isMenuOpen).toBe(false);
