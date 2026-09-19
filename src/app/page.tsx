@@ -2,7 +2,7 @@
 
 import { Hero } from "@/Components/Home/page";
 import { About, Certifications, CoCurricularActivities, Education, Skills } from "@/Components/About/page";
-import { Projects, WelcomeToProject } from "@/Components/Projects/page";
+import { GithubContributions, Projects, WelcomeToProject } from "@/Components/Projects/page";
 import { CurrentlyWorkingOn, Experience, WelcomeToExperience } from "@/Components/Experience/page";
 import { Contact } from "@/Components/Contact/page";
 import { projectsData } from "@/constants/project";
@@ -99,6 +99,7 @@ export default function Home() {
 
       <section id="projects">
         <WelcomeToProject />
+        <GithubContributions />
         <Projects />
       </section>
 
