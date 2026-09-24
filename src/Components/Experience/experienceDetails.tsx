@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, ViewTransition } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { FaArrowLeft, FaExternalLinkAlt, FaCalendar, FaCheckCircle, FaBuilding } from "react-icons/fa";
@@ -25,7 +25,12 @@ interface Experience {
 
 export default function ExperienceDetails({ experience }: { experience: Experience }) {
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    // "instant", not "smooth": a view transition snapshots the outgoing and
+    // incoming pages and animates between those snapshots, so a smooth scroll
+    // running underneath means the shared element morphs toward a position
+    // that is still moving - it lands short and then jumps. Arriving at the
+    // top of a newly-opened page needs no animation of its own anyway.
+    window.scrollTo({ top: 0, behavior: "instant" });
   }, []);
 
   const mainAccent = getAccent(0);
@@ -43,7 +48,7 @@ export default function ExperienceDetails({ experience }: { experience: Experien
         <div className="max-w-6xl mx-auto space-y-8">
 
           {/* Header Card */}
-          <div ref={headerRef} className={`panel rounded-2xl p-8 md:p-10 border-l-4 border-l-primary scroll-reveal ${isHeaderRevealed ? "is-visible" : ""}`}>
+          <div ref={headerRef} className={`panel rounded-lg p-8 md:p-10 border-l-4 border-l-primary scroll-reveal ${isHeaderRevealed ? "is-visible" : ""}`}>
             <div className="relative space-y-6">
               {/* Company & Title */}
               <div className="space-y-3">
@@ -52,24 +57,33 @@ export default function ExperienceDetails({ experience }: { experience: Experien
                   <span>COMPANY PROFILE</span>
                 </div>
 
-                <h1 className="text-3xl md:text-4xl lg:text-5xl font-black text-foreground">
-                  {experience.title}
-                </h1>
+                {/* Other half of the shared-element pair - the same
+                    `exp-<id>` name is on the matching card in
+                    Components/Experience/experience.tsx. The browser scales
+                    and repositions that card's heading into this one, so the
+                    role you clicked is visibly the role that opens. */}
+                <ViewTransition name={`exp-${experience.id}`} share="morph" default="none">
+                  <div className="space-y-3">
+                    <h1 className="text-3xl md:text-4xl lg:text-5xl font-black text-foreground">
+                      {experience.title}
+                    </h1>
 
-                <a
-                  href={experience.companyUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-xl md:text-2xl font-bold text-primary hover:text-secondary transition-colors group/link"
-                >
-                  {experience.name}
-                  <FaExternalLinkAlt className="w-5 h-5 group-hover/link:translate-x-1 group-hover/link:-translate-y-1 transition-transform duration-200" />
-                </a>
+                    <a
+                      href={experience.companyUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-xl md:text-2xl font-bold text-primary hover:text-secondary transition-colors group/link"
+                    >
+                      {experience.name}
+                      <FaExternalLinkAlt className="w-5 h-5 group-hover/link:translate-x-1 group-hover/link:-translate-y-1 transition-transform duration-200" />
+                    </a>
+                  </div>
+                </ViewTransition>
               </div>
 
               {/* Duration */}
-              <div className="flex items-center gap-3 px-5 py-3 bg-muted/50 rounded-2xl border border-border/50 w-fit">
-                <div className="p-2 bg-primary/10 border border-primary/30 rounded-2xl">
+              <div className="flex items-center gap-3 px-5 py-3 bg-muted/50 rounded-lg border border-border/50 w-fit">
+                <div className="p-2 bg-primary/10 border border-primary/30 rounded-lg">
                   <FaCalendar className="w-4 h-4 text-primary" />
                 </div>
                 <div>
@@ -88,7 +102,7 @@ export default function ExperienceDetails({ experience }: { experience: Experien
                   {experience.techStack.split(",").map((tech) => (
                     <span
                       key={tech}
-                      className={`px-4 py-2 ${mainAccent.badge} rounded-2xl text-sm font-semibold border hover:scale-105 transition-transform duration-150`}
+                      className={`px-4 py-2 ${mainAccent.badge} rounded-lg text-sm font-semibold border hover:scale-105 transition-transform duration-150`}
                     >
                       {tech.trim()}
                     </span>
@@ -106,7 +120,7 @@ export default function ExperienceDetails({ experience }: { experience: Experien
               return (
                 <div
                   key={detail.id}
-                  className={`relative border ${accent.border} rounded-2xl overflow-hidden animate-fadeIn`}
+                  className={`relative border ${accent.border} rounded-lg overflow-hidden animate-fadeIn`}
                   style={{ animationDelay: `${index * 60}ms` }}
                 >
                   <div className={`h-1 ${accent.bg}`}></div>
@@ -184,6 +198,7 @@ export default function ExperienceDetails({ experience }: { experience: Experien
           <div ref={footerRef} className={`flex justify-center pt-8 scroll-reveal ${isFooterRevealed ? "is-visible" : ""}`}>
             <Link
               href="/#experience"
+              transitionTypes={["nav-back"]}
               className="btn-primary group px-8 py-4 font-bold"
             >
               <FaArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform duration-200" />

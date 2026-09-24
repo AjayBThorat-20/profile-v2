@@ -13,10 +13,23 @@ export default function Projects() {
   const [currentImageIndexes, setCurrentImageIndexes] = useState<number[]>(
     Array(projectsData.length).fill(0)
   );
+  // Set while the pointer is over (or keyboard focus is inside) any card, so
+  // the slideshow doesn't advance out from under someone who is actually
+  // looking at a screenshot - a 3s tick is quick enough that reading a
+  // dashboard capture was a race against the timer.
+  const [isPaused, setIsPaused] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
   const isRevealed = useScrollReveal(sectionRef);
 
   useEffect(() => {
+    if (isPaused) return;
+    // An auto-advancing carousel is motion the visitor never asked for, so
+    // it doesn't run at all under prefers-reduced-motion - the dot controls
+    // below are then the only way through the screenshots, which is the
+    // point. (The global reduced-motion rule in globals.css only shortens
+    // CSS transitions; it can't reach a JS interval.)
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
     const interval = setInterval(() => {
       setCurrentImageIndexes((prevIndexes) =>
         prevIndexes.map((index, activityIdx) =>
@@ -25,10 +38,16 @@ export default function Projects() {
             : index + 1
         )
       );
-    }, 3000);
+    }, 4500);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [isPaused]);
+
+  const goToImage = (projectIdx: number, imageIdx: number) => {
+    setCurrentImageIndexes((prev) =>
+      prev.map((current, idx) => (idx === projectIdx ? imageIdx : current))
+    );
+  };
 
   return (
     <div ref={sectionRef} className={`container-custom section scroll-reveal ${isRevealed ? "is-visible" : ""}`}>
@@ -54,6 +73,10 @@ export default function Projects() {
                 className="group relative animate-fadeIn"
                 style={{ animationDelay: `${activityIdx * 60}ms` }}
                 data-cursor-label="View"
+                onMouseEnter={() => setIsPaused(true)}
+                onMouseLeave={() => setIsPaused(false)}
+                onFocusCapture={() => setIsPaused(true)}
+                onBlurCapture={() => setIsPaused(false)}
               >
                 <div className={`spotlight entry-card ${accent.border} overflow-hidden`}>
 
@@ -90,16 +113,46 @@ export default function Projects() {
                       style={{ animationDelay: `${activityIdx * 60 + 120}ms` }}
                     ></span>
 
-                    {/* Image Counter */}
-                    <div className="absolute bottom-3 right-3 px-3 py-1.5 bg-black/80 backdrop-blur-sm text-white text-xs font-bold font-mono rounded-full border border-white/20">
-                      {currentImageIndexes[activityIdx] + 1} / {project.pictures.length}
-                    </div>
-
                     {/* Project Number Badge */}
                     <div className={`absolute top-3 left-3 w-10 h-10 ${accent.bg} rounded-full flex items-center justify-center ${accent.fg} font-black shadow-lg`}>
                       {activityIdx + 1}
                     </div>
                   </TiltCard>
+
+                  {/* Slide controls. The old version of this was a static
+                      "2 / 5" counter: it told you the slideshow existed but
+                      gave you no way to steer it, so the only route to a
+                      particular screenshot was waiting for the timer to come
+                      back round. These are real buttons - a dash per slide,
+                      the current one filled. They sit outside TiltCard on
+                      purpose, so they stay flat and hittable instead of
+                      riding its 3D rotation. */}
+                  {project.pictures.length > 1 && (
+                    <div className="flex items-center justify-between gap-4 border-b border-border px-6 py-3 md:px-8">
+                      <div className="flex items-center gap-2" role="group" aria-label={`${project.title} screenshots`}>
+                        {project.pictures.map((picture, imageIdx) => {
+                          const isCurrent = currentImageIndexes[activityIdx] === imageIdx;
+                          return (
+                            <button
+                              key={picture.picture}
+                              type="button"
+                              onClick={() => goToImage(activityIdx, imageIdx)}
+                              aria-label={`Show screenshot ${imageIdx + 1} of ${project.pictures.length}`}
+                              aria-current={isCurrent}
+                              className={`h-1 rounded-full transition-all duration-300 ${
+                                isCurrent
+                                  ? "w-8 bg-foreground"
+                                  : "w-4 bg-foreground/25 hover:bg-foreground/50"
+                              }`}
+                            />
+                          );
+                        })}
+                      </div>
+                      <span className="font-mono text-xs text-muted-foreground tabular-nums">
+                        {String(currentImageIndexes[activityIdx] + 1).padStart(2, "0")} / {String(project.pictures.length).padStart(2, "0")}
+                      </span>
+                    </div>
+                  )}
 
                   {/* Details Section */}
                   <div className="space-y-5 p-6 md:p-8">
@@ -126,7 +179,7 @@ export default function Projects() {
                         {project.techStack.split(", ").map((tech) => (
                           <span
                             key={tech}
-                            className={`px-3 py-1.5 ${accent.badge} rounded-2xl text-sm font-semibold border hover:scale-105 transition-transform duration-150 cursor-default`}
+                            className={`px-3 py-1.5 ${accent.badge} rounded-lg text-sm font-semibold border hover:scale-105 transition-transform duration-150 cursor-default`}
                           >
                             {tech}
                           </span>
@@ -138,7 +191,7 @@ export default function Projects() {
                     <div className="pt-2 flex flex-wrap items-center gap-3">
                       <a
                         href={project.url}
-                        className={`magnetic group/btn inline-flex items-center gap-2 px-6 py-3 ${accent.bg} ${accent.fg} font-bold rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-200`}
+                        className={`magnetic group/btn inline-flex items-center gap-2 px-6 py-3 ${accent.bg} ${accent.fg} font-bold rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-200`}
                         target="_blank"
                         rel="noopener noreferrer"
                       >
@@ -149,7 +202,7 @@ export default function Projects() {
                       {project.docsUrl && (
                         <a
                           href={project.docsUrl}
-                          className="magnetic inline-flex items-center gap-2 px-6 py-3 border border-border font-bold rounded-2xl hover:bg-foreground/5 transition-colors duration-200"
+                          className="magnetic inline-flex items-center gap-2 px-6 py-3 border border-border font-bold rounded-lg hover:bg-foreground/5 transition-colors duration-200"
                           target="_blank"
                           rel="noopener noreferrer"
                         >
@@ -167,10 +220,10 @@ export default function Projects() {
 
         {/* GitHub CTA Card */}
         <div className="relative group animate-fadeIn" style={{ animationDelay: '220ms' }}>
-          <div className="panel rounded-2xl overflow-hidden border-dashed border-2 border-primary/30 hover:border-primary/50 hover:border-solid transition-colors duration-200">
+          <div className="panel rounded-lg overflow-hidden border-dashed border-2 border-primary/30 hover:border-primary/50 hover:border-solid transition-colors duration-200">
             <div className="relative p-8 md:p-12 text-center space-y-6">
               {/* Icon */}
-              <div className="inline-flex items-center justify-center w-20 h-20 border border-primary/30 bg-primary/10 text-primary rounded-2xl">
+              <div className="inline-flex items-center justify-center w-20 h-20 border border-primary/30 bg-primary/10 text-primary rounded-lg">
                 <FaGithub className="w-10 h-10" />
               </div>
 

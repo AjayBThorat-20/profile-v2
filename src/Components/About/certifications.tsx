@@ -106,7 +106,7 @@ export default function Certifications() {
                   {/* View Button */}
                   <button
                     onClick={() => setSelectedImage({ image: cert.image, title: cert.title })}
-                    className={`w-full px-5 py-3 border ${accent.border} ${accent.bgSoft} ${accent.text} font-semibold rounded-2xl transition-colors duration-150 ${accent.hoverBgSolid}`}
+                    className={`w-full px-5 py-3 border ${accent.border} ${accent.bgSoft} ${accent.text} font-semibold rounded-lg transition-colors duration-150 ${accent.hoverBgSolid}`}
                   >
                     <span className="flex items-center justify-center gap-2">
                       <FaCertificate className="w-4 h-4" />
@@ -146,11 +146,11 @@ export default function Certifications() {
 
           <div className="min-h-full flex items-center justify-center p-4 py-20">
             <div
-              className="relative w-full max-w-6xl bg-card rounded-2xl shadow-2xl overflow-hidden border border-border animate-fadeInScale"
+              className="relative w-full max-w-6xl bg-card rounded-lg shadow-2xl overflow-hidden border border-border animate-fadeInScale"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="relative w-full p-8" style={{ maxHeight: "85vh" }}>
-                <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-muted">
+                <div className="relative rounded-lg overflow-hidden shadow-2xl bg-muted">
                   <Image
                     src={selectedImage.image}
                     alt={`${selectedImage.title} certificate - Ajay Thorat`}

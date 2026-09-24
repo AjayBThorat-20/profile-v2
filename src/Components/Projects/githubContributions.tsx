@@ -141,7 +141,7 @@ export default function GithubContributions() {
   return (
     <div className="container-custom pb-12 md:pb-16">
       <div className="max-w-5xl mx-auto">
-        <div className="panel rounded-2xl p-6 md:p-8">
+        <div className="panel rounded-lg p-6 md:p-8">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between mb-5">
             <div className="space-y-2">
               <SectionEyebrow icon={FaGithub} label="GitHub Activity" />

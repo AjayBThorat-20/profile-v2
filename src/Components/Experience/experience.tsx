@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, ViewTransition } from "react";
 import Link from "next/link";
 import { experienceData } from "@/constants/experience";
 import { FaBriefcase, FaMapMarkerAlt, FaArrowRight, FaCheckCircle, FaExternalLinkAlt } from "react-icons/fa";
@@ -54,10 +54,23 @@ export default function Experience() {
                     <div className="flex items-center gap-2 mb-2">
                       {current && <Badge tone="success" dot>Current</Badge>}
                     </div>
-                    <h3 className="text-lg md:text-xl font-bold text-foreground leading-tight mb-1">
-                      {exp.title}
-                    </h3>
-                    <p className={`font-semibold mb-4 ${accent.text}`}>{exp.name}</p>
+                    {/* Shared element: the same name is on the <h1> block of
+                        /experience/details/[id], so the browser animates this
+                        heading into that one instead of cutting between two
+                        unrelated pages. share="morph" + default="none" is the
+                        pair the Next guide calls for - without default="none"
+                        every named element on the page crossfades on every
+                        unrelated navigation, and without the explicit share
+                        the pair silently stops morphing. */}
+                    <ViewTransition name={`exp-${exp.id}`} share="morph" default="none">
+                      <div>
+                        <h3 className="text-lg md:text-xl font-bold text-foreground leading-tight mb-1">
+                          {exp.title}
+                        </h3>
+                        <p className={`font-semibold ${accent.text}`}>{exp.name}</p>
+                      </div>
+                    </ViewTransition>
+                    <div className="mb-4" />
 
                     {/* Details */}
                     <div className="flex items-center gap-2 text-sm text-muted-foreground mb-4">
@@ -75,7 +88,7 @@ export default function Experience() {
                         {exp.techStack.split(", ").slice(0, 6).map((tech) => (
                           <span
                             key={tech}
-                            className={`px-3 py-1.5 ${accent.badge} rounded-2xl text-xs font-semibold border hover:scale-105 transition-transform duration-150 cursor-default`}
+                            className={`px-3 py-1.5 ${accent.badge} rounded-lg text-xs font-semibold border hover:scale-105 transition-transform duration-150 cursor-default`}
                           >
                             {tech}
                           </span>
@@ -87,7 +100,11 @@ export default function Experience() {
                     <div className="flex flex-col sm:flex-row gap-3">
                       <Link
                         href={`/experience/details/${exp.id}`}
-                        className={`group/btn flex-1 inline-flex items-center justify-center gap-2 px-6 py-3 ${accent.bg} ${accent.fg} font-bold rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-200`}
+                        /* Tags the navigation as "deeper in", which the detail
+                           page's back link mirrors with nav-back, so forward
+                           and return journeys don't animate identically. */
+                        transitionTypes={["nav-forward"]}
+                        className={`group/btn flex-1 inline-flex items-center justify-center gap-2 px-6 py-3 ${accent.bg} ${accent.fg} font-bold rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-200`}
                       >
                         <span>View Details</span>
                         <FaArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-200" />
@@ -97,7 +114,7 @@ export default function Experience() {
                         href={exp.companyUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group/link inline-flex items-center justify-center gap-2 px-6 py-3 border-2 border-border hover:border-primary/50 bg-card hover:bg-muted rounded-2xl font-bold transition-colors duration-200"
+                        className="group/link inline-flex items-center justify-center gap-2 px-6 py-3 border-2 border-border hover:border-primary/50 bg-card hover:bg-muted rounded-lg font-bold transition-colors duration-200"
                       >
                         <span>Visit Company</span>
                         <FaExternalLinkAlt className="w-3.5 h-3.5 group-hover/link:translate-x-1 group-hover/link:-translate-y-1 transition-transform duration-200" />

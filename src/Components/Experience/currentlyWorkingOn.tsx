@@ -46,7 +46,7 @@ export default function CurrentlyWorkingOn() {
                 className="animate-fadeIn"
                 style={{ animationDelay: `${index * 60}ms` }}
               >
-                <div className={`border ${accent.border} rounded-2xl overflow-hidden transition-colors duration-200`}>
+                <div className={`border ${accent.border} rounded-lg overflow-hidden transition-colors duration-200`}>
                   <div className={`h-1 ${accent.bg}`}></div>
 
                   <div className="p-6 md:p-8">
@@ -60,7 +60,7 @@ export default function CurrentlyWorkingOn() {
 
                         <button
                           onClick={() => toggleExpand(activity.id)}
-                          className={`inline-flex items-center gap-2 px-4 py-2 border ${accent.border} ${accent.bgSoft} ${accent.text} text-sm font-semibold rounded-2xl transition-colors duration-150`}
+                          className={`inline-flex items-center gap-2 px-4 py-2 border ${accent.border} ${accent.bgSoft} ${accent.text} text-sm font-semibold rounded-lg transition-colors duration-150`}
                         >
                           <span>{isExpanded ? "Show Less" : "Show More"}</span>
                           {isExpanded ? (
@@ -75,7 +75,7 @@ export default function CurrentlyWorkingOn() {
                     {/* Expanded Content */}
                     {isExpanded && (
                       <div className="mt-6 pt-6 border-t border-border animate-fadeIn">
-                        <div className={`p-6 rounded-2xl border ${accent.border} ${accent.bgSoft}`}>
+                        <div className={`p-6 rounded-lg border ${accent.border} ${accent.bgSoft}`}>
                           <h4 className={`text-sm font-bold mb-3 flex items-center gap-2 ${accent.text}`}>
                             <div className={`w-1.5 h-1.5 rounded-full ${accent.bg} animate-pulse`}></div>
                             Additional Details

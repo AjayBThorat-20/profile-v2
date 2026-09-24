@@ -139,7 +139,7 @@ export default function Contact() {
             </div>
 
             {/* Contact Methods */}
-            <div className="panel rounded-2xl p-2 md:p-4">
+            <div className="panel rounded-lg p-2 md:p-4">
               {[
                 { icon: IoMdMail, label: "Email", value: "ajaythorat988@gmail.com" },
                 { icon: FaLinkedin, label: "LinkedIn", value: "Connect on LinkedIn" },
@@ -158,11 +158,14 @@ export default function Contact() {
               })}
             </div>
 
-            {/* Quick Response Badge */}
-            <div className="p-6 rounded-2xl border border-green-500/20 bg-green-500/5">
+            {/* Quick Response Badge. Neutral, not green: this is a standing
+                promise about reply time, not a success state responding to
+                something the visitor did, so it has no reason to borrow the
+                form's semantic success hue. */}
+            <div className="p-6 rounded-lg border border-border bg-muted/40">
               <div className="flex items-center gap-3">
-                <div className="p-3 bg-green-500/10 rounded-full">
-                  <FaCheckCircle className="w-6 h-6 text-green-600 dark:text-green-400" />
+                <div className="p-3 bg-foreground/5 rounded-full">
+                  <FaCheckCircle className="w-6 h-6 text-foreground" />
                 </div>
                 <div>
                   <h4 className="font-bold text-foreground">Quick Response</h4>
@@ -174,7 +177,7 @@ export default function Contact() {
             </div>
 
             {/* Decorative Quote */}
-            <div className="panel p-6 rounded-2xl border-l-4 border-l-primary">
+            <div className="panel p-6 rounded-lg border-l-4 border-l-primary">
               <p className="text-base italic text-foreground/80 leading-relaxed">
                 "The best way to predict the future is to create it."
                 <span className="block mt-2 text-sm font-semibold text-primary">
@@ -186,23 +189,30 @@ export default function Contact() {
 
           {/* Right Side - Contact Form */}
           <div className="animate-fadeIn" style={{ animationDelay: '120ms' }}>
-            <div className="panel rounded-2xl p-8 md:p-10">
+            <div className="panel rounded-lg p-8 md:p-10">
+              {/* role="status" on both the sending and sent panels. Submitting
+                  swaps the entire form out for one of these, so without a
+                  live region a screen-reader user gets silence followed by a
+                  vanished form - the spinner, the tick and the colour are all
+                  sighted-only feedback. (The failure path uses role="alert"
+                  below, which is assertive, since it needs the visitor to go
+                  back and change something.) */}
               {status === "loading" ? (
-                <div className="relative flex flex-col items-center justify-center py-20">
-                  <div className="w-16 h-16 border-4 border-primary/30 border-t-primary rounded-full animate-spin mb-4"></div>
+                <div role="status" aria-busy="true" className="relative flex flex-col items-center justify-center py-20">
+                  <div className="w-16 h-16 border-4 border-primary/30 border-t-primary rounded-full animate-spin mb-4" aria-hidden="true"></div>
                   <p className="text-primary font-semibold text-lg">
                     Sending your message...
                   </p>
                 </div>
               ) : status === "success" ? (
-                <div className="relative flex flex-col items-center justify-center py-20 text-center">
-                  <div className="w-20 h-20 bg-green-500/10 rounded-full flex items-center justify-center mb-4 animate-fadeInScale">
-                    <FaCheckCircle className="w-12 h-12 text-green-600 dark:text-green-400" />
+                <div role="status" className="relative flex flex-col items-center justify-center py-20 text-center">
+                  <div className="w-20 h-20 bg-success/10 rounded-full flex items-center justify-center mb-4 animate-fadeInScale">
+                    <FaCheckCircle className="w-12 h-12 text-success" />
                   </div>
                   <h3 className="text-2xl font-bold text-foreground mb-2 animate-fadeIn" style={{ animationDelay: '80ms' }}>
                     Message Sent!
                   </h3>
-                  <p className="text-green-600 dark:text-green-400 font-semibold animate-fadeIn" style={{ animationDelay: '140ms' }}>
+                  <p className="text-success font-semibold animate-fadeIn" style={{ animationDelay: '140ms' }}>
                     {successMessage}
                   </p>
                 </div>
@@ -217,11 +227,19 @@ export default function Contact() {
                     </p>
                   </div>
 
-                  {/* Error Message */}
+                  {/* Error Message. role="alert" so a screen reader announces
+                      a rejected submit - the shake animation and the colour
+                      were the only feedback, and neither reaches a
+                      non-sighted visitor. Colours come from --destructive
+                      rather than red-500/600 so the one error hue on the
+                      site is defined in a single place. */}
                   {status === "error" && errorMessage && (
-                    <div className="flex items-center gap-3 p-4 bg-red-500/10 border-2 border-red-500/20 rounded-2xl animate-shake">
-                      <FaExclamationCircle className="w-5 h-5 text-red-600 dark:text-red-400 shrink-0" />
-                      <p className="text-sm font-semibold text-red-600 dark:text-red-400">
+                    <div
+                      role="alert"
+                      className="flex items-center gap-3 p-4 bg-destructive/10 border-2 border-destructive/20 rounded-lg animate-shake"
+                    >
+                      <FaExclamationCircle className="w-5 h-5 text-destructive shrink-0" />
+                      <p className="text-sm font-semibold text-destructive">
                         {errorMessage}
                       </p>
                     </div>
@@ -254,7 +272,7 @@ export default function Contact() {
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 bg-background border-2 border-border focus:border-primary focus:ring-4 focus:ring-foreground/5 rounded-2xl text-foreground placeholder:text-muted-foreground transition-all duration-200 outline-none"
+                      className="w-full px-4 py-3 bg-background border-2 border-border focus:border-primary focus:ring-4 focus:ring-foreground/5 rounded-lg text-foreground placeholder:text-muted-foreground transition-all duration-200 outline-none"
                       placeholder="John Doe"
                     />
                   </div>
@@ -272,7 +290,7 @@ export default function Contact() {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 bg-background border-2 border-border focus:border-primary focus:ring-4 focus:ring-foreground/5 rounded-2xl text-foreground placeholder:text-muted-foreground transition-all duration-200 outline-none"
+                      className="w-full px-4 py-3 bg-background border-2 border-border focus:border-primary focus:ring-4 focus:ring-foreground/5 rounded-lg text-foreground placeholder:text-muted-foreground transition-all duration-200 outline-none"
                       placeholder="john@example.com"
                     />
                   </div>
@@ -290,7 +308,7 @@ export default function Contact() {
                       value={formData.subject}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 bg-background border-2 border-border focus:border-primary focus:ring-4 focus:ring-foreground/5 rounded-2xl text-foreground placeholder:text-muted-foreground transition-all duration-200 outline-none"
+                      className="w-full px-4 py-3 bg-background border-2 border-border focus:border-primary focus:ring-4 focus:ring-foreground/5 rounded-lg text-foreground placeholder:text-muted-foreground transition-all duration-200 outline-none"
                       placeholder="What's this about?"
                     />
                   </div>
@@ -308,7 +326,7 @@ export default function Contact() {
                       onChange={handleChange}
                       required
                       rows={6}
-                      className="w-full px-4 py-3 bg-background border-2 border-border focus:border-primary focus:ring-4 focus:ring-foreground/5 rounded-2xl text-foreground placeholder:text-muted-foreground transition-all duration-200 outline-none resize-none"
+                      className="w-full px-4 py-3 bg-background border-2 border-border focus:border-primary focus:ring-4 focus:ring-foreground/5 rounded-lg text-foreground placeholder:text-muted-foreground transition-all duration-200 outline-none resize-none"
                       placeholder="Tell me about your project or opportunity..."
                     />
                   </div>

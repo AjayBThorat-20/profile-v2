@@ -64,7 +64,7 @@ export default function About() {
             {/* Text Section */}
             <div className="w-full lg:w-[55%] space-y-8 animate-fadeIn">
               {/* Name & Title Card */}
-              <div className="panel p-8 rounded-2xl border-l-4 border-l-primary">
+              <div className="panel p-8 rounded-lg border-l-4 border-l-primary">
                 <div className="relative z-10 space-y-4">
                   <RevealText
                     as="h2"
@@ -96,7 +96,7 @@ export default function About() {
               </div>
 
               {/* Highlights */}
-              <div className="panel rounded-2xl p-2 md:p-4">
+              <div className="panel rounded-lg p-2 md:p-4">
                 {highlights.map((highlight) => (
                   <div key={highlight} className="list-row px-2">
                     <div className="mt-0.5 shrink-0 w-5 h-5 rounded-full border border-primary/30 bg-primary/10 flex items-center justify-center">
@@ -114,7 +114,7 @@ export default function About() {
           </div>
 
           {/* Call to Action Section */}
-          <div className="panel p-8 md:p-12 rounded-2xl border-l-4 border-l-primary text-center space-y-6 animate-fadeIn" style={{ animationDelay: '320ms' }}>
+          <div className="panel p-8 md:p-12 rounded-lg border-l-4 border-l-primary text-center space-y-6 animate-fadeIn" style={{ animationDelay: '320ms' }}>
             <div className="relative z-10">
               <h3 className="text-2xl md:text-3xl font-bold mb-4 text-foreground">
                 Let's Build Something Amazing Together

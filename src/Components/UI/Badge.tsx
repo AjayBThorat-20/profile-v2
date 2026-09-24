@@ -16,9 +16,13 @@ interface BadgeProps {
 // hero chips, review stat pills) with one component, so pill styling
 // drifts in one place instead of many.
 export default function Badge({ children, accent, tone = "neutral", icon: Icon, dot, className = "" }: BadgeProps) {
+  // Routed through the --success token rather than hardcoded
+  // text-green-600/dark:text-green-400, so the one semantic success hue on
+  // the site is defined once in globals.css next to --destructive instead
+  // of being restated in every component that needs it.
   const toneClasses =
     tone === "success"
-      ? "text-green-600 dark:text-green-400 border-green-500/30"
+      ? "text-success border-success/30"
       : `${accent?.text ?? "text-foreground"} border-border`;
 
   return (

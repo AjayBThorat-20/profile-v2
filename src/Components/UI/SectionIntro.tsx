@@ -2,6 +2,7 @@
 
 import React, { useRef } from "react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import CountUp from "./CountUp";
 
 interface SectionIntroProps {
   intro: React.ReactNode;
@@ -21,7 +22,7 @@ export default function SectionIntro({ intro, facts, closingStatement }: Section
 
   return (
     <div ref={sectionRef} className={`space-y-8 scroll-reveal ${isRevealed ? "is-visible" : ""}`}>
-      <div className="panel rounded-2xl p-8 md:p-10">
+      <div className="panel rounded-lg p-8 md:p-10">
         <p className="text-lg md:text-xl text-foreground/90 leading-relaxed text-center">{intro}</p>
       </div>
 
@@ -33,16 +34,22 @@ export default function SectionIntro({ intro, facts, closingStatement }: Section
           guarantees 2-up on mobile / all-in-a-row from sm: regardless
           of label length. */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-6 md:gap-x-10 justify-items-center sm:justify-items-start max-w-md sm:max-w-none mx-auto">
-        {facts.map((fact) => (
-          <div key={fact.label} className="stat-figure text-left">
-            <div className="stat-figure-value text-2xl sm:text-3xl md:text-4xl text-foreground">{fact.value}</div>
+        {facts.map((fact, i) => (
+          <div
+            key={fact.label}
+            className="stat-figure text-left stagger-child"
+            style={{ "--stagger-i": i } as React.CSSProperties}
+          >
+            <div className="stat-figure-value text-2xl sm:text-3xl md:text-4xl text-foreground">
+              <CountUp value={fact.value} />
+            </div>
             <div className="text-xs md:text-sm text-muted-foreground mt-1">{fact.label}</div>
           </div>
         ))}
       </div>
 
       {closingStatement && (
-        <div className="panel rounded-2xl p-8 md:p-10 text-center border-l-4 border-l-primary">
+        <div className="panel rounded-lg p-8 md:p-10 text-center border-l-4 border-l-primary">
           <p className="text-xl md:text-2xl font-black leading-relaxed text-foreground">{closingStatement}</p>
         </div>
       )}

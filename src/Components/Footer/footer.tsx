@@ -124,7 +124,7 @@ export default function Footer() {
             {/* Scroll to top button */}
             <button
               onClick={scrollToTop}
-              className="magnetic group p-2 rounded-2xl border border-border hover:border-primary/50 transition-colors duration-150"
+              className="magnetic group p-2 rounded-lg border border-border hover:border-primary/50 transition-colors duration-150"
               aria-label="Scroll to top"
             >
               <FaArrowUp className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors duration-200" />

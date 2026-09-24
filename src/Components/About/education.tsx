@@ -51,7 +51,7 @@ export default function Education() {
                       {edu.course}
                     </h3>
 
-                    <div className="flex items-start gap-3 bg-muted/50 rounded-2xl p-4">
+                    <div className="flex items-start gap-3 bg-muted/50 rounded-lg p-4">
                       <IconTile icon={HiAcademicCap} accent={accent} size="sm" />
                       <div className="min-w-0">
                         <p className="font-bold text-foreground text-sm md:text-base leading-tight">

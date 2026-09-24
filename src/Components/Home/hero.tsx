@@ -7,21 +7,40 @@ import { getAccent } from "@/Components/UI/accentColor";
 import Image from "next/image";
 import { FaArrowRight } from "react-icons/fa";
 import Badge from "@/Components/UI/Badge";
+import Marquee from "@/Components/UI/Marquee";
+import { useParallax } from "@/hooks/useParallax";
+import { useRef } from "react";
+import { skillsData } from "@/constants/about";
 
 export default function Hero() {
   const theme = useSelector((state: RootState) => state.theme.mode);
 
+  // The portrait drifts a little slower than the page, so it reads as sitting
+  // behind the offset ink frame rather than pasted onto it. Desktop and
+  // full-motion only - see useParallax.
+  const portraitRef = useRef<HTMLDivElement>(null);
+  useParallax(portraitRef, 0.05);
+
+  // Real stack from the skills data rather than a second hand-kept list, so
+  // the ticker can't drift out of step with the Skills section below it.
+  const marqueeItems = skillsData.map((skill) => skill.text);
+
   return (
-    <section id="home" className="relative min-h-[min(100vh,900px)] overflow-hidden pt-20 md:pt-24">
+    <section id="home" className="relative min-h-[min(100svh,900px)] overflow-hidden pt-20 md:pt-24">
       {/* Cinematic backdrop now lives site-wide in DefaultLayout - see there. */}
 
       {/* Main Content */}
-      {/* Capped with min() rather than a bare 100vh: mobile browsers'
+      {/* Capped with min() rather than a bare 100svh: mobile browsers'
           "Request Desktop Site" mode forces a wide layout viewport while
           scaling its height to preserve the device's real (portrait) aspect
-          ratio, which can inflate 100vh to 2000px+ and leave this
-          flex-centered content stranded in a wall of dead space. */}
-      <div className="container-custom min-h-[min(calc(100vh-140px),760px)] flex items-center py-8 md:py-12">
+          ratio, which can inflate the viewport unit to 2000px+ and leave
+          this flex-centered content stranded in a wall of dead space.
+          svh, not vh: on mobile browsers vh resolves against the viewport
+          with the URL/toolbar retracted, so at rest - toolbar shown - a
+          100vh hero is taller than the screen and its bottom is cut off.
+          svh is the smallest (toolbar-visible) height, so the hero always
+          fits without the chrome having to hide first. */}
+      <div className="container-custom min-h-[min(calc(100svh-140px),760px)] flex items-center py-8 md:py-12">
         <div className="flex flex-col md:flex-row-reverse items-center justify-between w-full gap-8 md:gap-12 lg:gap-16">
 
           {/* Image Section - Better proportions */}
@@ -32,8 +51,11 @@ export default function Hero() {
                   else on the page. */}
               <div className="absolute -bottom-3 -right-3 md:-bottom-4 md:-right-4 w-full h-full bg-foreground -z-10" aria-hidden="true" />
 
-              {/* Main Image */}
-              <div className="relative">
+              {/* Main Image. The parallax ref goes here rather than on the
+                  outer box so the photo drifts against the fixed ink frame
+                  behind it - moving both together would just slide the whole
+                  assembly and show no depth at all. */}
+              <div className="relative" ref={portraitRef}>
                 <div className="relative aspect-3/4 overflow-hidden border border-border">
                   <Image
                     src="/Images/Profile/Ajay3.webp" // Use .webp if you converted it
@@ -48,13 +70,11 @@ export default function Hero() {
                 </div>
               </div>
 
-              {/* Available Badge - Top right */}
-              <div className="absolute top-4 md:top-6 right-4 md:right-6">
-                <div className="flex items-center gap-1.5 md:gap-2 px-3 py-1.5 md:px-4 md:py-2 bg-background border border-border">
-                  <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                  <span className="text-xs md:text-sm font-bold text-foreground">Available</span>
-                </div>
-              </div>
+              {/* The "Available" chip that used to sit over this photo is
+                  gone: BasicInfo already states "Available for
+                  opportunities" in the adjacent text column, so both read
+                  at once in the same viewport - saying it twice made the
+                  claim look like decoration rather than a status. */}
             </div>
           </div>
 
@@ -65,8 +85,17 @@ export default function Hero() {
         </div>
       </div>
 
+      {/* Stack ticker. Full-bleed and edge-to-edge on purpose - it is the one
+          element on the page that deliberately runs past the container
+          gutters, which is what makes the hero feel like it continues off
+          the sides of the frame rather than stopping at a margin. Hairlines
+          top and bottom tie it to the rest of the rule-based layout. */}
+      <div className="border-y border-border py-4 md:py-5 animate-fadeIn" style={{ animationDelay: '400ms' }}>
+        <Marquee items={marqueeItems} durationSec={52} />
+      </div>
+
       {/* Featured Project Teaser */}
-      <div className="container-custom pb-16 md:pb-24 animate-fadeIn" style={{ animationDelay: '360ms' }}>
+      <div className="container-custom pt-16 md:pt-24 pb-16 md:pb-24 animate-fadeIn" style={{ animationDelay: '360ms' }}>
         <a
           href="#projects"
           className="group block panel p-6 md:p-8 border-l-4 border-l-primary transition-colors duration-300 hover:border-l-secondary"

@@ -23,7 +23,7 @@ export default function Navbar() {
     if (flagError) {
       return (
         <div
-          className="rounded-2xl overflow-hidden shrink-0"
+          className="rounded-lg overflow-hidden shrink-0"
           style={{
             width: `${size}px`,
             height: `${size}px`,
@@ -55,7 +55,7 @@ export default function Navbar() {
           clickable as a "close and go home" shortcut - instead of being
           hidden behind the overlay's opaque backdrop while it's open. */}
       <div
-        className={`fixed top-3 left-3 md:top-5 md:left-6 z-70 flex items-center gap-2.5 magnetic rounded-2xl px-2.5 py-1.5 transition-all duration-200 ${
+        className={`fixed top-3 left-3 md:top-5 md:left-6 z-70 flex items-center gap-2.5 magnetic rounded-lg px-2.5 py-1.5 transition-all duration-200 ${
           scrolled || isMenuOpen ? "glass shadow-sm" : ""
         }`}
       >
@@ -75,7 +75,7 @@ export default function Navbar() {
           which used to sit a few pixels off from this trigger and read as
           the close control "jumping" the moment the menu opened. */}
       <div
-        className={`fixed top-3 right-3 md:top-5 md:right-6 z-70 flex items-center gap-2 rounded-2xl px-2 py-2 transition-all duration-200 ${
+        className={`fixed top-3 right-3 md:top-5 md:right-6 z-70 flex items-center gap-2 rounded-lg px-2 py-2 transition-all duration-200 ${
           scrolled || isMenuOpen ? "glass shadow-sm" : ""
         }`}
       >
@@ -84,7 +84,7 @@ export default function Navbar() {
         </div>
         <button
           onClick={handleToggleMenu}
-          className="magnetic flex items-center gap-2 px-3.5 py-2 rounded-2xl border border-border hover:border-primary/50 hover:bg-muted transition-all duration-200 active:scale-95"
+          className="magnetic flex items-center gap-2 px-3.5 py-2 rounded-lg border border-border hover:border-primary/50 hover:bg-muted transition-all duration-200 active:scale-95"
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           aria-expanded={isMenuOpen}
         >

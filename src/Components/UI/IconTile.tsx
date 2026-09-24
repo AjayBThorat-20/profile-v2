@@ -11,9 +11,9 @@ interface IconTileProps {
 }
 
 const SIZE_CLASSES: Record<NonNullable<IconTileProps["size"]>, { box: string; icon: string }> = {
-  sm: { box: "w-10 h-10 rounded-2xl", icon: "w-4 h-4" },
-  md: { box: "w-12 h-12 rounded-2xl", icon: "w-5 h-5" },
-  lg: { box: "w-14 h-14 rounded-2xl", icon: "w-6 h-6" },
+  sm: { box: "w-10 h-10 rounded-lg", icon: "w-4 h-4" },
+  md: { box: "w-12 h-12 rounded-lg", icon: "w-5 h-5" },
+  lg: { box: "w-14 h-14 rounded-lg", icon: "w-6 h-6" },
 };
 
 // Replaces the "icon in a saturated gradient box that rotates on hover"

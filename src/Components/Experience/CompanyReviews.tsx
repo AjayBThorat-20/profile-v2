@@ -220,7 +220,7 @@ export default function CompanyReviews() {
     return (
       <div className="container-custom section">
         <div className="flex items-center justify-center min-h-100">
-          <div className="text-center space-y-4 panel p-8 rounded-2xl border-l-4 border-l-destructive">
+          <div className="text-center space-y-4 panel p-8 rounded-lg border-l-4 border-l-destructive">
             <p className="text-xl font-bold text-destructive">{error}</p>
             <button
               onClick={fetchReviews}
@@ -241,7 +241,7 @@ export default function CompanyReviews() {
           <div className="flex justify-center">
             <SectionEyebrow icon={HiSparkles} label="Team Reviews" />
           </div>
-          <div className="panel p-8 rounded-2xl border-dashed max-w-md mx-auto">
+          <div className="panel p-8 rounded-lg border-dashed max-w-md mx-auto">
             <p className="text-xl font-bold text-foreground mb-2">No Reviews Yet</p>
             <p className="text-muted-foreground">Reviews will appear here once submitted.</p>
           </div>
@@ -429,7 +429,7 @@ export default function CompanyReviews() {
 
                     {/* Impact & Results */}
                     {(review.systemImprovement || review.workloadReduction !== "Not applicable") && (
-                      <div className="relative overflow-hidden rounded-2xl border border-border bg-muted/40 p-5">
+                      <div className="relative overflow-hidden rounded-lg border border-border bg-muted/40 p-5">
                         <div className="relative space-y-3">
                           <div className="flex items-center gap-2">
                             <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
@@ -444,7 +444,11 @@ export default function CompanyReviews() {
                                 <span className="text-sm font-medium text-muted-foreground">
                                   System Improvement:
                                 </span>
-                                <span className="text-sm font-bold text-green-600 dark:text-green-400 text-right">
+                                {/* text-foreground, matching the Workload
+                                    Reduction figure directly below it - these
+                                    are two metrics in the same list and only
+                                    one of them was green. */}
+                                <span className="text-sm font-bold text-foreground text-right">
                                   {review.systemImprovement}
                                 </span>
                               </div>
@@ -475,7 +479,7 @@ export default function CompanyReviews() {
 
                   {/* Decorative Quote Icon */}
                   <div className="absolute top-6 right-6 pointer-events-none">
-                    <div className={`p-3 ${accent.bgSoft} rounded-2xl`}>
+                    <div className={`p-3 ${accent.bgSoft} rounded-lg`}>
                       <FaQuoteLeft className={`w-5 h-5 ${accent.text}`} />
                     </div>
                   </div>

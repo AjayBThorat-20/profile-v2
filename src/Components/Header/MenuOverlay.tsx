@@ -50,12 +50,22 @@ export default function MenuOverlay() {
   ];
 
   return (
+    /* `inert` (plus visibility:hidden via `invisible`) is what actually
+       removes this from the tab order while closed. opacity-0 +
+       pointer-events-none only hid it from the mouse - every nav link and
+       social link stayed keyboard-focusable, so tabbing from the logo
+       walked through eight invisible controls before reaching the page
+       content. inert also blocks them from assistive tech, which
+       aria-modal on a still-rendered subtree does not. */
     <div
       role="dialog"
       aria-modal="true"
       aria-label="Site navigation"
-      className={`fixed inset-0 z-60 bg-background flex flex-col transition-all duration-300 ease-out ${
-        isMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+      inert={!isMenuOpen}
+      className={`fixed inset-0 z-60 bg-background flex flex-col transition-[opacity,visibility] duration-300 ease-out ${
+        isMenuOpen
+          ? "opacity-100 visible pointer-events-auto"
+          : "opacity-0 invisible pointer-events-none"
       }`}
     >
       {/* Big stacked links. Top padding clears the navbar's logo/menu

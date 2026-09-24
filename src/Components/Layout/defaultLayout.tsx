@@ -7,6 +7,8 @@ import Footer from "../Footer/footer";
 import { usePathname } from "next/navigation";
 import ScrollProgressBar from "../UI/ScrollProgressBar";
 import CustomCursor from "../UI/CustomCursor";
+import FilmGrain from "../UI/FilmGrain";
+import ChapterRail from "../UI/ChapterRail";
 import { useMagnetic } from "@/hooks/useMagnetic";
 
 const DefaultLayout = ({ children }: { children: React.ReactNode }) => {
@@ -32,6 +34,11 @@ const DefaultLayout = ({ children }: { children: React.ReactNode }) => {
     <div className="min-h-screen overflow-x-clip bg-background text-foreground transition-colors duration-200">
       <CustomCursor />
       <ScrollProgressBar />
+      {/* Grain sits above the page chrome (z-100) on purpose - it's a layer
+          over the whole frame, like emulsion, not a background behind the
+          content. The custom cursor stays above it at z-200. */}
+      <FilmGrain />
+      <ChapterRail />
 
       {/* Fixed Navbar */}
       <Navbar />
