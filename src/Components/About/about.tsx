@@ -2,20 +2,15 @@
 
 import Image from "next/image";
 import { FaRocket } from "react-icons/fa";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import RevealText from "@/Components/UI/RevealText";
 import { getYearsOfExperienceLabel } from "@/lib/experience";
 
 export default function About() {
-  const [mounted, setMounted] = useState(false);
   const [imageError, setImageError] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
   const isRevealed = useScrollReveal(sectionRef);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   const highlights = [
     "Built and maintain DevCompass, an open-source npm CLI tracking 500+ packages for CVE and deprecation risk",
@@ -75,7 +70,7 @@ export default function About() {
                   <div className="space-y-4 text-base md:text-lg leading-relaxed">
                     <p className="text-foreground/90">
                       Based in <span className="font-bold text-foreground">Mumbai, India</span>,
-                      I'm a passionate full-stack developer specializing in{" "}
+                      I’m a passionate full-stack developer specializing in{" "}
                       <span className="font-semibold text-foreground">Next.js, React, Node.js, and MongoDB</span>.
                     </p>
 
@@ -89,7 +84,7 @@ export default function About() {
 
                     <p className="text-muted-foreground">
                       Adaptable under pressure, I thrive in collaborative environments and 
-                      innovative projects, always pushing the boundaries of what's possible.
+                      innovative projects, always pushing the boundaries of what’s possible.
                     </p>
                   </div>
                 </div>
@@ -117,7 +112,7 @@ export default function About() {
           <div className="panel p-8 md:p-12 rounded-lg border-l-4 border-l-primary text-center space-y-6 animate-fadeIn" style={{ animationDelay: '320ms' }}>
             <div className="relative z-10">
               <h3 className="text-2xl md:text-3xl font-bold mb-4 text-foreground">
-                Let's Build Something Amazing Together
+                Let’s Build Something Amazing Together
               </h3>
               <p className="text-muted-foreground text-lg mb-6 max-w-2xl mx-auto">
                 Ready to bring your ideas to life with cutting-edge technology and innovative solutions.

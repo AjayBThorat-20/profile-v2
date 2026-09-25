@@ -1,7 +1,4 @@
-"use client";
-
-import React, { useRef } from "react";
-import { useScrollReveal } from "@/hooks/useScrollReveal";
+import React from "react";
 
 interface RevealTextProps {
   text: string;
@@ -11,33 +8,29 @@ interface RevealTextProps {
   delay?: number;
 }
 
-// Splits text into words, each sitting in its own overflow-hidden mask,
-// and slides them up into place with a per-word stagger once scrolled
-// into view - the headline "wipes" in rather than just fading, matching
-// the nabilissa.com reference. createElement (not JSX) because the tag
-// is chosen at runtime and a dynamic JSX tag can't carry a typed ref
-// across h1/h2/.../span cleanly.
+// Splits text into words, each sitting in its own overflow-hidden mask, and
+// slides them up into place with a per-word stagger once scrolled into view -
+// the headline "wipes" in rather than just fading, matching the nabilissa.com
+// reference. createElement (not JSX) because the tag is chosen at runtime.
+//
+// Server component: the trigger is the `data-reveal` attribute plus the shared
+// RevealObserver, so this no longer needs a ref, a hook or a re-render - the
+// per-word delays are static inline styles and the CSS decides when they run.
 export default function RevealText({ text, as = "h2", className = "", delay = 0 }: RevealTextProps) {
-  const ref = useRef<HTMLElement>(null);
-  const isVisible = useScrollReveal(ref as React.RefObject<HTMLElement>);
   const words = text.split(" ");
 
   return React.createElement(
     as,
-    { ref, className },
+    { "data-reveal": true, className },
     words.map((word, i) => (
       <React.Fragment key={`${word}-${i}`}>
         <span className="reveal-word-mask">
-          <span
-            className="reveal-word"
-            data-visible={isVisible}
-            style={{ transitionDelay: isVisible ? `${delay + i * 45}ms` : "0ms" }}
-          >
+          <span className="reveal-word" style={{ transitionDelay: `${delay + i * 45}ms` }}>
             {word}
           </span>
         </span>
         {i < words.length - 1 ? " " : ""}
       </React.Fragment>
-    ))
+    )),
   );
 }

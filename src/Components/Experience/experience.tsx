@@ -1,19 +1,18 @@
-"use client";
-
-import React, { useRef, ViewTransition } from "react";
+// Server component. It carried "use client" only so it could call
+// useScrollReveal for its entrance animation; that is now driven by the
+// `data-reveal` attribute and one shared observer (see UI/RevealObserver), so
+// none of this markup needs to ship to the browser or hydrate.
+import React, { ViewTransition } from "react";
 import Link from "next/link";
 import { experienceData } from "@/constants/experience";
 import { FaBriefcase, FaMapMarkerAlt, FaArrowRight, FaCheckCircle, FaExternalLinkAlt } from "react-icons/fa";
 import { HiBuildingOffice2 } from "react-icons/hi2";
-import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { getAccent } from "@/Components/UI/accentColor";
 import SectionEyebrow from "@/Components/UI/SectionEyebrow";
 import { TimelineRail, TimelineItem } from "@/Components/UI/Timeline";
 import Badge from "@/Components/UI/Badge";
 
 export default function Experience() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const isRevealed = useScrollReveal(sectionRef);
 
   // Helper to check if it's current position
   const isCurrent = (duration: string) => {
@@ -28,7 +27,7 @@ export default function Experience() {
   };
 
   return (
-    <div id="experience-journey" ref={sectionRef} className={`container-custom section scroll-reveal scroll-mt-36 ${isRevealed ? "is-visible" : ""}`}>
+    <div id="experience-journey" data-reveal className="container-custom section scroll-mt-36">
       <div className="max-w-4xl mx-auto space-y-12">
         {/* Header */}
         <div className="text-center space-y-4 animate-fadeIn">
@@ -50,7 +49,7 @@ export default function Experience() {
             return (
               <div key={exp.id} className="animate-fadeIn" style={{ animationDelay: `${index * 60}ms` }}>
                 <TimelineItem icon={HiBuildingOffice2} accent={accent} meta={exp.duration}>
-                  <div className={`spotlight entry-card ${accent.border} p-5 md:p-6`}>
+                  <div className={`spotlight entry-card surface-3d ${accent.border} p-5 md:p-6`}>
                     <div className="flex items-center gap-2 mb-2">
                       {current && <Badge tone="success" dot>Current</Badge>}
                     </div>

@@ -9,6 +9,7 @@ import ScrollProgressBar from "../UI/ScrollProgressBar";
 import CustomCursor from "../UI/CustomCursor";
 import FilmGrain from "../UI/FilmGrain";
 import ChapterRail from "../UI/ChapterRail";
+import RevealObserver from "../UI/RevealObserver";
 import { useMagnetic } from "@/hooks/useMagnetic";
 
 const DefaultLayout = ({ children }: { children: React.ReactNode }) => {
@@ -39,6 +40,8 @@ const DefaultLayout = ({ children }: { children: React.ReactNode }) => {
           content. The custom cursor stays above it at z-200. */}
       <FilmGrain />
       <ChapterRail />
+      {/* Drives every [data-reveal] element; renders nothing. */}
+      <RevealObserver />
 
       {/* Fixed Navbar */}
       <Navbar />

@@ -1,4 +1,9 @@
-"use client";
+// Server component. It was marked "use client", which made the whole page a
+// client entry: the two structured-data objects below (built from projectsData)
+// were serialised into the client bundle as well as the HTML, and the module
+// itself shipped to the browser for no reason - nothing here uses state, an
+// effect or an event handler. A server component can still render the client
+// components it imports; they each hydrate on their own.
 
 import { Hero } from "@/Components/Home/page";
 import { About, Certifications, CoCurricularActivities, Education, Skills } from "@/Components/About/page";

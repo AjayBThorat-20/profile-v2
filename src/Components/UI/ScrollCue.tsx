@@ -13,7 +13,7 @@ export default function ScrollCue({ label = "Scroll" }: { label?: string }) {
         {label}
       </span>
       <span className="scroll-cue-track">
-        <span className="scroll-cue-run" />
+        <span className="scroll-cue-run" data-pause-offscreen />
       </span>
     </div>
   );

@@ -72,7 +72,11 @@ export default function MenuOverlay() {
           chips, which stay fixed above this overlay (z-70) instead of
           this overlay drawing its own close button - one control, one
           position, no jump when the menu opens. */}
-      <nav className="flex-1 flex flex-col justify-center px-8 md:px-16 lg:px-24 pt-24 md:pt-28">
+      {/* .stage puts all five links in one shared scene, so they swing about a
+          common vanishing point rather than each having its own - which is
+          what makes a stack of rotating lines read as one panel folding open
+          instead of five unrelated flaps. */}
+      <nav className="stage flex-1 flex flex-col justify-center px-8 md:px-16 lg:px-24 pt-24 md:pt-28">
         {siteSections.map((section, index) => {
           const isActive = isMenuOpen && activeId === section.id;
           return (
@@ -80,14 +84,20 @@ export default function MenuOverlay() {
               key={section.id}
               href={`/#${section.id}`}
               onClick={handleClose}
-              className={`group flex items-baseline gap-4 md:gap-6 py-2 md:py-3 border-b border-border/60 last:border-b-0 transition-colors duration-200 ${
+              className={`menu-line-3d group flex items-baseline gap-4 md:gap-6 py-2 md:py-3 border-b border-border/60 last:border-b-0 transition-colors duration-200 ${
                 isActive ? "text-primary" : "text-foreground hover:text-primary"
               }`}
               style={{
                 transitionProperty: "opacity, transform, color",
                 transitionDelay: isMenuOpen ? `${index * 50}ms` : "0ms",
                 opacity: isMenuOpen ? 1 : 0,
-                transform: isMenuOpen ? "translateY(0)" : "translateY(16px)",
+                // Each line hangs back and pitched away, then swings down flat
+                // about its own top edge (transform-origin is set by
+                // .menu-line-3d), so the menu opens like a board dropping into
+                // place rather than the whole list sliding up 16px.
+                transform: isMenuOpen
+                  ? "translate3d(0, 0, 0) rotateX(0deg)"
+                  : "translate3d(0, 16px, -80px) rotateX(-35deg)",
               }}
             >
               <span className={`font-mono text-sm md:text-base transition-colors duration-200 ${

@@ -37,15 +37,21 @@ export default function ChapterRail() {
             key={section.id}
             href={`/#${section.id}`}
             aria-current={isActive}
-            aria-label={section.label}
             className="chapter-link group flex items-center gap-3 py-1"
           >
             <span className="chapter-tick" aria-hidden="true" />
+            {/* The label is the accessible name, not decoration. It used to be
+                aria-hidden with aria-label="Home" on the link, which left the
+                visible text ("01 Home") and the accessible name ("Home")
+                disagreeing - Lighthouse flags that as a label/content mismatch,
+                and it breaks voice control, where saying the words you can see
+                has to activate the control. It stays readable to assistive tech
+                while collapsed because it is clipped by max-width, not removed
+                with display:none. */}
             <span
               className={`chapter-label font-mono text-[0.7rem] font-semibold uppercase tracking-[0.12em] ${
                 isActive ? "text-foreground" : "text-muted-foreground"
               }`}
-              aria-hidden="true"
             >
               {section.index} {section.label}
             </span>

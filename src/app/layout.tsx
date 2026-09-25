@@ -158,16 +158,32 @@ export default function RootLayout({
           }}
         />
 
-        {/* Google Analytics */}
+        {/* Google Analytics.
+
+            strategy="lazyOnload", not "afterInteractive": gtag.js is 176 KB
+            and was costing ~300 ms of main-thread time and ~190 ms of the
+            page's ~420 ms Total Blocking Time - by far the largest single
+            contributor, and all of it spent before the visitor can interact.
+            lazyOnload holds it until the browser is idle after load, which
+            takes that work out of the interaction window entirely. Page views
+            are still recorded; they are just reported a moment later.
+
+            The preconnect is what stops that deferral costing anything at the
+            other end: without it the DNS + TLS handshake to googletagmanager
+            only starts once the script is requested (~90 ms, per the
+            Lighthouse preconnect audit). Warming the connection early and
+            fetching late gets both. */}
         {gaId && (
           <>
+            <link rel="preconnect" href="https://www.googletagmanager.com" />
+            <link rel="preconnect" href="https://www.google-analytics.com" />
             <Script
-              strategy="afterInteractive"
+              strategy="lazyOnload"
               src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
             />
             <Script
               id="google-analytics"
-              strategy="afterInteractive"
+              strategy="lazyOnload"
               dangerouslySetInnerHTML={{
                 __html: `
                   window.dataLayer = window.dataLayer || [];

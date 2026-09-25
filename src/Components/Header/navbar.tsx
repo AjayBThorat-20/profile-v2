@@ -3,50 +3,50 @@
 // sidebar drawer.
 "use client";
 
-import React, { useState } from "react";
-import Image from "next/image";
+import React from "react";
+import Link from "next/link";
 import { useAppSelector, useAppDispatch } from "@/store/hooks";
 import { toggleMenu } from "@/store/slices/themeSlice";
 import ThemeToggleButton from "../Buttons/ThemeToggleButton";
 import MenuOverlay from "./MenuOverlay";
 
+// Drawn in CSS rather than loaded from /Flag/flag.gif. That file is a 47.7 KB
+// animated GIF being displayed at 22x22 and marked `priority`, so it competed
+// for bandwidth with the LCP image while delivering roughly 2 KB of visible
+// detail - Lighthouse flagged it as the page's worst image by far. At this size
+// the waving animation is a couple of pixels nobody can resolve, so the three
+// bands are all that ever read. This costs no request and no decode.
+//
+// Declared at module scope, not inside Navbar: a component defined during
+// render is a brand-new component *type* on every render, so React tears down
+// the old subtree and mounts a fresh one each time instead of updating it.
+function FlagIcon({ size = 24 }: { size?: number }) {
+  return (
+    <div
+      role="img"
+      aria-label="Indian flag"
+      className="rounded-sm overflow-hidden shrink-0 border border-border/40"
+      style={{
+        width: `${size}px`,
+        height: `${size}px`,
+        // Hard stops (each colour ends exactly where the next begins) render
+        // three flat bands rather than fading between them.
+        background:
+          "linear-gradient(to bottom, #FF9933 0 33.33%, #FFFFFF 33.33% 66.66%, #138808 66.66% 100%)",
+      }}
+    />
+  );
+}
+
 export default function Navbar() {
   const dispatch = useAppDispatch();
-  const [flagError, setFlagError] = useState(false);
   const { isMenuOpen, scrolled } = useAppSelector((state) => state.theme);
 
   const handleToggleMenu = () => {
     dispatch(toggleMenu());
   };
 
-  const FlagIcon = ({ size = 24 }: { size?: number }) => {
-    if (flagError) {
-      return (
-        <div
-          className="rounded-lg overflow-hidden shrink-0"
-          style={{
-            width: `${size}px`,
-            height: `${size}px`,
-            background: 'linear-gradient(to bottom, #FF9933 33.33%, #FFFFFF 33.33%, #FFFFFF 66.66%, #138808 66.66%)'
-          }}
-        />
-      );
-    }
 
-    return (
-      <div className="relative shrink-0" style={{ width: `${size}px`, height: `${size}px` }}>
-        <Image
-          src="/Flag/flag.gif"
-          alt="Indian Flag"
-          fill
-          className="object-contain"
-          onError={() => setFlagError(true)}
-          priority
-          unoptimized
-        />
-      </div>
-    );
-  };
 
   return (
     <>
@@ -59,13 +59,13 @@ export default function Navbar() {
           scrolled || isMenuOpen ? "glass shadow-sm" : ""
         }`}
       >
-        <a
+        <Link
           href="/#home"
           onClick={() => isMenuOpen && dispatch(toggleMenu())}
-          className="font-mono text-lg md:text-xl font-bold tracking-tight border-2 border-primary/30 hover:border-primary rounded-md px-2 py-0.5 text-foreground transition-all duration-200 active:scale-95"
+          className="inline-flex items-center min-h-11 font-mono text-lg md:text-xl font-bold tracking-tight border-2 border-primary/30 hover:border-primary rounded-md px-2 text-foreground transition-all duration-200 active:scale-95"
         >
           <span className="text-primary">&lt;</span>AT<span className="text-primary">/&gt;</span>
-        </a>
+        </Link>
         <FlagIcon size={22} />
       </div>
 
@@ -84,7 +84,7 @@ export default function Navbar() {
         </div>
         <button
           onClick={handleToggleMenu}
-          className="magnetic flex items-center gap-2 px-3.5 py-2 rounded-lg border border-border hover:border-primary/50 hover:bg-muted transition-all duration-200 active:scale-95"
+          className="magnetic flex items-center justify-center gap-2 min-h-11 px-3.5 rounded-lg border border-border hover:border-primary/50 hover:bg-muted transition-all duration-200 active:scale-95"
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           aria-expanded={isMenuOpen}
         >

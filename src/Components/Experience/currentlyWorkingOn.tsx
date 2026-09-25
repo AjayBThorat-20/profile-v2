@@ -30,7 +30,7 @@ export default function CurrentlyWorkingOn() {
             <SectionEyebrow index="02" icon={FaRocket} label="Currently Working On" />
           </div>
           <p className="text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Active projects and initiatives I'm currently focused on.
+            Active projects and initiatives I’m currently focused on.
           </p>
         </div>
 

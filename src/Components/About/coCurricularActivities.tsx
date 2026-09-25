@@ -1,10 +1,11 @@
-"use client";
-
-import React, { useRef } from "react";
+// Server component. It carried "use client" only so it could call
+// useScrollReveal for its entrance animation; that is now driven by the
+// `data-reveal` attribute and one shared observer (see UI/RevealObserver), so
+// none of this markup needs to ship to the browser or hydrate.
+import React from "react";
 import { coCurricularActivitiesData } from "@/constants/about";
 import { FaFire, FaHandsHelping, FaLaptopCode, FaRocket } from "react-icons/fa";
 import { IconType } from "react-icons";
-import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { getAccent } from "@/Components/UI/accentColor";
 import IconTile from "@/Components/UI/IconTile";
 import SectionEyebrow from "@/Components/UI/SectionEyebrow";
@@ -17,11 +18,9 @@ const ACTIVITY_ICONS: Record<string, IconType> = {
 };
 
 export default function CoCurricularActivities() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const isRevealed = useScrollReveal(sectionRef);
 
   return (
-    <div id="activities" ref={sectionRef} className={`container-custom section scroll-reveal scroll-mt-36 ${isRevealed ? "is-visible" : ""}`}>
+    <div id="activities" data-reveal className="container-custom section scroll-mt-36">
       <div className="max-w-7xl mx-auto space-y-12">
         {/* Header Section */}
         <div className="text-center space-y-4 animate-fadeIn">

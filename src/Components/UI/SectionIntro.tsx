@@ -1,7 +1,5 @@
-"use client";
-
-import React, { useRef } from "react";
-import { useScrollReveal } from "@/hooks/useScrollReveal";
+// Server component - see RevealObserver for why the reveal no longer needs a hook.
+import React from "react";
 import CountUp from "./CountUp";
 
 interface SectionIntroProps {
@@ -17,11 +15,8 @@ interface SectionIntroProps {
 // Collaboration", ...) that said nothing specific about this portfolio -
 // replaced with actual numbers pulled from each page's own data.
 export default function SectionIntro({ intro, facts, closingStatement }: SectionIntroProps) {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const isRevealed = useScrollReveal(sectionRef);
-
   return (
-    <div ref={sectionRef} className={`space-y-8 scroll-reveal ${isRevealed ? "is-visible" : ""}`}>
+    <div data-reveal className="space-y-8">
       <div className="panel rounded-lg p-8 md:p-10">
         <p className="text-lg md:text-xl text-foreground/90 leading-relaxed text-center">{intro}</p>
       </div>

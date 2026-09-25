@@ -1,5 +1,4 @@
-"use client";
-
+// Server component: static copy plus SectionIntro, neither of which needs the client.
 import React from "react";
 import SectionIntro from "@/Components/UI/SectionIntro";
 import { getYearsOfExperienceLabel } from "@/lib/experience";

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState, FormEvent } from "react";
+import React, { useEffect, useRef, useState, FormEvent } from "react";
 import { FaEnvelope, FaUser, FaPaperPlane, FaCheckCircle, FaExclamationCircle, FaLinkedin, FaGithub, FaTag, FaCommentDots } from "react-icons/fa";
 import { IoMdMail } from "react-icons/io";
 import { sendContactEmail } from "@/app/actions/contact.action";
@@ -43,7 +43,15 @@ export default function Contact() {
   const [successMessage, setSuccessMessage] = useState("");
   const sectionRef = useRef<HTMLDivElement>(null);
   const isRevealed = useScrollReveal(sectionRef);
-  const formStartTimeRef = useRef<number>(Date.now());
+  // Seeded in an effect, not with Date.now() during render: reading the clock
+  // while rendering is an impure call - it makes the render's output depend on
+  // when it ran, which breaks under Strict Mode's double render and under
+  // replay. The value is only ever compared against submit time, so the tiny
+  // difference between "render" and "mounted" is immaterial.
+  const formStartTimeRef = useRef<number>(0);
+  useEffect(() => {
+    formStartTimeRef.current = Date.now();
+  }, []);
 
   const validateEmail = (email: string) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -100,7 +108,7 @@ export default function Contact() {
         setStatus("error");
         setErrorMessage(result.error || "Failed to send message. Please try again.");
       }
-    } catch (error) {
+    } catch {
       setStatus("error");
       setErrorMessage("An unexpected error occurred. Please try again later.");
     }
@@ -134,7 +142,7 @@ export default function Contact() {
 
               <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
                 Have a project in mind or want to discuss opportunities? Feel free to reach out.
-                I'm always open to new challenges and collaborations.
+                I’m always open to new challenges and collaborations.
               </p>
             </div>
 
@@ -168,7 +176,11 @@ export default function Contact() {
                   <FaCheckCircle className="w-6 h-6 text-foreground" />
                 </div>
                 <div>
-                  <h4 className="font-bold text-foreground">Quick Response</h4>
+                  {/* h3, not h4: the nearest heading above this in the
+                      document is the section's h2, so an h4 here skipped a
+                      level. Heading level is the document outline, not a size
+                      - the size comes from the class either way. */}
+                  <h3 className="font-bold text-foreground">Quick Response</h3>
                   <p className="text-sm text-muted-foreground">
                     I typically respond within 24 hours
                   </p>
@@ -179,9 +191,9 @@ export default function Contact() {
             {/* Decorative Quote */}
             <div className="panel p-6 rounded-lg border-l-4 border-l-primary">
               <p className="text-base italic text-foreground/80 leading-relaxed">
-                "The best way to predict the future is to create it."
+                “The best way to predict the future is to create it.”
                 <span className="block mt-2 text-sm font-semibold text-primary">
-                  — Let's build something amazing together
+                  — Let’s build something amazing together
                 </span>
               </p>
             </div>
@@ -223,7 +235,7 @@ export default function Contact() {
                       Send a Message
                     </h3>
                     <p className="text-sm text-muted-foreground">
-                      Fill out the form below and I'll get back to you soon.
+                      Fill out the form below and I’ll get back to you soon.
                     </p>
                   </div>
 

@@ -163,8 +163,13 @@ export default function Skills() {
                 className="group relative stagger-child"
                 style={{ "--stagger-i": skillIdx } as React.CSSProperties}
               >
+                {/* tile-3d replaces the old group-hover:-translate-y-1: the
+                    tile now pushes toward the viewer and pitches back rather
+                    than sliding up the page. Both can't coexist - they set the
+                    same property - so the 2D lift is gone rather than being
+                    overridden. */}
                 <div
-                  className={`relative overflow-hidden border ${accent.border} rounded-lg p-4 sm:p-6 group-hover:-translate-y-1 group-hover:border-foreground/40 transition-[transform,border-color] duration-200`}
+                  className={`relative overflow-hidden border ${accent.border} rounded-lg p-4 sm:p-6 tile-3d group-hover:border-foreground/40`}
                 >
                   {/* Content */}
                   <div className="relative z-10 flex flex-col items-center justify-center space-y-3 min-h-25">

@@ -78,7 +78,13 @@ export default function Projects() {
                 onFocusCapture={() => setIsPaused(true)}
                 onBlurCapture={() => setIsPaused(false)}
               >
-                <div className={`spotlight entry-card ${accent.border} overflow-hidden`}>
+                {/* surface-3d lifts the whole card toward the viewer on
+                    hover instead of nudging it up 2px. It deliberately has no
+                    .surface-3d-raise inside: that needs preserve-3d on the
+                    card, and preserve-3d is ignored on an element that clips
+                    its overflow - which this one must, to keep the screenshot
+                    inside the rounded corners. */}
+                <div className={`spotlight entry-card surface-3d ${accent.border} overflow-hidden`}>
 
                   {/* Top Accent Bar */}
                   <div className={`h-1.5 ${accent.bg}`}></div>
@@ -129,7 +135,7 @@ export default function Projects() {
                       riding its 3D rotation. */}
                   {project.pictures.length > 1 && (
                     <div className="flex items-center justify-between gap-4 border-b border-border px-6 py-3 md:px-8">
-                      <div className="flex items-center gap-2" role="group" aria-label={`${project.title} screenshots`}>
+                      <div className="flex items-center gap-3" role="group" aria-label={`${project.title} screenshots`}>
                         {project.pictures.map((picture, imageIdx) => {
                           const isCurrent = currentImageIndexes[activityIdx] === imageIdx;
                           return (
@@ -139,7 +145,16 @@ export default function Projects() {
                               onClick={() => goToImage(activityIdx, imageIdx)}
                               aria-label={`Show screenshot ${imageIdx + 1} of ${project.pictures.length}`}
                               aria-current={isCurrent}
-                              className={`h-1 rounded-full transition-all duration-300 ${
+                              /* The visible dash stays 4px tall, but the
+                                 ::after box extends the hit area to roughly
+                                 28x44 without taking any layout space. As bare
+                                 4px-tall buttons these were impossible to hit
+                                 on a phone - measured 16x4 - and well under the
+                                 24x24 WCAG 2.2 target-size minimum. The gap
+                                 above was widened to 12px so the enlarged
+                                 areas meet without overlapping, which would
+                                 hand taps to the wrong slide. */
+                              className={`relative h-1 rounded-full transition-all duration-300 after:absolute after:content-[''] after:-inset-y-5 after:-inset-x-1.5 ${
                                 isCurrent
                                   ? "w-8 bg-foreground"
                                   : "w-4 bg-foreground/25 hover:bg-foreground/50"

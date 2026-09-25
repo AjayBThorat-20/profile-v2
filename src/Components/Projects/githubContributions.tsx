@@ -3,6 +3,8 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { FaGithub, FaArrowRight } from "react-icons/fa";
 import SectionEyebrow from "@/Components/UI/SectionEyebrow";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
+import ContributionsSkeleton from "@/Components/Skeletons/ContributionsSkeleton";
 import {
   GITHUB_USERNAME,
   describeDay,
@@ -30,10 +32,18 @@ const DAY_LABELS = ["", "Mon", "", "Wed", "", "Fri", ""];
 
 type State = { status: "loading" } | { status: "ready"; data: ContributionData } | { status: "error" };
 
-function useContributions(): State {
+// `enabled` gates the whole thing on the panel approaching the viewport. The
+// graph sits well below the fold, renders ~393 elements (21% of the page's
+// entire DOM), and polls on a timer - all of which used to happen during the
+// initial load, competing with content the visitor can actually see. Nothing is
+// lost by waiting: the markup is client-rendered either way, so it was never in
+// the HTML that crawlers read, and the skeleton it shows meanwhile is already
+// the same height as the finished graph, so deferring costs no layout shift.
+function useContributions(enabled: boolean): State {
   const [state, setState] = useState<State>({ status: "loading" });
 
   useEffect(() => {
+    if (!enabled) return;
     let cancelled = false;
     const controller = new AbortController();
 
@@ -56,7 +66,7 @@ function useContributions(): State {
       controller.abort();
       clearInterval(id);
     };
-  }, []);
+  }, [enabled]);
 
   return state;
 }
@@ -136,10 +146,15 @@ function Legend() {
 }
 
 export default function GithubContributions() {
-  const state = useContributions();
+  // useScrollReveal's observer already fires 300px before the element reaches
+  // the viewport (see the hook), so the fetch is in flight by the time the
+  // panel is actually on screen and the graph is rarely seen loading.
+  const panelRef = useRef<HTMLDivElement>(null);
+  const isNearViewport = useScrollReveal(panelRef);
+  const state = useContributions(isNearViewport);
 
   return (
-    <div className="container-custom pb-12 md:pb-16">
+    <div ref={panelRef} className="container-custom pb-12 md:pb-16">
       <div className="max-w-5xl mx-auto">
         <div className="panel rounded-lg p-6 md:p-8">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between mb-5">
@@ -155,7 +170,9 @@ export default function GithubContributions() {
               href={PROFILE_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center gap-2 text-sm font-semibold text-primary"
+              /* py-2 gives this a 36px-tall touch target; as a bare inline
+                 link it measured 20px, under the 24px WCAG 2.2 minimum. */
+              className="group inline-flex items-center gap-2 py-2 text-sm font-semibold text-primary"
             >
               <span>@{GITHUB_USERNAME}</span>
               <FaArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
@@ -171,9 +188,25 @@ export default function GithubContributions() {
             </>
           )}
 
-          {state.status === "loading" && (
-            <div className="h-[132px] md:h-[150px] rounded-lg bg-muted animate-pulse" aria-busy="true" aria-label="Loading GitHub activity" />
-          )}
+          {/* Two stages on purpose.
+              Before the panel is anywhere near the viewport, this is a single
+              empty box that just reserves the right height. The detailed
+              skeleton mirrors the real 53x7 grid, which is ~390 elements - and
+              rendering those from page load put every one of them in the
+              initial DOM, undoing the whole point of deferring the graph (it
+              measured 1,867 elements against 1,411 without it).
+              Once the panel is approaching and the fetch is actually in
+              flight, the full skeleton takes over, so the shape is held exactly
+              at the moment anyone can see it. */}
+          {state.status === "loading" &&
+            (isNearViewport ? (
+              <ContributionsSkeleton />
+            ) : (
+              <div
+                aria-hidden="true"
+                className="h-[132px] md:h-[150px] rounded-lg bg-muted/60"
+              />
+            ))}
 
           {state.status === "error" && (
             <p className="text-sm text-muted-foreground py-8 text-center">

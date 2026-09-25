@@ -1,12 +1,13 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { FaStar, FaQuoteLeft, FaUserCircle, FaBriefcase, FaCalendar, FaChartLine, FaClock, FaThumbsUp } from "react-icons/fa";
+import { FaStar, FaQuoteLeft, FaBriefcase, FaCalendar, FaChartLine, FaThumbsUp } from "react-icons/fa";
 import { HiSparkles } from "react-icons/hi2";
 import { getAccent } from "@/Components/UI/accentColor";
 import SectionEyebrow from "@/Components/UI/SectionEyebrow";
 import Badge from "@/Components/UI/Badge";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import ReviewsSkeleton from "@/Components/Skeletons/ReviewsSkeleton";
 
 interface Review {
   timestamp: string;
@@ -36,29 +37,14 @@ export default function CompanyReviews() {
   const [reviews, setReviews] = useState<Review[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [selectedReview, setSelectedReview] = useState<number | null>(null);
   const [shouldDisplay, setShouldDisplay] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
   const isRevealed = useScrollReveal(sectionRef);
 
-  useEffect(() => {
-    // Check if the current company is Renewalytics (id: 2)
-    const companyId = localStorage.getItem("selectedCompanyId");
-    if (companyId === "2") {
-      setShouldDisplay(true);
-      fetchReviews();
-    } else {
-      setLoading(false);
-    }
-  }, []);
-
   const fetchReviews = async () => {
     try {
       setLoading(true);
-      // Replace with your Google Sheets CSV export URL
-      const SHEET_URL = "YOUR_GOOGLE_SHEETS_CSV_URL_HERE";
-      
-      // For demo purposes, using sample data
+      // Sample data stands in until a real reviews source is wired up.
       const sampleData: Review[] = [
         {
           timestamp: "2026/03/06 3:01:21 PM GMT+5:30",
@@ -161,11 +147,32 @@ export default function CompanyReviews() {
 
       setReviews(displayableReviews);
       setLoading(false);
-    } catch (err) {
+    } catch {
       setError("Failed to fetch reviews. Please try again later.");
       setLoading(false);
     }
   };
+
+  // localStorage is read here rather than in a lazy useState initialiser
+  // because it does not exist on the server: seeding state from it during
+  // render would produce markup that disagrees with the server's and break
+  // hydration. Setting state from a mount effect is the correct pattern for a
+  // browser-only value, so the cascading-render rule is knowingly accepted.
+  /* eslint-disable react-hooks/set-state-in-effect -- see note above: a
+     browser-only value has to be read after mount, so the state update is
+     unavoidable here. */
+  useEffect(() => {
+    // Check if the current company is Renewalytics (id: 2)
+    const companyId = localStorage.getItem("selectedCompanyId");
+    if (companyId === "2") {
+      setShouldDisplay(true);
+      fetchReviews();
+    } else {
+      setLoading(false);
+    }
+  }, []);
+  /* eslint-enable react-hooks/set-state-in-effect */
+
 
   // Don't render anything if not Renewalytics
   if (!shouldDisplay) {
@@ -204,16 +211,7 @@ export default function CompanyReviews() {
   };
 
   if (loading) {
-    return (
-      <div className="container-custom section">
-        <div className="flex items-center justify-center min-h-100">
-          <div className="text-center space-y-4">
-            <div className="w-16 h-16 border-4 border-primary/30 border-t-primary rounded-full animate-spin mx-auto"></div>
-            <p className="text-lg font-semibold text-muted-foreground">Loading reviews...</p>
-          </div>
-        </div>
-      </div>
-    );
+    return <ReviewsSkeleton />;
   }
 
   if (error) {
@@ -263,7 +261,7 @@ export default function CompanyReviews() {
             What My Colleagues Say
           </h2>
           <p className="text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Authentic feedback from team members I've collaborated with at Renewalytics
+            Authentic feedback from team members I’ve collaborated with at Renewalytics
           </p>
         </div>
 

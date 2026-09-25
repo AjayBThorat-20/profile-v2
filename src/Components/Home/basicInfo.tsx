@@ -10,11 +10,11 @@ import CountUp from "@/Components/UI/CountUp";
 import ScrollCue from "@/Components/UI/ScrollCue";
 import { getYearsOfExperienceLabel } from "@/lib/experience";
 
-interface BasicInfoProps {
-  theme: "light" | "dark";
-}
-
-export default function BasicInfo({ theme }: BasicInfoProps) {
+// No props: the `theme` prop this used to take was never read - every colour
+// here comes from CSS custom properties that already flip with the .dark class,
+// so the component has no need to know the mode. Passing it was what made Hero
+// subscribe to the Redux store and re-render on every theme toggle.
+export default function BasicInfo() {
   const metrics = [
     { value: "4+", label: "Production Systems" },
     { value: "500+", label: "Packages Tracked" },
@@ -133,7 +133,7 @@ export default function BasicInfo({ theme }: BasicInfoProps) {
           href="#contact"
           className="magnetic btn-secondary group flex-1 px-5 py-3 md:px-6 md:py-4 text-sm md:text-base"
         >
-          <span>Let's Connect</span>
+          <span>Let’s Connect</span>
           <FaArrowRight className="w-3 h-3 md:w-4 md:h-4 group-hover:translate-x-1 transition-transform" />
         </Link>
       </div>

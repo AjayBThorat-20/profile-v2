@@ -170,6 +170,25 @@ body {
   --input: 0 0% 88%;
   --ring: 0 0% 9%;
   --radius: 0.5rem;
+
+  /* ---- Depth system ----
+     One vanishing distance for the whole site, so every 3D surface reads as
+     belonging to the same room. Smaller = more extreme foreshortening; 1200px
+     against a ~1400px-wide layout is a long lens, which keeps verticals near
+     vertical and stops the page looking like a fisheye.
+     --depth-lift is how far an interactive surface travels toward the viewer
+     on hover, and --depth-reveal-z/-angle are where a STAGGERED CHILD starts
+     before it settles into the page plane. They are deliberately not used by
+     the section-level reveal: a transform on an observation target changes the
+     box IntersectionObserver measures, and on a section thousands of pixels
+     tall that displaced it clean out of its own trigger. Staggered children are
+     small and are driven by their ancestor's state rather than observed
+     themselves, so they are safe. */
+  --depth-perspective: 1200px;
+  --depth-reveal-z: -90px;
+  --depth-reveal-angle: 7deg;
+  --depth-lift: 26px;
+  --depth-ease: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .dark {
@@ -552,16 +571,51 @@ html {
 /* ==========================================
    SCROLL REVEAL ANIMATIONS
    ========================================== */
+/* The section-level reveal is a plain fade-and-rise, deliberately 2D.
+   It was briefly a 3D move (perspective + rotateX about the bottom edge), and
+   that broke badly on tall sections: IntersectionObserver measures the
+   TRANSFORMED box, so a 7022px section was reported as 3909px tall with its top
+   pushed down to y=3687 while hidden. The observer therefore could not see it
+   until the page had scrolled ~2500px past where the content actually sat, and
+   the reader got a screen of blank space where a section should be - the exact
+   failure the comment in useScrollReveal warns about, reintroduced from a
+   different direction.
+   Depth belongs on things with a bounded size - cards, tiles, the hero scene,
+   staggered children - not on a container thousands of pixels tall. Those keep
+   their 3D; none of them is an observation target, so none can displace itself
+   out of its own trigger. */
 .scroll-reveal {
   opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translate3d(0, 30px, 0);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.scroll-reveal.is-visible {
+.scroll-reveal.is-visible,
+/* Attribute-driven twin of .scroll-reveal, set by RevealObserver. Sections that
+   use this need no React state and so need not be client components at all -
+   see RevealObserver for why it is an attribute rather than a class. */
+[data-reveal][data-revealed] {
   opacity: 1;
-  transform: translateY(0);
+  transform: translate3d(0, 0, 0);
+}
+
+[data-reveal] {
+  opacity: 0;
+  transform: translate3d(0, 30px, 0);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Without JavaScript nothing ever sets data-revealed, which would leave every
+   section permanently invisible while still occupying its full height. The
+   content is in the HTML either way (it is server-rendered), so this makes sure
+   it is also on screen. */
+@media (scripting: none) {
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .scroll-reveal-left {
@@ -609,7 +663,6 @@ html {
    in and a matching easing back out on release.
    ========================================== */
 .magnetic {
-  will-change: transform;
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -788,6 +841,11 @@ body.custom-cursor-active [contenteditable="true"] {
   transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* Driven by the shared RevealObserver's data-revealed attribute on the heading
+   itself (RevealText sets data-reveal). Previously each word carried its own
+   data-visible prop, which meant the component had to be a client component and
+   re-render every word to flip them. */
+[data-reveal][data-revealed] .reveal-word,
 .reveal-word[data-visible="true"] {
   transform: translateY(0);
 }
@@ -994,16 +1052,20 @@ img {
    ========================================== */
 .stagger-child {
   opacity: 0;
-  transform: translateY(18px);
+  transform: perspective(var(--depth-perspective))
+             translate3d(0, 18px, -60px)
+             rotateX(var(--depth-reveal-angle));
+  transform-origin: 50% 100%;
   transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
               transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   transition-delay: calc(var(--stagger-i, 0) * var(--stagger-step, 70ms));
 }
 
 .is-visible .stagger-child,
+[data-revealed] .stagger-child,
 .stagger-child.is-visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: perspective(var(--depth-perspective)) translate3d(0, 0, 0) rotateX(0deg);
 }
 
 /* ==========================================
@@ -1146,4 +1208,298 @@ html:active-view-transition .page-transition {
    the ones that reload the document, where nothing else could. */
 @view-transition {
   navigation: auto;
+}
+
+/* ==========================================
+   3D STAGE SYSTEM
+
+   Two distinct mechanisms, used for different
+   jobs - mixing them up is what makes CSS 3D
+   look broken:
+
+   1. `transform: perspective(...)` inside an
+      element's own transform list. Self-
+      contained: the element is its own scene.
+      Used by .scroll-reveal and .surface-3d,
+      which have to work anywhere without a
+      parent opting in.
+
+   2. `perspective` as a PROPERTY on a .stage,
+      with `transform-style: preserve-3d` on
+      the children. This is what puts several
+      elements in ONE shared scene, so they
+      share a vanishing point and their Z
+      values are comparable. Used by the hero,
+      where the portrait, its frame and the
+      headline must read as being at genuinely
+      different distances.
+
+   A .stage must never contain position:fixed
+   descendants: any ancestor with a transform
+   or perspective becomes their containing
+   block, which would peel the navbar, chapter
+   rail, grain and cursor off the viewport. All
+   of those live in DefaultLayout, outside every
+   stage, and must stay there.
+   ========================================== */
+.stage {
+  perspective: var(--depth-perspective);
+  perspective-origin: 50% 50%;
+}
+
+/* will-change stays on the handful of elements that animate CONTINUOUSLY -
+   this scene while the pointer moves, the marquee track, the cursor, the tilt
+   card. It was removed from .magnetic, .surface-3d and .tile-3d, which each
+   match many elements at once and only animate on hover: a permanent layer per
+   element costs compositor memory all the time to save nothing, since a
+   transform transition is composited regardless. */
+.stage-3d {
+  transform-style: preserve-3d;
+  /* --px/--py are written by useScene3D as numbers in the range -1..1 (0,0 =
+     pointer at the centre). They default to 0 so the scene is square-on
+     before any pointer arrives, and on touch devices where none ever does. */
+  transform: rotateX(calc(var(--py, 0) * -1 * var(--scene-tilt, 3deg)))
+             rotateY(calc(var(--px, 0) * var(--scene-tilt, 3deg)));
+  will-change: transform;
+}
+
+/* Depth planes within a stage. Negative Z sits further away and is drawn
+   smaller by the perspective, so each layer is scaled back up by roughly the
+   amount the projection shrinks it - otherwise "adding depth" just silently
+   shrinks the artwork. scale = (perspective - z) / perspective. */
+.depth-back {
+  transform: translateZ(-120px) scale(1.1);
+}
+
+.depth-mid {
+  transform: translateZ(-50px) scale(1.042);
+}
+
+.depth-front {
+  transform: translateZ(60px) scale(0.95);
+}
+
+/* ==========================================
+   3D SURFACES
+   Interactive cards that lift toward the
+   viewer and pitch slightly, as one solid
+   object rather than a flat rectangle that
+   grew a shadow.
+   ========================================== */
+.surface-3d {
+  transform: perspective(var(--depth-perspective)) translateZ(0) rotateX(0deg);
+  transition: transform 0.45s var(--depth-ease), box-shadow 0.45s var(--depth-ease);
+}
+
+.surface-3d:hover,
+.surface-3d:focus-within,
+.group:hover .surface-3d {
+  transform: perspective(var(--depth-perspective))
+             translateZ(var(--depth-lift))
+             rotateX(1.5deg);
+  /* A neutral cast shadow, not a coloured glow - the object is lit by the
+     same flat key light as the rest of the page and is simply nearer now. */
+  box-shadow: 0 24px 50px -24px hsl(0 0% 0% / 0.28);
+}
+
+.dark .surface-3d:hover,
+.dark .surface-3d:focus-within,
+.dark .group:hover .surface-3d {
+  box-shadow: 0 24px 50px -24px hsl(0 0% 0% / 0.7);
+}
+
+/* Content raised off its own card face, so the card has real thickness when
+   it tilts instead of being a printed picture of a card. Requires the card to
+   preserve-3d, which .surface-3d-body does. */
+.surface-3d-body {
+  transform-style: preserve-3d;
+}
+
+.surface-3d-raise {
+  transform: translateZ(18px);
+}
+
+/* ==========================================
+   3D TILE
+   Skill tiles push toward the viewer rather
+   than sliding up the page. The tile keeps its
+   own perspective so the grid doesn't need to
+   become a stage (a stage on the grid would put
+   all 18 tiles in one shared scene, and the
+   ones at the edges would shear away from the
+   camera at the centre).
+   ========================================== */
+.tile-3d {
+  transform: perspective(700px) translateZ(0) rotateX(0deg);
+  transition: transform 0.35s var(--depth-ease), border-color 0.35s ease;
+}
+
+.group:hover .tile-3d {
+  transform: perspective(700px) translateZ(34px) rotateX(-6deg);
+}
+
+/* ==========================================
+   MENU OVERLAY IN 3D
+   Each line swings down into place about its
+   own top edge, like a board flipping over -
+   the flat version simply slid up 16px.
+   ========================================== */
+.menu-line-3d {
+  transform-origin: 50% 0%;
+  backface-visibility: hidden;
+}
+
+/* ==========================================
+   REDUCED MOTION
+   The global rule at the top of this file kills
+   durations, which would leave elements frozen
+   at whatever 3D pose they start in - a page of
+   permanently tilted, pushed-back blocks. These
+   reset the resting pose to flat so the content
+   simply sits in the page plane.
+   ========================================== */
+@media (prefers-reduced-motion: reduce) {
+  .scroll-reveal,
+  [data-reveal],
+  .stagger-child {
+    transform: none;
+  }
+
+  .stage-3d,
+  .surface-3d,
+  .tile-3d,
+  .surface-3d:hover,
+  .tile-3d:hover,
+  .group:hover .surface-3d,
+  .group:hover .tile-3d {
+    transform: none;
+  }
+
+  .depth-back,
+  .depth-mid,
+  .depth-front {
+    transform: none;
+  }
+}
+
+/* ==========================================
+   FLATTEN 3D ON TOUCH / SMALL SCREENS
+
+   Every perspective() and preserve-3d creates a
+   3D rendering context the compositor has to
+   maintain, and the page has one per revealing
+   section plus one per staggered child - well
+   over a hundred. On a phone that is spent for
+   nothing: the pointer-driven scenes have no
+   pointer, the hover lifts have no hover, and
+   the remaining depth is a few degrees of
+   rotation on a 390px-wide screen.
+
+   Measured: on Lighthouse's throttled mobile
+   profile the page was spending 1.6s in Style &
+   Layout with a 5.2s render delay on LCP.
+
+   The reveals keep their motion here - they just
+   do it in 2D, which is what they did before the
+   depth pass and which reads the same at this
+   size. Desktop keeps the full 3D.
+   ========================================== */
+@media (pointer: coarse), (max-width: 768px) {
+  .scroll-reveal,
+  [data-reveal] {
+    transform: translate3d(0, 30px, 0);
+  }
+
+  .scroll-reveal.is-visible,
+  [data-reveal][data-revealed] {
+    transform: translate3d(0, 0, 0);
+  }
+
+  .stagger-child {
+    transform: translate3d(0, 18px, 0);
+  }
+
+  .is-visible .stagger-child,
+  .stagger-child.is-visible {
+    transform: translate3d(0, 0, 0);
+  }
+
+  /* Drop the 3D contexts themselves, not just the poses - a flattened
+     perspective still costs the compositor a layer to maintain. */
+  .stage {
+    perspective: none;
+  }
+
+  .stage-3d {
+    transform-style: flat;
+    transform: none;
+  }
+
+  .surface-3d,
+  .tile-3d {
+    transform: none;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .depth-back,
+  .depth-mid,
+  .depth-front {
+    transform: none;
+  }
+}
+
+/* ==========================================
+   SKELETONS
+   Placeholder shapes shown while deferred or
+   fetched content is on its way. A sweep of
+   light travels across the fill rather than the
+   whole block pulsing in opacity: a pulse makes
+   a large placeholder flash as one slab, which
+   is more distracting than the wait it covers,
+   while a sweep reads as "working" and stays
+   quiet at the edge of vision.
+
+   Monochrome like everything else - the sweep is
+   a lift in lightness, not a tint.
+   ========================================== */
+@keyframes skeletonSweep {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(100%); }
+}
+
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background-color: hsl(var(--muted));
+  border-radius: var(--radius-sm);
+}
+
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(
+    90deg,
+    transparent,
+    hsl(var(--foreground) / 0.07),
+    transparent
+  );
+  animation: skeletonSweep 1.6s ease-in-out infinite;
+}
+
+/* A sweep that never arrives is worse than no sweep: the global reduced-motion
+   rule would clamp the duration to 0.01ms and strand the highlight somewhere
+   across the block. Dropping the overlay leaves a plain, calm fill. */
+@media (prefers-reduced-motion: reduce) {
+  .skeleton::after {
+    display: none;
+  }
+}
+
+/* Looping animations park themselves when scrolled out of view. RevealObserver
+   sets data-offscreen; anything marked data-pause-offscreen opts in. Applies to
+   the element's own animation, so the attribute goes on whatever is animating
+   (the marquee track, the scroll cue's runner) rather than on a wrapper. */
+[data-pause-offscreen][data-offscreen="true"] {
+  animation-play-state: paused;
 }

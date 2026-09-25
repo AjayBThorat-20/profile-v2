@@ -39,7 +39,7 @@ export default function Marquee({ items, durationSec = 48, className = "" }: Mar
 
   return (
     <div className={`marquee ${className}`}>
-      <div className="marquee-track" style={{ animationDuration: `${durationSec}s` }}>
+      <div className="marquee-track" data-pause-offscreen style={{ animationDuration: `${durationSec}s` }}>
         {row(false)}
         {row(true)}
       </div>
