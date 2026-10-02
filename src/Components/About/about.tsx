@@ -13,9 +13,10 @@ export default function About() {
   const isRevealed = useScrollReveal(sectionRef);
 
   const highlights = [
+    `${getYearsOfExperienceLabel()} years of full-stack experience, now the sole developer behind three production platforms at Mumbai Biocluster: IndiaPharmaHub, Yantra, and an internal HRMS`,
+    "Part of the Mumbai Biocluster team behind PCG 2026 (400+ delegates, 70+ speakers), gathering feedback on IndiaPharmaHub and Yantra directly from industry leaders",
     "Built and maintain DevCompass, an open-source npm CLI tracking 500+ packages for CVE and deprecation risk",
     "Shipped production systems — FNS and ExcelFlow — at Renewalytics, helping manage 3.22+ GW of renewable energy capacity across 34+ sites",
-    `${getYearsOfExperienceLabel()} years of full-stack experience across Next.js, Node.js, PostgreSQL, and MongoDB, now building at Mumbai Biocluster`,
   ];
 
   return (
@@ -37,7 +38,9 @@ export default function About() {
                       alt="Ajay Thorat - Full Stack Developer"
                       fill
                       className="object-cover grayscale"
-                      priority
+                      // Lazy, not priority: this sits a full screen below the
+                      // fold, and preloading it competed with the hero
+                      // portrait (the LCP image) for bandwidth on slow phones.
                       quality={85}
                       sizes="(max-width: 768px) 90vw, (max-width: 1024px) 50vw, 45vw"
                       onError={() => setImageError(true)}
@@ -71,7 +74,7 @@ export default function About() {
                     <p className="text-foreground/90">
                       Based in <span className="font-bold text-foreground">Mumbai, India</span>,
                       I’m a passionate full-stack developer specializing in{" "}
-                      <span className="font-semibold text-foreground">Next.js, React, Node.js, and MongoDB</span>.
+                      <span className="font-semibold text-foreground">Next.js, React, Node.js, and PostgreSQL</span>.
                     </p>
 
                     <p className="text-muted-foreground">
@@ -83,8 +86,10 @@ export default function About() {
                     </p>
 
                     <p className="text-muted-foreground">
-                      Adaptable under pressure, I thrive in collaborative environments and 
-                      innovative projects, always pushing the boundaries of what’s possible.
+                      I like working close to the people who use what I build, from
+                      renewable-energy clients at Renewalytics to the speakers and industry
+                      leaders I met at{" "}
+                      <span className="font-semibold text-foreground">PCG 2026</span>.
                     </p>
                   </div>
                 </div>

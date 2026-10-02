@@ -50,7 +50,7 @@ export default function Hero() {
         <div className="flex flex-col md:flex-row-reverse items-center justify-between w-full gap-8 md:gap-12 lg:gap-16">
 
           {/* Image Section - Better proportions */}
-          <div className="relative w-full md:w-[46%] flex items-center justify-center md:justify-end order-1 animate-fadeIn">
+          <div className="relative w-full md:w-[46%] flex items-center justify-center md:justify-end order-1 animate-riseIn">
             <div className="relative w-full max-w-75 sm:max-w-90 md:max-w-none stage">
               <div
                 ref={portraitSceneRef}
@@ -80,7 +80,11 @@ export default function Hero() {
                       alt="Ajay Thorat - Full Stack Developer"
                       fill
                       className="object-cover object-center grayscale"
-                      priority
+                      // The hero portrait is the page's LCP element. Next 16
+                      // deprecates `priority`; its guidance for the LCP image
+                      // is loading="eager" + fetchPriority="high" (and no
+                      // `preload` alongside `loading`, which it also set).
+                      fetchPriority="high"
                       quality={85}
                       sizes="(max-width: 640px) 300px, (max-width: 768px) 360px, (max-width: 1024px) 420px, 460px"
                       loading="eager"
@@ -98,7 +102,10 @@ export default function Hero() {
           </div>
 
           {/* Info Section - Better width distribution */}
-          <div className="md:w-[58%] w-full animate-fadeIn order-2" style={{ animationDelay: '120ms' }}>
+          {/* No entrance of its own: every row inside BasicInfo already has
+              one, and a fade here as well stacked a second opacity ramp on
+              all of them (and hid the headline from the LCP measurement). */}
+          <div className="md:w-[58%] w-full order-2">
             <BasicInfo />
           </div>
         </div>

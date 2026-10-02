@@ -1,6 +1,6 @@
 # Ajay Thorat
 
-> Ajay Bhimrao Thorat is a Full Stack Developer based in Mumbai, India, specializing in Next.js, React, Node.js, and MongoDB/PostgreSQL. He builds production-ready, scalable web applications and is currently available for freelance and full-time opportunities.
+> Ajay Bhimrao Thorat is a Full Stack Developer based in Mumbai, India, specializing in Next.js, React, TypeScript, Node.js, and PostgreSQL. He builds production-ready, scalable web applications and currently works as a Junior Full Stack Developer at ICT Mumbai Research Foundation (Mumbai Biocluster).
 
 ## Profile
 
@@ -8,13 +8,13 @@
 - Role: Full Stack Developer (Next.js / MERN Stack)
 - Location: Mumbai, Maharashtra, India
 - Email: ajaythorat988@gmail.com
-- LinkedIn: https://www.linkedin.com/in/ajay-thorat-24b4b6215
+- LinkedIn: https://www.linkedin.com/in/ajaythorat-dev/
 - GitHub: https://github.com/AjayBThorat-20
 - Website: https://ajaythorat.com
 
 ## Core Skills
 
-Node.js, Python, Next.js, React.js, Tailwind CSS, JavaScript, TypeScript, Bootstrap, MySQL, MongoDB, PostgreSQL, Prisma ORM, Clerk Auth, GitHub, Docker, SQL Server, Postman, Pentaho, Supabase, Express.js, Redis, BullMQ, Highcharts, shadcn/ui.
+Node.js, Python, Next.js, React.js, Tailwind CSS, JavaScript, TypeScript, Bootstrap, MySQL, MongoDB, PostgreSQL, Prisma ORM, NextAuth.js, Clerk Auth, GitHub, Docker, SQL Server, Postman, Pentaho, Supabase, Express.js, Redis, BullMQ, AWS S3, AWS EC2, Razorpay, Jest, Highcharts, shadcn/ui.
 
 ## Pages
 
@@ -26,9 +26,13 @@ Node.js, Python, Next.js, React.js, Tailwind CSS, JavaScript, TypeScript, Bootst
 
 ## Experience
 
-- Junior Full Stack Developer at ICT Mumbai Research Foundation (Mumbai Biocluster) (18 May 2026 - Present) — current role, building full-stack tooling for a Section-8 nonprofit biotech research facility at ICT Mumbai using Next.js, Prisma, Tailwind CSS, PostgreSQL, MySQL, MongoDB, Redis, and BullMQ.
+- Junior Full Stack Developer at ICT Mumbai Research Foundation (Mumbai Biocluster) (18 May 2026 - Present) — current role at a Section-8 nonprofit biotech research facility at ICT Mumbai. Sole full-stack developer of three production platforms: IndiaPharmaHub (a B2B pharma and biopharma outsourcing marketplace), Yantra (a lab instrument booking and sample testing marketplace), and an internal HRMS, built with Next.js 16, TypeScript, Prisma, PostgreSQL, Redis, NextAuth v5, Razorpay, and AWS.
 - Junior Full Stack Developer at Renewalytics Services Pvt. Ltd. (18 March 2025 - 09 March 2026) — built full-stack applications for AI-powered renewable energy forecasting and grid management using Next.js, Prisma, PostgreSQL, MySQL, MongoDB, Redis, BullMQ, and Highcharts.
 - Full-Stack Developer Intern at ShypBUDDY PVT. LTD (March 2024 - September 2024) — built e-commerce shipping platform features using Next.js, Supabase, Prisma, Clerk, and Tailwind CSS.
+
+## Events
+
+- PCG 2026, the Peptides & Complex Generics Symposium (28–29 September 2026, Aurika by Lemon Tree Hotels, Mumbai), organized by Mumbai Biocluster and ICT Mumbai, with 400+ delegates and 70+ speakers. Ajay was part of the Mumbai Biocluster team running the event: he managed speaker travel and gathered feedback on IndiaPharmaHub and Yantra directly from speakers and industry leaders.
 
 ## Selected Projects
 

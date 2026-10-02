@@ -48,7 +48,8 @@ export interface SkillElement {
     { id: 20, text: "PostgreSQL" },
     { id: 21, text: "NextAuth.js" },
     { id: 22, text: "AWS S3" },
-    { id: 23, text: "Razorpay" }
+    { id: 23, text: "Razorpay" },
+    { id: 24, text: "Redis" }
   ];
   
   // 🔹 Education Data

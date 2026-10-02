@@ -36,11 +36,19 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://ajaythorat.com';
 const googleVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
 const bingVerification = process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION;
 
+// One description for search results and link previews. It names Mumbai and
+// the projects (IndiaPharmaHub, Yantra, Mumbai Biocluster, DevCompass) on
+// purpose: "Ajay Thorat" is shared by many unrelated profiles, and these are
+// the terms that tell search engines this page is this person.
+const siteDescription =
+  "Ajay Thorat is a full-stack developer in Mumbai: sole developer of IndiaPharmaHub and Yantra at Mumbai Biocluster, and maintainer of the DevCompass npm CLI.";
+const siteTitle = "Ajay Thorat | Full Stack Developer in Mumbai";
+
 export const metadata: Metadata = {
-  title: "Ajay Thorat | Full Stack Developer",
-  description: "Full-Stack Developer specializing in Next.js, Node.js, PostgreSQL, MongoDB & Redis, passionate about solving real-world problems through innovative solutions.",
-  keywords: ["Next.js", "React", "Node.js", "PostgreSQL", "MongoDB", "Redis", "Docker", "Full Stack Developer", "Web Development", "Ajay Thorat", "Software Engineer", "JavaScript", "TypeScript", "MERN Stack"],
-  authors: [{ name: "Ajay Thorat" }],
+  title: siteTitle,
+  description: siteDescription,
+  keywords: ["Ajay Thorat", "Ajay Bhimrao Thorat", "Full Stack Developer", "Full Stack Developer Mumbai", "Next.js Developer", "TypeScript", "React", "Node.js", "PostgreSQL", "Prisma", "Redis", "Mumbai Biocluster", "ICT Mumbai", "IndiaPharmaHub", "Yantra", "DevCompass", "npm CLI"],
+  authors: [{ name: "Ajay Thorat", url: siteUrl }],
   creator: "Ajay Thorat",
   publisher: "Ajay Thorat",
   metadataBase: new URL(siteUrl),
@@ -53,27 +61,21 @@ export const metadata: Metadata = {
       'msvalidate.01': bingVerification,
     } : {},
   },
+  // No `images` here: app/opengraph-image.tsx generates the preview card and,
+  // as file-based metadata, is what Next emits for og:image. X falls back to
+  // og:image when there's no twitter:image, so it gets the same card.
   openGraph: {
-    title: "Ajay Thorat | Full Stack Developer",
-    description: "Full-Stack Developer specializing in Next.js, Node.js, PostgreSQL, MongoDB & Redis, passionate about solving real-world problems through innovative solutions.",
+    title: siteTitle,
+    description: siteDescription,
     type: "website",
     locale: "en_US",
     url: siteUrl,
-    siteName: "Ajay Thorat Portfolio",
-    images: [
-      {
-        url: "/Images/Profile/Ajay3.png",
-        width: 1200,
-        height: 630,
-        alt: "Ajay Thorat - Full Stack Developer",
-      },
-    ],
+    siteName: "Ajay Thorat",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ajay Thorat | Full Stack Developer",
-    description: "Full-Stack Developer specializing in Next.js, Node.js, PostgreSQL, MongoDB & Redis, passionate about solving real-world problems through innovative solutions.",
-    images: ["/Images/Profile/Ajay3.png"],
+    title: siteTitle,
+    description: siteDescription,
   },
   robots: {
     index: true,
@@ -99,22 +101,31 @@ export default function RootLayout({
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Person",
+    // A stable id so the homepage's ProfilePage and the WebSite block below
+    // can point at this one entity instead of describing a second person.
+    "@id": `${siteUrl}/#person`,
     "name": "Ajay Thorat",
+    "alternateName": "Ajay Bhimrao Thorat",
+    "givenName": "Ajay",
+    "familyName": "Thorat",
+    "description": siteDescription,
     "url": siteUrl,
     "image": `${siteUrl}/Images/Profile/Ajay3.png`,
     "jobTitle": "Full Stack Developer",
     "worksFor": {
       "@type": "Organization",
-      "name": "Freelance"
+      "name": "ICT Mumbai Research Foundation (Mumbai Biocluster)",
+      "url": "https://www.mumbaibiocluster.org/"
     },
     "sameAs": [
-      "https://www.linkedin.com/in/ajay-thorat-24b4b6215",
-      "https://github.com/AjayBThorat-20"
+      "https://www.linkedin.com/in/ajaythorat-dev/",
+      "https://github.com/AjayBThorat-20",
+      "https://www.npmjs.com/~ajaybthorat-20"
     ],
     "knowsAbout": [
       "Next.js", "React", "Full Stack Development", "JavaScript", "TypeScript",
       "Node.js", "MongoDB", "PostgreSQL", "MySQL", "Prisma ORM", "Tailwind CSS", "Express.js",
-      "Docker", "Redis", "RESTful APIs"
+      "Docker", "Redis", "BullMQ", "AWS", "Jest", "RESTful APIs"
     ],
     "alumniOf": [
       {
@@ -135,12 +146,16 @@ export default function RootLayout({
   const websiteStructuredData = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "name": "Ajay Thorat Portfolio",
+    "@id": `${siteUrl}/#website`,
+    // Google uses this as the site name shown above the result; the person's
+    // name is what people search for, so it leads, with the old name kept
+    // as an alternate.
+    "name": "Ajay Thorat",
+    "alternateName": ["Ajay Thorat Portfolio", "ajaythorat.com"],
     "url": siteUrl,
-    "author": {
-      "@type": "Person",
-      "name": "Ajay Thorat"
-    }
+    "inLanguage": "en",
+    "author": { "@id": `${siteUrl}/#person` },
+    "publisher": { "@id": `${siteUrl}/#person` }
   };
 
   return (

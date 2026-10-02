@@ -55,11 +55,18 @@
      of a quick linear-ish snap. Durations bumped alongside it (0.22s
      read as instant at this easing) so the deceleration is actually
      visible. */
-  --animate-fadeIn: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  --animate-fadeInScale: fadeInScale 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  --animate-slideInLeft: slideInLeft 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  --animate-slideInRight: slideInRight 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  --animate-slideInUp: slideInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-fadeIn: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-fadeInScale: fadeInScale 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-slideInLeft: slideInLeft 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-slideInRight: slideInRight 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-slideInUp: slideInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-riseIn: riseIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  /* `both`, not `forwards`: with only forwards fill, an element with an
+     animation-delay renders at its normal, fully visible style until the
+     delay ends - then drops to the 0% keyframe and fades back in. Every
+     staggered hero row (chips, stats, CTAs) flashed on for ~450ms and
+     blinked out before its entrance on each page load. `both` holds the
+     0% keyframe through the delay too. */
 }
 
 /* --font-fraunces/--font-sora/--font-geist-mono (from next/font) are
@@ -71,6 +78,13 @@
 body {
   --heading-typeface: var(--font-fraunces), Georgia, "Times New Roman", serif;
   --body-typeface: var(--font-sora), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  /* Same reason, for the hand-written rules (.eyebrow, .stat-figure-value,
+     the cursor label). They used var(--font-mono), but the @theme block is
+     `inline`, which bakes the stack into Tailwind's font-mono utility and
+     never defines --font-mono at runtime - so those rules resolved to
+     nothing and inherited Sora, and the eyebrows and stat figures that are
+     meant to be set in Geist Mono never were. */
+  --mono-typeface: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
 @keyframes fadeIn {
@@ -89,9 +103,22 @@ body {
   0% { opacity: 0; transform: translateX(30px); }
   100% { opacity: 1; transform: translateX(0); }
 }
+/* Transform-only, no opacity: these are the hero headline lines, each
+   inside an overflow-hidden mask, so the rise from behind the mask is the
+   whole reveal. Starting them at opacity 0 also made Chrome skip them as
+   Largest Contentful Paint candidates (content painted invisible is never
+   counted), so LCP fell through to the tiny REC timer that only appears
+   after hydration - 6.7s on a mid-range phone instead of the headline's
+   first paint. */
 @keyframes slideInUp {
-  0% { opacity: 0; transform: translateY(30px); }
-  100% { opacity: 1; transform: translateY(0); }
+  0% { transform: translateY(30px); }
+  100% { transform: translateY(0); }
+}
+/* Same idea for the hero portrait: a short rise with no fade, so the
+   page's largest image is visible - and measurable - from its first paint. */
+@keyframes riseIn {
+  0% { transform: translateY(20px); }
+  100% { transform: translateY(0); }
 }
 @keyframes recPulse {
   0%, 100% { opacity: 1; }
@@ -463,7 +490,7 @@ html {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  font-family: var(--font-mono);
+  font-family: var(--mono-typeface);
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.08em;
@@ -501,7 +528,7 @@ html {
   border-left: 2px solid hsl(var(--border));
 }
 .stat-figure-value {
-  font-family: var(--font-mono);
+  font-family: var(--mono-typeface);
   font-weight: 700;
   line-height: 1;
 }
@@ -744,7 +771,7 @@ html {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: var(--font-mono);
+  font-family: var(--mono-typeface);
   font-size: 0.65rem;
   font-weight: 700;
   letter-spacing: 0.05em;
@@ -882,6 +909,11 @@ img {
   *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
+    /* Delays too: with entrance animations now filling `both`, a delayed
+       element sits at its hidden 0% keyframe until the delay ends, which
+       would keep reduced-motion visitors waiting up to ~0.4s for content
+       that has no motion to wait for. */
+    animation-delay: 0ms !important;
     transition-duration: 0.01ms !important;
   }
 }
@@ -1034,10 +1066,23 @@ img {
 }
 
 .chapter-link:hover .chapter-label,
-.chapter-link:focus-visible .chapter-label,
-.chapter-link[aria-current="true"] .chapter-label {
+.chapter-link:focus-visible .chapter-label {
   max-width: 8rem;
   opacity: 1;
+}
+
+/* The current section's label only stays open once the left gutter can hold
+   it. The rail needs ~11.5rem ("04 Experience" plus tick and offset), but the
+   container's gutter is just its 4rem padding until the viewport passes 80rem,
+   so on laptop widths an always-open label sat on top of the section content
+   (the About photo, the first skill tile). Below this width the long solid
+   tick still marks the current section, and hover/focus still opens the
+   label. */
+@media (min-width: 100rem) {
+  .chapter-link[aria-current="true"] .chapter-label {
+    max-width: 8rem;
+    opacity: 1;
+  }
 }
 
 /* ==========================================

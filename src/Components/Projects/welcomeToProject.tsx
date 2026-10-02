@@ -1,6 +1,7 @@
 // Server component: static copy plus SectionIntro, neither of which needs the client.
 import React from "react";
 import SectionIntro from "@/Components/UI/SectionIntro";
+import { projectsData } from "@/constants/project";
 
 export default function WelcomeToProject() {
   return (
@@ -9,13 +10,17 @@ export default function WelcomeToProject() {
         <SectionIntro
           intro={
             <>
-              Four production projects and one open-source npm package I actively maintain —{" "}
-              <span className="font-bold text-foreground">DevCompass</span>, a dependency-health CLI
-              with real-time CVE scanning and AI-assisted fixes.
+              {projectsData.length} projects, including{" "}
+              <span className="font-bold text-foreground">DevCompass</span>, the open-source
+              dependency-health CLI I actively maintain, with real-time CVE scanning and
+              AI-assisted fixes.
             </>
           }
           facts={[
-            { value: "4", label: "Live projects" },
+            // Counted from projectsData. Was "4 Live projects", but the other
+            // three link to GitHub repos, not live deployments, and the intro
+            // read as four projects *plus* DevCompass when it is one of them.
+            { value: String(projectsData.length), label: "Projects" },
             { value: "1", label: "Open-source npm package" },
             { value: "500+", label: "Packages tracked by DevCompass" },
             { value: "4", label: "LLM providers integrated" },

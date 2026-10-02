@@ -94,10 +94,13 @@ export default function ExperienceDetails({ experience }: { experience: Experien
 
               {/* Tech Stack */}
               <div className="space-y-3">
-                <h3 className="text-sm font-bold text-foreground flex items-center gap-2">
+                {/* h2, not h3: it sits directly under the page's h1, and
+                    skipping a level breaks the outline screen readers and
+                    crawlers navigate by. */}
+                <h2 className="text-sm font-bold text-foreground flex items-center gap-2">
                   <div className="w-1.5 h-1.5 bg-primary rounded-full"></div>
                   Technology Stack
-                </h3>
+                </h2>
                 <div className="flex flex-wrap gap-2">
                   {experience.techStack.split(",").map((tech) => (
                     <span
@@ -116,6 +119,14 @@ export default function ExperienceDetails({ experience }: { experience: Experien
           <div ref={detailsRef} className={`space-y-8 scroll-reveal ${isDetailsRevealed ? "is-visible" : ""}`}>
             {experience.details.map((detail, index) => {
               const accent = getAccent(index);
+              const sectionTitle = detail.title.charAt(0).toUpperCase() + detail.title.slice(1);
+              // The 288-384px image banner only appears when it shows something
+              // new. Every Mumbai Biocluster section uses the same logo, so the
+              // page used to repeat one identical banner seven times - most of
+              // its length was the same picture. A repeat gets a compact title
+              // row instead; roles with a distinct image per section are
+              // unaffected.
+              const showImage = index === 0 || detail.picture !== experience.details[index - 1].picture;
 
               return (
                 <div
@@ -125,34 +136,49 @@ export default function ExperienceDetails({ experience }: { experience: Experien
                 >
                   <div className={`h-1 ${accent.bg}`}></div>
 
-                  {/* Image Section */}
-                  <div className="relative w-full h-72 md:h-96 overflow-hidden">
-                    <Image
-                      src={detail.picture}
-                      alt={`${experience.name} - ${detail.title} - Ajay Thorat`}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 768px) 100vw, 80vw"
-                      priority={index === 0}
-                      quality={85}
-                    />
-
-                    {/* Gradient overlay */}
-                    <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent"></div>
-
-                    {/* Badge positioned on image */}
-                    <div className={`absolute top-6 left-6 inline-flex items-center gap-2 px-4 py-2 bg-card/90 backdrop-blur-sm rounded-full text-sm font-bold shadow-lg border-2 ${accent.border}`}>
-                      <span className={`w-2 h-2 ${accent.bg} rounded-full animate-pulse`}></span>
-                      Section {index + 1} of {experience.details.length}
-                    </div>
-
-                    {/* Title overlay at bottom */}
-                    <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
-                      <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-white drop-shadow-lg">
-                        {detail.title.charAt(0).toUpperCase() + detail.title.slice(1)}
+                  {!showImage && (
+                    <div className="flex flex-wrap items-center justify-between gap-3 px-6 md:px-8 pt-6 md:pt-8">
+                      <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-foreground">
+                        {sectionTitle}
                       </h2>
+                      <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold border ${accent.border}`}>
+                        <span className={`w-2 h-2 ${accent.bg} rounded-full`}></span>
+                        Section {index + 1} of {experience.details.length}
+                      </div>
                     </div>
-                  </div>
+                  )}
+
+                  {/* Image Section */}
+                  {showImage && (
+                    <div className="relative w-full h-72 md:h-96 overflow-hidden">
+                      <Image
+                        src={detail.picture}
+                        alt={`${experience.name} - ${detail.title} - Ajay Thorat`}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 80vw"
+                        loading={index === 0 ? "eager" : "lazy"}
+                        fetchPriority={index === 0 ? "high" : "auto"}
+                        quality={85}
+                      />
+
+                      {/* Gradient overlay */}
+                      <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent"></div>
+
+                      {/* Badge positioned on image */}
+                      <div className={`absolute top-6 left-6 inline-flex items-center gap-2 px-4 py-2 bg-card/90 backdrop-blur-sm rounded-full text-sm font-bold shadow-lg border-2 ${accent.border}`}>
+                        <span className={`w-2 h-2 ${accent.bg} rounded-full animate-pulse`}></span>
+                        Section {index + 1} of {experience.details.length}
+                      </div>
+
+                      {/* Title overlay at bottom */}
+                      <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
+                        <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-white drop-shadow-lg">
+                          {sectionTitle}
+                        </h2>
+                      </div>
+                    </div>
+                  )}
 
                   {/* Content Section */}
                   <div className="p-6 md:p-8 space-y-6">

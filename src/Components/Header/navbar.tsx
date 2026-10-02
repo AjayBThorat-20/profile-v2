@@ -3,11 +3,11 @@
 // sidebar drawer.
 "use client";
 
-import React from "react";
-import Link from "next/link";
+import React, { useEffect } from "react";
 import { useAppSelector, useAppDispatch } from "@/store/hooks";
-import { toggleMenu } from "@/store/slices/themeSlice";
+import { toggleMenu, setScrolled } from "@/store/slices/themeSlice";
 import ThemeToggleButton from "../Buttons/ThemeToggleButton";
+import SectionLink from "@/Components/Links/SectionLink";
 import MenuOverlay from "./MenuOverlay";
 
 // Drawn in CSS rather than loaded from /Flag/flag.gif. That file is a 47.7 KB
@@ -46,7 +46,25 @@ export default function Navbar() {
     dispatch(toggleMenu());
   };
 
-
+  // Drives the `scrolled` flag the two corner chips style themselves from.
+  // The old navbar's scroll listener set it and was deleted in the
+  // single-page rebuild, which left the flag stuck at false: the chips never
+  // picked up their opaque .glass fill, so page text slid visibly through
+  // them on every scroll. Dispatches only when the boolean actually flips,
+  // not on every scroll event.
+  useEffect(() => {
+    let last: boolean | null = null;
+    const onScroll = () => {
+      const next = window.scrollY > 20;
+      if (next !== last) {
+        last = next;
+        dispatch(setScrolled(next));
+      }
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [dispatch]);
 
   return (
     <>
@@ -59,13 +77,15 @@ export default function Navbar() {
           scrolled || isMenuOpen ? "glass shadow-sm" : ""
         }`}
       >
-        <Link
+        {/* SectionLink: a bare next/link to /#home did nothing when the URL
+            was already /#home. */}
+        <SectionLink
           href="/#home"
           onClick={() => isMenuOpen && dispatch(toggleMenu())}
           className="inline-flex items-center min-h-11 font-mono text-lg md:text-xl font-bold tracking-tight border-2 border-primary/30 hover:border-primary rounded-md px-2 text-foreground transition-all duration-200 active:scale-95"
         >
           <span className="text-primary">&lt;</span>AT<span className="text-primary">/&gt;</span>
-        </Link>
+        </SectionLink>
         <FlagIcon size={22} />
       </div>
 

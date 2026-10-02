@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import SectionLink from "@/Components/Links/SectionLink";
 import { FaHeart, FaGithub, FaLinkedin, FaArrowUp } from "react-icons/fa";
 import { IoMdMail } from "react-icons/io";
 import { getAccent } from "@/Components/UI/accentColor";
@@ -15,7 +16,7 @@ export default function Footer() {
   const socialLinks = [
     {
       name: "LinkedIn",
-      href: "https://www.linkedin.com/in/ajay-thorat-24b4b6215",
+      href: "https://www.linkedin.com/in/ajaythorat-dev/",
       icon: FaLinkedin,
     },
     {
@@ -50,35 +51,38 @@ export default function Footer() {
               <span className="font-mono text-sm font-bold border-2 border-primary/30 rounded-md px-2 py-0.5 text-foreground">
                 <span className="text-primary">&lt;</span>AT<span className="text-primary">/&gt;</span>
               </span>
-              <h3 className="text-xl font-black text-foreground">
+              <h2 className="text-xl font-black text-foreground">
                 Ajay Thorat
-              </h3>
+              </h2>
             </div>
             <p className="text-sm text-muted-foreground leading-relaxed max-w-xs">
-              Full Stack Developer specializing in Next.js, React, Node.js & MongoDB.
+              Full Stack Developer specializing in Next.js, React, Node.js & PostgreSQL.
               Building scalable web applications that make a difference.
             </p>
           </div>
 
           {/* Center: Quick Links */}
           <div className="space-y-4">
-            <h4 className="eyebrow">Quick Links</h4>
+            <h3 className="eyebrow">Quick Links</h3>
+            {/* SectionLink, not a bare next/link: with the address bar already
+                at /#about, a plain Link to /#about did nothing when clicked
+                (see SectionLink). */}
             <nav className="flex flex-col space-y-2">
               {navLinks.map((link) => (
-                <Link
+                <SectionLink
                   key={link.name}
                   href={link.href}
                   className="link-underline text-sm text-muted-foreground hover:text-primary transition-colors duration-150 w-fit"
                 >
                   {link.name}
-                </Link>
+                </SectionLink>
               ))}
             </nav>
           </div>
 
           {/* Right: Connect */}
           <div className="space-y-4">
-            <h4 className="eyebrow">Connect</h4>
+            <h3 className="eyebrow">Connect</h3>
             <div className="flex flex-wrap gap-3">
               {socialLinks.map((social, index) => (
                 <Link
@@ -115,9 +119,13 @@ export default function Footer() {
           </p>
           
           <div className="flex items-center gap-6">
-            <p className="text-sm text-muted-foreground flex items-center gap-2">
+            {/* Plain inline text, not a flex row: as flex items, "Made with"
+                and "using Next.js & TypeScript" each wrapped inside their own
+                column on a phone, stacking "Made" over "with" beside the
+                heart. Inline, the sentence wraps like a sentence. */}
+            <p className="text-sm text-muted-foreground">
               Made with{" "}
-              <FaHeart className="w-4 h-4 text-foreground animate-pulse" />{" "}
+              <FaHeart className="inline-block w-4 h-4 -mt-0.5 align-middle text-foreground animate-pulse" />{" "}
               using Next.js & TypeScript
             </p>
             

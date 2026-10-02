@@ -13,17 +13,23 @@ import {
   FaBootstrap,
   FaCode,
   FaServer,
+  FaAws,
+  FaKey,
 } from "react-icons/fa";
-import { 
-  SiNextdotjs, 
-  SiTailwindcss, 
-  SiJavascript, 
-  SiMysql, 
-  SiMongodb, 
+import {
+  SiNextdotjs,
+  SiTailwindcss,
+  SiJavascript,
+  SiMysql,
+  SiMongodb,
   SiPrisma,
   SiExpress,
   SiPostman,
-  SiSupabase
+  SiSupabase,
+  SiTypescript,
+  SiPostgresql,
+  SiRedis,
+  SiRazorpay
 } from "react-icons/si";
 import { IconType } from "react-icons";
 import { getAccent } from "@/Components/UI/accentColor";
@@ -56,7 +62,13 @@ export default function Skills() {
       "Postman": SiPostman,
       "Pentaho": FaServer,
       "Supabase": SiSupabase,
-      "Express.js": SiExpress
+      "Express.js": SiExpress,
+      "TypeScript": SiTypescript,
+      "PostgreSQL": SiPostgresql,
+      "Redis": SiRedis,
+      "NextAuth.js": FaKey,
+      "AWS S3": FaAws,
+      "Razorpay": SiRazorpay
     };
     
     return iconMap[skillText] || FaCode;
@@ -65,10 +77,10 @@ export default function Skills() {
   // Get category (and a stable accent index, cycled through the brand
   // palette instead of a category-specific rainbow color) for a skill
   const getSkillDetails = (skillText: string): { category: string; accentIndex: number } => {
-    const languages = ["Node.js", "Python", "JavaScript"];
+    const languages = ["Node.js", "Python", "JavaScript", "TypeScript"];
     const frameworks = ["Next.js", "React.js", "Express.js", "Bootstrap", "Tailwind CSS"];
-    const databases = ["MySQL", "MongoDB", "SQL Server", "Prisma ORM", "Supabase"];
-    const tools = ["GitHub", "Docker", "Postman", "Pentaho", "Clerk Auth"];
+    const databases = ["MySQL", "MongoDB", "SQL Server", "Prisma ORM", "Supabase", "PostgreSQL", "Redis"];
+    const tools = ["GitHub", "Docker", "Postman", "Pentaho", "Clerk Auth", "NextAuth.js", "AWS S3", "Razorpay"];
 
     if (languages.includes(skillText)) return { category: "Languages", accentIndex: 0 };
     if (frameworks.includes(skillText)) return { category: "Frameworks", accentIndex: 1 };
@@ -132,11 +144,15 @@ export default function Skills() {
         </div>
 
         {/* Skills Grid */}
-        {/* --stagger-step is set low here: 18 tiles at the default 70ms would
-            take over a second to finish dealing out, which stops reading as a
-            reveal and starts reading as a slow page. */}
+        {/* --stagger-step is set low here: 24 tiles at the default 70ms would
+            take well over a second to finish dealing out, which stops reading
+            as a reveal and starts reading as a slow page.
+            Three columns from the smallest screen up, not two: at two, the 24
+            tiles stacked into twelve rows - over two full phone screens of
+            scrolling for one list. Three halves that cost to eight rows, and
+            the tighter mobile padding keeps every label on at most two lines. */}
         <div
-          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4"
+          className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4"
           style={{ "--stagger-step": "35ms" } as React.CSSProperties}
         >
           {filteredSkills.map((skill, skillIdx) => {
@@ -169,7 +185,7 @@ export default function Skills() {
                     same property - so the 2D lift is gone rather than being
                     overridden. */}
                 <div
-                  className={`relative overflow-hidden border ${accent.border} rounded-lg p-4 sm:p-6 tile-3d group-hover:border-foreground/40`}
+                  className={`relative overflow-hidden border ${accent.border} rounded-lg p-3 sm:p-6 tile-3d group-hover:border-foreground/40`}
                 >
                   {/* Content */}
                   <div className="relative z-10 flex flex-col items-center justify-center space-y-3 min-h-25">
@@ -204,7 +220,7 @@ export default function Skills() {
             {[
               { category: "Frontend Development", skills: ["Next.js", "React.js", "Tailwind CSS"], level: 90 },
               { category: "Backend Development", skills: ["Node.js", "Express.js", "Python"], level: 85 },
-              { category: "Database Management", skills: ["MongoDB", "MySQL", "Prisma"], level: 88 },
+              { category: "Database Management", skills: ["PostgreSQL", "MongoDB", "Prisma"], level: 88 },
               { category: "DevOps & Tools", skills: ["Docker", "GitHub", "Postman"], level: 80 },
             ].map((item, index) => {
               const accent = getAccent(index);

@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import React from "react";
 import { FaArrowRight, FaDownload } from "react-icons/fa";
 import { getAccent } from "@/Components/UI/accentColor";
@@ -8,7 +7,8 @@ import LiveTimecode from "@/Components/UI/LiveTimecode";
 import Badge from "@/Components/UI/Badge";
 import CountUp from "@/Components/UI/CountUp";
 import ScrollCue from "@/Components/UI/ScrollCue";
-import { getYearsOfExperienceLabel } from "@/lib/experience";
+import SectionLink from "@/Components/Links/SectionLink";
+import { getProductionSystemsCount, getYearsOfExperienceLabel } from "@/lib/experience";
 
 // No props: the `theme` prop this used to take was never read - every colour
 // here comes from CSS custom properties that already flip with the .dark class,
@@ -16,7 +16,7 @@ import { getYearsOfExperienceLabel } from "@/lib/experience";
 // subscribe to the Redux store and re-render on every theme toggle.
 export default function BasicInfo() {
   const metrics = [
-    { value: "4+", label: "Production Systems" },
+    { value: String(getProductionSystemsCount()), label: "Production Systems" },
     { value: "500+", label: "Packages Tracked" },
     { value: getYearsOfExperienceLabel(), label: "Years Experience" },
   ];
@@ -55,6 +55,22 @@ export default function BasicInfo() {
           className="font-black tracking-tight leading-[0.95]"
           style={{ fontSize: "clamp(1.875rem, 0.95rem + 5.9vw, 6rem)" }}
         >
+          {/* The name, as a kicker over the display line. The hero never said
+              whose site this was - the logo is just "<AT/>" and the name first
+              appeared in About, a full screen further down - so a visitor
+              arriving from a LinkedIn post had to scroll to confirm it. It
+              lives inside the h1 so the page's one top-level heading carries
+              the name for search engines as well. */}
+          <div className="overflow-hidden pb-4 md:pb-6">
+            <span
+              className="flex items-center gap-3 font-mono text-sm md:text-base font-semibold uppercase tracking-[0.2em] leading-none text-foreground animate-slideInUp"
+              style={{ animationDelay: '0ms' }}
+            >
+              <span className="inline-block w-8 h-px bg-foreground" aria-hidden="true" />
+              Ajay Thorat
+              <span className="sr-only">: </span>
+            </span>
+          </div>
           <div className="overflow-hidden">
             <span className="block animate-slideInUp" style={{ animationDelay: '0ms' }}>
               <span className="text-foreground">Building</span>
@@ -129,13 +145,15 @@ export default function BasicInfo() {
           <FaArrowRight className="w-3 h-3 md:w-4 md:h-4 group-hover:translate-x-1 transition-transform" />
         </a>
 
-        <Link
+        {/* SectionLink: a bare next/link to "#contact" did nothing on a
+            second click once the URL already ended in #contact. */}
+        <SectionLink
           href="#contact"
           className="magnetic btn-secondary group flex-1 px-5 py-3 md:px-6 md:py-4 text-sm md:text-base"
         >
           <span>Let’s Connect</span>
           <FaArrowRight className="w-3 h-3 md:w-4 md:h-4 group-hover:translate-x-1 transition-transform" />
-        </Link>
+        </SectionLink>
       </div>
 
       {/* Scroll cue. Desktop only: on a phone the hero already ends mid-screen

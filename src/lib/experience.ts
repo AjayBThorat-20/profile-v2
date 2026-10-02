@@ -20,7 +20,23 @@ export function getYearsOfExperience(): number {
   return totalWorkedMs / MS_PER_YEAR;
 }
 
-// Formatted for display, e.g. "2.5+".
+// Production systems shipped, for the hero stat - counted from the data
+// rather than typed in, since the hand-written "4+" sat unchanged while the
+// real count doubled. Each "project N: ..." section of a role is one system
+// (IndiaPharmaHub, Yantra, the HRMS, FNS, ExcelFlow, RealSync); a role with
+// no per-project sections shipped one (the ShypBUDDY platform); plus
+// DevCompass, the published npm CLI.
+export function getProductionSystemsCount(): number {
+  const fromRoles = experienceData.reduce((sum, exp) => {
+    const projects = exp.details.filter((detail) => detail.title.startsWith("project")).length;
+    return sum + Math.max(projects, 1);
+  }, 0);
+  return fromRoles + 1;
+}
+
+// Formatted for display, e.g. "2.5+". Floored, not rounded: "+" reads as
+// "at least", so 1.85 years must show as "1.8+" - toFixed(1) would round it
+// up to "1.9+" and overstate the figure.
 export function getYearsOfExperienceLabel(): string {
-  return `${getYearsOfExperience().toFixed(1)}+`;
+  return `${(Math.floor(getYearsOfExperience() * 10) / 10).toFixed(1)}+`;
 }

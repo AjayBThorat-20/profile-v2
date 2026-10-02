@@ -8,6 +8,7 @@ import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { getAccent } from "@/Components/UI/accentColor";
 import SectionEyebrow from "@/Components/UI/SectionEyebrow";
 import TiltCard from "@/Components/UI/TiltCard";
+import ClampText from "@/Components/UI/ClampText";
 
 export default function Projects() {
   const [currentImageIndexes, setCurrentImageIndexes] = useState<number[]>(
@@ -107,7 +108,6 @@ export default function Projects() {
                       src={project.pictures[currentImageIndexes[activityIdx]].picture}
                       fill
                       sizes="(min-width: 1280px) 1152px, (min-width: 1024px) calc(100vw - 8rem), (min-width: 640px) calc(100vw - 5rem), calc(100vw - 3rem)"
-                      priority={activityIdx === 0}
                     />
                     <div className="absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent pointer-events-none"></div>
                     {/* Solid panel that wipes away left-to-right on mount,
@@ -180,9 +180,10 @@ export default function Projects() {
                     </div>
 
                     {/* Description */}
-                    <p className="text-muted-foreground text-base leading-relaxed max-w-3xl">
-                      {project.discription}
-                    </p>
+                    <ClampText
+                      text={project.discription}
+                      className="text-muted-foreground text-base leading-relaxed max-w-3xl"
+                    />
 
                     {/* Tech Stack */}
                     <div>

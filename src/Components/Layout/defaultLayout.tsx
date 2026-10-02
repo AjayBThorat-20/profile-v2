@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../Header/navbar";
 import { useAppSelector } from "@/store/hooks";
 import Footer from "../Footer/footer";
@@ -15,6 +15,20 @@ import { useMagnetic } from "@/hooks/useMagnetic";
 const DefaultLayout = ({ children }: { children: React.ReactNode }) => {
   const theme = useAppSelector((state) => state.theme.mode);
   const pathname = usePathname();
+
+  // The route-change settle (.page-transition) should only play on an actual
+  // client-side navigation, not on the first load. On the first load it
+  // started the entire page at opacity 0, so nothing in <main> counted as
+  // Largest Contentful Paint (Chrome skips content painted invisible).
+  // Tracked by comparing against the previous pathname during render - the
+  // React-recommended way to adjust state when a value changes - so the
+  // server and the first client render agree (no class on either).
+  const [prevPathname, setPrevPathname] = useState(pathname);
+  const [hasNavigated, setHasNavigated] = useState(false);
+  if (pathname !== prevPathname) {
+    setPrevPathname(pathname);
+    setHasNavigated(true);
+  }
 
   // Keep the document class in sync whenever the user toggles theme.
   // (Initial load is already handled by the blocking script in layout.tsx.)
@@ -39,7 +53,10 @@ const DefaultLayout = ({ children }: { children: React.ReactNode }) => {
           over the whole frame, like emulsion, not a background behind the
           content. The custom cursor stays above it at z-200. */}
       <FilmGrain />
-      <ChapterRail />
+      {/* Home only: the rail tracks the homepage's five sections, and no
+          other route has those ids, so elsewhere it sat stuck on "01 Home"
+          with its label over the page content. */}
+      {pathname === "/" && <ChapterRail />}
       {/* Drives every [data-reveal] element; renders nothing. */}
       <RevealObserver />
 
@@ -52,7 +69,7 @@ const DefaultLayout = ({ children }: { children: React.ReactNode }) => {
             deliberately distinct from each page's own translateY-based
             content stagger, so the two don't visually compound - it softens
             the route-change snap without delaying each page's own reveal. */}
-        <div key={pathname} className="w-full min-h-full page-transition">
+        <div key={pathname} className={`w-full min-h-full ${hasNavigated ? "page-transition" : ""}`}>
           {children}
         </div>
       </main>

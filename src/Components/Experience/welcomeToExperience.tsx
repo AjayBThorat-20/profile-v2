@@ -2,6 +2,7 @@
 import React from "react";
 import SectionIntro from "@/Components/UI/SectionIntro";
 import { getYearsOfExperienceLabel } from "@/lib/experience";
+import { experienceData } from "@/constants/experience";
 
 export default function WelcomeToExperience() {
   return (
@@ -16,7 +17,9 @@ export default function WelcomeToExperience() {
             </>
           }
           facts={[
-            { value: "2", label: "Companies" },
+            // Counted from experienceData, not typed in, so it can't drift
+            // from the roles actually listed (it once read "2" beside three).
+            { value: String(experienceData.length), label: "Companies" },
             { value: getYearsOfExperienceLabel(), label: "Years experience" },
             { value: "Present", label: "Currently at Mumbai Biocluster" },
           ]}

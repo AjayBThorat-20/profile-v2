@@ -7,6 +7,13 @@ export function generateStaticParams() {
   return experienceData.map((exp) => ({ id: String(exp.id) }));
 }
 
+// Only the ids above exist. With the default (true), an unknown id like
+// /experience/details/99 was rendered on demand, and because this route has
+// a loading.tsx the 200 status was already streamed before the page called
+// notFound() - a "soft 404" that search engines flag. false makes unknown
+// ids a real 404 at the routing level, before anything renders.
+export const dynamicParams = false;
+
 type Params = { id: string };
 
 function findExperience(id: string) {
@@ -25,9 +32,8 @@ export async function generateMetadata({
     return { title: "Experience Details | Ajay Thorat" };
   }
 
-  const title = `${experience.title} at ${experience.name} | Ajay Thorat`;
-  const description = `Ajay Thorat's role as ${experience.title} at ${experience.name} (${experience.duration}). Tech stack: ${experience.techStack}.`;
-  const image = experience.details[0]?.picture || "/Images/Profile/Ajay3.png";
+  const title = `${experience.title} at ${experience.shortName} | Ajay Thorat`;
+  const description = experience.seoDescription;
 
   return {
     title,
@@ -35,27 +41,21 @@ export async function generateMetadata({
     alternates: {
       canonical: `/experience/details/${experience.id}`,
     },
+    // og:image comes from the sibling opengraph-image.tsx (a per-role card);
+    // the company logos used before were 500-800px wide, not the 1200x630
+    // they were declared as. X falls back to og:image for its card.
     openGraph: {
       title,
       description,
       type: "website",
       locale: "en_US",
       url: `https://ajaythorat.com/experience/details/${experience.id}`,
-      siteName: "Ajay Thorat Portfolio",
-      images: [
-        {
-          url: image,
-          width: 1200,
-          height: 630,
-          alt: `${experience.name} - ${experience.title}`,
-        },
-      ],
+      siteName: "Ajay Thorat",
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: [image],
     },
   };
 }
@@ -73,7 +73,9 @@ export default async function Page({ params }: { params: Promise<Params> }) {
     "@type": "BreadcrumbList",
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Home", item: "https://ajaythorat.com/" },
-      { "@type": "ListItem", position: 2, name: "Experience", item: "https://ajaythorat.com/experience" },
+      // The homepage section, not /experience: that path only 308-redirects
+      // here, and breadcrumb items should point at the real page.
+      { "@type": "ListItem", position: 2, name: "Experience", item: "https://ajaythorat.com/#experience" },
       {
         "@type": "ListItem",
         position: 3,

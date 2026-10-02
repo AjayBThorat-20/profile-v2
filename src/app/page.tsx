@@ -12,6 +12,22 @@ import { CurrentlyWorkingOn, Experience, WelcomeToExperience } from "@/Component
 import { Contact } from "@/Components/Contact/page";
 import { projectsData } from "@/constants/project";
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://ajaythorat.com";
+
+// Marks the homepage as a profile page about one person - the Person defined
+// once in layout.tsx, referenced by its @id rather than described again.
+const profilePageStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "@id": `${siteUrl}/#profilepage`,
+  url: siteUrl,
+  name: "Ajay Thorat | Full Stack Developer in Mumbai",
+  inLanguage: "en",
+  isPartOf: { "@id": `${siteUrl}/#website` },
+  mainEntity: { "@id": `${siteUrl}/#person` },
+  about: { "@id": `${siteUrl}/#person` },
+};
+
 const faqStructuredData = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -21,7 +37,7 @@ const faqStructuredData = {
       name: "What does Ajay Thorat specialize in?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Ajay Thorat is a full stack developer specializing in Next.js, React, Node.js, and MongoDB/PostgreSQL, with hands-on experience building scalable, production-ready web applications and managing agile teams.",
+        text: "Ajay Thorat is a full stack developer in Mumbai specializing in Next.js, React, TypeScript, Node.js, and PostgreSQL, with hands-on experience building scalable, production-ready web applications end to end and managing agile teams.",
       },
     },
     {
@@ -42,10 +58,18 @@ const faqStructuredData = {
     },
     {
       "@type": "Question",
-      name: "Is Ajay Thorat available for freelance or full-time work?",
+      name: "Where does Ajay Thorat work?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Yes, Ajay Thorat is currently available for freelance projects and full-time opportunities as a full stack developer.",
+        text: "Since May 2026, Ajay Thorat has worked as a Junior Full Stack Developer at ICT Mumbai Research Foundation (Mumbai Biocluster) in Mumbai, where he is the sole developer of three production platforms: IndiaPharmaHub, Yantra, and an internal HRMS.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What is DevCompass?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "DevCompass is an open-source npm CLI built and maintained by Ajay Thorat. It checks JavaScript projects' dependencies for known vulnerabilities, outdated and unused packages, and license conflicts, with AI-assisted fix suggestions and an interactive dependency graph. Documentation is at devcompass.ajaythorat.com.",
       },
     },
     {
@@ -83,6 +107,10 @@ const projectsListStructuredData = {
 export default function Home() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(profilePageStructuredData) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqStructuredData) }}

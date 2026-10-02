@@ -17,6 +17,11 @@ export type ExperienceItem = {
   techStack: string;
   details: ExperienceDetail[];
   detailPageUrl: string;
+  // Search-result copy for the role's /experience/details page. The full
+  // company name and tech stack ran those titles to 95 characters and the
+  // descriptions past 300, both well beyond what Google shows (~60 / ~160).
+  shortName: string;
+  seoDescription: string;
 };
 type ExperienceDetail = {
   id: number;
@@ -67,7 +72,7 @@ export type RealSyncProjectData = {
     {
       id: 1,
       description: "Maintaining DevCompass, my open-source dependency-health CLI",
-      hiddenDisc: "Hardened the remaining shell-exec call sites to execFile with argv arrays, added CodeQL and OpenSSF Scorecard scanning plus a release version-guard to CI, and shipped a migrate-syntax codemod engine with a one-command undo for auto-fix sessions — now on v4.1.8 with 50 published releases and a self-analyzed health score of 9.3/10",
+      hiddenDisc: "Hardened the remaining shell-exec call sites to execFile with argv arrays, added CodeQL and OpenSSF Scorecard scanning plus a release version-guard to CI, and shipped a migrate-syntax codemod engine with a one-command undo for auto-fix sessions — now on v4.1.8 with 50 published releases",
     },
     // {
     //   id: 3,
@@ -86,6 +91,8 @@ export type RealSyncProjectData = {
       startDate: "2026-05-18",
       endDate: null,
       companyUrl: "https://www.mumbaibiocluster.org/",
+      shortName: "Mumbai Biocluster",
+      seoDescription: "Ajay Thorat is the sole developer of IndiaPharmaHub, Yantra and an internal HRMS at Mumbai Biocluster (ICT Mumbai), built with Next.js, Prisma and PostgreSQL.",
       techStack: "Next.js 16, TypeScript, Prisma ORM (adapter-pg), PostgreSQL, NextAuth v5, Razorpay, AWS S3, AWS EC2, Bluehost VPS, Redis, BullMQ, Tailwind CSS, shadcn/ui, Zod, Jest",
       details: [
         {
@@ -206,9 +213,30 @@ export type RealSyncProjectData = {
         },
         {
           id: 6,
+          title: "event: PCG 2026 Symposium",
+          picture: "/Images/Experience/MBC/mbc.png",
+          data: {
+            overview: [
+              "The Peptides & Complex Generics Symposium (PCG 2026), organized by Mumbai Biocluster and ICT Mumbai, ran on 28–29 September 2026 at Aurika by Lemon Tree Hotels, Mumbai: 400+ delegates and 70+ speakers working through peptides, oligonucleotides, GLP-1s, and the Billion Dose Challenge.",
+              "I was part of the Mumbai Biocluster team running the event, which put me in the same room as the people IndiaPharmaHub and Yantra are built for."
+            ],
+            myRole: [
+              "Managed travel for speakers during the event.",
+              "Talked with speakers and industry leaders about IndiaPharmaHub and Yantra and asked for their views on both platforms, collecting product feedback first-hand instead of through a spec.",
+              "Built new connections across industry, academia, and the regulatory side of pharma."
+            ],
+            takeaways: [
+              "Users are not a spec document: a few minutes of honest feedback from the people a platform serves beats weeks of guessing.",
+              "In pharma, trust is the product. Nobody hands their research to a platform they don't trust, which is why verification sits at the core of IndiaPharmaHub and Yantra.",
+              "Scaling medicine to a billion doses is not only a science problem; it also needs systems that connect labs, CDMOs, startups, and industry."
+            ]
+          }
+        },
+        {
+          id: 7,
           title: "conclusion",
           picture: "/Images/Experience/MBC/mbc.png",
-          data: "Since joining Mumbai Biocluster, I've been the sole full-stack developer behind three production platforms built for ICT Mumbai Research Foundation — IndiaPharmaHub, a pharma outsourcing marketplace; Yantra, a lab-instrument-booking and sample-testing marketplace; and an internal HRMS running the organization's own attendance, payroll, and recruitment operations. Owning all three end-to-end has meant designing independent Postgres/Prisma schemas, wiring payments, storage, and verification workflows, building my own CI test tooling, driving a real frontend performance pass, and making the judgment calls that come with sole ownership — including building then deliberately reverting a redundant AI subsystem once a simpler existing flow was shown to already solve the problem. The role has deepened my experience designing multi-sided, trust-and-verification-driven marketplaces and internal line-of-business systems alike, both at production scale."
+          data: "Since joining Mumbai Biocluster, I've been the sole full-stack developer behind three production platforms built for ICT Mumbai Research Foundation — IndiaPharmaHub, a pharma outsourcing marketplace; Yantra, a lab-instrument-booking and sample-testing marketplace; and an internal HRMS running the organization's own attendance, payroll, and recruitment operations. Owning all three end-to-end has meant designing independent Postgres/Prisma schemas, wiring payments, storage, and verification workflows, building my own CI test tooling, driving a real frontend performance pass, and making the judgment calls that come with sole ownership — including building then deliberately reverting a redundant AI subsystem once a simpler existing flow was shown to already solve the problem. Outside the codebase, I was part of the team behind PCG 2026, where I heard what speakers and industry leaders need from IndiaPharmaHub and Yantra directly from them. The role has deepened my experience designing multi-sided, trust-and-verification-driven marketplaces and internal line-of-business systems alike, both at production scale."
         }
       ],
       detailPageUrl: "/details"
@@ -221,6 +249,8 @@ export type RealSyncProjectData = {
   startDate: "2025-03-18",
   endDate: "2026-03-09",
   companyUrl: "https://www.renewalytics.in/",
+  shortName: "Renewalytics",
+  seoDescription: "Ajay Thorat built FNS, ExcelFlow and RealSync at Renewalytics: renewable-energy forecasting apps managing 3.22+ GW across 34+ sites, on Next.js and PostgreSQL.",
   techStack: "Next.js, Prisma, Tailwind CSS, PostgreSQL, MySQL, MongoDB, Redis, BullMQ, Highcharts, shadcn/ui, Zoho Email, Digital Ocean, PM2, Nginx",
   details: [
     {
@@ -373,6 +403,8 @@ export type RealSyncProjectData = {
       startDate: "2024-03-18",
       endDate: "2024-09-18",
       companyUrl: "https://shypbuddy.net/",
+      shortName: "ShypBUDDY",
+      seoDescription: "Ajay Thorat's 6-month full-stack internship at ShypBUDDY, a Mumbai e-commerce shipping platform: order management plus Shopify and 7+ courier API integrations.",
       techStack: "Next.js, Supabase, Prisma, Clerk, Tailwind CSS, Node.js",
       details: [
         {

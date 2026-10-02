@@ -158,7 +158,7 @@ export default function Certifications() {
                     height={800}
                     className="w-full h-auto object-contain"
                     sizes="90vw"
-                    priority
+                    loading="eager"
                   />
                 </div>
               </div>

@@ -44,7 +44,7 @@ export default function MenuOverlay() {
   }, [isMenuOpen]);
 
   const socialLinks = [
-    { name: "LinkedIn", href: "https://www.linkedin.com/in/ajay-thorat-24b4b6215", icon: FaLinkedin },
+    { name: "LinkedIn", href: "https://www.linkedin.com/in/ajaythorat-dev/", icon: FaLinkedin },
     { name: "GitHub", href: "https://github.com/AjayBThorat-20", icon: FaGithub },
     { name: "Email", href: "mailto:ajaythorat988@gmail.com", icon: IoMdMail },
   ];
