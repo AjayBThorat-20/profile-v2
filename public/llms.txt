@@ -18,17 +18,16 @@ Node.js, Python, Next.js, React.js, Tailwind CSS, JavaScript, TypeScript, Bootst
 
 ## Pages
 
-- [Home](https://ajaythorat.com/): Introduction and summary of Ajay's background and availability.
-- [About](https://ajaythorat.com/about): Bio, skills, education, certifications, and co-curricular activities.
-- [Projects](https://ajaythorat.com/projects): Portfolio of web development projects with tech stacks and descriptions.
-- [Experience](https://ajaythorat.com/experience): Professional work history and current activity.
-- [Contact](https://ajaythorat.com/contact): Contact form and direct contact details.
+- [Home](https://ajaythorat.com/): The whole portfolio on one page: introduction, [about](https://ajaythorat.com/#about), [experience](https://ajaythorat.com/#experience), [projects](https://ajaythorat.com/#projects), skills, education, certifications, and [contact](https://ajaythorat.com/#contact).
+- [Mumbai Biocluster role](https://ajaythorat.com/experience/details/3): Current role in depth: IndiaPharmaHub, Yantra, the internal HRMS, and PCG 2026.
+- [Renewalytics role](https://ajaythorat.com/experience/details/2): FNS, ExcelFlow and RealSync, renewable-energy forecasting apps.
+- [ShypBUDDY internship](https://ajaythorat.com/experience/details/1): Order management plus Shopify and courier API integrations.
 
 ## Experience
 
-- Junior Full Stack Developer at ICT Mumbai Research Foundation (Mumbai Biocluster) (18 May 2026 - Present) — current role at a Section-8 nonprofit biotech research facility at ICT Mumbai. Sole full-stack developer of three production platforms: IndiaPharmaHub (a B2B pharma and biopharma outsourcing marketplace), Yantra (a lab instrument booking and sample testing marketplace), and an internal HRMS, built with Next.js 16, TypeScript, Prisma, PostgreSQL, Redis, NextAuth v5, Razorpay, and AWS.
-- Junior Full Stack Developer at Renewalytics Services Pvt. Ltd. (18 March 2025 - 09 March 2026) — built full-stack applications for AI-powered renewable energy forecasting and grid management using Next.js, Prisma, PostgreSQL, MySQL, MongoDB, Redis, BullMQ, and Highcharts.
-- Full-Stack Developer Intern at ShypBUDDY PVT. LTD (March 2024 - September 2024) — built e-commerce shipping platform features using Next.js, Supabase, Prisma, Clerk, and Tailwind CSS.
+- Junior Full Stack Developer at ICT Mumbai Research Foundation (Mumbai Biocluster) (18 May 2026 - Present) — current role at a Section-8 nonprofit biotech research facility at ICT Mumbai. Sole full-stack developer of three production platforms: IndiaPharmaHub (a B2B pharma and biopharma outsourcing marketplace), Yantra (a lab instrument booking and sample testing marketplace), and an internal HRMS, built with Next.js 16, TypeScript, Prisma, PostgreSQL, Redis, NextAuth v5, Razorpay, and AWS. Live: https://www.indiapharmahub.com/ and https://yantra.mumbaibiocluster.org/ | Details: https://ajaythorat.com/experience/details/3
+- Junior Full Stack Developer at Renewalytics Services Pvt. Ltd. (18 March 2025 - 09 March 2026) — built FNS, ExcelFlow and RealSync, full-stack applications for AI-powered renewable energy forecasting and grid management covering 3.22+ GW across 34+ sites, using Next.js, Prisma, PostgreSQL, MySQL, MongoDB, Redis, BullMQ, and Highcharts. Details: https://ajaythorat.com/experience/details/2
+- Full-Stack Developer Intern at ShypBUDDY PVT. LTD (March 2024 - September 2024) — built order management plus Shopify and 7+ courier API integrations for an e-commerce shipping platform, using Next.js, Supabase, Prisma, Clerk, and Tailwind CSS. Details: https://ajaythorat.com/experience/details/1
 
 ## Events
 
@@ -36,10 +35,10 @@ Node.js, Python, Next.js, React.js, Tailwind CSS, JavaScript, TypeScript, Bootst
 
 ## Selected Projects
 
+- DevCompass (Node.js, Commander.js, D3.js, SQLite, OpenAI/Anthropic/Google APIs) — published, open-source npm CLI for JavaScript dependency health analysis with AI-powered recommendations and CVE scanning. https://github.com/AjayBThorat-20/devcompass | npm: https://www.npmjs.com/package/devcompass | Docs: https://devcompass.ajaythorat.com/
 - Crime Predict (React.js, Python, Django, SQLite3, JWT) — crime data analysis and visualization platform for law enforcement. https://github.com/AjayBThorat-20/Crime-Predict
 - LinkedIn Clone (Next.js, Node.js, MongoDB, Tailwind CSS, NextAuth.js) — professional networking platform with Google OAuth. https://github.com/AjayBThorat-20/linkedin-clone
 - Study Partner (Android SDK, Java, SQLite) — Android learning app for students in tier-2 Indian cities. https://github.com/AjayBThorat-20/study-partner
-- DevCompass (Node.js, Commander.js, D3.js, SQLite, OpenAI/Anthropic/Google APIs) — published npm CLI for JavaScript dependency health analysis with AI-powered recommendations and CVE scanning. https://github.com/AjayBThorat-20/devcompass | Docs: https://devcompass.ajaythorat.com/
 
 ## Education
 
