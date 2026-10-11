@@ -36,6 +36,16 @@ import { getAccent } from "@/Components/UI/accentColor";
 import IconTile from "@/Components/UI/IconTile";
 import Badge from "@/Components/UI/Badge";
 import SectionEyebrow from "@/Components/UI/SectionEyebrow";
+import { getSkillSourceCount, getSkillUsage } from "@/lib/experience";
+
+// Grouped by what each skill is used for. Only skills with at least one role or
+// project behind them are shown, so the block never lists a skill it cannot back up.
+const skillGroups = [
+  { category: "Frontend", skills: ["Next.js", "React.js", "Tailwind CSS", "TypeScript"] },
+  { category: "Backend", skills: ["Node.js", "Python"] },
+  { category: "Data & Infrastructure", skills: ["PostgreSQL", "Prisma ORM", "MongoDB", "MySQL", "Redis"] },
+  { category: "Integrations", skills: ["Razorpay", "AWS S3", "Supabase", "Clerk Auth"] },
+];
 
 export default function Skills() {
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
@@ -210,56 +220,32 @@ export default function Skills() {
           })}
         </div>
 
-        {/* Proficiency Levels - More detailed and useful */}
+        {/* Where each skill shows up. Counts are the roles and projects whose
+            tech stack lists the skill (see getSkillUsage), not a self-rated
+            level, so every number can be traced to a role or project. */}
         <div className="panel p-8 rounded-lg animate-fadeIn" style={{ animationDelay: '120ms' }}>
-          <div className="flex justify-center mb-6">
-            <h3 className="eyebrow">Proficiency Overview</h3>
+          <div className="flex flex-col items-center gap-2 mb-6">
+            <h3 className="eyebrow">Where I’ve Used Them</h3>
+            <p className="text-xs text-muted-foreground text-center">
+              Roles and projects each skill appears in, out of {getSkillSourceCount()}.
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {[
-              { category: "Frontend Development", skills: ["Next.js", "React.js", "Tailwind CSS"], level: 90 },
-              { category: "Backend Development", skills: ["Node.js", "Express.js", "Python"], level: 85 },
-              { category: "Database Management", skills: ["PostgreSQL", "MongoDB", "Prisma"], level: 88 },
-              { category: "DevOps & Tools", skills: ["Docker", "GitHub", "Postman"], level: 80 },
-            ].map((item, index) => {
-              const accent = getAccent(index);
+            {skillGroups.map((group) => {
+              const usage = group.skills
+                .map((skill) => ({ skill, count: getSkillUsage(skill) }))
+                .filter((item) => item.count > 0)
+                .sort((a, b) => b.count - a.count);
               return (
-                <div key={item.category} className="space-y-3">
-                  <div className="flex justify-between items-center">
-                    <h4 className="font-bold text-foreground">{item.category}</h4>
-                    <span className="font-mono text-sm font-bold text-foreground">{item.level}%</span>
-                  </div>
-
-                  {/* Progress bar. The fill is keyed off isRevealed so it
-                      actually grows when the section scrolls into view -
-                      it already carried a transition, but its width was a
-                      constant, so there was never a change to transition
-                      from and the bars simply appeared at full length.
-                      scaleX rather than width keeps the animation on the
-                      compositor, and the stagger walks the four bars in
-                      sequence instead of firing them as one block. */}
-                  <div
-                    className="h-3 bg-muted rounded-full overflow-hidden"
-                    role="progressbar"
-                    aria-label={`${item.category} proficiency`}
-                    aria-valuemin={0}
-                    aria-valuemax={100}
-                    aria-valuenow={item.level}
-                  >
-                    <div
-                      className={`h-full w-full origin-left ${accent.bg} rounded-full transition-transform duration-700 ease-out`}
-                      style={{
-                        transform: `scaleX(${isRevealed ? item.level / 100 : 0})`,
-                        transitionDelay: `${index * 90}ms`,
-                      }}
-                    ></div>
-                  </div>
-
-                  {/* Skills list */}
+                <div key={group.category} className="space-y-3">
+                  <h4 className="font-bold text-foreground">{group.category}</h4>
                   <div className="flex flex-wrap gap-2">
-                    {item.skills.map((skill) => (
-                      <Badge key={skill}>{skill}</Badge>
+                    {usage.map(({ skill, count }) => (
+                      <Badge key={skill}>
+                        {skill}
+                        <span className="ml-2 font-mono font-bold">{count}</span>
+                      </Badge>
                     ))}
                   </div>
                 </div>

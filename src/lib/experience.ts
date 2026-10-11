@@ -1,4 +1,5 @@
 import { experienceData } from "@/constants/experience";
+import { projectsData } from "@/constants/project";
 
 const MS_PER_YEAR = 1000 * 60 * 60 * 24 * 365.25;
 
@@ -20,18 +21,17 @@ export function getYearsOfExperience(): number {
   return totalWorkedMs / MS_PER_YEAR;
 }
 
-// Production systems shipped, for the hero stat - counted from the data
-// rather than typed in, since the hand-written "4+" sat unchanged while the
-// real count doubled. Each "project N: ..." section of a role is one system
-// (IndiaPharmaHub, Yantra, the HRMS, FNS, ExcelFlow, RealSync); a role with
-// no per-project sections shipped one (the ShypBUDDY platform); plus
-// DevCompass, the published npm CLI.
-export function getProductionSystemsCount(): number {
-  const fromRoles = experienceData.reduce((sum, exp) => {
+// Production platforms shipped at companies, for the hero stat - counted from
+// the data rather than typed in. Each "project N: ..." section of a role is
+// one platform (IndiaPharmaHub, Yantra, the internal HRMS at Biocluster; FNS,
+// ExcelFlow, RealSync at Renewalytics); a role with no per-project sections
+// shipped one (the ShypBUDDY platform). DevCompass is an open-source tool, not
+// a company project, so it is not included.
+export function getProductionPlatformsCount(): number {
+  return experienceData.reduce((sum, exp) => {
     const projects = exp.details.filter((detail) => detail.title.startsWith("project")).length;
     return sum + Math.max(projects, 1);
   }, 0);
-  return fromRoles + 1;
 }
 
 // Formatted for display, e.g. "2.5+". Floored, not rounded: "+" reads as
@@ -39,4 +39,22 @@ export function getProductionSystemsCount(): number {
 // up to "1.9+" and overstate the figure.
 export function getYearsOfExperienceLabel(): string {
   return `${(Math.floor(getYearsOfExperience() * 10) / 10).toFixed(1)}+`;
+}
+
+// Roles and projects whose tech stacks feed the skill usage counts below.
+const techStackSources: string[][] = [
+  ...experienceData.map((exp) => exp.techStack),
+  ...projectsData.map((project) => project.techStack),
+].map((stack) => stack.split(", "));
+
+export function getSkillSourceCount(): number {
+  return techStackSources.length;
+}
+
+// How many roles and projects list a skill in their tech stack. Matched on the
+// skill's first word and the start of each stack item, so "Prisma ORM" finds
+// "Prisma" and "Prisma ORM (adapter-pg)" alike.
+export function getSkillUsage(skill: string): number {
+  const key = skill.split(" ")[0].toLowerCase();
+  return techStackSources.filter((items) => items.some((item) => item.toLowerCase().startsWith(key))).length;
 }

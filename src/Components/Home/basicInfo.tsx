@@ -8,7 +8,7 @@ import Badge from "@/Components/UI/Badge";
 import CountUp from "@/Components/UI/CountUp";
 import ScrollCue from "@/Components/UI/ScrollCue";
 import SectionLink from "@/Components/Links/SectionLink";
-import { getProductionSystemsCount, getYearsOfExperienceLabel } from "@/lib/experience";
+import { getProductionPlatformsCount, getYearsOfExperienceLabel } from "@/lib/experience";
 
 // No props: the `theme` prop this used to take was never read - every colour
 // here comes from CSS custom properties that already flip with the .dark class,
@@ -16,7 +16,7 @@ import { getProductionSystemsCount, getYearsOfExperienceLabel } from "@/lib/expe
 // subscribe to the Redux store and re-render on every theme toggle.
 export default function BasicInfo() {
   const metrics = [
-    { value: String(getProductionSystemsCount()), label: "Production Systems" },
+    { value: String(getProductionPlatformsCount()), label: "Production Platforms" },
     { value: "500+", label: "Packages Tracked" },
     { value: getYearsOfExperienceLabel(), label: "Years Experience" },
   ];
@@ -96,7 +96,7 @@ export default function BasicInfo() {
 
       {/* Role Tags */}
       <div className="flex flex-wrap gap-2 md:gap-3 animate-fadeIn" style={{ animationDelay: '180ms' }}>
-        {["Full-Stack Developer", "Next.js · Node.js · PostgreSQL", "System Architect"].map((role, index) => {
+        {["Full-Stack Developer", "Next.js · Node.js · PostgreSQL", "Product Engineer"].map((role, index) => {
           const accent = getAccent(index);
           return (
             <Badge key={role} accent={accent} className="font-mono text-xs md:text-sm py-1.5 md:py-2 px-3 md:px-4 hover:scale-105 transition-transform duration-150 cursor-default">
@@ -124,11 +124,11 @@ export default function BasicInfo() {
       {/* Description with reveal effect */}
       <div className="space-y-2 md:space-y-3 animate-fadeIn" style={{ animationDelay: '280ms' }}>
         <p className="text-sm md:text-base lg:text-lg leading-relaxed text-foreground/90">
-          Specialized in architecting <span className="font-bold text-foreground">scalable web applications</span> from concept to deployment.
-          Experienced in building <span className="font-bold text-foreground">real-time systems</span> that handle production traffic.
+          I build and maintain <span className="font-bold text-foreground">production systems</span> at Mumbai Biocluster,
+          and I build <span className="font-bold text-foreground">open-source developer tools</span> on my own.
         </p>
         <p className="text-xs md:text-sm lg:text-base leading-relaxed text-muted-foreground">
-          From database optimization to UI/UX excellence — delivering complete solutions that solve real business problems.
+          Full-stack work from database schema to shipped UI, with the people who use the product in mind.
         </p>
       </div>
 
