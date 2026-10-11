@@ -1,13 +1,13 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
-import { FaStar, FaQuoteLeft, FaBriefcase, FaCalendar, FaChartLine, FaThumbsUp } from "react-icons/fa";
+import React, { useRef } from "react";
+import { FaStar, FaBriefcase, FaCalendar, FaChartLine, FaThumbsUp, FaArrowRight } from "react-icons/fa";
 import { HiSparkles } from "react-icons/hi2";
 import { getAccent } from "@/Components/UI/accentColor";
 import SectionEyebrow from "@/Components/UI/SectionEyebrow";
 import Badge from "@/Components/UI/Badge";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
-import ReviewsSkeleton from "@/Components/Skeletons/ReviewsSkeleton";
+import { REVIEW_FORM_URL } from "@/constants/experience";
 
 interface Review {
   timestamp: string;
@@ -33,145 +33,125 @@ interface Review {
   displayPermission: string;
 }
 
-export default function CompanyReviews() {
-  const [reviews, setReviews] = useState<Review[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [shouldDisplay, setShouldDisplay] = useState(false);
+// Feedback collected from the Renewalytics team through a review form. Only
+// reviewers who agreed to have their name and review shown are displayed.
+const TEAM_REVIEWS: Review[] = [
+  {
+    timestamp: "2026/03/06 3:01:21 PM GMT+5:30",
+    username: "sahil.sheikh@renewalytics.in",
+    fullName: "Sahil Sheikh",
+    role: "Operation Analyst",
+    department: "Operations Team",
+    monthsWorked: "6-9 months",
+    projects: "ReFlux",
+    businessLogicRating: 5,
+    fullStackRating: 5,
+    codeQualityRating: 5,
+    databaseRating: 5,
+    apiRating: 5,
+    systemImprovement: "61-80% improvement",
+    workloadReduction: "61-80% reduction in workload",
+    timeSaved: "30 minutes - 1 hour per day",
+    uiUxRating: 4,
+    adaptabilityRating: 5,
+    recommendationScore: 10,
+    overallRating: 5,
+    workAgain: "Probably yes",
+    displayPermission: "Yes, display my full name and review"
+  },
+  {
+    timestamp: "2026/03/06 8:47:34 PM GMT+5:30",
+    username: "shubham.gote@renewalytics.in",
+    fullName: "Shubham Gote",
+    role: "Data Engineer",
+    department: "ML/AI Team",
+    monthsWorked: "More than 12 months",
+    projects: "ReFlux;ExcelFlow;RealSync",
+    businessLogicRating: 4,
+    fullStackRating: 4,
+    codeQualityRating: 4,
+    databaseRating: 4,
+    apiRating: 4,
+    systemImprovement: "61-80% improvement",
+    workloadReduction: "61-80% reduction in workload",
+    timeSaved: "1-2 hours per day",
+    uiUxRating: 4,
+    adaptabilityRating: 4,
+    recommendationScore: 8,
+    overallRating: 4,
+    workAgain: "Definitely yes",
+    displayPermission: "Yes, display my full name and review"
+  },
+  {
+    timestamp: "2026/03/06 9:22:16 PM GMT+5:30",
+    username: "ankita.shitole@renewalytics.in",
+    fullName: "Ankita Shitole",
+    role: "Meteorologist",
+    department: "ML/AI Team",
+    monthsWorked: "6-9 months",
+    projects: "ReFlux",
+    businessLogicRating: 5,
+    fullStackRating: 5,
+    codeQualityRating: 0,
+    databaseRating: 0,
+    apiRating: 0,
+    systemImprovement: "81-100% improvement",
+    workloadReduction: "Not applicable",
+    timeSaved: "Not applicable",
+    uiUxRating: 5,
+    adaptabilityRating: 5,
+    recommendationScore: 10,
+    overallRating: 5,
+    workAgain: "Definitely yes",
+    displayPermission: "Yes, display my full name and review"
+  },
+  {
+    timestamp: "2026/03/07 10:05:16 AM GMT+5:30",
+    username: "piraj.shinde@renewalytics.in",
+    fullName: "Piraj Shankar Shinde",
+    role: "Jr. Full stack Developer",
+    department: "Tech Team",
+    monthsWorked: "9-12 months",
+    projects: "ReFlux;ExcelFlow",
+    businessLogicRating: 5,
+    fullStackRating: 5,
+    codeQualityRating: 5,
+    databaseRating: 5,
+    apiRating: 5,
+    systemImprovement: "81-100% improvement",
+    workloadReduction: "81-100% reduction in workload",
+    timeSaved: "More than 4 hours per day",
+    uiUxRating: 5,
+    adaptabilityRating: 5,
+    recommendationScore: 10,
+    overallRating: 5,
+    workAgain: "Definitely yes",
+    displayPermission: "Yes, display my full name and review"
+  }
+];
+
+const DISPLAYABLE_REVIEWS = TEAM_REVIEWS.filter((review) => review.displayPermission.includes("Yes"));
+
+// Every review below is from the Renewalytics team, so the block only shows
+// on that role's page (experience id 2).
+const REVIEWED_COMPANY_ID = 2;
+
+export default function CompanyReviews({ companyId }: { companyId: number }) {
+  // Decided by the page being shown. It used to read a "selectedCompanyId"
+  // that the homepage card wrote to localStorage on click; when that card
+  // became a plain link nothing wrote it any more, and the reviews stopped
+  // appearing anywhere. A stale value could also show them on the wrong role.
+  const shouldDisplay = companyId === REVIEWED_COMPANY_ID;
+  // Plain data, not a fetch in an effect: it is there on the first render, so
+  // the section below exists when useScrollReveal attaches its observer. It
+  // used to load through a mock async fetch behind a loading skeleton, so the
+  // observer attached to the skeleton's missing ref and never saw the real
+  // section - which then stayed at opacity 0, invisible.
+  const reviews = DISPLAYABLE_REVIEWS;
   const sectionRef = useRef<HTMLDivElement>(null);
   const isRevealed = useScrollReveal(sectionRef);
 
-  const fetchReviews = async () => {
-    try {
-      setLoading(true);
-      // Sample data stands in until a real reviews source is wired up.
-      const sampleData: Review[] = [
-        {
-          timestamp: "2026/03/06 3:01:21 PM GMT+5:30",
-          username: "sahil.sheikh@renewalytics.in",
-          fullName: "Sahil Sheikh",
-          role: "Operation Analyst",
-          department: "Operations Team",
-          monthsWorked: "6-9 months",
-          projects: "ReFlux",
-          businessLogicRating: 5,
-          fullStackRating: 5,
-          codeQualityRating: 5,
-          databaseRating: 5,
-          apiRating: 5,
-          systemImprovement: "61-80% improvement",
-          workloadReduction: "61-80% reduction in workload",
-          timeSaved: "30 minutes - 1 hour per day",
-          uiUxRating: 4,
-          adaptabilityRating: 5,
-          recommendationScore: 10,
-          overallRating: 5,
-          workAgain: "Probably yes",
-          displayPermission: "Yes, display my full name and review"
-        },
-        {
-          timestamp: "2026/03/06 8:47:34 PM GMT+5:30",
-          username: "shubham.gote@renewalytics.in",
-          fullName: "Shubham Gote",
-          role: "Data Engineer",
-          department: "ML/AI Team",
-          monthsWorked: "More than 12 months",
-          projects: "ReFlux;ExcelFlow;RealSync",
-          businessLogicRating: 4,
-          fullStackRating: 4,
-          codeQualityRating: 4,
-          databaseRating: 4,
-          apiRating: 4,
-          systemImprovement: "61-80% improvement",
-          workloadReduction: "61-80% reduction in workload",
-          timeSaved: "1-2 hours per day",
-          uiUxRating: 4,
-          adaptabilityRating: 4,
-          recommendationScore: 8,
-          overallRating: 4,
-          workAgain: "Definitely yes",
-          displayPermission: "Yes, display my full name and review"
-        },
-        {
-          timestamp: "2026/03/06 9:22:16 PM GMT+5:30",
-          username: "ankita.shitole@renewalytics.in",
-          fullName: "Ankita Shitole",
-          role: "Meteorologist",
-          department: "ML/AI Team",
-          monthsWorked: "6-9 months",
-          projects: "ReFlux",
-          businessLogicRating: 5,
-          fullStackRating: 5,
-          codeQualityRating: 0,
-          databaseRating: 0,
-          apiRating: 0,
-          systemImprovement: "81-100% improvement",
-          workloadReduction: "Not applicable",
-          timeSaved: "Not applicable",
-          uiUxRating: 5,
-          adaptabilityRating: 5,
-          recommendationScore: 10,
-          overallRating: 5,
-          workAgain: "Definitely yes",
-          displayPermission: "Yes, display my full name and review"
-        },
-        {
-          timestamp: "2026/03/07 10:05:16 AM GMT+5:30",
-          username: "piraj.shinde@renewalytics.in",
-          fullName: "Piraj Shankar Shinde",
-          role: "Jr. Full stack Developer",
-          department: "Tech Team",
-          monthsWorked: "9-12 months",
-          projects: "ReFlux;ExcelFlow",
-          businessLogicRating: 5,
-          fullStackRating: 5,
-          codeQualityRating: 5,
-          databaseRating: 5,
-          apiRating: 5,
-          systemImprovement: "81-100% improvement",
-          workloadReduction: "81-100% reduction in workload",
-          timeSaved: "More than 4 hours per day",
-          uiUxRating: 5,
-          adaptabilityRating: 5,
-          recommendationScore: 10,
-          overallRating: 5,
-          workAgain: "Definitely yes",
-          displayPermission: "Yes, display my full name and review"
-        }
-      ];
 
-      // Filter only reviews with display permission
-      const displayableReviews = sampleData.filter(
-        review => review.displayPermission.includes("Yes")
-      );
-
-      setReviews(displayableReviews);
-      setLoading(false);
-    } catch {
-      setError("Failed to fetch reviews. Please try again later.");
-      setLoading(false);
-    }
-  };
-
-  // localStorage is read here rather than in a lazy useState initialiser
-  // because it does not exist on the server: seeding state from it during
-  // render would produce markup that disagrees with the server's and break
-  // hydration. Setting state from a mount effect is the correct pattern for a
-  // browser-only value, so the cascading-render rule is knowingly accepted.
-  /* eslint-disable react-hooks/set-state-in-effect -- see note above: a
-     browser-only value has to be read after mount, so the state update is
-     unavoidable here. */
-  useEffect(() => {
-    // Check if the current company is Renewalytics (id: 2)
-    const companyId = localStorage.getItem("selectedCompanyId");
-    if (companyId === "2") {
-      setShouldDisplay(true);
-      fetchReviews();
-    } else {
-      setLoading(false);
-    }
-  }, []);
-  /* eslint-enable react-hooks/set-state-in-effect */
 
 
   // Don't render anything if not Renewalytics
@@ -209,28 +189,6 @@ export default function CompanyReviews() {
       year: "numeric" 
     });
   };
-
-  if (loading) {
-    return <ReviewsSkeleton />;
-  }
-
-  if (error) {
-    return (
-      <div className="container-custom section">
-        <div className="flex items-center justify-center min-h-100">
-          <div className="text-center space-y-4 panel p-8 rounded-lg border-l-4 border-l-destructive">
-            <p className="text-xl font-bold text-destructive">{error}</p>
-            <button
-              onClick={fetchReviews}
-              className="btn-primary px-6 py-3"
-            >
-              Retry
-            </button>
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   if (reviews.length === 0) {
     return (
@@ -321,9 +279,6 @@ export default function CompanyReviews() {
                 style={{ animationDelay: `${(index + 2) * 60}ms` }}
               >
                 <div className={`spotlight relative entry-card ${accent.border} overflow-hidden`}>
-                  {/* Top Accent Bar */}
-                  <div className={`h-1.5 ${accent.bg}`}></div>
-
                   {/* Content */}
                   <div className="relative p-6 md:p-8 space-y-6">
 
@@ -475,18 +430,31 @@ export default function CompanyReviews() {
                     </div>
                   </div>
 
-                  {/* Decorative Quote Icon */}
-                  <div className="absolute top-6 right-6 pointer-events-none">
-                    <div className={`p-3 ${accent.bgSoft} rounded-lg`}>
-                      <FaQuoteLeft className={`w-5 h-5 ${accent.text}`} />
-                    </div>
-                  </div>
                 </div>
               </div>
             );
           })}
         </div>
 
+        {/* REVIEW_FORM_URL was defined and imported from the start but never
+            rendered, so there was no way onto the form from the site. */}
+        <div className="panel rounded-lg p-6 md:p-8 flex flex-col gap-5 md:flex-row md:items-center md:justify-between animate-fadeIn">
+          <div className="space-y-1">
+            <h3 className="text-xl md:text-2xl font-black text-foreground">Worked with me at Renewalytics?</h3>
+            <p className="text-sm md:text-base leading-relaxed text-muted-foreground">
+              Add your review through the same form the ones above came from.
+            </p>
+          </div>
+          <a
+            href={REVIEW_FORM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="magnetic btn-primary group/btn shrink-0 self-start md:self-auto"
+          >
+            <span>Leave a review</span>
+            <FaArrowRight className="w-3 h-3 group-hover/btn:translate-x-1 transition-transform duration-200" />
+          </a>
+        </div>
       </div>
     </div>
   );

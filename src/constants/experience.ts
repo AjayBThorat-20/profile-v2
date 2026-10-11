@@ -27,7 +27,23 @@ type ExperienceDetail = {
   id: number;
   title: string;
   picture: string;
+  // Live product a section describes, and screenshots of its public pages.
+  // `path` is the page each screenshot was taken from, shown in the frame's
+  // address bar and linked from it.
+  url?: string;
+  screenshots?: ProjectScreenshot[];
+  // Photos from an event section; the first is the large lead image.
+  photos?: EventPhoto[];
   data: string | ExperienceDataStructure;
+};
+export type EventPhoto = {
+  src: string;
+  caption: string;
+};
+export type ProjectScreenshot = {
+  src: string;
+  label: string;
+  path: string;
 };
 type ExperienceDataStructure = {
   [key: string]: string[];
@@ -129,6 +145,11 @@ export type RealSyncProjectData = {
           id: 3,
           title: "project 1: IndiaPharmaHub (IPH)",
           picture: "/Images/Experience/MBC/mbc.png",
+          url: "https://www.indiapharmahub.com/",
+          screenshots: [
+            { src: "/Images/Experience/MBC/iph-home.webp", label: "Home", path: "/" },
+            { src: "/Images/Experience/MBC/iph-products.webp", label: "Product catalog", path: "/products" },
+          ],
           data: {
             overview: [
               "A B2B marketplace connecting verified pharma, biopharma, and life-sciences sellers and buyers across India for outsourcing R&D, manufacturing, testing, packaging, regulatory support, and technology needs.",
@@ -170,6 +191,12 @@ export type RealSyncProjectData = {
           id: 4,
           title: "project 2: Yantra",
           picture: "/Images/Experience/MBC/mbc.png",
+          url: "https://yantra.mumbaibiocluster.org/",
+          screenshots: [
+            { src: "/Images/Experience/MBC/yantra-home.webp", label: "Home", path: "/" },
+            { src: "/Images/Experience/MBC/yantra-instruments.webp", label: "Instruments", path: "/browse" },
+            { src: "/Images/Experience/MBC/yantra-catalog.webp", label: "Test catalog", path: "/catalog" },
+          ],
           data: {
             overview: [
               "A sister marketplace to IndiaPharmaHub: connects Clients who need lab instrument bookings and sample/analytical testing with verified Labs, with Admin mediating every interaction — Client and Lab never see each other's identity directly.",
@@ -192,6 +219,10 @@ export type RealSyncProjectData = {
           id: 5,
           title: "project 3: Internal HRMS",
           picture: "/Images/Experience/MBC/mbc.png",
+          url: "https://hrms.mumbaibiocluster.org/",
+          screenshots: [
+            { src: "/Images/Experience/MBC/hrms-home.webp", label: "Home", path: "/" },
+          ],
           data: {
             overview: [
               "An internal HR management system built for Mumbai Biocluster itself, not client-facing: attendance, leave, payroll, KPI reviews, recruitment, assets, announcements, training, and company policies in one platform.",
@@ -215,6 +246,15 @@ export type RealSyncProjectData = {
           id: 6,
           title: "event: PCG 2026 Symposium",
           picture: "/Images/Experience/MBC/mbc.png",
+          photos: [
+            { src: "/Images/Experience/MBC/pcg-team.webp", caption: "The organising team on stage at PCG 2026" },
+            { src: "/Images/Experience/MBC/pcg-booth-team.webp", caption: "At the IndiaPharmaHub and Yantra stand" },
+            { src: "/Images/Experience/MBC/pcg-booth.webp", caption: "The IndiaPharmaHub and Yantra stand" },
+            { src: "/Images/Experience/MBC/pcg-booth-stand.webp", caption: "At the IndiaPharmaHub and Yantra stand" },
+            { src: "/Images/Experience/MBC/pcg-photo-wall.webp", caption: "The #PCG2026 photo wall" },
+            { src: "/Images/Experience/MBC/pcg-stage.webp", caption: "On stage at the symposium" },
+            { src: "/Images/Experience/MBC/pcg-backdrop.webp", caption: "At the PCG 2026 backdrop" },
+          ],
           data: {
             overview: [
               "The Peptides & Complex Generics Symposium (PCG 2026), organized by Mumbai Biocluster and ICT Mumbai, ran on 28–29 September 2026 at Aurika by Lemon Tree Hotels, Mumbai: 400+ delegates and 70+ speakers working through peptides, oligonucleotides, GLP-1s, and the Billion Dose Challenge.",

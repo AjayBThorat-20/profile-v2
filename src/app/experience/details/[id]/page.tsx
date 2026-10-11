@@ -85,13 +85,25 @@ export default async function Page({ params }: { params: Promise<Params> }) {
     ],
   };
 
+  // Roles are listed newest first, so the one before this is the newer role
+  // and the one after it the earlier role - linked from the page's footer.
+  const position = experienceData.findIndex((exp) => exp.id === experience.id);
+  const toRoleLink = (exp: (typeof experienceData)[number] | undefined) =>
+    exp ? { id: exp.id, shortName: exp.shortName, title: exp.title } : null;
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbStructuredData) }}
       />
-      <ExperienceDetails experience={experience} />
+      <ExperienceDetails
+        experience={experience}
+        position={position}
+        total={experienceData.length}
+        newer={toRoleLink(experienceData[position - 1])}
+        older={toRoleLink(experienceData[position + 1])}
+      />
     </>
   );
 }
