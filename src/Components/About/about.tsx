@@ -31,10 +31,12 @@ export default function About() {
             <div className="w-full lg:w-[45%] flex justify-center animate-fadeIn" style={{ animationDelay: '120ms' }}>
               <div className="relative w-full max-w-md">
                 <div className="absolute -bottom-3 -right-3 md:-bottom-4 md:-right-4 w-full h-full bg-foreground -z-10" aria-hidden="true" />
-                <div className="relative aspect-3/4 overflow-hidden border border-border bg-muted/20">
+                {/* Same fixed light surface as the hero portrait, for the same
+                    reason: the photo is a transparent cutout. */}
+                <div className="relative aspect-3/4 overflow-hidden border border-border bg-neutral-100">
                   {!imageError ? (
                     <Image
-                      src="/Images/Profile/Ajay4.webp"
+                      src="/Images/Profile/ajay-about.webp"
                       alt="Ajay Thorat - Full Stack Developer"
                       fill
                       className="object-cover grayscale"

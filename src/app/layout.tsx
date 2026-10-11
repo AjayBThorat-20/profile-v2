@@ -110,7 +110,7 @@ export default function RootLayout({
     "familyName": "Thorat",
     "description": siteDescription,
     "url": siteUrl,
-    "image": `${siteUrl}/Images/Profile/Ajay3.png`,
+    "image": `${siteUrl}/Images/Profile/ajay-hero.webp`,
     "jobTitle": "Full Stack Developer",
     "worksFor": {
       "@type": "Organization",
