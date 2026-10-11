@@ -20,6 +20,8 @@ export type ExperienceItem = {
   // Search-result copy for the role's /experience/details page. The full
   // company name and tech stack ran those titles to 95 characters and the
   // descriptions past 300, both well beyond what Google shows (~60 / ~160).
+  // Keep seoDescription to 150 characters: at 156-159, Google's ~920px
+  // snippet cut them off, and Bing Webmaster Tools flagged one as too long.
   shortName: string;
   seoDescription: string;
 };
@@ -92,7 +94,7 @@ export type RealSyncProjectData = {
       endDate: null,
       companyUrl: "https://www.mumbaibiocluster.org/",
       shortName: "Mumbai Biocluster",
-      seoDescription: "Ajay Thorat is the sole developer of IndiaPharmaHub, Yantra and an internal HRMS at Mumbai Biocluster (ICT Mumbai), built with Next.js, Prisma and PostgreSQL.",
+      seoDescription: "Ajay Thorat is the sole developer of IndiaPharmaHub, Yantra and an internal HRMS at Mumbai Biocluster (ICT Mumbai), built on Next.js and PostgreSQL.",
       techStack: "Next.js 16, TypeScript, Prisma ORM (adapter-pg), PostgreSQL, NextAuth v5, Razorpay, AWS S3, AWS EC2, Bluehost VPS, Redis, BullMQ, Tailwind CSS, shadcn/ui, Zod, Jest",
       details: [
         {
@@ -250,7 +252,7 @@ export type RealSyncProjectData = {
   endDate: "2026-03-09",
   companyUrl: "https://www.renewalytics.in/",
   shortName: "Renewalytics",
-  seoDescription: "Ajay Thorat built FNS, ExcelFlow and RealSync at Renewalytics: renewable-energy forecasting apps managing 3.22+ GW across 34+ sites, on Next.js and PostgreSQL.",
+  seoDescription: "Ajay Thorat built FNS, ExcelFlow and RealSync at Renewalytics: Next.js apps for renewable-energy forecasting, managing 3.22+ GW across 34+ sites.",
   techStack: "Next.js, Prisma, Tailwind CSS, PostgreSQL, MySQL, MongoDB, Redis, BullMQ, Highcharts, shadcn/ui, Zoho Email, Digital Ocean, PM2, Nginx",
   details: [
     {
@@ -404,7 +406,7 @@ export type RealSyncProjectData = {
       endDate: "2024-09-18",
       companyUrl: "https://shypbuddy.net/",
       shortName: "ShypBUDDY",
-      seoDescription: "Ajay Thorat's 6-month full-stack internship at ShypBUDDY, a Mumbai e-commerce shipping platform: order management plus Shopify and 7+ courier API integrations.",
+      seoDescription: "Ajay Thorat interned at ShypBUDDY, a Mumbai e-commerce shipping platform, building order management plus Shopify and 7+ courier API integrations.",
       techStack: "Next.js, Supabase, Prisma, Clerk, Tailwind CSS, Node.js",
       details: [
         {
