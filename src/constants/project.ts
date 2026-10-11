@@ -1,6 +1,10 @@
 export interface ProjectItem {
     id: number;
     title: string;
+    // Short type label shown above each card's title, e.g. "Android app".
+    kind: string;
+    // The one project shown as the large lead card; the rest form the grid.
+    featured?: boolean;
     url: string;
     docsUrl?: string;
     techStack: string;
@@ -15,7 +19,9 @@ export interface ProjectItem {
   export const projectsData: readonly ProjectItem[] = [
     {
       id: 4,
-      title: "DevCompass (Open Source npm Package)",
+      title: "DevCompass",
+      kind: "Open-source npm CLI",
+      featured: true,
       url: "https://github.com/AjayBThorat-20/devcompass",
       docsUrl: "https://devcompass.ajaythorat.com/",
       techStack: "Node.js, Commander.js, D3.js, SQLite, OpenAI/Anthropic/Google APIs, GitHub Actions",
@@ -32,6 +38,7 @@ export interface ProjectItem {
     {
       id: 1,
       title: "Crime Predict",
+      kind: "Full-stack web app",
       url: "https://github.com/AjayBThorat-20/Crime-Predict",
       techStack: "React.js, Python, Django, SQLite3, JWT, RESTful APIs",
       discription:
@@ -46,6 +53,7 @@ export interface ProjectItem {
     {
       id: 2,
       title: "LinkedIn Clone",
+      kind: "Full-stack web app",
       url: "https://github.com/AjayBThorat-20/linkedin-clone",
       techStack: "Next.js, Node.js, MongoDB, Tailwind CSS, NextAuth.js, RESTful APIs",
       discription:
@@ -61,6 +69,7 @@ export interface ProjectItem {
     {
       id: 3,
       title: "Study Partner",
+      kind: "Android app",
       url: "https://github.com/AjayBThorat-20/study-partner",
       techStack: "Android SDK, Java, SQLite, RESTful APIs, XML",
       discription:
