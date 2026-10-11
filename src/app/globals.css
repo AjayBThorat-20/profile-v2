@@ -191,7 +191,7 @@ body {
   --accent-foreground: 0 0% 9%;
   --destructive: 0 75% 45%;    /* semantic only - real error states, not a brand accent */
   --destructive-foreground: 0 0% 100%;
-  --success: 145 63% 32%;      /* semantic only - form success / "current role" verification */
+  --success: 0 0% 9%;          /* ink, not green - "current" and "verified" states stay black and white */
   --success-foreground: 0 0% 100%;
   --border: 0 0% 88%;
   --input: 0 0% 88%;
@@ -235,7 +235,7 @@ body {
   --accent-foreground: 0 0% 96%;
   --destructive: 0 80% 60%;    /* semantic only - real error states, not a brand accent */
   --destructive-foreground: 0 0% 100%;
-  --success: 145 55% 55%;      /* semantic only - form success / "current role" verification */
+  --success: 0 0% 96%;         /* ink, not green - "current" and "verified" states stay black and white */
   --success-foreground: 0 0% 9%;
   --border: 0 0% 20%;
   --input: 0 0% 20%;
@@ -928,17 +928,20 @@ img {
    so it wins when both match.
    ========================================== */
 :root {
-  --heat-1: #9be9a8;
-  --heat-2: #40c463;
-  --heat-3: #30a14e;
-  --heat-4: #216e39;
+  /* Greyscale ramp, not GitHub's greens: the site is strictly black and white.
+     Each step is far enough from the empty-day gray (bg-muted) and from its
+     neighbours that the levels read apart at 11px. */
+  --heat-1: #bdbdbd;
+  --heat-2: #8f8f8f;
+  --heat-3: #545454;
+  --heat-4: #171717;
 }
 
 .dark {
-  --heat-1: #0e4429;
-  --heat-2: #006d32;
-  --heat-3: #26a641;
-  --heat-4: #39d353;
+  --heat-1: #4d4d4d;
+  --heat-2: #7d7d7d;
+  --heat-3: #b5b5b5;
+  --heat-4: #f5f5f5;
 }
 
 /* ==========================================

@@ -16,10 +16,9 @@ interface BadgeProps {
 // hero chips, review stat pills) with one component, so pill styling
 // drifts in one place instead of many.
 export default function Badge({ children, accent, tone = "neutral", icon: Icon, dot, className = "" }: BadgeProps) {
-  // Routed through the --success token rather than hardcoded
-  // text-green-600/dark:text-green-400, so the one semantic success hue on
-  // the site is defined once in globals.css next to --destructive instead
-  // of being restated in every component that needs it.
+  // Routed through the --success token rather than hardcoded colour classes,
+  // so the success state is defined once in globals.css. It is ink, not a
+  // hue, so "current" and "verified" pills stay black and white.
   const toneClasses =
     tone === "success"
       ? "text-success border-success/30"

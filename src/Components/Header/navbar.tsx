@@ -10,31 +10,37 @@ import ThemeToggleButton from "../Buttons/ThemeToggleButton";
 import SectionLink from "@/Components/Links/SectionLink";
 import MenuOverlay from "./MenuOverlay";
 
-// Drawn in CSS rather than loaded from /Flag/flag.gif. That file is a 47.7 KB
-// animated GIF being displayed at 22x22 and marked `priority`, so it competed
-// for bandwidth with the LCP image while delivering roughly 2 KB of visible
-// detail - Lighthouse flagged it as the page's worst image by far. At this size
-// the waving animation is a couple of pixels nobody can resolve, so the three
-// bands are all that ever read. This costs no request and no decode.
+// Drawn inline as SVG, so it costs no request and no decode. The flag is the
+// official 3:2 design: saffron, white and green bands with the 24-spoke navy
+// Ashoka Chakra centred on the white band. The earlier version was three CSS
+// bands forced into a square, which dropped the chakra and distorted the ratio.
 //
 // Declared at module scope, not inside Navbar: a component defined during
 // render is a brand-new component *type* on every render, so React tears down
 // the old subtree and mounts a fresh one each time instead of updating it.
 function FlagIcon({ size = 24 }: { size?: number }) {
+  const spokes = Array.from({ length: 24 }, (_, i) => i * 15);
   return (
-    <div
+    <svg
       role="img"
-      aria-label="Indian flag"
-      className="rounded-sm overflow-hidden shrink-0 border border-border/40"
-      style={{
-        width: `${size}px`,
-        height: `${size}px`,
-        // Hard stops (each colour ends exactly where the next begins) render
-        // three flat bands rather than fading between them.
-        background:
-          "linear-gradient(to bottom, #FF9933 0 33.33%, #FFFFFF 33.33% 66.66%, #138808 66.66% 100%)",
-      }}
-    />
+      aria-label="Flag of India"
+      width={size * 1.5}
+      height={size}
+      viewBox="0 0 90 60"
+      className="rounded-sm shrink-0 border border-border/40"
+      style={{ display: "block" }}
+    >
+      <rect width="90" height="20" fill="#FF9933" />
+      <rect y="20" width="90" height="20" fill="#FFFFFF" />
+      <rect y="40" width="90" height="20" fill="#138808" />
+      <g transform="translate(45 30)" fill="none" stroke="#000080">
+        <circle r="7.5" strokeWidth="0.7" />
+        <circle r="1.4" fill="#000080" stroke="none" />
+        {spokes.map((deg) => (
+          <line key={deg} x1="0" y1="0" x2="0" y2="-7.5" strokeWidth="0.5" transform={`rotate(${deg})`} />
+        ))}
+      </g>
+    </svg>
   );
 }
 

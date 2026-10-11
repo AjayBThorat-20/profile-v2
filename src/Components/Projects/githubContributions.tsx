@@ -84,8 +84,12 @@ function Heatmap({ data }: { data: ContributionData }) {
 
   return (
     <div ref={scrollRef} className="overflow-x-auto pb-2">
+      {/* Cells keep a fixed size so they stay square. On desktop the container
+          fills the card and the spare width goes into the gaps between weeks
+          (justify-content: space-between), so the graph spans the panel instead
+          of leaving a dead band on the right. Phones keep the horizontal scroll. */}
       <div
-        className="inline-flex gap-2 min-w-max [--cell:11px] [--gap:3px] md:[--cell:13px]"
+        className="flex gap-2 min-w-max md:min-w-0 md:w-full [--cell:11px] [--gap:3px] md:[--cell:14px]"
         role="img"
         aria-label={`Contribution graph: ${data.total.toLocaleString("en-US")} contributions in the last year`}
       >
@@ -95,10 +99,10 @@ function Heatmap({ data }: { data: ContributionData }) {
           ))}
         </div>
 
-        <div>
+        <div className="min-w-0 flex-1">
           <div
             className="grid h-[calc(var(--cell)+6px)] text-[10px] leading-none text-muted-foreground"
-            style={{ gridTemplateColumns: `repeat(${weeks.length}, var(--cell))`, columnGap: "var(--gap)" }}
+            style={{ gridTemplateColumns: `repeat(${weeks.length}, var(--cell))`, columnGap: "var(--gap)", justifyContent: "space-between" }}
             aria-hidden="true"
           >
             {labels.map((l) => (
@@ -115,6 +119,7 @@ function Heatmap({ data }: { data: ContributionData }) {
               gridAutoFlow: "column",
               gridAutoColumns: "var(--cell)",
               gap: "var(--gap)",
+              justifyContent: "space-between",
             }}
           >
             {weeks.flatMap((week, w) =>
