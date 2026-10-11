@@ -41,7 +41,7 @@ const bingVerification = process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION;
 // purpose: "Ajay Thorat" is shared by many unrelated profiles, and these are
 // the terms that tell search engines this page is this person.
 const siteDescription =
-  "Ajay Thorat is a full-stack developer in Mumbai: sole developer of IndiaPharmaHub and Yantra at Mumbai Biocluster, and maintainer of the DevCompass npm CLI.";
+  "Ajay Thorat is a full-stack developer in Mumbai, sole developer of IndiaPharmaHub and Yantra at Mumbai Biocluster, and maintainer of DevCompass.";
 const siteTitle = "Ajay Thorat | Full Stack Developer in Mumbai";
 
 export const metadata: Metadata = {
@@ -110,7 +110,7 @@ export default function RootLayout({
     "familyName": "Thorat",
     "description": siteDescription,
     "url": siteUrl,
-    "image": `${siteUrl}/Images/Profile/Ajay3.png`,
+    "image": `${siteUrl}/Images/Profile/ajay-hero.webp`,
     "jobTitle": "Full Stack Developer",
     "worksFor": {
       "@type": "Organization",

@@ -74,12 +74,17 @@ export default function Hero() {
                     behind it - moving both together would just slide the whole
                     assembly and show no depth at all. */}
                 <div className="relative" ref={portraitRef}>
-                  <div className="relative aspect-3/4 overflow-hidden border border-border">
+                  {/* The portrait is a transparent cutout, so this box needs
+                      its own surface - without one the ink frame behind shows
+                      through, and in light mode the dark suit disappears into
+                      it. A fixed light neutral (not a theme token) reads as
+                      studio paper in both themes, the way a print would. */}
+                  <div className="relative aspect-3/4 overflow-hidden border border-border bg-neutral-100">
                     <Image
-                      src="/Images/Profile/Ajay3.webp" // Use .webp if you converted it
+                      src="/Images/Profile/ajay-hero.webp"
                       alt="Ajay Thorat - Full Stack Developer"
                       fill
-                      className="object-cover object-center grayscale"
+                      className="object-cover object-top grayscale"
                       // The hero portrait is the page's LCP element. Next 16
                       // deprecates `priority`; its guidance for the LCP image
                       // is loading="eager" + fetchPriority="high" (and no

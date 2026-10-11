@@ -15,8 +15,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     exp.details.map((detail) => abs(detail.picture))
   )
   const profileImages = [
-    abs('/Images/Profile/Ajay3.png'),
-    abs('/Images/Profile/Ajay4.png'),
+    abs('/Images/Profile/ajay-hero.webp'),
+    abs('/Images/Profile/ajay-about.webp'),
   ]
 
   return [

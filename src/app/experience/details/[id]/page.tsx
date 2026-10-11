@@ -32,7 +32,8 @@ export async function generateMetadata({
     return { title: "Experience Details | Ajay Thorat" };
   }
 
-  const title = `${experience.title} at ${experience.shortName} | Ajay Thorat`;
+  // A comma rather than " at " keeps the longest of these at 60 characters.
+  const title = `${experience.title}, ${experience.shortName} | Ajay Thorat`;
   const description = experience.seoDescription;
 
   return {
